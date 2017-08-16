@@ -1,0 +1,257 @@
+#########
+# VIEWS #
+#########
+
+default_view:
+  view: yes
+  entities:
+    - group.people
+    - group.tab_office
+    - group.tab_living_room
+    - group.tab_master_bedroom
+    - group.tab_hallways
+    - group.tab_kitchen
+    - group.climate
+    - group.outside
+    - group.garage_doors
+    - group.front_door
+
+living_room_view:
+  name: Living Room
+  view: yes
+  entities:
+    - group.living_room_lights
+    - group.living_room_fan
+#   - media_player.outside_speakers
+    - group.living_room_climate
+    - group.living_room_media
+    - group.living_room_tv_media_card
+    - group.living_room_sonos_media_card
+
+kitchen_view:
+  name: Kitchen/Dining
+  view: yes
+  entities:
+    - switch.kitchen_light
+    - switch.cabinet_lights
+    - group.kitchen_climate
+
+master_bedroom_view:
+  name: Master Bedroom
+  view: yes
+  entities:
+    - light.calebs_lamp
+    - light.brittanys_lamp
+    - light.master_bedroom_light
+    - group.master_bedroom_fan
+    - group.master_bedroom_tv
+    - group.master_bedroom_climate
+    - group.master_bedroom_tv_media_card
+
+office_view:
+    name: Office
+    view: yes
+    entities:
+      - switch.office_light
+      - switch.office_floor_lamp
+      - group.office_fan
+      - group.office_tv
+      - group.office_climate
+      - group.office_tv_media_card
+
+tech_closet_view:
+  name: Tech Closet
+  view: yes
+  entities:
+    - group.tab_tech_closet
+
+##############
+# ROOM CARDS #
+##############
+
+tab_hallways:
+  name: Hallways
+  entities:
+    - switch.west_hallway_light
+    - switch.east_hallway_light
+
+tab_kitchen:
+  name: Kitchen
+  entities:
+    - sensor.kitchen_occupancy_template
+    - switch.kitchen_light
+    - switch.cabinet_lights
+
+tab_living_room:
+  name: Living Room
+  entities:
+    - sensor.living_room_occupancy_template
+    - switch.living_room_light
+    - switch.living_room_dome_lights
+    - light.floor_lamp
+    - light.table_lamp
+    - switch.living_room_fan
+    - input_boolean.dynamic_living_room_tv
+
+tab_master_bedroom:
+  name: Master Bedroom
+  entities:
+    - sensor.west_wing_occupancy_template
+    - light.calebs_lamp
+    - light.brittanys_lamp
+    - light.master_bedroom_light
+    - switch.master_bedroom_fan
+    - input_boolean.dynamic_master_bedroom_tv
+
+tab_office:
+  name: Office
+  entities:
+    - sensor.office_occupancy_template
+    - switch.office_light
+    - switch.office_floor_lamp
+    - switch.office_fan
+    - input_boolean.dynamic_office_tv
+
+tab_tech_closet:
+  name: Tech Closet
+  entities:
+    - sensor.server_closet_temp
+    - sensor.server_closet_humidity
+    - sensor.network_rack_power_draw
+    - sensor.server_rack_power_draw
+    - sensor.media_rack_power_draw
+
+################
+# MEDIA GROUPS #
+################
+
+living_room_sonos_media_card:
+  name: Sonos
+  entities:
+    - media_player.living_room
+
+living_room_media:
+  name: Media
+  entities:
+    - input_select.dynamic_living_room_sonos
+    - input_boolean.dynamic_living_room_tv
+
+living_room_tv_media_card:
+  name: Kodi
+  entities:
+    - media_player.living_room_kodi
+
+master_bedroom_tv:
+  name: Television
+  entities:
+    - input_boolean.dynamic_master_bedroom_tv
+
+master_bedroom_tv_media_card:
+  name: Kodi
+  entities:
+    - media_player.master_bedroom_kodi
+
+office_tv:
+    name: Television
+    entities:
+      - input_boolean.dynamic_office_tv
+
+office_tv_media_card:
+  name: Kodi
+  entities:
+    - media_player.office_kodi
+
+###########
+# CLIMATE #
+###########
+
+climate:
+  name: Climate
+  entities:
+    - climate.east_wing
+    - climate.west_wing
+    - sensor.east_wing_humidity
+    - sensor.west_wing_humidity
+    - sensor.office_temperature
+    - sensor.living_room_temperature
+    - sensor.kitchen_temperature
+    - sensor.west_wing_temperature
+    - sensor.bedroom_temperature
+
+outside:
+  name: Weather
+  entities:
+    - sensor.dark_sky_temperature
+    - sensor.dark_sky_humidity
+
+living_room_climate:
+  name: Climate
+  entities:
+    - sensor.living_room_occupancy_template
+    - sensor.living_room_temperature
+
+office_climate:
+  name: Climate
+  entities:
+    - sensor.office_occupancy_template
+    - sensor.office_temperature
+
+kitchen_climate:
+  name: Climate
+  entities:
+    - sensor.kitchen_occupancy_template
+    - sensor.kitchen_temperature
+
+master_bedroom_climate:
+  name: Climate
+  entities:
+    - sensor.west_wing_occupancy_template
+    - sensor.west_wing_temperature
+
+#########
+# DOORS #
+#########
+front_door:
+  name: Entrance
+  entities:
+    - sensor.front_door_template
+    - sensor.battery
+
+garage_doors:
+  name: Garage Doors
+  entities:
+    - sensor.double_door_template
+    - sensor.single_door_template
+
+########
+# MISC #
+########
+
+people:
+  name: Family
+  entities:
+    - sensor.caleb_location_template
+    - sensor.brittany_location_template
+
+master_bedroom_fan:
+  name: Fan
+  entities:
+    - switch.master_bedroom_fan
+
+office_fan:
+  name: Fan
+  entities:
+    - switch.office_fan
+
+living_room_lights:
+  name: Lights
+  entities:
+    - switch.living_room_light
+    - switch.living_room_dome_lights
+    - light.floor_lamp
+    - light.table_lamp
+
+living_room_fan:
+  name: Fan
+  entities:
+    - switch.living_room_fan

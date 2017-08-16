@@ -1,0 +1,122 @@
+###########
+# SENSORS #
+###########
+
+- platform: mqtt
+  state_topic: "smartthings/Server Closet Temp/temperature"
+  name: "Server Closet Temp"
+  qos: 0
+  unit_of_measurement: "°F"
+
+- platform: mqtt
+  state_topic: "smartthings/Server Closet Temp/humidity"
+  name: "Server Closet Humidity"
+  qos: 0
+  unit_of_measurement: "%"
+
+- platform: mqtt
+  state_topic: "smartthings/Server Rack Switch/power"
+  name: "Server Rack Power Draw"
+  qos: 0
+  unit_of_measurement: "W"
+
+- platform: mqtt
+  state_topic: "smartthings/Network Rack Switch/power"
+  name: "Network Rack Power Draw"
+  qos: 0
+  unit_of_measurement: "W"
+
+- platform: mqtt
+  state_topic: "smartthings/Media Rack Switch/power"
+  name: "Media Rack Power Draw"
+  qos: 0
+  unit_of_measurement: "W"
+
+- platform: mqtt
+  state_topic: "smartthings/Front Door/battery"
+  name: "Lock Battery"
+  qos: 0
+  unit_of_measurement: "%"
+
+- platform: template
+  sensors:
+    office_occupancy_template:
+      value_template: >-
+        {%- if is_state('binary_sensor.office_occupancy', 'on') -%}
+        Occupied
+        {%- else -%}
+        Empty
+        {%- endif -%}
+      friendly_name: 'Office Occupancy'
+    living_room_occupancy_template:
+      value_template: >-
+        {%- if is_state('binary_sensor.living_room_occupancy', 'on') -%}
+        Occupied
+        {%- else -%}
+        Empty
+        {%- endif -%}
+      friendly_name: 'Living Room Occupancy'
+    caleb_location_template:
+      value_template: >-
+        {%- if is_state('device_tracker.myiphone', 'home') -%}
+        Home
+        {%- else -%}
+        Away
+        {%- endif -%}
+      friendly_name: 'Caleb'
+    brittany_location_template:
+      value_template: >-
+        {%- if is_state('device_tracker.brittannsiphone', 'not_home') -%}
+        Away
+        {%- else -%}
+        Home
+        {%- endif -%}
+      friendly_name: 'Brittany'
+    kitchen_occupancy_template:
+      value_template: >-
+        {%- if is_state('binary_sensor.kitchen_occupancy', 'on') -%}
+        Occupied
+        {%- else -%}
+        Empty
+        {%- endif -%}
+      friendly_name: 'Kitchen Occupancy'
+    west_wing_occupancy_template:
+      value_template: >-
+        {%- if is_state('binary_sensor.west_wing_occupancy', 'on') -%}
+        Occupied
+        {%- else -%}
+        Empty
+        {%- endif -%}
+      friendly_name: 'Master Bedroom Occupancy'
+    double_door_template:
+      value_template: >-
+        {%- if is_state('cover.double_door', 'closed') -%}
+        Closed
+        {%- else -%}
+        Opened
+        {%- endif -%}
+      friendly_name: 'Double Door'
+    single_door_template:
+      value_template: >-
+        {%- if is_state('cover.single_door', 'closed') -%}
+        Closed
+        {%- else -%}
+        Opened
+        {%- endif -%}
+      friendly_name: 'Single Door'
+    front_door_template:
+      value_template: >-
+        {%- if is_state('lock.front_door', 'locked') -%}
+        Locked
+        {%- else -%}
+        Unlocked
+        {%- endif -%}
+      friendly_name: 'Front Door'
+
+- platform: darksky
+  api_key: !secret darksky_api
+  monitored_conditions:
+    - summary
+    - icon
+    - temperature
+    - humidity

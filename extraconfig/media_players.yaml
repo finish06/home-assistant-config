@@ -1,0 +1,63 @@
+#################
+# MEDIA PLAYERS #
+#################
+
+  - platform: kodi
+    host: 192.168.1.86
+    port: 8080
+    name: Master Bedroom Kodi
+  - platform: kodi
+    host: 192.168.1.87
+    port: 8080
+    name: Living Room Kodi
+  - platform: kodi
+    host: 192.168.1.85
+    port: 8080
+    name: Office Kodi
+  - platform: sonos
+    hosts: 192.168.1.220
+  - platform: universal
+    name: Living Room Media Center
+    children:
+      - media_player.living_room_kodi
+    commands:
+      turn_on:
+        service: switch.turn_on
+        data:
+          entity_id: switch.living_room_tv
+      turn_off:
+        service: switch.turn_off
+        data:
+          entity_id: switch.living_room_tv
+      volume_up:
+        service: media_player.volume_up
+        data:
+          entity_id: media_player.living_room
+      volume_down:
+        service: media_player.volume_down
+        data:
+          entity_id: media_player.living_room
+      volume_mute:
+        service: media_player.volume_mute
+        data:
+          entity_id: media_player.living_room
+    attributes:
+      state: switch.living_room_tv
+      volume_level: media_player.living_room
+      is_volume_muted: media_player.living_room
+  - platform: universal
+    name: Office TV
+    children:
+      - media_player.office_kodi
+    commands:
+      turn_on:
+        service: switch.turn_on
+        data:
+          entity_id: switch.office_tv
+      turn_off:
+        service: switch.turn_off
+        data:
+          entity_id: switch.office_tv
+    attributes:
+      state: switch.office_tv
+

@@ -1,0 +1,12 @@
+#########################
+# ECHO VIA EMULATED HUE #
+#########################
+
+  host_ip: 10.10.3.50
+  advertise_ip: 10.10.3.50
+  listen_port: 8300
+  exposed_domains:
+    - light
+    - switch
+    - input_boolean
+    - media_player

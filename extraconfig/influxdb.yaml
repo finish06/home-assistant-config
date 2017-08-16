@@ -1,0 +1,12 @@
+############
+# influxdb #
+############
+
+  host: influxdb.du.nn
+  include:
+    entities:
+      - sensor.server_rack_power_draw
+      - sensor.network_rack_power_draw
+      - sensor.media_rack_power_draw
+      - sensor.server_closet_temp
+      - sensor.server_closet_humidity

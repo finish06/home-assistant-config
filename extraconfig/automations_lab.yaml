@@ -1,0 +1,188 @@
+- id: show_living_room_tv_media_card
+  initial_state: false
+  trigger:
+  - payload: 'on'
+    platform: mqtt
+    topic: harmony-api/hubs/living-room/state
+  action:
+  - data:
+      visible: true
+    entity_id: group.living_room_tv_media_card
+    service: group.set_visibility
+  alias: Show Living Room Media Card
+- id: hide_living_room_tv_media_card
+  initial_state: false
+  trigger:
+  - payload: 'off'
+    platform: mqtt
+    topic: harmony-api/hubs/living-room/state
+  action:
+  - data:
+      visible: false
+    entity_id: group.living_room_tv_media_card
+    service: group.set_visibility
+  alias: Hide Living Room Media Card
+- id: show_living_room_sonos
+  trigger:
+    platform: state
+    entity_id: input_boolean.dynamic_living_room_sonos
+    from: 'off'
+    to: 'on'
+  action:
+  - data:
+      visible: true
+    entity_id: group.living_room_sonos_media_card
+    service: group.set_visibility
+  alias: Show Living Room Sonos
+- id: hide_living_room_sonos
+  trigger:
+    platform: state
+    entity_id: input_boolean.dynamic_living_room_sonos
+    from: 'on'
+    to: 'off'
+  action:
+  - data:
+      visible: false
+    entity_id: group.living_room_sonos_media_card
+    service: group.set_visibility
+  alias: Hide Living Room Sonos Switch
+
+- id: hide_living_room_tv_when_off
+  initial_state: false
+  trigger:
+  - platform: mqtt
+    payload: 'off'
+    topic: harmony-api/hubs/living-room/state
+  condition:
+    condition: state
+    entity_id: switch.living_room_tv
+    state: off
+    for:
+      minutes: 10
+
+
+- id: select_and_show_living_room_sonos
+  trigger:
+  - entity_id: input_select.dynamic_living_room_sonos
+    platform: state
+  - entity_id: input_select.dynamic_living_room_sonos
+    platform: state
+  - entity_id: input_select.dynamic_living_room_sonos
+    platform: state
+  action:
+  - data_template:
+      source: "{{ trigger.to_state.state }}"
+    entity_id: media_player.living_room
+    service: media_player.select_source
+  - data:
+      visible: true
+    entity_id: group.living_room_sonos_media_card
+    service: group.set_visibility
+  alias: Select and Show Living Room Sonos
+
+- id: hide_living_room_sonos
+  trigger:
+  - entity_id: media_player.living_room
+    platform: state
+    to: 'paused'
+    for:
+      minutes: 1
+  action:
+  - data:
+      option: ' '
+    entity_id: input_select.dynamic_living_room_sonos
+    service: input_select.select_option
+  - data:
+      visible: false
+    entity_id: group.living_room_sonos_media_card
+    service: group.set_visibility
+  alias: Hide Living Room Sonos
+
+- id: hide_living_room_sonos_at_start
+  trigger:
+    platform: homeassistant
+    event: start
+  condition:
+    condition: state
+    entity_id: 'media_player.living_room'
+    state: 'paused'
+  action:
+  - data:
+      option: ' '
+    entity_id: input_select.dynamic_living_room_sonos
+    service: input_select.select_option
+  - data:
+      visible: false
+    entity_id: group.living_room_sonos_media_card
+    service: group.set_visibility
+  alias: Hide Living Room Sonos at Start
+
+- id: hide_living_room_tv_at_start
+  trigger:
+    platform: homeassistant
+    event: start
+  condition:
+    condition: state
+    entity_id: 'switch.living_room_tv'
+    state: 'off'
+  action:
+  - data:
+      visible: false
+    entity_id: group.living_room_tv_media_card
+    service: group.set_visibility
+  alias: Hide Living Room TV at Start
+
+- id: start_and_show_master_bedroom_tv
+  trigger:
+  - platform: state
+    entity_id: input_boolean.dynamic_master_bedroom_tv
+    from: 'off'
+    to: 'on'
+  - platform: mqtt
+    topic: harmony-api/hubs/master-bedroom/state
+    payload: 'on'
+  action:
+  - service: group.set_visibility
+    entity_id: group.master_bedroom_tv_media_card
+    data:
+      visible: true
+  - service: switch.turn_on
+    entity_id: switch.master_bedroom_tv
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.dynamic_master_bedroom_tv
+  alias: Start and Show Master Bedroom TV
+
+- id: stop_and_hide_master_bedroom_tv
+  trigger:
+  - platform: state
+    entity_id: input_boolean.dynamic_master_bedroom_tv
+    from: 'on'
+    to: 'off'
+  - platform: mqtt
+    topic: harmony-api/hubs/master-bedroom/state
+    payload: 'off'
+  action:
+  - service: group.set_visibility
+    entity_id: group.master_bedroom_tv_media_card
+    data:
+      visible: False
+  - service: switch.turn_off
+    entity_id: switch.master_bedroom_tv
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.dynamic_master_bedroom_tv
+  alias: Stop and Hide Master Bedroom TV
+
+- id: hide_master_bedroom_tv_at_start
+  trigger:
+    platform: homeassistant
+    event: start
+  condition:
+    condition: state
+    entity_id: 'switch.master_bedroom_tv'
+    state: 'off'
+  action:
+  - data:
+      visible: false
+    entity_id: group.master_bedroom_tv_media_card
+    service: group.set_visibility
+  alias: Hide Master Bedroom TV at Start

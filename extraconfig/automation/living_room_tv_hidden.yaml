@@ -1,0 +1,10 @@
+trigger:
+  platform: mqtt
+  topic: "harmony-api/hubs/living-room/state"
+  payload: "off"
+action:
+  service: group.set_visibility
+  entity_id: group.living_room_tv
+  data:
+    visible: False
+

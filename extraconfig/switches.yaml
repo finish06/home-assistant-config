@@ -1,0 +1,81 @@
+############
+# SWITCHES #
+############
+  - platform: mqtt
+    name: Office Floor Lamp
+    state_topic: "smartthings/Office Lamp/switch"
+    command_topic: "smartthings/Office Lamp/switch"
+    payload_on: "on"
+    payload_off: "off"
+    retain: true
+  - platform: template
+    switches:
+       living_room_tv:
+         friendly_name: 'Living Room TV'
+         value_template: "{% if is_state('remote.living_room', 'on') %}on{% else %}off{% endif %}"
+         turn_on:
+            service: remote.turn_on
+            entity_id: remote.living_room
+            data:
+              activity: '26364722'
+         turn_off:
+             service: remote.turn_off
+             entity_id: remote.living_room
+  - platform: template
+    switches:
+       office_tv:
+         friendly_name: 'Office TV'
+         value_template: "{% if is_state('remote.office', 'on') %}on{% else %}off{% endif %}"
+         turn_on:
+            service: remote.turn_on
+            entity_id: remote.office
+            data:
+              activity: 'Kodi'
+         turn_off:
+             service: remote.turn_off
+             entity_id: remote.office
+  - platform: template
+    switches:
+       master_bedroom_tv:
+         friendly_name: 'Master Bedroom TV'
+         value_template: "{% if is_state('remote.master_bedroom', 'on') %}on{% else %}off{% endif %}"
+         turn_on:
+            service: remote.turn_on
+            entity_id: remote.master_bedroom
+            data:
+              activity: '16078420'
+         turn_off:
+             service: remote.turn_off
+             entity_id: remote.master_bedroom
+
+
+  # - platform: mqtt
+  #   name: "Living Room TV Old"
+  #   state_topic: "harmony-api/hubs/living-room/activities/kodi/state"
+  #   command_topic: "harmony-api/hubs/living-room/activities/kodi/command"
+  #   payload_on: "on"
+  #   payload_off: "off"
+  # - platform: mqtt
+  #   name: "Office TV"
+  #   state_topic: "harmony-api/hubs/office/activities/kodi/state"
+  #   command_topic: "harmony-api/hubs/office/activities/kodi/command"
+  #   payload_on: "on"
+  #   payload_off: "off"
+  # - platform: mqtt
+  #   name: "Master Bedroom TV"
+  #   state_topic: "harmony-api/hubs/master-bedroom/activities/kodi/state"
+  #   command_topic: "harmony-api/hubs/master-bedroom/activities/kodi/command"
+  #   payload_on: "on"
+  #   payload_off: "off"
+  # - platform: command_line
+  #   switches:
+  #     food_network:
+  #       command_on: '/home/hass/.homeassistant/bash_scripts/food_network.sh'
+  #       command_off: '/home/hass/.homeassistant/bash_scripts/kodi_off.sh'
+  #       friendly_name: Food Network
+  # - platform: command_line
+  #   switches:
+  #      hgtv:
+  #        command_on: '/home/hass/.homeassistant/bash_scripts/hgtv.sh'
+  #        command_off: '/home/hass/.homeassistant/bash_scripts/kodi_off.sh'
+  #        friendly_name: HGTV

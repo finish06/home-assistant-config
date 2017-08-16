@@ -1,0 +1,9 @@
+trigger:
+  platform: mqtt
+  topic: "harmony-api/hubs/living-room/state"
+  payload: "on"
+action:
+  service: group.set_visibility
+  entity_id: group.living_room_tv_media_card
+  data:
+    visible: True

@@ -1,0 +1,8 @@
+- alias: "Adjust living room Sonos speaker volume."
+  trigger:
+    platform: state
+    entity_id: switch.living_room_universal_volume
+    to: 'on'
+  action:
+    service: media_player.volume_up
+    entity_id: media_player.living_room

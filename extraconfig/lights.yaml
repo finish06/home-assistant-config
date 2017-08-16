@@ -1,0 +1,7 @@
+##########
+# LIGHTS #
+##########
+
+  - platform: hue
+    host: 192.168.1.237
+    allow_unreachable: true

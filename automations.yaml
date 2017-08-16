@@ -1,0 +1,223 @@
+- id: start_and_show_living_room_tv
+  trigger:
+  - platform: state
+    entity_id: input_boolean.dynamic_living_room_tv
+    to: 'on'
+  - platform: state
+    entity_id: switch.living_room_tv
+    to: 'on'
+  action:
+  - service: group.set_visibility
+    entity_id: group.living_room_tv_media_card
+    data:
+      visible: true
+  - service: remote.turn_on
+    entity_id: remote.living_room
+    data:
+      activity: '26364722'
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.dynamic_living_room_tv
+  alias: Start and Show Living Room TV
+
+- id: stop_and_hide_living_room_tv
+  trigger:
+  - platform: state
+    entity_id: input_boolean.dynamic_living_room_tv
+    to: 'off'
+  - platform: state
+    entity_id: switch.living_room_tv
+    to: 'off'
+  action:
+  - service: group.set_visibility
+    entity_id: group.living_room_tv_media_card
+    data:
+      visible: false
+  - service: remote.turn_off
+    entity_id: remote.living_room
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.dynamic_living_room_tv
+  alias: Stop and Hide Living Room TV
+
+- id: hide_living_room_tv_at_start
+  trigger:
+    platform: homeassistant
+    event: start
+  condition:
+    condition: state
+    entity_id: 'switch.living_room_tv'
+    state: 'off'
+  action:
+  - data:
+      visible: false
+    entity_id: group.living_room_tv_media_card
+    service: group.set_visibility
+  alias: Hide Living Room TV at Start
+
+- id: start_and_show_office_tv
+  trigger:
+  - platform: state
+    entity_id: input_boolean.dynamic_office_tv
+    to: 'on'
+  - platform: state
+    entity_id: switch.office_tv
+    to: 'on'
+  action:
+  - service: group.set_visibility
+    entity_id: group.office_tv_media_card
+    data:
+      visible: true
+  - service: remote.turn_on
+    entity_id: remote.office
+    data:
+      activity: '18381843'
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.dynamic_office_tv
+  alias: Start and Show Office TV
+
+- id: stop_and_hide_office_tv
+  trigger:
+  - platform: state
+    entity_id: input_boolean.dynamic_office_tv
+    to: 'off'
+  - platform: state
+    entity_id: switch.office_tv
+    to: 'off'
+  action:
+  - service: group.set_visibility
+    entity_id: group.office_tv_media_card
+    data:
+      visible: false
+  - service: remote.turn_off
+    entity_id: remote.office
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.dynamic_office_tv
+  alias: Stop and Hide Office TV
+
+- id: hide_office_tv_at_start
+  trigger:
+    platform: homeassistant
+    event: start
+  condition:
+    condition: state
+    entity_id: 'switch.office_tv'
+    state: 'off'
+  action:
+  - data:
+      visible: false
+    entity_id: group.office_tv_media_card
+    service: group.set_visibility
+  alias: Hide Office TV at Start
+
+- id: start_and_show_master_bedroom_tv
+  trigger:
+  - platform: state
+    entity_id: input_boolean.dynamic_master_bedroom_tv
+    to: 'on'
+  - platform: state
+    entity_id: switch.master_bedroom_tv
+    to: 'on'
+  action:
+  - service: group.set_visibility
+    entity_id: group.master_bedroom_tv_media_card
+    data:
+      visible: true
+  - service: remote.turn_on
+    entity_id: remote.master_bedroom
+    data:
+      activity: '16078420'
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.dynamic_master_bedroom_tv
+  alias: Start and Show Master Bedroom TV
+
+- id: stop_and_hide_master_bedroom_tv
+  trigger:
+  - platform: state
+    entity_id: input_boolean.dynamic_master_bedroom_tv
+    to: 'off'
+  - platform: state
+    entity_id: switch.master_bedroom_tv
+    to: 'off'
+  action:
+  - service: group.set_visibility
+    entity_id: group.master_bedroom_tv_media_card
+    data:
+      visible: false
+  - service: remote.turn_off
+    entity_id: remote.master_bedroom
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.dynamic_master_bedroom_tv
+  alias: Stop and Hide Master Bedroom TV
+
+- id: hide_master_bedroom_tv_at_start
+  trigger:
+    platform: homeassistant
+    event: start
+  condition:
+    condition: state
+    entity_id: 'switch.master_bedroom_tv'
+    state: 'off'
+  action:
+  - data:
+      visible: false
+    entity_id: group.master_bedroom_tv_media_card
+    service: group.set_visibility
+  alias: Hide Master Bedroom TV at Start
+
+- id: select_and_show_living_room_sonos
+  trigger:
+  - entity_id: input_select.dynamic_living_room_sonos
+    platform: state
+  condition:
+    condition: template
+    value_template: "{{ states.dynamic_living_room_sonos.attributes.select_option != 'Select a Playlist' }}"
+  action:
+  - data_template:
+      source: "{{ trigger.to_state.state }}"
+    entity_id: media_player.living_room
+    service: media_player.select_source
+  - data:
+      visible: true
+    entity_id: group.living_room_sonos_media_card
+    service: group.set_visibility
+  - data:
+      volume_level: 0.2
+    entity_id: media_player.living_room
+    service: media_player.volume_set
+  alias: Select and Show Living Room Sonos
+
+- id: hide_living_room_sonos
+  trigger:
+  - entity_id: media_player.living_room
+    platform: state
+    to: 'paused'
+    for:
+      minutes: 1
+  action:
+  - data:
+      option: 'Select a Playlist'
+    entity_id: input_select.dynamic_living_room_sonos
+    service: input_select.select_option
+  - data:
+      visible: false
+    entity_id: group.living_room_sonos_media_card
+    service: group.set_visibility
+  alias: Hide Living Room Sonos
+
+- id: hide_living_room_sonos_at_start
+  trigger:
+    platform: homeassistant
+    event: start
+  condition:
+    condition: state
+    entity_id: 'media_player.living_room'
+    state: 'paused'
+  action:
+  - data:
+      option: ' '
+    entity_id: input_select.dynamic_living_room_sonos
+    service: input_select.select_option
+  - data:
+      visible: false
+    entity_id: group.living_room_sonos_media_card
+    service: group.set_visibility
+  alias: Hide Living Room Sonos at Start

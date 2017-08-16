@@ -1,0 +1,19 @@
+dynamic_living_room_sonos:
+  name: Living Room Sonos
+  initial: off
+  icon: mdi:music-note
+
+dynamic_living_room_tv:
+  name: Living Room TV
+  initial: off
+  icon: mdi:television
+
+dynamic_master_bedroom_tv:
+  name: Master Bedroom TV
+  initial: off
+  icon: mdi:television
+
+dynamic_office_tv:
+  name: Office TV
+  initial: off
+  icon: mdi:television

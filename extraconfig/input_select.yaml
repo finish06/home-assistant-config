@@ -1,0 +1,8 @@
+dynamic_living_room_sonos:
+  name: Living Room Sonos
+  options:
+    - Select a Playlist
+    - Top Christian
+    - Sara Bareilles
+    - Top Country
+    - NPR (KWGS)

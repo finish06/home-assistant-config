@@ -1,0 +1,8 @@
+trigger:
+  platform: mqtt
+  topic: 
+  payload: 'on'        {%- if is_state('cover.single_door', 'closed') -%}
+        Closed
+        {%- else -%}
+        Opened
+        {%- endif -%}

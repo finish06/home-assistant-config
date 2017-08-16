@@ -1,0 +1,123 @@
+
+########
+# View #
+########
+  cover.double_door:
+    emulated_hue: false
+  cover.single_door:
+    emulated_hue: false
+  input_boolean.dynamic_living_room_tv:
+    emulated_hue: false
+  input_boolean.dynamic_master_bedroom_tv:
+    emulated_hue: false
+  input_select.dynamic_living_room_sonos:
+    icon: mdi:music
+  light.brittanys_lamp:
+    friendly_name: Her Lamp
+  light.calebs_lamp:
+    friendly_name: His Lamp
+  light.master_bedroom_light:
+    friendly_name: Master Bedroom Light
+  media_player.living_room:
+    hidden: false
+    emulated_hue: false
+    friendly_name: Playbar
+  media_player.living_room_kodi:
+    emulated_hue: false
+    friendly_name: Kodi
+  media_player.living_room_media_center:
+    emulated_hue: false
+  media_player.master_bedroom_kodi:
+    emulated_hue: false
+    friendly_name: Kodi
+  media_player.office_kodi:
+    emulated_hue: false
+    friendly_name: Kodi
+  media_player.shield:
+    hidden: true
+  media_player.shield2:
+    hidden: true
+  media_player.shield3:
+    hidden: true
+  sensor.caleb_location_template:
+    friendly_name: Caleb
+    icon: mdi:account
+  sensor.battery:
+    icon: mdi:battery-90
+    friendly_name: Battery
+  sensor.brittany_location_template:
+    friendly_name: Brittany
+    icon: mdi:account
+  sensor.dark_sky_temperature:
+    friendly_name: Temperature
+  sensor.dark_sky_humidity:
+    friendly_name: Humidity
+  sensor.double_door_template:
+    icon: mdi:garage
+  sensor.east_wing_humidity:
+    icon: mdi:water-percent
+  sensor.front_door_template:
+    icon: mdi:lock
+  sensor.network_rack_power_draw:
+    icon: mdi:flash
+  sensor.server_rack_power_draw:
+    icon: mdi:flash
+  sensor.media_rack_power_draw:
+    icon: mdi:flash
+  sensor.single_door_template:
+    icon: mdi:garage
+  sensor.west_wing_temperature:
+    friendly_name: Master Bedroom Temperature
+  sensor.west_wing_humidity:
+    icon: mdi:water-percent
+  switch.auto_dr:
+    emulated_hue: false
+    hidden: true
+  switch.cabinet_lights:
+    icon: mdi:lightbulb
+  switch.east_hallway_light:
+    icon: mdi:lightbulb
+  switch.kitchen_light:
+    icon: mdi:lightbulb
+  switch.kitchen_light_1:
+    emulated_hue: false
+    hidden: true
+  switch.kitchen_light_2:
+    emulated_hue: false
+    hidden: true
+  switch.living_room_fan:
+    icon: mdi:fan
+  switch.living_room_light:
+    icon: mdi:lightbulb
+  switch.living_room_dome_lights:
+    icon: mdi:lightbulb
+  switch.living_room_dome_lights_1:
+    emulated_hue: false
+    hidden: true
+  switch.living_room_dome_lights_2:
+    emulated_hue: false
+    hidden: true
+  switch.living_room_tv:
+    icon: mdi:television
+  switch.master_bedroom_fan:
+    friendly_name: Master Bedroom Fan
+    icon: mdi:fan
+  switch.office_tv:
+    icon: mdi:television
+    emulated_hue: false
+  switch.master_bedroom_tv:
+    icon: mdi:television
+  switch.office_fan:
+    icon: mdi:fan
+  switch.office_light:
+    icon: mdi:lightbulb
+  switch.office_floor_lamp:
+    icon: mdi:lightbulb
+  switch.west_hallway_light:
+    icon: mdi:lightbulb
+  switch.west_hallway_1:
+    emulated_hue: false
+    hidden: true
+  switch.west_hallway_2:
+    emulated_hue: false
+    hidden: true

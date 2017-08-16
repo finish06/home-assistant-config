@@ -1,3 +1,3 @@
 # home_assistant_configuration
 
-![UI](images/default.jpg)
+![UI](images/overview.png)

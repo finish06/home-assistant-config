@@ -1,29 +1,25 @@
 homeassistant:
-  # Name of the location where Home Assistant is running
   name: Overview
-  # Location required to calculate the time the sun rises and sets
   latitude: !secret latitude_location
   longitude: !secret longitude_location
-  # Impacts weather/sunrise data
   elevation: 192
-  # metric for Metric, imperial for Imperial
   unit_system: imperial
-  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Chicago
-  # Customize
   customize: !include extraconfig/customize.yaml
 
-# Enables configuration UI
 config:
-
-# Enables the frontend
+discovery:
+  ignore:
+    - philips_hue
+    - samsung_tv
+    - sonos
+    - yamaha
 frontend:
   themes:
     happy:
       primary-color: green
-
+history:
 http:
-  # Uncomment this to add a password (recommended!)
   api_password: !secret api_password
   trusted_networks:
     - 127.0.0.1
@@ -32,35 +28,14 @@ http:
     - 10.8.0.0/16
   ip_ban_enabled: true
   login_attempts_threshold: 3
-
-# Checks for available updates
-updater:
-
-# Discover some devices automatically
-discovery:
-  ignore:
-    - philips_hue
-    - samsung_tv
-    - sonos
-    - yamaha
-    - harmony
-
-# Enables support for tracking state changes over time.
-history:
-
-# Enables support for database purging
-recorder:
-  purge_days: 7
-
-# View all events in a logbook
+ios:
 logbook:
-
-#Log setting
 logger:
   default: error
-
-# Track the sun
+recorder:
+  purge_days: 7
 sun:
+updater:
 
 ##############
 # Components #
@@ -76,7 +51,6 @@ group: !include extraconfig/group.yaml
 influxdb: !include extraconfig/influxdb.yaml
 input_boolean: !include extraconfig/input_boolean.yaml
 input_select: !include extraconfig/input_select.yaml
-ios:
 isy994: !include extraconfig/isy994.yaml
 light: !include extraconfig/lights.yaml
 lock: !include extraconfig/locks.yaml

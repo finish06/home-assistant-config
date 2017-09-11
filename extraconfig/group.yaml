@@ -32,6 +32,7 @@ kitchen_view:
   name: Kitchen/Dining
   view: yes
   entities:
+    - switch.dining_room_light
     - switch.kitchen_light
     - switch.cabinet_lights
     - group.kitchen_climate
@@ -79,6 +80,7 @@ tab_kitchen:
   name: Kitchen
   entities:
     - sensor.kitchen_occupancy_template
+    - switch.dining_room_light
     - switch.kitchen_light
     - switch.cabinet_lights
 

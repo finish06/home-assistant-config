@@ -75,6 +75,8 @@
     hidden: true
   switch.cabinet_lights:
     icon: mdi:lightbulb
+  switch.dining_room_light:
+    icon: mdi:lightbulb
   switch.east_hallway_light:
     icon: mdi:lightbulb
   switch.kitchen_light:

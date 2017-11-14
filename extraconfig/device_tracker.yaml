@@ -8,4 +8,4 @@
     password: !secret unifi_password
     verify_ssl: False
     consider_home: 180
-    track_new_devices: False
+    # track_new_devices: False

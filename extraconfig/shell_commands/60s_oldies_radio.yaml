@@ -1,1 +1,0 @@
-60s_oldies_radio: curl -X GET http://192.168.1.50:5005/living%20room/favorite/60s%20Oldies%20Radio

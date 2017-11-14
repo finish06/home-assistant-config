@@ -17,7 +17,7 @@
             service: remote.turn_on
             entity_id: remote.living_room
             data:
-              activity: '26364722'
+              activity: '28269845'
          turn_off:
              service: remote.turn_off
              entity_id: remote.living_room
@@ -30,7 +30,7 @@
             service: remote.turn_on
             entity_id: remote.office
             data:
-              activity: 'Kodi'
+              activity: '28282150'
          turn_off:
              service: remote.turn_off
              entity_id: remote.office
@@ -43,7 +43,7 @@
             service: remote.turn_on
             entity_id: remote.master_bedroom
             data:
-              activity: '16078420'
+              activity: '28271107'
          turn_off:
              service: remote.turn_off
              entity_id: remote.master_bedroom

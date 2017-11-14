@@ -2,43 +2,72 @@
 ########
 # View #
 ########
+  automation.hide_living_room_sonos:
+    haaska_hidden: true
+  automation.hide_living_room_sonos_at_start:
+    haaska_hidden: true
+  automation.hide_living_room_tv_at_start:
+    haaska_hidden: true
+  automation.hide_master_bedroom_tv_at_start:
+    haaska_hidden: true
+  automation.hide_office_tv_at_start:
+    haaska_hidden: true
+  automation.select_and_show_living_room_sonos:
+    haaska_hidden: true
+  automation.start_and_show_living_room_tv:
+    haaska_hidden: true
+  automation.start_and_show_master_bedroom_tv:
+    haaska_hidden: true
+  automation.start_and_show_office_tv:
+    haaska_hidden: true
   cover.double_door:
-    emulated_hue: false
+    haaska_hidden: true
   cover.single_door:
-    emulated_hue: false
+    haaska_hidden: true
   input_boolean.dynamic_living_room_tv:
-    emulated_hue: false
+    haaska_hidden: true
+  input_boolean.dynamic_living_room_sonos:
+    haaska_hidden: true
   input_boolean.dynamic_master_bedroom_tv:
-    emulated_hue: false
+    haaska_hidden: true
+  input_boolean.dynamic_office_tv:
+    haaska_hidden: true
   input_select.dynamic_living_room_sonos:
     icon: mdi:music
   light.brittanys_lamp:
     friendly_name: Her Lamp
+    haaska_name: Her Lamp
   light.calebs_lamp:
     friendly_name: His Lamp
+    haaska_name: His Lamp
+  light.hgrp0000000030:
+    hidden: true
+    haaska_hidden: true
   light.master_bedroom_light:
     friendly_name: Master Bedroom Light
+  media_player.gym_shield:
+    hidden: true
+    haaska_hidden: true
   media_player.living_room:
-    hidden: false
-    emulated_hue: false
     friendly_name: Playbar
   media_player.living_room_kodi:
-    emulated_hue: false
+    haaska_hidden: true
     friendly_name: Kodi
-  media_player.living_room_media_center:
-    emulated_hue: false
   media_player.master_bedroom_kodi:
-    emulated_hue: false
+    haaska_hidden: true
     friendly_name: Kodi
   media_player.office_kodi:
-    emulated_hue: false
+    haaska_hidden: true
     friendly_name: Kodi
-  media_player.shield:
+  media_player.living_room_shield:
     hidden: true
-  media_player.shield2:
+    haaska_hidden: true
+  media_player.master_bedroom_shield:
     hidden: true
-  media_player.shield3:
+    haaska_hidden: true
+  media_player.office_shield:
     hidden: true
+    haaska_hidden: true
   sensor.caleb_location_template:
     friendly_name: Caleb
     icon: mdi:account
@@ -58,12 +87,22 @@
     icon: mdi:water-percent
   sensor.front_door_template:
     icon: mdi:lock
-  sensor.network_rack_power_draw:
+  sensor.network_rack_power:
     icon: mdi:flash
-  sensor.server_rack_power_draw:
+  sensor.server_rack_power:
     icon: mdi:flash
-  sensor.media_rack_power_draw:
+  sensor.media_rack_power:
     icon: mdi:flash
+  sensor.media_rack_power_cost:
+    icon: mdi:square-inc-cash
+  sensor.network_rack_power_cost:
+    icon: mdi:square-inc-cash
+  sensor.server_closet_temp:
+    icon: mdi:thermometer
+  sensor.server_closet_humidity:
+    icon: mdi:water-percent
+  sensor.server_rack_power_cost:
+    icon: mdi:square-inc-cash
   sensor.single_door_template:
     icon: mdi:garage
   sensor.west_wing_temperature:
@@ -71,7 +110,7 @@
   sensor.west_wing_humidity:
     icon: mdi:water-percent
   switch.auto_dr:
-    emulated_hue: false
+    haaska_hidden: true
     hidden: true
   switch.cabinet_lights:
     icon: mdi:lightbulb
@@ -82,10 +121,10 @@
   switch.kitchen_light:
     icon: mdi:lightbulb
   switch.kitchen_light_1:
-    emulated_hue: false
+    haaska_hidden: true
     hidden: true
   switch.kitchen_light_2:
-    emulated_hue: false
+    haaska_hidden: true
     hidden: true
   switch.living_room_fan:
     icon: mdi:fan
@@ -94,10 +133,10 @@
   switch.living_room_dome_lights:
     icon: mdi:lightbulb
   switch.living_room_dome_lights_1:
-    emulated_hue: false
+    haaska_hidden: true
     hidden: true
   switch.living_room_dome_lights_2:
-    emulated_hue: false
+    haaska_hidden: true
     hidden: true
   switch.living_room_tv:
     icon: mdi:television
@@ -106,7 +145,6 @@
     icon: mdi:fan
   switch.office_tv:
     icon: mdi:television
-    emulated_hue: false
   switch.master_bedroom_tv:
     icon: mdi:television
   switch.office_fan:
@@ -118,8 +156,8 @@
   switch.west_hallway_light:
     icon: mdi:lightbulb
   switch.west_hallway_1:
-    emulated_hue: false
+    haaska_hidden: true
     hidden: true
   switch.west_hallway_2:
-    emulated_hue: false
+    haaska_hidden: true
     hidden: true

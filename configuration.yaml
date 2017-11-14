@@ -15,9 +15,6 @@ discovery:
     - sonos
     - yamaha
 frontend:
-  themes:
-    happy:
-      primary-color: green
 history:
 http:
   api_password: !secret api_password
@@ -35,7 +32,6 @@ logger:
   logs:
     homeassistant.components.cover: critical
 recorder:
-  purge_days: 7
 sun:
 updater:
 
@@ -45,10 +41,9 @@ updater:
 automation: !include automations.yaml
 binary_sensor: !include extraconfig/binary_sensors.yaml
 climate: !include extraconfig/climate.yaml
-cover: !include extraconfig/cover.yaml
+#cover: !include extraconfig/cover.yaml
 device_tracker: !include extraconfig/device_tracker.yaml
 ecobee: !include extraconfig/ecobee.yaml
-emulated_hue: !include extraconfig/emulated_hue.yaml
 group: !include extraconfig/group.yaml
 influxdb: !include extraconfig/influxdb.yaml
 input_boolean: !include extraconfig/input_boolean.yaml
@@ -59,7 +54,7 @@ lock: !include extraconfig/locks.yaml
 media_player: !include extraconfig/media_players.yaml
 mqtt: !include extraconfig/mqtt.yaml
 notify: !include extraconfig/notify.yaml
-remote: !include extraconfig/remotes.yaml
+#remote: !include extraconfig/remotes.yaml
 sensor: !include extraconfig/sensors.yaml
 shell_command: !include_dir_merge_named extraconfig/shell_commands/
 switch: !include extraconfig/switches.yaml

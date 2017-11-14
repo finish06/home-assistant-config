@@ -1,4 +1,4 @@
-#########
+ #########
 # VIEWS #
 #########
 
@@ -64,7 +64,10 @@ tech_closet_view:
   name: Tech Closet
   view: yes
   entities:
-    - group.tab_tech_closet
+    - group.tech_closet_climate_card
+    - group.media_rack_card
+    - group.network_rack_card
+    - group.server_rack_card
 
 ##############
 # ROOM CARDS #
@@ -119,9 +122,12 @@ tab_tech_closet:
   entities:
     - sensor.server_closet_temp
     - sensor.server_closet_humidity
-    - sensor.network_rack_power_draw
-    - sensor.server_rack_power_draw
-    - sensor.media_rack_power_draw
+    - sensor.network_rack_power
+    - sensor.network_rack_power_cost
+    - sensor.server_rack_power
+    - sensor.server_rack_power_cost
+    - sensor.media_rack_power
+    - sensor.media_rack_power_cost
 
 ################
 # MEDIA GROUPS #
@@ -163,9 +169,9 @@ office_tv_media_card:
   entities:
     - media_player.office_kodi
 
-###########
-# CLIMATE #
-###########
+##################
+# CLIMATE GROUPS #
+##################
 
 climate:
   name: Climate
@@ -224,6 +230,33 @@ garage_doors:
   entities:
     - sensor.double_door_template
     - sensor.single_door_template
+
+#################
+# SENSOR GROUPS #
+#################
+tech_closet_climate_card:
+  name: Climate
+  entities:
+    - sensor.server_closet_temp
+    - sensor.server_closet_humidity
+
+media_rack_card:
+  name: Media Rack
+  entities:
+    - sensor.media_rack_power
+    - sensor.media_rack_power_cost
+
+network_rack_card:
+  name: Network Rack
+  entities:
+    - sensor.network_rack_power
+    - sensor.network_rack_power_cost
+
+server_rack_card:
+  name: Server Rack
+  entities:
+    - sensor.server_rack_power
+    - sensor.server_rack_power_cost
 
 ########
 # MISC #

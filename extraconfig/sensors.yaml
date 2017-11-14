@@ -20,17 +20,83 @@
   qos: 0
   unit_of_measurement: "W"
 
+- platform: template
+  sensors:
+    server_rack_power:
+      friendly_name: "Server Rack Power"
+      entity_id: "sensor.server_rack_power_draw"
+      unit_of_measurement: "W"
+      value_template: "{{ states('sensor.server_rack_power_draw') | round(0) }}"
+
+- platform: statistics
+  entity_id: sensor.server_rack_power
+  name: Server Rack Stats
+  max_age:
+    days: 30
+
+- platform: template
+  sensors:
+    server_rack_power_cost:
+      friendly_name: "Server Rack Cost"
+      entity_id: "sensor.server_rack_stats_mean"
+      unit_of_measurement: "USD"
+      value_template: "{{ (states.sensor.server_rack_stats_mean.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
+
 - platform: mqtt
   state_topic: "smartthings/Network Rack Switch/power"
   name: "Network Rack Power Draw"
   qos: 0
   unit_of_measurement: "W"
 
+- platform: template
+  sensors:
+    network_rack_power:
+      friendly_name: "Network Rack Power"
+      entity_id: "sensor.network_rack_power_draw"
+      unit_of_measurement: "W"
+      value_template: "{{ states('sensor.network_rack_power_draw') | round(0) }}"
+
+- platform: statistics
+  entity_id: sensor.network_rack_power
+  name: Network Rack Stats
+  max_age:
+    days: 30
+
+- platform: template
+  sensors:
+    network_rack_power_cost:
+      friendly_name: "Network Rack Cost"
+      entity_id: "sensor.network_rack_stats_mean"
+      unit_of_measurement: "USD"
+      value_template: "{{ (states.sensor.network_rack_stats_mean.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
+
 - platform: mqtt
   state_topic: "smartthings/Media Rack Switch/power"
   name: "Media Rack Power Draw"
   qos: 0
   unit_of_measurement: "W"
+
+- platform: template
+  sensors:
+    media_rack_power:
+      friendly_name: "Media Rack Power"
+      entity_id: "sensor.media_rack_power_draw"
+      unit_of_measurement: "W"
+      value_template: "{{ states('sensor.media_rack_power_draw') | round(0) }}"
+
+- platform: statistics
+  entity_id: sensor.media_rack_power
+  name: Media Rack Stats
+  max_age:
+    days: 30
+
+- platform: template
+  sensors:
+    media_rack_power_cost:
+      friendly_name: "Media Rack Cost"
+      entity_id: "sensor.media_rack_stats_mean"
+      unit_of_measurement: "USD"
+      value_template: "{{ (states.sensor.media_rack_stats_mean.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
 
 - platform: mqtt
   state_topic: "smartthings/Front Door/battery"

@@ -14,7 +14,7 @@
   - service: remote.turn_on
     entity_id: remote.living_room
     data:
-      activity: '26364722'
+      activity: '28269845'
   - service: input_boolean.turn_on
     entity_id: input_boolean.dynamic_living_room_tv
   alias: Start and Show Living Room TV
@@ -69,7 +69,7 @@
   - service: remote.turn_on
     entity_id: remote.office
     data:
-      activity: '18381843'
+      activity: '28282150'
   - service: input_boolean.turn_on
     entity_id: input_boolean.dynamic_office_tv
   alias: Start and Show Office TV
@@ -124,7 +124,7 @@
   - service: remote.turn_on
     entity_id: remote.master_bedroom
     data:
-      activity: '16078420'
+      activity: '28271107'
   - service: input_boolean.turn_on
     entity_id: input_boolean.dynamic_master_bedroom_tv
   alias: Start and Show Master Bedroom TV

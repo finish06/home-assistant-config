@@ -8,19 +8,19 @@
     payload_on: "on"
     payload_off: "off"
     retain: true
-  - platform: template
-    switches:
-       living_room_tv:
-         friendly_name: 'Living Room TV'
-         value_template: "{% if is_state('remote.living_room', 'on') %}on{% else %}off{% endif %}"
-         turn_on:
-            service: remote.turn_on
-            entity_id: remote.living_room
-            data:
-              activity: '28269845'
-         turn_off:
-             service: remote.turn_off
-             entity_id: remote.living_room
+  # - platform: template
+  #   switches:
+  #      living_room_tv:
+  #        friendly_name: 'Living Room TV'
+  #        value_template: "{% if is_state('remote.living_room', 'on') %}on{% else %}off{% endif %}"
+  #        turn_on:
+  #           service: remote.turn_on
+  #           entity_id: remote.living_room
+  #           data:
+  #             activity: '28269845'
+  #        turn_off:
+  #            service: remote.turn_off
+  #            entity_id: remote.living_room
   - platform: template
     switches:
        office_tv:
@@ -48,13 +48,12 @@
              service: remote.turn_off
              entity_id: remote.master_bedroom
 
-
-  # - platform: mqtt
-  #   name: "Living Room TV Old"
-  #   state_topic: "harmony-api/hubs/living-room/activities/kodi/state"
-  #   command_topic: "harmony-api/hubs/living-room/activities/kodi/command"
-  #   payload_on: "on"
-  #   payload_off: "off"
+  - platform: mqtt
+    name: "Living Room TV"
+    state_topic: "harmony-api/hubs/living-room/activities/shield-tv/state"
+    command_topic: "harmony-api/hubs/living-room/activities/shield-tv/command"
+    payload_on: "on"
+    payload_off: "off"
   # - platform: mqtt
   #   name: "Office TV"
   #   state_topic: "harmony-api/hubs/office/activities/kodi/state"

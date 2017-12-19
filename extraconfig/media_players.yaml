@@ -7,13 +7,17 @@
     port: 8080
     name: Master Bedroom Kodi
   - platform: kodi
-    host: 10.10.3.21
+    host: 192.168.1.41
     port: 8080
     name: Living Room Kodi
   - platform: kodi
     host: 10.10.3.25
     port: 8080
     name: Office Kodi
+  - platform: kodi
+    host: 192.168.1.42
+    port: 8080
+    name: Family Room Kodi
   - platform: sonos
     hosts: 192.168.1.220
   # - platform: universal

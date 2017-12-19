@@ -40,12 +40,13 @@ updater:
 ##############
 automation: !include automations.yaml
 binary_sensor: !include extraconfig/binary_sensors.yaml
+camera: !include extraconfig/camera.yaml
 climate: !include extraconfig/climate.yaml
 #cover: !include extraconfig/cover.yaml
 device_tracker: !include extraconfig/device_tracker.yaml
 ecobee: !include extraconfig/ecobee.yaml
 group: !include extraconfig/group.yaml
-influxdb: !include extraconfig/influxdb.yaml
+#influxdb: !include extraconfig/influxdb.yaml
 input_boolean: !include extraconfig/input_boolean.yaml
 input_select: !include extraconfig/input_select.yaml
 isy994: !include extraconfig/isy994.yaml

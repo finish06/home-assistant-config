@@ -13,8 +13,9 @@ default_view:
     - group.tab_kitchen
     - group.climate
     - group.outside
-    - group.garage_doors
+#    - group.garage_doors
     - group.front_door
+    - camera.dog_crate
 
 living_room_view:
   name: Living Room
@@ -22,7 +23,6 @@ living_room_view:
   entities:
     - group.living_room_lights
     - group.living_room_fan
-#   - media_player.outside_speakers
     - group.living_room_climate
     - group.living_room_media
     - group.living_room_tv_media_card
@@ -96,7 +96,7 @@ tab_living_room:
     - light.floor_lamp
     - light.table_lamp
     - switch.living_room_fan
-    - input_boolean.dynamic_living_room_tv
+    - switch.living_room_tv
 
 tab_master_bedroom:
   name: Master Bedroom
@@ -142,7 +142,7 @@ living_room_media:
   name: Media
   entities:
     - input_select.dynamic_living_room_sonos
-    - input_boolean.dynamic_living_room_tv
+    - switch.living_room_tv
 
 living_room_tv_media_card:
   name: Kodi

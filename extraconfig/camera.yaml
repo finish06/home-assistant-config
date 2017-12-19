@@ -1,0 +1,8 @@
+##########
+# CAMERA #
+##########
+
+- platform: uvc
+  nvr: 192.168.1.21
+  key: gfDERo4JaUdY76eMuPckveLyLNYUhnRK
+  password: !secret uvc_password

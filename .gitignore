@@ -17,3 +17,6 @@ pyozw.sqlite
 ecobee.conf
 phue.conf
 .ios.conf
+.HA_VERSION
+.uuid
+.gitignore

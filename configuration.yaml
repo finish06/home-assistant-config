@@ -14,6 +14,7 @@ discovery:
     - samsung_tv
     - sonos
     - yamaha
+    - harmony
 frontend:
 history:
 http:

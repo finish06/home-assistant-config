@@ -21,7 +21,7 @@ homeassistant:
 
 config:
 customizer:
-   custom_ui: local
+   custom_ui: debug
 discovery:
   ignore:
     - philips_hue

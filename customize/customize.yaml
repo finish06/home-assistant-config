@@ -19,21 +19,6 @@
     haaska_hidden: true
   automation.start_and_show_office_tv:
     haaska_hidden: true
-  binary_sensor.bedroom_occupancy:
-    friendly_name: Guest Bedroom
-    device_class: motion
-  binary_sensor.kitchen_occupancy:
-    friendly_name: Kitchen
-    device_class: motion
-  binary_sensor.living_room_occupancy:
-    friendly_name: Living Room
-    device_class: motion
-  binary_sensor.office_occupancy:
-    friendly_name: Office
-    device_class: motion
-  binary_sensor.west_wing_occupancy:
-    friendly_name: Master Bedroom
-    device_class: motion
   cover.double_door:
     haaska_hidden: true
   cover.single_door:
@@ -101,8 +86,6 @@
   sensor.battery:
     icon: mdi:battery-90
     friendly_name: Battery
-  sensor.bedroom_temperature:
-    friendly_name: Bedroom Temp
   sensor.brittany_location_template:
     friendly_name: Brittany
     icon: mdi:account
@@ -116,10 +99,6 @@
     icon: mdi:water-percent
   sensor.front_door_template:
     icon: mdi:lock
-  sensor.kitchen_temperature:
-    friendly_name: Kitchen Temp
-  sensor.living_room_temperature:
-    friendly_name: Living Room Temp
   sensor.living_room_occupancy_template:
     device_class: motion
   sensor.network_rack_power:
@@ -134,8 +113,6 @@
     icon: mdi:square-inc-cash
   sensor.office_occupancy_template:
     device_class: motion
-  sensor.office_temperature:
-    friendly_name: Office Temp
   sensor.server_closet_temp:
     icon: mdi:thermometer
   sensor.server_closet_humidity:
@@ -144,8 +121,6 @@
     icon: mdi:square-inc-cash
   sensor.single_door_template:
     icon: mdi:garage
-  sensor.west_wing_temperature:
-    friendly_name: Master Bedroom Temp
   sensor.west_wing_humidity:
     icon: mdi:water-percent
   switch.auto_dr:
@@ -230,6 +205,47 @@
   switch.west_hallway_2:
     haaska_hidden: true
     hidden: true
+##################
+# BINARY SENSORS #
+##################
+  binary_sensor.bonus_room_occupancy:
+    friendly_name: Bonus Room
+    device_class: motion
+  binary_sensor.bedroom_occupancy:
+    friendly_name: Guest Bedroom
+    device_class: motion
+  binary_sensor.kitchen_occupancy:
+    friendly_name: Kitchen
+    device_class: motion
+  binary_sensor.living_room_occupancy:
+    friendly_name: Living Room
+    device_class: motion
+  binary_sensor.office_occupancy:
+    friendly_name: Office
+    device_class: motion
+  binary_sensor.west_wing_occupancy:
+    friendly_name: Master Bedroom
+    device_class: motion
+
+
+###########
+# SENSORS #
+###########
+  sensor.bonus_room_temperature:
+    friendly_name: Bonus Room
+  sensor.bedroom_temperature:
+    friendly_name: Guest Bedroom
+  sensor.home_gym_temperature:
+    friendly_name: Home Gym
+  sensor.kitchen_temperature:
+    friendly_name: Kitchen
+  sensor.living_room_temperature:
+    friendly_name: Living Room
+  sensor.office_temperature:
+    friendly_name: Office
+  sensor.west_wing_temperature:
+    friendly_name: Master Bedroom
+
 
 ##################
 # GROUP ORDERING #

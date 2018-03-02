@@ -318,6 +318,7 @@ motion:
 motion_badges:
   name: Motion
   entities:
+    - binary_sensor.bonus_room_occupancy
     - binary_sensor.bedroom_occupancy
     - binary_sensor.kitchen_occupancy
     - binary_sensor.living_room_occupancy

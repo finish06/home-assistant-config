@@ -1,41 +1,34 @@
  #########
 # VIEWS #
 #########
-
 default_view:
+  name: Overview
   view: yes
   entities:
     - group.people
-    - group.tab_office
-    - group.tab_living_room
-    - group.tab_master_bedroom
-    - group.tab_hallways
-    - group.tab_kitchen
+    - group.motion
+    - group.card_office
+    - group.card_living_room
+    - group.card_master_bedroom
+    - group.card_hallways
+    - group.card_kitchen
     - group.climate
     - group.outside
-#    - group.garage_doors
     - group.front_door
     - camera.dog_crate
 
-living_room_view:
-  name: Living Room
+main_living_view:
+  name: Main Living
   view: yes
   entities:
+    - group.main_living_climate
     - group.living_room_lights
-    - group.living_room_fan
-    - group.living_room_climate
-    - group.living_room_media
+    - group.main_living_media
     - group.living_room_tv_media_card
     - group.living_room_sonos_media_card
-
-kitchen_view:
-  name: Kitchen/Dining
-  view: yes
-  entities:
-    - switch.dining_room_light
-    - switch.kitchen_light
-    - switch.cabinet_lights
-    - group.kitchen_climate
+    - group.kitchen_lights
+    - group.office_lights
+    - group.office_tv_media_card
 
 master_bedroom_view:
   name: Master Bedroom
@@ -65,32 +58,30 @@ tech_closet_view:
   view: yes
   entities:
     - group.tech_closet_climate_card
-    - group.media_rack_card
-    - group.network_rack_card
-    - group.server_rack_card
+    - group.tech_closet_equipment
 
 ##############
 # ROOM CARDS #
 ##############
-
-tab_hallways:
+card_hallways:
   name: Hallways
+  control: hidden
   entities:
     - switch.west_hallway_light
     - switch.east_hallway_light
 
-tab_kitchen:
+card_kitchen:
   name: Kitchen
+  control: hidden
   entities:
-    - sensor.kitchen_occupancy_template
     - switch.dining_room_light
     - switch.kitchen_light
     - switch.cabinet_lights
 
-tab_living_room:
+card_living_room:
   name: Living Room
+  control: hidden
   entities:
-    - sensor.living_room_occupancy_template
     - switch.living_room_light
     - switch.living_room_dome_lights
     - light.floor_lamp
@@ -98,26 +89,26 @@ tab_living_room:
     - switch.living_room_fan
     - switch.living_room_tv
 
-tab_master_bedroom:
+card_master_bedroom:
   name: Master Bedroom
+  control: hidden
   entities:
-    - sensor.west_wing_occupancy_template
     - light.calebs_lamp
     - light.brittanys_lamp
     - light.master_bedroom_light
     - switch.master_bedroom_fan
     - input_boolean.dynamic_master_bedroom_tv
 
-tab_office:
+card_office:
   name: Office
+  control: hidden
   entities:
-    - sensor.office_occupancy_template
     - switch.office_light
     - switch.office_floor_lamp
     - switch.office_fan
     - input_boolean.dynamic_office_tv
 
-tab_tech_closet:
+card_tech_closet:
   name: Tech Closet
   entities:
     - sensor.server_closet_temp
@@ -132,7 +123,6 @@ tab_tech_closet:
 ################
 # MEDIA GROUPS #
 ################
-
 living_room_sonos_media_card:
   name: Sonos
   entities:
@@ -148,6 +138,14 @@ living_room_tv_media_card:
   name: Kodi
   entities:
     - media_player.living_room_kodi
+
+main_living_media:
+  name: Media
+  control: hidden
+  entities:
+    - input_select.dynamic_living_room_sonos
+    - switch.living_room_tv
+    - switch.office_tv
 
 master_bedroom_tv:
   name: Television
@@ -172,25 +170,50 @@ office_tv_media_card:
 ##################
 # CLIMATE GROUPS #
 ##################
-
 climate:
   name: Climate
   entities:
+    - group.room_temps_1
+    - group.room_temps_2
     - climate.east_wing
     - climate.west_wing
     - sensor.east_wing_humidity
     - sensor.west_wing_humidity
-    - sensor.office_temperature
-    - sensor.living_room_temperature
-    - sensor.kitchen_temperature
-    - sensor.west_wing_temperature
+
+room_temps_1:
+  name: Temps
+  entities:
+    - sensor.bonus_room_temperature
+    - sensor.home_gym_temperature
     - sensor.bedroom_temperature
+    - sensor.living_room_temperature
+
+room_temps_2:
+  name: Temps
+  entities:
+    - sensor.kitchen_temperature
+    - sensor.office_temperature
+    - sensor.west_wing_temperature
 
 outside:
   name: Weather
   entities:
     - sensor.dark_sky_temperature
     - sensor.dark_sky_humidity
+
+main_living_temps:
+  name: Climate
+  entities:
+    - sensor.bonus_room_temperature
+    - sensor.home_gym_temperature
+    - sensor.living_room_temperature
+    - sensor.kitchen_temperature
+    - sensor.office_temperature
+
+main_living_climate:
+  name: Climate
+  entities:
+    - group.main_living_temps
 
 living_room_climate:
   name: Climate
@@ -220,10 +243,12 @@ master_bedroom_climate:
 # DOORS #
 #########
 front_door:
-  name: Entrance
+  name: Entrances
   entities:
     - sensor.front_door_template
     - sensor.battery
+    - sensor.double_door_template
+    - sensor.single_door_template
 
 garage_doors:
   name: Garage Doors
@@ -240,33 +265,64 @@ tech_closet_climate_card:
     - sensor.server_closet_temp
     - sensor.server_closet_humidity
 
-media_rack_card:
-  name: Media Rack
+tech_closet_equipment:
+  name: Equipment
+  control: hidden
   entities:
-    - sensor.media_rack_power
-    - sensor.media_rack_power_cost
+    - switch.network_rack_switch
+    - switch.server_rack_switch
 
-network_rack_card:
-  name: Network Rack
+#################
+# LIGHTS & FANS #
+#################
+living_room_lights:
+  name: Living Room
+  control: hidden
   entities:
-    - sensor.network_rack_power
-    - sensor.network_rack_power_cost
+    - switch.living_room_dome_lights
+    - switch.living_room_light
+    - light.floor_lamp
+    - light.table_lamp
+    - switch.living_room_fan
 
-server_rack_card:
-  name: Server Rack
+kitchen_lights:
+  name: Kitchen
+  control: hidden
   entities:
-    - sensor.server_rack_power
-    - sensor.server_rack_power_cost
+    - switch.cabinet_lights
+    - switch.dining_room_light
+    - switch.kitchen_light
+
+office_lights:
+  name: Office
+  control: hidden
+  entities:
+    - switch.office_light
+    - switch.office_floor_lamp
+    - switch.office_fan
 
 ########
 # MISC #
 ########
-
 people:
   name: Family
   entities:
     - sensor.caleb_location_template
     - sensor.brittany_location_template
+
+motion:
+  name: Motion
+  entities:
+    group.motion_badges
+
+motion_badges:
+  name: Motion
+  entities:
+    - binary_sensor.bedroom_occupancy
+    - binary_sensor.kitchen_occupancy
+    - binary_sensor.living_room_occupancy
+    - binary_sensor.west_wing_occupancy
+    - binary_sensor.office_occupancy
 
 master_bedroom_fan:
   name: Fan
@@ -277,16 +333,3 @@ office_fan:
   name: Fan
   entities:
     - switch.office_fan
-
-living_room_lights:
-  name: Lights
-  entities:
-    - switch.living_room_light
-    - switch.living_room_dome_lights
-    - light.floor_lamp
-    - light.table_lamp
-
-living_room_fan:
-  name: Fan
-  entities:
-    - switch.living_room_fan

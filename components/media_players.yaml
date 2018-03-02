@@ -20,6 +20,8 @@
     name: Family Room Kodi
   - platform: sonos
     hosts: 192.168.1.220
+  - platform: cast
+    host: 192.168.1.224
   # - platform: universal
   #   name: Living Room Media Center
   #   children:

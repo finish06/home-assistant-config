@@ -1,4 +1,3 @@
-
 ########
 # View #
 ########
@@ -20,10 +19,37 @@
     haaska_hidden: true
   automation.start_and_show_office_tv:
     haaska_hidden: true
+  binary_sensor.bedroom_occupancy:
+    friendly_name: Guest Bedroom
+    device_class: motion
+  binary_sensor.kitchen_occupancy:
+    friendly_name: Kitchen
+    device_class: motion
+  binary_sensor.living_room_occupancy:
+    friendly_name: Living Room
+    device_class: motion
+  binary_sensor.office_occupancy:
+    friendly_name: Office
+    device_class: motion
+  binary_sensor.west_wing_occupancy:
+    friendly_name: Master Bedroom
+    device_class: motion
   cover.double_door:
     haaska_hidden: true
   cover.single_door:
     haaska_hidden: true
+  group.main_living_temps:
+    custom_ui_state_card: state-card-custom-ui
+    theme: center_badges
+  group.motion_badges:
+    custom_ui_state_card: state-card-custom-ui
+    theme: center_badges
+  group.room_temps_1:
+    custom_ui_state_card: state-card-custom-ui
+    theme: center_badges
+  group.room_temps_2:
+    custom_ui_state_card: state-card-custom-ui
+    theme: center_badges
   input_boolean.dynamic_living_room_tv:
     haaska_hidden: true
   input_boolean.dynamic_living_room_sonos:
@@ -40,6 +66,7 @@
   light.calebs_lamp:
     friendly_name: His Lamp
     haaska_name: His Lamp
+    theme: center_badges
   light.hgrp0000000030:
     hidden: true
     haaska_hidden: true
@@ -74,6 +101,8 @@
   sensor.battery:
     icon: mdi:battery-90
     friendly_name: Battery
+  sensor.bedroom_temperature:
+    friendly_name: Bedroom Temp
   sensor.brittany_location_template:
     friendly_name: Brittany
     icon: mdi:account
@@ -87,6 +116,12 @@
     icon: mdi:water-percent
   sensor.front_door_template:
     icon: mdi:lock
+  sensor.kitchen_temperature:
+    friendly_name: Kitchen Temp
+  sensor.living_room_temperature:
+    friendly_name: Living Room Temp
+  sensor.living_room_occupancy_template:
+    device_class: motion
   sensor.network_rack_power:
     icon: mdi:flash
   sensor.server_rack_power:
@@ -97,6 +132,10 @@
     icon: mdi:square-inc-cash
   sensor.network_rack_power_cost:
     icon: mdi:square-inc-cash
+  sensor.office_occupancy_template:
+    device_class: motion
+  sensor.office_temperature:
+    friendly_name: Office Temp
   sensor.server_closet_temp:
     icon: mdi:thermometer
   sensor.server_closet_humidity:
@@ -106,7 +145,7 @@
   sensor.single_door_template:
     icon: mdi:garage
   sensor.west_wing_temperature:
-    friendly_name: Master Bedroom Temperature
+    friendly_name: Master Bedroom Temp
   sensor.west_wing_humidity:
     icon: mdi:water-percent
   switch.auto_dr:
@@ -147,12 +186,42 @@
     icon: mdi:television
   switch.master_bedroom_tv:
     icon: mdi:television
+  switch.media_rack_switch:
+    friendly_name: Media Rack
+    confirm_controls_show_lock: true
+    extra_badge:
+       - entity_id: sensor.media_rack_power
+         unit: W
+         blacklist_states: 0
+       - entity_id: sensor.media_rack_power_cost
+         unit: USD
+         blacklist_states: 0
+  switch.network_rack_switch:
+    friendly_name: Network Rack
+    confirm_controls_show_lock: true
+    extra_badge:
+       - entity_id: sensor.network_rack_power
+         unit: W
+         blacklist_states: 0
+       - entity_id: sensor.network_rack_power_cost
+         unit: USD
+         blacklist_states: 0
   switch.office_fan:
     icon: mdi:fan
   switch.office_light:
     icon: mdi:lightbulb
   switch.office_floor_lamp:
     icon: mdi:lightbulb
+  switch.server_rack_switch:
+    friendly_name: Server Rack
+    confirm_controls_show_lock: true
+    extra_badge:
+       - entity_id: sensor.server_rack_power
+         unit: W
+         blacklist_states: 0
+       - entity_id: sensor.server_rack_power_cost
+         unit: USD
+         blacklist_states: 0
   switch.west_hallway_light:
     icon: mdi:lightbulb
   switch.west_hallway_1:
@@ -161,3 +230,27 @@
   switch.west_hallway_2:
     haaska_hidden: true
     hidden: true
+
+##################
+# GROUP ORDERING #
+##################
+# Overview
+  group.motion:
+    order: 2
+# Main Living
+  group.main_living_climate:
+    order: 1
+  group.living_room_lights:
+    order: 2
+  group.living_room_media:
+    order: 3
+  group.living_room_tv_media_card:
+    order: 4
+  group.living_room_sonos_media_card:
+    order: 5
+  group.kitchen_lights:
+    order: 6
+  group.office_lights:
+    order: 7
+  group.office_tv_media_card:
+    order: 8

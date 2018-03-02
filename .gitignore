@@ -11,12 +11,16 @@ home-assistant_v2.db
 lib
 deps
 secrets.yaml
+emulated_hue_ids.json
 known_devices.yaml
-phue.conf
+entity_registry.yaml
 pyozw.sqlite
 ecobee.conf
 phue.conf
+tts
+update.sh
 .ios.conf
 .HA_VERSION
 .uuid
 .gitignore
+configurator.py

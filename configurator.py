@@ -8,6 +8,7 @@ import os
 import sys
 import json
 import ssl
+import socket
 import socketserver
 import base64
 import ipaddress
@@ -16,34 +17,49 @@ import cgi
 import shlex
 import subprocess
 import logging
+import fnmatch
 from string import Template
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler
 import urllib.request
 from urllib.parse import urlparse, parse_qs, unquote
+
 
 ### Some options for you to change
 LISTENIP = "0.0.0.0"
 LISTENPORT = 3218
-# Set BASEPATH to something like "/home/hass/.homeassistant/" if you're not running the configurator from that path
-BASEPATH ="/home/homeassistant/.homeassistant"
-# Set the paths to a certificate and the key if you're using SSL, e.g "/etc/ssl/certs/mycert.pem"
+# Set BASEPATH to something like "/home/hass/.homeassistant/" if you're not
+# running the configurator from that path
+BASEPATH = None
+# Set the paths to a certificate and the key if you're using SSL,
+# e.g "/etc/ssl/certs/mycert.pem"
 SSL_CERTIFICATE = None
 SSL_KEY = None
 # Set the destination where the HASS API is reachable
 HASS_API = "http://127.0.0.1:8123/api/"
 # If a password is required to access the API, set it in the form of "password"
+# if you have HA ignoring SSL locally this is not needed if on same machine.
 HASS_API_PASSWORD = None
-# To enable authentication, set the credentials in the form of "username:password"
+# Enable authentication, set the credentials in the form of "username:password"
 CREDENTIALS = None
-# Limit access to the configurator by adding allowed IP addresses / networks to the list,
-# e.g ALLOWED_NETWORKS = ["192.168.0.0/24", "172.16.47.23"]
+# Limit access to the configurator by adding allowed IP addresses / networks to
+# the list, e.g ALLOWED_NETWORKS = ["192.168.0.0/24", "172.16.47.23"]
 ALLOWED_NETWORKS = []
 # List of statically banned IP addresses, e.g. ["1.1.1.1", "2.2.2.2"]
 BANNED_IPS = []
-# Ban IPs after n failed login attempts. Restart service to reset banning. The default of `0` disables this feature.
+# Ban IPs after n failed login attempts. Restart service to reset banning.
+# The default of `0` disables this feature.
 BANLIMIT = 0
-# Enable git integration. GitPython (https://gitpython.readthedocs.io/en/stable/) has to be installed.
+# Enable git integration.
+# GitPython (https://gitpython.readthedocs.io/en/stable/) has to be installed.
 GIT = False
+# Files to ignore in the UI.  A good example list that cleans up the UI is
+# [".*", "*.log", "deps", "icloud", "*.conf", "*.json", "certs", "__pycache__"]
+IGNORE_PATTERN = []
+# if DIRSFIRST is set to `true`, directories will be displayed at the top
+DIRSFIRST = False
+# Sesame token. Browse to the configurator URL + /secrettoken to unban your
+# client IP and add it to the list of allowed IPs.
+SESAME = None
 ### End of options
 
 LOGLEVEL = logging.INFO
@@ -51,10 +67,11 @@ LOG = logging.getLogger(__name__)
 LOG.setLevel(LOGLEVEL)
 SO = logging.StreamHandler(sys.stdout)
 SO.setLevel(LOGLEVEL)
-SO.setFormatter(logging.Formatter('%(levelname)s:%(asctime)s:%(name)s:%(message)s'))
+SO.setFormatter(
+    logging.Formatter('%(levelname)s:%(asctime)s:%(name)s:%(message)s'))
 LOG.addHandler(SO)
 RELEASEURL = "https://api.github.com/repos/danielperna84/hass-configurator/releases/latest"
-VERSION = "0.1.7"
+VERSION = "0.2.6"
 BASEDIR = "."
 DEV = False
 HTTPD = None
@@ -64,7 +81,7 @@ if GIT:
     try:
         from git import Repo as REPO
     except Exception:
-        LOG.warn("Unable to import Git module")
+        LOG.warning("Unable to import Git module")
 INDEX = Template(r"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,8 +89,8 @@ INDEX = Template(r"""<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
     <title>HASS Configurator</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/1.8.36/css/materialdesignicons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/2.0.46/css/materialdesignicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <style type="text/css" media="screen">
         body {
             margin: 0;
@@ -265,7 +282,7 @@ INDEX = Template(r"""<!DOCTYPE html>
         }
 
         #dropdown_gitmenu {
-            min-width: 110px;
+            min-width: 140px !important;
         }
 
         .dropdown-content li>a,
@@ -287,8 +304,13 @@ INDEX = Template(r"""<!DOCTYPE html>
         }
 
         .input-field input[type=text].valid {
-            border-bottom: 1px solid #03a9f4;;
-            box-shadow: 0 1px 0 0 #03a9f4;;
+            border-bottom: 1px solid #03a9f4 !important;
+            box-shadow: 0 1px 0 0 #03a9f4 !important;
+        }
+
+        .input-field input[type=text]:focus {
+            border-bottom: 1px solid #03a9f4 !important;
+            box-shadow: 0 1px 0 0 #03a9f4 !important;
         }
 
         .row .input-field input:focus {
@@ -313,16 +335,16 @@ INDEX = Template(r"""<!DOCTYPE html>
         }
 
         .preloader-background {
-	          display: flex;
-	          align-items: center;
-	          justify-content: center;
-	          background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #eee;
             position: fixed;
-	          z-index: 10000;
-	          top: 0;
-	          left: 0;
-	          right: 0;
-	          bottom: 0;
+            z-index: 10000;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
         }
 
         .modal-content_nopad {
@@ -459,6 +481,10 @@ INDEX = Template(r"""<!DOCTYPE html>
             background-color: #03a9f4 !important;
         }
 
+        .ace_invisible {
+            color: rgba(191, 191, 191, 0.5) !important;
+        }
+
         .fbicon_pad {
             min-height: 64px !important;
         }
@@ -509,10 +535,28 @@ INDEX = Template(r"""<!DOCTYPE html>
             100% { background-color: #f5f5f5; }
         }
 
+        #lint-status {
+            position: absolute;
+            top: 0.75rem;
+            right: 10px;
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+        }
+
+        #modal_lint.modal {
+            width: 80%;
+        }
+
+        #modal_lint textarea {
+            resize: none;
+            height: auto;
+        }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ext-modelist.js" type="text/javascript" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.6/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ext-modelist.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.9/ext-language_tools.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
   <div class="preloader-background">
@@ -573,11 +617,11 @@ INDEX = Template(r"""<!DOCTYPE html>
                 </ul>
                 <ul class="right">
                     <li><a class="waves-effect waves-light tooltipped hide-on-small-only markdirty hidesave" data-position="bottom" data-delay="500" data-tooltip="Save" onclick="save_check()"><i class="material-icons">save</i></a></li>
-                    <li><a class="waves-effect waves-light tooltipped hide-on-small-only" data-position="bottom" data-delay="500" data-tooltip="Close" href="#modal_close"><i class="material-icons">close</i></a></li>
+                    <li><a class="waves-effect waves-light tooltipped hide-on-small-only modal-trigger" data-position="bottom" data-delay="500" data-tooltip="Close" href="#modal_close"><i class="material-icons">close</i></a></li>
                     <li><a class="waves-effect waves-light tooltipped hide-on-small-only" data-position="bottom" data-delay="500" data-tooltip="Search" onclick="editor.execCommand('replace')"><i class="material-icons">search</i></a></li>
                     <li><a class="waves-effect waves-light dropdown-button hide-on-small-only" data-activates="dropdown_menu" data-beloworigin="true"><i class="material-icons right">more_vert</i></a></li>
                     <li><a class="waves-effect waves-light hide-on-med-and-up markdirty hidesave" onclick="save_check()"><i class="material-icons">save</i></a></li>
-                    <li><a class="waves-effect waves-light hide-on-med-and-up" href="#modal_close"><i class="material-icons">close</i></a></li>
+                    <li><a class="waves-effect waves-light hide-on-med-and-up modal-trigger" href="#modal_close"><i class="material-icons">close</i></a></li>
                     <li><a class="waves-effect waves-light hide-on-med-and-up" onclick="editor.execCommand('replace')"><i class="material-icons">search</i></a></li>
                     <li><a class="waves-effect waves-light dropdown-button hide-on-med-and-up" data-activates="dropdown_menu_mobile" data-beloworigin="true"><i class="material-icons right">more_vert</i></a></li>
                 </ul>
@@ -587,41 +631,51 @@ INDEX = Template(r"""<!DOCTYPE html>
   </header>
   <main>
     <ul id="dropdown_menu" class="dropdown-content z-depth-4">
-        <li><a target="_blank" href="#modal_components">HASS Components</a></li>
-        <li><a target="_blank" href="#modal_icons">Material Icons</a></li>
+        <li><a onclick="localStorage.setItem('new_tab', true);window.open(window.location.href, '_blank');">New tab</a></li>
+        <li class="divider"></li>
+        <li><a class="modal-trigger" target="_blank" href="#modal_components">Components</a></li>
+        <li><a class="modal-trigger" target="_blank" href="#modal_icons">Material Icons</a></li>
         <li><a href="#" data-activates="ace_settings" class="ace_settings-collapse">Editor Settings</a></li>
-        <li><a href="#modal_about">About HASS-Configurator</a></li>
+        <li><a class="modal-trigger" href="#modal_netstat" onclick="get_netstat()">Network status</a></li>
+        <li><a class="modal-trigger" href="#modal_about">About HASS-Configurator</a></li>
         <li class="divider"></li>
         <!--<li><a href="#modal_check_config">Check HASS Configuration</a></li>-->
-        <li><a href="#modal_reload_automations">Reload automations</a></li>
-        <li><a href="#modal_reload_groups">Reload groups</a></li>
-        <li><a href="#modal_reload_core">Reload core</a></li>
-        <li><a href="#modal_restart">Restart HASS</a></li>
+        <li><a class="modal-trigger" href="#modal_reload_automations">Reload automations</a></li>
+        <li><a class="modal-trigger" href="#modal_reload_scripts">Reload scripts</a></li>
+        <li><a class="modal-trigger" href="#modal_reload_groups">Reload groups</a></li>
+        <li><a class="modal-trigger" href="#modal_reload_core">Reload core</a></li>
+        <li><a class="modal-trigger" href="#modal_restart">Restart HASS</a></li>
         <li class="divider"></li>
-        <li><a href="#modal_exec_command">Execute shell command</a></li>
+        <li><a class="modal-trigger" href="#modal_exec_command">Execute shell command</a></li>
     </ul>
     <ul id="dropdown_menu_mobile" class="dropdown-content z-depth-4">
-        <li><a target="_blank" href="https://home-assistant.io/help/">Need HASS Help?</a></li>
-        <li><a target="_blank" href="https://home-assistant.io/components/">HASS Components</a></li>
+        <li><a onclick="localStorage.setItem('new_tab', true);window.open(window.location.href, '_blank');">New tab</a></li>
+        <li class="divider"></li>
+        <li><a target="_blank" href="https://home-assistant.io/help/">Help</a></li>
+        <li><a target="_blank" href="https://home-assistant.io/components/">Components</a></li>
         <li><a target="_blank" href="https://materialdesignicons.com/">Material Icons</a></li>
         <li><a href="#" data-activates="ace_settings" class="ace_settings-collapse">Editor Settings</a></li>
-        <li><a href="#modal_about">About HASS-Configurator</a></li>
+        <li><a class="modal-trigger" href="#modal_netstat" onclick="get_netstat()">Network status</a></li>
+        <li><a class="modal-trigger" href="#modal_about">About HASS-Configurator</a></li>
         <li class="divider"></li>
         <!--<li><a href="#modal_check_config">Check HASS Configuration</a></li>-->
-        <li><a href="#modal_reload_automations">Reload automations</a></li>
-        <li><a href="#modal_reload_groups">Reload groups</a></li>
-        <li><a href="#modal_reload_core">Reload core</a></li>
-        <li><a href="#modal_restart">Restart HASS</a></li>
+        <li><a class="modal-trigger" href="#modal_reload_automations">Reload automations</a></li>
+        <li><a class="modal-trigger" href="#modal_reload_scripts">Reload scripts</a></li>
+        <li><a class="modal-trigger" href="#modal_reload_groups">Reload groups</a></li>
+        <li><a class="modal-trigger" href="#modal_reload_core">Reload core</a></li>
+        <li><a class="modal-trigger" href="#modal_restart">Restart HASS</a></li>
         <li class="divider"></li>
-        <li><a href="#modal_exec_command">Execute shell command</a></li>
+        <li><a class="modal-trigger" href="#modal_exec_command">Execute shell command</a></li>
     </ul>
     <ul id="dropdown_gitmenu" class="dropdown-content z-depth-4">
-        <li><a href="#modal_init" class="nowrap waves-effect">git init</a></li>
-        <li><a href="#modal_commit" class="nowrap waves-effect">git commit</a></li>
+        <li><a class="modal-trigger" href="#modal_init" class="nowrap waves-effect">git init</a></li>
+        <li><a class="modal-trigger" href="#modal_commit" class="nowrap waves-effect">git commit</a></li>
+        <li><a class="modal-trigger" href="#modal_push" class="nowrap waves-effect">git push</a></li>
     </ul>
     <ul id="dropdown_gitmenu_mobile" class="dropdown-content z-depth-4">
-        <li><a href="#modal_init" class="nowrap waves-effect">git init</a></li>
-        <li><a href="#modal_commit" class="nowrap waves-effect">git commit</a></li>
+        <li><a class="modal-trigger" href="#modal_init" class="nowrap waves-effect">git init</a></li>
+        <li><a class="modal-trigger" href="#modal_commit" class="nowrap waves-effect">git commit</a></li>
+        <li><a class="modal-trigger" href="#modal_push" class="nowrap waves-effect">git push</a></li>
     </ul>
     <div id="modal_components" class="modal bottom-sheet modal-fixed-footer">
         <div class="modal-content_nopad">
@@ -1205,6 +1259,16 @@ INDEX = Template(r"""<!DOCTYPE html>
           <a onclick="commit(document.getElementById('commitmessage').value)" class=" modal-action modal-close waves-effect waves-green btn-flat light-blue-text">OK</a>
         </div>
     </div>
+    <div id="modal_push" class="modal">
+        <div class="modal-content">
+          <h4 class="grey-text text-darken-3">git push<i class="mdi mdi-git right grey-text text-darken-3" style="font-size: 2.48rem;"></i></h4>
+          <p>Are you sure you want to push your commited changes to the configured remote / origin?</p>
+        </div>
+        <div class="modal-footer">
+          <a class=" modal-action modal-close waves-effect waves-red btn-flat light-blue-text">Cancel</a>
+          <a onclick="gitpush()" class=" modal-action modal-close waves-effect waves-green btn-flat light-blue-text">OK</a>
+        </div>
+    </div>
     <div id="modal_close" class="modal">
         <div class="modal-content">
             <h4 class="grey-text text-darken-3">Close File<i class="grey-text text-darken-3 material-icons right" style="font-size: 2.28rem;">close</i></h4>
@@ -1212,7 +1276,7 @@ INDEX = Template(r"""<!DOCTYPE html>
         </div>
         <div class="modal-footer">
           <a class=" modal-action modal-close waves-effect waves-red btn-flat light-blue-text">No</a>
-          <a onclick="document.getElementById('currentfile').value='';editor.getSession().setValue('');$('.markdirty').each(function(i, o){o.classList.remove('red');});" class="modal-action modal-close waves-effect waves-green btn-flat light-blue-text">Yes</a>
+          <a onclick="closefile()" class="modal-action modal-close waves-effect waves-green btn-flat light-blue-text">Yes</a>
         </div>
     </div>
     <div id="modal_delete" class="modal">
@@ -1255,6 +1319,16 @@ INDEX = Template(r"""<!DOCTYPE html>
           <a onclick="reload_automations()" class=" modal-action modal-close waves-effect waves-green btn-flat light-blue-text">Yes</a>
         </div>
     </div>
+    <div id="modal_reload_scripts" class="modal">
+        <div class="modal-content">
+            <h4 class="grey-text text-darken-3">Reload scripts<i class="mdi mdi-settings right grey-text text-darken-3" style="font-size: 2rem;"></i></h4>
+            <p>Do you want to reload the scripts?</p>
+        </div>
+        <div class="modal-footer">
+          <a class=" modal-action modal-close waves-effect waves-red btn-flat light-blue-text">No</a>
+          <a onclick="reload_scripts()" class=" modal-action modal-close waves-effect waves-green btn-flat light-blue-text">Yes</a>
+        </div>
+    </div>
     <div id="modal_reload_groups" class="modal">
         <div class="modal-content">
             <h4 class="grey-text text-darken-3">Reload groups<i class="mdi mdi-settings right grey-text text-darken-3" style="font-size: 2rem;"></i></h4>
@@ -1285,6 +1359,46 @@ INDEX = Template(r"""<!DOCTYPE html>
           <a onclick="restart()" class=" modal-action modal-close waves-effect waves-green btn-flat light-blue-text">Yes</a>
         </div>
     </div>
+    <div id="modal_a_net_remove" class="modal">
+        <div class="modal-content">
+            <h4 class="grey-text text-darken-3">Remove allowed network / IP<i class="mdi mdi-settings right grey-text text-darken-3" style="font-size: 2rem;"></i></h4>
+            <p>Do you really want to remove the network / IP <b><span id="removenet"></span></b> from the list of allowed networks?</p>
+        </div>
+        <div class="modal-footer">
+          <a class=" modal-action modal-close waves-effect waves-red btn-flat light-blue-text">No</a>
+          <a onclick="a_net_remove()" class=" modal-action modal-close waves-effect waves-green btn-flat light-blue-text">Yes</a>
+        </div>
+    </div>
+    <div id="modal_a_net_add" class="modal">
+            <div class="modal-content">
+                <h4 class="grey-text text-darken-3">Add allowed network / IP<i class="mdi mdi-settings right grey-text text-darken-3" style="font-size: 2rem;"></i></h4>
+                <p>Do you really want to Add the network / IP <b><span id="addnet"></span></b> to the list of allowed networks?</p>
+            </div>
+            <div class="modal-footer">
+              <a class=" modal-action modal-close waves-effect waves-red btn-flat light-blue-text">No</a>
+              <a onclick="a_net_add()" class=" modal-action modal-close waves-effect waves-green btn-flat light-blue-text">Yes</a>
+            </div>
+        </div>
+    <div id="modal_unban" class="modal">
+        <div class="modal-content">
+            <h4 class="grey-text text-darken-3">Unban IP<i class="mdi mdi-settings right grey-text text-darken-3" style="font-size: 2rem;"></i></h4>
+            <p>Do you really want to unban the IP <b><span id="unbanip"></span></b>?</p>
+        </div>
+        <div class="modal-footer">
+          <a class=" modal-action modal-close waves-effect waves-red btn-flat light-blue-text">No</a>
+          <a onclick="banned_unban()" class=" modal-action modal-close waves-effect waves-green btn-flat light-blue-text">Yes</a>
+        </div>
+    </div>
+    <div id="modal_ban" class="modal">
+            <div class="modal-content">
+                <h4 class="grey-text text-darken-3">Ban IP<i class="mdi mdi-settings right grey-text text-darken-3" style="font-size: 2rem;"></i></h4>
+                <p>Do you really want to ban the IP <b><span id="banip"></span></b>?</p>
+            </div>
+            <div class="modal-footer">
+              <a class=" modal-action modal-close waves-effect waves-red btn-flat light-blue-text">No</a>
+              <a onclick="banned_ban()" class=" modal-action modal-close waves-effect waves-green btn-flat light-blue-text">Yes</a>
+            </div>
+        </div>
     <div id="modal_exec_command" class="modal">
         <div class="modal-content">
             <h4 class="grey-text text-darken-3">Execute shell command<i class="mdi mdi-laptop right grey-text text-darken-3" style="font-size: 2rem;"></i></h4>
@@ -1354,11 +1468,40 @@ INDEX = Template(r"""<!DOCTYPE html>
                     <input type="text" id="newbranch">
                     <label class="active" for="newbranch">New Branch Name</label>
                 </div>
-          </div>
+            </div>
         </div>
         <div class="modal-footer">
           <a class=" modal-action modal-close waves-effect waves-red btn-flat light-blue-text">Cancel</a>
           <a onclick="newbranch(document.getElementById('newbranch').value)" class=" modal-action modal-close waves-effect waves-green btn-flat light-blue-text">OK</a>
+        </div>
+    </div>
+    <div id="modal_netstat" class="modal">
+        <div class="modal-content">
+            <h4 class="grey-text text-darken-3">Network status<i class="mdi mdi-network right grey-text text-darken-3" style="font-size: 2.48rem;"></i></h4>
+            <p><label for="listening_address">Listening address:&nbsp;</label><span id="listening_address">$listening_address</span></p>
+            <p><label for="hass_api_address">HASS API address:&nbsp;</label><span id="hass_api_address">$hass_api_address</span></p>
+            <p>Modifying the following lists is not persistent. To statically control access please use the configuration file.</p>
+            <p>
+                <ul id="allowed_networks" class="collection with-header"></ul>
+                <br />
+                <div class="input-field">
+                    <a href="#" class="prefix" onclick="helper_a_net_add()"><i class="mdi mdi-plus-circle prefix light-blue-text"></i></a></i>
+                    <input placeholder="192.168.0.0/16" id="add_net_ip" type="text">
+                    <label for="add_net_ip">Add network / IP</label>
+                </div>
+            </p>
+            <p>
+                <ul id="banned_ips" class="collection with-header"></ul>
+                <br />
+                <div class="input-field">
+                    <a href="#" class="prefix" onclick="helper_banned_ban()"><i class="mdi mdi-plus-circle prefix light-blue-text"></i></a></i>
+                    <input placeholder="1.2.3.4" id="add_banned_ip" type="text">
+                    <label for="add_banned_ip">Ban IP</label>
+                </div>
+            </p>
+        </div>
+        <div class="modal-footer">
+          <a class=" modal-action modal-close waves-effect waves-red btn-flat light-blue-text">Cancel</a>
         </div>
     </div>
     <div id="modal_about" class="modal modal-fixed-footer">
@@ -1370,10 +1513,22 @@ INDEX = Template(r"""<!DOCTYPE html>
             <p>Developed by:</p>
             <ul>
                 <li>
-                    <div class="chip"> <img src="https://avatars3.githubusercontent.com/u/7396998?v=3&s=400" alt="Contact Person"> <a class="black-text" href="https://github.com/danielperna84" target="_blank">Daniel Perna</a> </div>
+                    <div class="chip"> <img src="https://avatars3.githubusercontent.com/u/7396998?v=4&s=400" alt="Contact Person"> <a class="black-text" href="https://github.com/danielperna84" target="_blank">Daniel Perna</a> </div>
                 </li>
                 <li>
-                    <div class="chip"> <img src="https://avatars2.githubusercontent.com/u/1509640?v=3&s=460" alt="Contact Person"> <a class="black-text" href="https://github.com/jmart518" target="_blank">JT Martinez</a> </div>
+                    <div class="chip"> <img src="https://avatars2.githubusercontent.com/u/1509640?v=4&s=400" alt="Contact Person"> <a class="black-text" href="https://github.com/jmart518" target="_blank">JT Martinez</a> </div>
+                </li>
+                <li>
+                    <div class="chip"> <img src="https://avatars0.githubusercontent.com/u/1525413?v=4&s=400" alt="Contact Person"> <a class="black-text" href="https://github.com/AtoxIO" target="_blank">AtoxIO</a> </div>
+                </li>
+                <li>
+                    <div class="chip"> <img src="https://avatars0.githubusercontent.com/u/646513?s=400&v=4" alt="Contact Person"> <a class="black-text" href="https://github.com/Munsio" target="_blank">Martin Treml</a> </div>
+                </li>
+                <li>
+                    <div class="chip"> <img src="https://avatars2.githubusercontent.com/u/1399443?s=460&v=4" alt="Contact Person"> <a class="black-text" href="https://github.com/sytone" target="_blank">Sytone</a> </div>
+                </li>
+                <li>
+                    <div class="chip"> <img src="https://avatars3.githubusercontent.com/u/1561226?s=400&v=4" alt="Contact Person"> <a class="black-text" href="https://github.com/dimagoltsman" target="_blank">Dima Goltsman</a> </div>
                 </li>
             </ul>
             <p>Libraries used:</p>
@@ -1426,10 +1581,29 @@ INDEX = Template(r"""<!DOCTYPE html>
                   </div>
                 </a>
               </div>
+              <div class="col s6 m3 l3">
+                <a class="light-blue-text" href="https://github.com/nodeca/js-yaml" target="_blank">
+                  <div class="card grey lighten-3 hoverable">
+                    <div class="card-image">
+                    </div>
+                    <div class="card-content">
+                      <p class="grey-text text-darken-2">js-yaml</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
             </div>
         </div>
         <div class="modal-footer">
           <a class=" modal-action modal-close waves-effect btn-flat light-blue-text">OK</a>
+        </div>
+    </div>
+    <div id="modal_lint" class="modal">
+        <div class="modal-content">
+            <textarea rows="8" readonly></textarea>
+        </div>
+        <div class="modal-footer">
+          <a class="modal-action modal-close waves-effect btn-flat light-blue-text">OK</a>
         </div>
     </div>
     <!-- Main Editor Area -->
@@ -1440,6 +1614,7 @@ INDEX = Template(r"""<!DOCTYPE html>
                 <select onchange="insert(this.value)">
                     <option value="" disabled selected>Select trigger platform</option>
                     <option value="event">Event</option>
+                    <option value="homeassistant">Home Assistant</option>
                     <option value="mqtt">MQTT</option>
                     <option value="numeric_state">Numeric State</option>
                     <option value="state">State</option>
@@ -1478,6 +1653,7 @@ INDEX = Template(r"""<!DOCTYPE html>
         <div class="col s12 m8 l9">
           <div class="card input-field col s12 grey lighten-4 hoverable pathtip">
               <input class="currentfile_input" value="" id="currentfile" type="text">
+              <i class="material-icons" id="lint-status" onclick="show_lint_error()"></i>
           </div>
         </div>
         <div class="col s12 m8 l9 z-depth-2" id="editor"></div>
@@ -1499,15 +1675,15 @@ INDEX = Template(r"""<!DOCTYPE html>
         <ul id="slide-out" class="side-nav grey lighten-4">
           <li class="no-padding">
             <ul class="row no-padding center hide-on-small-only grey lighten-4" style="margin-bottom: 0;">
-              <a class="col s3 waves-effect fbtoolbarbutton tooltipped" href="#modal_newfile" data-position="bottom" data-delay="500" data-tooltip="New File"><i class="grey-text text-darken-2 material-icons fbtoolbarbutton_icon">note_add</i></a>
-              <a class="col s3 waves-effect fbtoolbarbutton tooltipped" href="#modal_newfolder" data-position="bottom" data-delay="500" data-tooltip="New Folder"><i class="grey-text text-darken-2 material-icons fbtoolbarbutton_icon">create_new_folder</i></a>
-              <a class="col s3 waves-effect fbtoolbarbutton tooltipped" href="#modal_upload" data-position="bottom" data-delay="500" data-tooltip="Upload File"><i class="grey-text text-darken-2 material-icons fbtoolbarbutton_icon">file_upload</i></a>
+              <a class="col s3 waves-effect fbtoolbarbutton tooltipped modal-trigger" href="#modal_newfile" data-position="bottom" data-delay="500" data-tooltip="New File"><i class="grey-text text-darken-2 material-icons fbtoolbarbutton_icon">note_add</i></a>
+              <a class="col s3 waves-effect fbtoolbarbutton tooltipped modal-trigger" href="#modal_newfolder" data-position="bottom" data-delay="500" data-tooltip="New Folder"><i class="grey-text text-darken-2 material-icons fbtoolbarbutton_icon">create_new_folder</i></a>
+              <a class="col s3 waves-effect fbtoolbarbutton tooltipped modal-trigger" href="#modal_upload" data-position="bottom" data-delay="500" data-tooltip="Upload File"><i class="grey-text text-darken-2 material-icons fbtoolbarbutton_icon">file_upload</i></a>
               <a class="col s3 waves-effect fbtoolbarbutton tooltipped dropdown-button" data-activates="dropdown_gitmenu" data-alignment='right' data-beloworigin='true' data-delay='500' data-position="bottom" data-tooltip="Git"><i class="mdi mdi-git grey-text text-darken-2 material-icons" style="padding-top: 17px;"></i></a>
             </ul>
             <ul class="row center toolbar_mobile hide-on-med-and-up grey lighten-4" style="margin-bottom: 0;">
-              <a class="col s3 waves-effect fbtoolbarbutton" href="#modal_newfile"><i class="grey-text text-darken-2 material-icons fbtoolbarbutton_icon">note_add</i></a>
-              <a class="col s3 waves-effect fbtoolbarbutton" href="#modal_newfolder"><i class="grey-text text-darken-2 material-icons fbtoolbarbutton_icon">create_new_folder</i></a>
-              <a class="col s3 waves-effect fbtoolbarbutton" href="#modal_upload"><i class="grey-text text-darken-2 material-icons fbtoolbarbutton_icon">file_upload</i></a>
+              <a class="col s3 waves-effect fbtoolbarbutton modal-trigger" href="#modal_newfile"><i class="grey-text text-darken-2 material-icons fbtoolbarbutton_icon">note_add</i></a>
+              <a class="col s3 waves-effect fbtoolbarbutton modal-trigger" href="#modal_newfolder"><i class="grey-text text-darken-2 material-icons fbtoolbarbutton_icon">create_new_folder</i></a>
+              <a class="col s3 waves-effect fbtoolbarbutton modal-trigger" href="#modal_upload"><i class="grey-text text-darken-2 material-icons fbtoolbarbutton_icon">file_upload</i></a>
               <a class="col s3 waves-effect fbtoolbarbutton dropdown-button" data-activates="dropdown_gitmenu_mobile" data-alignment='right' data-beloworigin='true'><i class="mdi mdi-git grey-text text-darken-2 material-icons" style="padding-top: 17px;"></i></a>
             </ul>
           </li>
@@ -1525,7 +1701,7 @@ INDEX = Template(r"""<!DOCTYPE html>
           <li>
             <ul class="row no-padding" style="margin-bottom: 0;">
               <a id="branchselector" class="col s10 dropdown-button waves-effect truncate grey-text text-darken-2" data-beloworigin="true" data-activates='branches'><i class="grey-text text-darken-2 left material-icons" style="margin-left: 0; margin-right: 0; padding-top: 12px; padding-right: 8px;">arrow_drop_down</i>Branch:<span id="fbheaderbranch"></span></a>
-              <a id="newbranchbutton" class="waves-effect col s2 center" href="#modal_newbranch"><i class="grey-text text-darken-2 center material-icons" style="padding-top: 12px;">add</i></a>
+              <a id="newbranchbutton" class="waves-effect col s2 center modal-trigger" href="#modal_newbranch"><i class="grey-text text-darken-2 center material-icons" style="padding-top: 12px;">add</i></a>
             </ul>
             <div class="divider" style="margin-top: 0;"></div>
           </li>
@@ -1580,7 +1756,11 @@ INDEX = Template(r"""<!DOCTYPE html>
         <ul id="ace_settings" class="side-nav">
           <li class="center s12 grey lighten-3 z-depth-1 subheader">Editor Settings</li>
           <div class="row col s12">
-              <p class="col s12"> <a class="waves-effect waves-light btn light-blue" href="#modal_acekeyboard">Keyboard Shortcuts</a> </p>
+              <p class="col s12"> <a class="waves-effect waves-light btn light-blue modal-trigger" href="#modal_acekeyboard">Keyboard Shortcuts</a> </p>
+              <p class="col s12">
+                  <input type="checkbox" class="blue_check" onclick="set_save_prompt(this.checked)" id="savePrompt" />
+                  <Label for="savePrompt">Prompt before save</label>
+              </p>
               <p class="col s12">
                   <input type="checkbox" class="blue_check" onclick="editor.setOption('animatedScroll', !editor.getOptions().animatedScroll)" id="animatedScroll" />
                   <Label for="animatedScroll">Animated Scroll</label>
@@ -1879,16 +2059,82 @@ INDEX = Template(r"""<!DOCTYPE html>
                   <input id="wrap_limit" type="number" onchange="editor.setOption('wrap', parseInt(this.value))" min="1" value="80">
                   <label class="active" for="wrap_limit">Wrap Limit</label>
               </div> <a class="waves-effect waves-light btn light-blue" onclick="save_ace_settings()">Save Settings Locally</a>
-              <p class="center col s12"> Ace Editor 1.2.6 </p>
+              <p class="center col s12"> Ace Editor 1.2.9 </p>
           </div>
         </ul>
       </div>
 </main>
 <input type="hidden" id="fb_currentfile" value="" />
 <!-- Scripts -->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 <script type="text/javascript">
+    var global_current_filepath = null;
+    var global_current_filename = null;
+
+    function got_focus_or_visibility() {
+        if (global_current_filename && global_current_filepath) {
+            // The globals are set, set the localStorage to those values
+            var current_file = {current_filepath: global_current_filepath,
+                                current_filename: global_current_filename}
+            localStorage.setItem('current_file', JSON.stringify(current_file));
+        }
+        else {
+            // This tab had no prior file opened, clearing from localStorage
+            localStorage.removeItem('current_file');
+        }
+    }
+
+    window.onfocus = function() {
+        got_focus_or_visibility();
+    }
+    //window.onblur = function() {
+    //    console.log("lost focus");
+    //}
+
+    // Got this from here: https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API
+    // Set the name of the hidden property and the change event for visibility
+    var hidden, visibilityChange;
+    if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
+        hidden = "hidden";
+        visibilityChange = "visibilitychange";
+    }
+    else if (typeof document.msHidden !== "undefined") {
+        hidden = "msHidden";
+        visibilityChange = "msvisibilitychange";
+    }
+    else if (typeof document.webkitHidden !== "undefined") {
+        hidden = "webkitHidden";
+        visibilityChange = "webkitvisibilitychange";
+    }
+
+    function handleVisibilityChange() {
+        if (document[hidden]) {
+            // We're doing nothing when the tab gets out of vision
+        }
+        else {
+            // We're doing this if the tab becomes visible
+            got_focus_or_visibility();
+        }
+    }
+    // Warn if the browser doesn't support addEventListener or the Page Visibility API
+    if (typeof document.addEventListener === "undefined" || typeof document.hidden === "undefined") {
+        console.log("This requires a browser, such as Google Chrome or Firefox, that supports the Page Visibility API.");
+    }
+    else {
+        // Handle page visibility change
+        document.addEventListener(visibilityChange, handleVisibilityChange, false);
+    }
+
+    $(document).keydown(function(e) {
+        if ((e.key == 's' || e.key == 'S' ) && (e.ctrlKey || e.metaKey)) {
+            e.preventDefault();
+            save_check();
+            return false;
+        }
+        return true;
+    });
+
     $(document).ready(function () {
         $('select').material_select();
         $('.modal').modal();
@@ -1901,7 +2147,7 @@ INDEX = Template(r"""<!DOCTYPE html>
         $('.dropdown-button').dropdown({
             inDuration: 300,
             outDuration: 225,
-            constrainWidth: true,
+            constrainWidth: false,
             hover: false,
             gutter: 0,
             belowOrigin: true,
@@ -1921,15 +2167,24 @@ INDEX = Template(r"""<!DOCTYPE html>
             draggable: true
         });
         listdir('.');
+        document.getElementById('savePrompt').checked = get_save_prompt();
     });
 </script>
 <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function(){
-	     $('.preloader-background').delay(800).fadeOut('slow');
-
-	      $('.preloader-wrapper')
-		      .delay(800)
-		      .fadeOut('slow');
+    document.addEventListener("DOMContentLoaded", function() {
+        $('.preloader-background').delay(800).fadeOut('slow');
+        $('.preloader-wrapper').delay(800).fadeOut('slow');
+        if (!localStorage.getItem("new_tab")) {
+            var old_file = localStorage.getItem("current_file");
+            if (old_file) {
+                old_file = JSON.parse(old_file);
+                loadfile(old_file.current_filepath, old_file.current_filename);
+            }
+        }
+        else {
+            localStorage.removeItem("current_file");
+        }
+        localStorage.removeItem("new_tab");
     });
 </script>
 <script>
@@ -1949,77 +2204,86 @@ INDEX = Template(r"""<!DOCTYPE html>
     modemapping['txt'] = 'ace/mode/text';
     modemapping['xml'] = 'ace/mode/xml';
     modemapping['yaml'] = 'ace/mode/yaml';
+
+    function sort_select(id) {
+        var options = $('#' + id + ' option');
+        var arr = options.map(function (_, o) {
+            return {
+                t: $(o).text(), v: o.value
+            };
+        }).get();
+        arr.sort(function (o1, o2) {
+            var t1 = o1.t.toLowerCase(), t2 = o2.t.toLowerCase();
+            return t1 > t2 ? 1 : t1 < t2 ? -1 : 0;
+        });
+        options.each(function (i, o) {
+            o.value = arr[i].v;
+            $(o).text(arr[i].t);
+        });
+    }
+
     var separator = '$separator';
-    var bootstrap = $bootstrap;
-    if (bootstrap.hasOwnProperty("events")) {
+    var services_list = $services;
+    var events_list = $events;
+    var states_list = $states;
+
+    if (events_list) {
         var events = document.getElementById("events");
-        for (var i = 0; i < bootstrap.events.length; i++) {
+        for (var i = 0; i < events_list.length; i++) {
             var option = document.createElement("option");
-            option.value = bootstrap.events[i].event;
-            option.text = bootstrap.events[i].event;
+            option.value = events_list[i].event;
+            option.text = events_list[i].event;
             events.add(option);
         }
         var events = document.getElementById("events_side");
-        for (var i = 0; i < bootstrap.events.length; i++) {
+        for (var i = 0; i < events_list.length; i++) {
             var option = document.createElement("option");
-            option.value = bootstrap.events[i].event;
-            option.text = bootstrap.events[i].event;
+            option.value = events_list[i].event;
+            option.text = events_list[i].event;
             events.add(option);
         }
+        sort_select('events');
+        sort_select('events_side');
+    }
+
+    if (states_list) {
         var entities = document.getElementById("entities");
-        for (var i = 0; i < bootstrap.states.length; i++) {
+        for (var i = 0; i < states_list.length; i++) {
             var option = document.createElement("option");
-            option.value = bootstrap.states[i].entity_id;
-            option.text = bootstrap.states[i].attributes.friendly_name + ' (' + bootstrap.states[i].entity_id + ')';
+            option.value = states_list[i].entity_id;
+            option.text = states_list[i].attributes.friendly_name + ' (' + states_list[i].entity_id + ')';
             entities.add(option);
         }
         var entities = document.getElementById("entities_side");
-        for (var i = 0; i < bootstrap.states.length; i++) {
+        for (var i = 0; i < states_list.length; i++) {
             var option = document.createElement("option");
-            option.value = bootstrap.states[i].entity_id;
-            option.text = bootstrap.states[i].attributes.friendly_name + ' (' + bootstrap.states[i].entity_id + ')';
+            option.value = states_list[i].entity_id;
+            option.text = states_list[i].attributes.friendly_name + ' (' + states_list[i].entity_id + ')';
             entities.add(option);
         }
+        sort_select('entities');
+        sort_select('entities_side');
+    }
+
+    if (services_list) {
         var services = document.getElementById("services");
-        for (var i = 0; i < bootstrap.services.length; i++) {
-            for (var k in bootstrap.services[i].services) {
+        for (var i = 0; i < services_list.length; i++) {
+            for (var k in services_list[i].services) {
                 var option = document.createElement("option");
-                option.value = bootstrap.services[i].domain + '.' + k;
-                option.text = bootstrap.services[i].domain + '.' + k;
+                option.value = services_list[i].domain + '.' + k;
+                option.text = services_list[i].domain + '.' + k;
                 services.add(option);
             }
         }
         var services = document.getElementById("services_side");
-        for (var i = 0; i < bootstrap.services.length; i++) {
-            for (var k in bootstrap.services[i].services) {
+        for (var i = 0; i < services_list.length; i++) {
+            for (var k in services_list[i].services) {
                 var option = document.createElement("option");
-                option.value = bootstrap.services[i].domain + '.' + k;
-                option.text = bootstrap.services[i].domain + '.' + k;
+                option.value = services_list[i].domain + '.' + k;
+                option.text = services_list[i].domain + '.' + k;
                 services.add(option);
             }
         }
-
-        function sort_select(id) {
-            var options = $('#' + id + ' option');
-            var arr = options.map(function (_, o) {
-                return {
-                    t: $(o).text(), v: o.value
-                };
-            }).get();
-            arr.sort(function (o1, o2) {
-                var t1 = o1.t.toLowerCase(), t2 = o2.t.toLowerCase();
-                return t1 > t2 ? 1 : t1 < t2 ? -1 : 0;
-            });
-            options.each(function (i, o) {
-                o.value = arr[i].v;
-                $(o).text(arr[i].t);
-            });
-        }
-
-        sort_select('events');
-        sort_select('events_side');
-        sort_select('entities');
-        sort_select('entities_side');
         sort_select('services');
         sort_select('services_side');
     }
@@ -2070,7 +2334,7 @@ INDEX = Template(r"""<!DOCTYPE html>
             else {
                 iicon.classList.add('mdi', 'mdi-file');
             }
-            item.setAttribute("onclick", "loadfile('" + encodeURI(itemdata.fullpath) + "')");
+            item.setAttribute("onclick", "loadfile('" + encodeURI(itemdata.fullpath) + "', '" + itemdata.name + "')");
             stats.innerHTML = "Mod.: " + date.toUTCString() + "&nbsp;&nbsp;Size: " + (itemdata.size/1024).toFixed(1) + " KiB";
         }
         item.appendChild(iicon);
@@ -2117,6 +2381,7 @@ INDEX = Template(r"""<!DOCTYPE html>
         dd_delete.classList.add("waves-effect", "fb_dd");
         var dd_delete_a = document.createElement('a');
         dd_delete_a.setAttribute('href', "#modal_delete");
+        dd_delete_a.classList.add("modal-trigger");
         dd_delete_a.innerHTML = "Delete";
         dd_delete.appendChild(dd_delete_a);
         dropdown.appendChild(dd_delete);
@@ -2129,7 +2394,7 @@ INDEX = Template(r"""<!DOCTYPE html>
                 // git add button
                 var dd_gitadd = document.createElement('li');
                 var dd_gitadd_a = document.createElement('a');
-                dd_gitadd_a.classList.add('waves-effect', 'fb_dd');
+                dd_gitadd_a.classList.add('waves-effect', 'fb_dd', 'modal-trigger');
                 dd_gitadd_a.setAttribute('href', "#modal_gitadd");
                 dd_gitadd_a.innerHTML = "git add";
                 dd_gitadd.appendChild(dd_gitadd_a);
@@ -2215,14 +2480,14 @@ INDEX = Template(r"""<!DOCTYPE html>
     }
 
     function checkout(){
-      $(".collapsible-header").removeClass(function(){
-        return "active";
-      });
-      $(".collapsible").collapsible({accordion: true});
-      $(".collapsible").collapsible({accordion: false});
+        $(".collapsible-header").removeClass(function(){
+            return "active";
+        });
+        $(".collapsible").collapsible({accordion: true});
+        $(".collapsible").collapsible({accordion: false});
     }
 
-    function loadfile(filepath) {
+    function loadfile(filepath, filenameonly) {
         if ($('.markdirty.red').length) {
             $('#modal_markdirty').modal('open');
         }
@@ -2241,8 +2506,27 @@ INDEX = Template(r"""<!DOCTYPE html>
                 editor.session.getUndoManager().markClean();
                 $('.markdirty').each(function(i, o){o.classList.remove('red');});
                 $('.hidesave').css('opacity', 0);
+                document.title = filenameonly + " - HASS Configurator";
+                global_current_filepath = filepath;
+                global_current_filename = filenameonly;
+                var current_file = {current_filepath: global_current_filepath,
+                                    current_filename: global_current_filename}
+                localStorage.setItem('current_file', JSON.stringify(current_file));
+                check_lint();
             });
         }
+    }
+
+    function closefile() {
+        document.getElementById('currentfile').value='';
+        editor.getSession().setValue('');
+        $('.markdirty').each(function(i, o) {
+            o.classList.remove('red');
+        });
+        localStorage.removeItem('current_file');
+        global_current_filepath = null;
+        global_current_filename = null;
+        document.title = 'HASS Configurator';
     }
 
     function check_config() {
@@ -2261,6 +2545,13 @@ INDEX = Template(r"""<!DOCTYPE html>
     function reload_automations() {
         $.get("api/reload_automations", function (resp) {
             var $toastContent = $("<div>Automations reloaded</div>");
+            Materialize.toast($toastContent, 2000);
+        });
+    }
+
+    function reload_scripts() {
+        $.get("api/reload_scripts", function (resp) {
+            var $toastContent = $("<div>Scripts reloaded</div>");
             Materialize.toast($toastContent, 2000);
         });
     }
@@ -2287,6 +2578,175 @@ INDEX = Template(r"""<!DOCTYPE html>
             }
             else {
                 var $toastContent = $("<div><pre>" + resp + "</pre></div>");
+                Materialize.toast($toastContent, 2000);
+            }
+        });
+    }
+
+    function get_netstat() {
+        $.get("api/netstat", function (resp) {
+            if (resp.hasOwnProperty("allowed_networks")) {
+                var allowed_list = document.getElementById("allowed_networks");
+                while (allowed_list.firstChild) {
+                    allowed_list.removeChild(allowed_list.firstChild);
+                }
+                var header = document.createElement("li");
+                header.classList.add("collection-header");
+                var header_h4 = document.createElement("h4");
+                header_h4.innerText = "Allowed networks";
+                header_h4.classList.add("grey-text");
+                header_h4.classList.add("text-darken-3");
+                header.appendChild(header_h4);
+                allowed_list.appendChild(header);
+                for (var i = 0; i < resp.allowed_networks.length; i++) {
+                    var li = document.createElement("li");
+                    li.classList.add("collection-item");
+                    var li_div = document.createElement("div");
+                    var address = document.createElement("span");
+                    address.innerText = resp.allowed_networks[i];
+                    li_div.appendChild(address);
+                    var li_a = document.createElement("a");
+                    li_a.classList.add("light-blue-text");
+                    li_a.href = "#!";
+                    li_a.classList.add("secondary-content");
+                    var li_a_i = document.createElement("i");
+                    li_a_i.classList.add("mdi");
+                    li_a_i.classList.add("mdi-delete");
+                    li_a_i.innerText = "Remove";
+                    li_a.appendChild(li_a_i);
+                    li_a.setAttribute("onclick", "helper_a_net_remove('" + resp.allowed_networks[i] + "')");
+                    li_div.appendChild(li_a);
+                    li.appendChild(li_div);
+                    allowed_list.appendChild(li);
+                }
+            }
+            if (resp.hasOwnProperty("banned_ips")) {
+                var banlist = document.getElementById("banned_ips");
+                while (banlist.firstChild) {
+                    banlist.removeChild(banlist.firstChild);
+                }
+                var header = document.createElement("li");
+                header.classList.add("collection-header");
+                var header_h4 = document.createElement("h4");
+                header_h4.innerText = "Banned IPs";
+                header_h4.classList.add("grey-text");
+                header_h4.classList.add("text-darken-3");
+                header.appendChild(header_h4);
+                banlist.appendChild(header);
+                for (var i = 0; i < resp.banned_ips.length; i++) {
+                    var li = document.createElement("li");
+                    li.classList.add("collection-item");
+                    var li_div = document.createElement("div");
+                    var address = document.createElement("span");
+                    address.innerText = resp.banned_ips[i];
+                    li_div.appendChild(address);
+                    var li_a = document.createElement("a");
+                    li_a.classList.add("light-blue-text");
+                    li_a.href = "#!";
+                    li_a.classList.add("secondary-content");
+                    var li_a_i = document.createElement("i");
+                    li_a_i.classList.add("mdi");
+                    li_a_i.classList.add("mdi-delete");
+                    li_a_i.innerText = "Unban";
+                    li_a.appendChild(li_a_i);
+                    li_a.setAttribute("onclick", "helper_banned_unban('" + resp.banned_ips[i] + "')");
+                    li_div.appendChild(li_a);
+                    li.appendChild(li_div);
+                    banlist.appendChild(li);
+                }
+            }
+        });
+    }
+
+    function helper_a_net_remove(network) {
+        document.getElementById("removenet").innerText = network;
+        $('#modal_netstat').modal('close');
+        $('#modal_a_net_remove').modal('open');
+    }
+
+    function a_net_remove() {
+        var network = document.getElementById("removenet").innerText
+        data = new Object();
+        data.network = network;
+        data.method = 'remove';
+        $.post("api/allowed_networks", data).done(function(resp) {
+            if (resp.error) {
+                var $toastContent = $("<div><pre>" + resp.message + "</pre></div>");
+                Materialize.toast($toastContent, 5000);
+            }
+            else {
+                var $toastContent = $("<div><pre>" + resp.message + "</pre></div>");
+                Materialize.toast($toastContent, 2000);
+            }
+        });
+    }
+
+    function helper_a_net_add() {
+        document.getElementById("addnet").innerText = document.getElementById("add_net_ip").value;
+        document.getElementById("add_net_ip").value = "";
+        $('#modal_netstat').modal('close');
+        $('#modal_a_net_add').modal('open');
+    }
+
+    function a_net_add() {
+        var network = document.getElementById("addnet").innerText
+        data = new Object();
+        data.network = network;
+        data.method = 'add';
+        $.post("api/allowed_networks", data).done(function(resp) {
+            if (resp.error) {
+                var $toastContent = $("<div><pre>" + resp.message + "</pre></div>");
+                Materialize.toast($toastContent, 5000);
+            }
+            else {
+                var $toastContent = $("<div><pre>" + resp.message + "</pre></div>");
+                Materialize.toast($toastContent, 2000);
+            }
+        });
+    }
+
+    function helper_banned_unban(ip) {
+        document.getElementById("unbanip").innerText = ip;
+        $('#modal_netstat').modal('close');
+        $('#modal_unban').modal('open');
+    }
+
+    function banned_unban() {
+        var ip = document.getElementById("unbanip").innerText
+        data = new Object();
+        data.ip = ip;
+        data.method = 'unban';
+        $.post("api/banned_ips", data).done(function(resp) {
+            if (resp.error) {
+                var $toastContent = $("<div><pre>" + resp.message + "</pre></div>");
+                Materialize.toast($toastContent, 5000);
+            }
+            else {
+                var $toastContent = $("<div><pre>" + resp.message + "</pre></div>");
+                Materialize.toast($toastContent, 2000);
+            }
+        });
+    }
+
+    function helper_banned_ban() {
+        document.getElementById("banip").innerText = document.getElementById("add_banned_ip").value;
+        document.getElementById("add_banned_ip").value = "";
+        $('#modal_netstat').modal('close');
+        $('#modal_ban').modal('open');
+    }
+
+    function banned_ban() {
+        var ip = document.getElementById("banip").innerText
+        data = new Object();
+        data.ip = ip;
+        data.method = 'ban';
+        $.post("api/banned_ips", data).done(function(resp) {
+            if (resp.error) {
+                var $toastContent = $("<div><pre>" + resp.message + "</pre></div>");
+                Materialize.toast($toastContent, 5000);
+            }
+            else {
+                var $toastContent = $("<div><pre>" + resp.message + "</pre></div>");
                 Materialize.toast($toastContent, 2000);
             }
         });
@@ -2321,18 +2781,23 @@ INDEX = Template(r"""<!DOCTYPE html>
     function save_check() {
         var filepath = document.getElementById('currentfile').value;
         if (filepath.length > 0) {
-          $('#modal_save').modal('open');
+            if (get_save_prompt()) {
+                $('#modal_save').modal('open');
+            }
+            else {
+                save();
+            }
         }
         else {
             Materialize.toast('Error:  Please provide a filename', 5000);
             $(".pathtip").bind("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
-              $(this).removeClass("pathtip_color");
+                $(this).removeClass("pathtip_color");
             }).addClass("pathtip_color");
        }
     }
 
     function download_file(filepath) {
-        window.open("/api/download?filename="+encodeURI(filepath));
+        window.open("api/download?filename="+encodeURI(filepath));
     }
 
     function delete_file() {
@@ -2458,6 +2923,25 @@ INDEX = Template(r"""<!DOCTYPE html>
                     Materialize.toast($toastContent, 2000);
                     listdir(document.getElementById('fbheader').innerHTML);
                     document.getElementById('commitmessage').value = "";
+                }
+            });
+        }
+    }
+
+    function gitpush() {
+        var path = document.getElementById("fbheader").innerHTML;
+        if (path.length > 0) {
+            data = new Object();
+            data.path = path;
+            $.post("api/push", data).done(function(resp) {
+                if (resp.error) {
+                    var $toastContent = $("<div><pre>" + resp.message + "\n" + resp.path + "</pre></div>");
+                    Materialize.toast($toastContent, 5000);
+                }
+                else {
+                    var $toastContent = $("<div><pre>" + resp.message + "</pre></div>");
+                    Materialize.toast($toastContent, 2000);
+                    listdir(document.getElementById('fbheader').innerHTML);
                 }
             });
         }
@@ -2609,6 +3093,18 @@ INDEX = Template(r"""<!DOCTYPE html>
         editor.$blockScrolling = Infinity;
     }
 
+    function set_save_prompt(checked) {
+        localStorage.setItem('save_prompt', JSON.stringify({save_prompt: checked}));
+    }
+
+    function get_save_prompt() {
+        if (localStorage.getItem('save_prompt')) {
+            var save_prompt = JSON.parse(localStorage.getItem('save_prompt'));
+            return save_prompt.save_prompt;
+        }
+        return false;
+    }
+
     function apply_settings() {
         var options = editor.getOptions();
         for (var key in options) {
@@ -2660,18 +3156,68 @@ INDEX = Template(r"""<!DOCTYPE html>
     }
 
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/3.10.0/js-yaml.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+var lint_timeout;
+var lint_status = $('#lint-status'); // speed optimization
+var lint_error = "";
+
+function check_lint() {
+    if (document.getElementById('currentfile').value.match(".yaml$")) {
+        try {
+            var text = editor.getValue().replace(/!(include|secret)/g,".$1"); // hack because js-yaml does not like !include/!secret
+            jsyaml.safeLoad(text);
+            lint_status.text("check_circle");
+            lint_status.removeClass("cursor-pointer red-text grey-text");
+            lint_status.addClass("green-text");
+            lint_error = "";
+        } catch (err) {
+            lint_status.text("error");
+            lint_status.removeClass("green-text grey-text");
+            lint_status.addClass("cursor-pointer red-text");
+            lint_error = err.message;
+        }
+    } else {
+        lint_status.empty();
+    }
+}
+
+function queue_lint(e) {
+    if (document.getElementById('currentfile').value.match(".yaml$")) {
+        clearTimeout(lint_timeout);
+        lint_timeout = setTimeout(check_lint, 500);
+        if (lint_status.text() != "cached") {
+            lint_status.text("cached");
+            lint_status.removeClass("cursor-pointer red-text green-text");
+            lint_status.addClass("grey-text");
+        }
+    } else {
+        lint_status.empty();
+    }
+}
+
+function show_lint_error() {
+    if(lint_error) {
+        $("#modal_lint textarea").val(lint_error);
+        $("#modal_lint").modal('open');
+    }
+}
+
+editor.on('change', queue_lint);
+</script>
 </body>
 </html>""")
 
 def signal_handler(sig, frame):
     global HTTPD
-    LOG.info("Got signal: %s. Shutting down server" % str(sig))
+    LOG.info("Got signal: %s. Shutting down server", str(sig))
     HTTPD.server_close()
     sys.exit(0)
 
 def load_settings(settingsfile):
     global LISTENIP, LISTENPORT, BASEPATH, SSL_CERTIFICATE, SSL_KEY, HASS_API, \
-    HASS_API_PASSWORD, CREDENTIALS, ALLOWED_NETWORKS, BANNED_IPS, BANLIMIT, DEV
+    HASS_API_PASSWORD, CREDENTIALS, ALLOWED_NETWORKS, BANNED_IPS, BANLIMIT, \
+    DEV, IGNORE_PATTERN, DIRSFIRST, SESAME
     try:
         if os.path.isfile(settingsfile):
             with open(settingsfile) as fptr:
@@ -2688,9 +3234,12 @@ def load_settings(settingsfile):
                 BANNED_IPS = settings.get("BANNED_IPS", BANNED_IPS)
                 BANLIMIT = settings.get("BANLIMIT", BANLIMIT)
                 DEV = settings.get("DEV", DEV)
+                IGNORE_PATTERN = settings.get("IGNORE_PATTERN", IGNORE_PATTERN)
+                DIRSFIRST = settings.get("DIRSFIRST", DIRSFIRST)
+                SESAME = settings.get("SESAME", SESAME)
     except Exception as err:
-        LOG.warn(err)
-        LOG.warn("Not loading static settings")
+        LOG.warning(err)
+        LOG.warning("Not loading static settings")
     return False
 
 def get_dircontent(path, repo=None):
@@ -2706,7 +3255,7 @@ def get_dircontent(path, repo=None):
             for element in repo.index.diff("HEAD"):
                 staged["%s%s%s" % (repo.working_dir, os.sep, "%s"%os.sep.join(element.b_path.split('/')))] = element.change_type
         except Exception as err:
-            LOG.warn("Exception: %s" % str(err))
+            LOG.warning("Exception: %s", str(err))
         for element in repo.index.diff(None):
             unstaged["%s%s%s" % (repo.working_dir, os.sep, "%s"%os.sep.join(element.b_path.split('/')))] = element.change_type
     else:
@@ -2714,7 +3263,15 @@ def get_dircontent(path, repo=None):
         staged = {}
         unstaged = {}
 
-    for elem in sorted(os.listdir(path), key=lambda x: x.lower()):
+    def sorted_file_list():
+        dirlist = [x for x in os.listdir(path) if os.path.isdir(os.path.join(path, x))]
+        filelist = [x for x in os.listdir(path) if not os.path.isdir(os.path.join(path, x))]
+        if DIRSFIRST:
+            return sorted(dirlist, key=lambda x: x.lower()) + sorted(filelist, key=lambda x: x.lower())
+        else:
+            return sorted(dirlist + filelist, key=lambda x: x.lower())
+
+    for elem in sorted_file_list():
         edata = {}
         edata['name'] = elem
         edata['dir'] = path
@@ -2738,7 +3295,16 @@ def get_dircontent(path, repo=None):
         elif edata['fullpath'] in staged:
             edata['gitstatus'] = 'staged'
             edata['changetype'] = staged.get(edata['name'], None)
-        dircontent.append(edata)
+
+        hidden = False
+        if IGNORE_PATTERN is not None:
+            for file_pattern in IGNORE_PATTERN:
+                if fnmatch.fnmatch(edata['name'], file_pattern):
+                    hidden = True
+
+        if not hidden:
+            dircontent.append(edata)
+
     return dircontent
 
 def get_html():
@@ -2748,13 +3314,14 @@ def get_html():
                 html = Template(fptr.read())
                 return html
         except Exception as err:
-            LOG.warn(err)
-            LOG.warn("Delivering embedded HTML")
+            LOG.warning(err)
+            LOG.warning("Delivering embedded HTML")
     return INDEX
 
 def check_access(clientip):
     global BANNED_IPS
     if clientip in BANNED_IPS:
+        LOG.warning("Client IP banned.")
         return False
     if not ALLOWED_NETWORKS:
         return True
@@ -2762,12 +3329,13 @@ def check_access(clientip):
         ipobject = ipaddress.ip_address(clientip)
         if ipobject in ipaddress.ip_network(net):
             return True
+    LOG.warning("Client IP not within allowed networks.")
     BANNED_IPS.append(clientip)
     return False
 
 class RequestHandler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
-        LOG.info("%s - %s" % (self.client_address[0], format%args))
+        LOG.info("%s - %s" % (self.client_address[0], format % args))
         return
 
     def do_BLOCK(self):
@@ -2776,13 +3344,24 @@ class RequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(bytes("Policy not fulfilled", "utf8"))
 
     def do_GET(self):
+        req = urlparse(self.path)
+        if SESAME:
+            if req.path.endswith("/%s" % SESAME):
+                if self.client_address[0] not in ALLOWED_NETWORKS:
+                    ALLOWED_NETWORKS.append(self.client_address[0])
+                if self.client_address[0] in BANNED_IPS:
+                    BANNED_IPS.remove(self.client_address[0])
+                url = req.path[:req.path.rfind(SESAME)]
+                self.send_response(302)
+                self.send_header('Location', url)
+                self.end_headers()
+                return
         if not check_access(self.client_address[0]):
             self.do_BLOCK()
             return
-        req = urlparse(self.path)
         query = parse_qs(req.query)
         self.send_response(200)
-        if req.path == '/api/file':
+        if req.path.endswith('/api/file'):
             content = ""
             self.send_header('Content-type', 'text/text')
             self.end_headers()
@@ -2796,11 +3375,11 @@ class RequestHandler(BaseHTTPRequestHandler):
                     else:
                         content = "File not found"
             except Exception as err:
-                LOG.warn(err)
+                LOG.warning(err)
                 content = str(err)
             self.wfile.write(bytes(content, "utf8"))
             return
-        elif req.path == '/api/download':
+        elif req.path.endswith('/api/download'):
             content = ""
             filename = query.get('filename', None)
             try:
@@ -2817,12 +3396,12 @@ class RequestHandler(BaseHTTPRequestHandler):
                     else:
                         content = "File not found"
             except Exception as err:
-                LOG.warn(err)
+                LOG.warning(err)
                 content = str(err)
             self.send_header('Content-type', 'text/text')
             self.wfile.write(bytes(content, "utf8"))
             return
-        elif req.path == '/api/listdir':
+        elif req.path.endswith('/api/listdir'):
             content = ""
             self.send_header('Content-type', 'text/json')
             self.end_headers()
@@ -2854,11 +3433,11 @@ class RequestHandler(BaseHTTPRequestHandler):
                                    }
                         self.wfile.write(bytes(json.dumps(filedata), "utf8"))
             except Exception as err:
-                LOG.warn(err)
+                LOG.warning(err)
                 content = str(err)
                 self.wfile.write(bytes(content, "utf8"))
             return
-        elif req.path == '/api/abspath':
+        elif req.path.endswith('/api/abspath'):
             content = ""
             self.send_header('Content-type', 'text/text')
             self.end_headers()
@@ -2871,7 +3450,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                 if os.path.isdir(dirpath):
                     self.wfile.write(os.path.abspath(dirpath))
             return
-        elif req.path == '/api/parent':
+        elif req.path.endswith('/api/parent'):
             content = ""
             self.send_header('Content-type', 'text/text')
             self.end_headers()
@@ -2884,7 +3463,17 @@ class RequestHandler(BaseHTTPRequestHandler):
                 if os.path.isdir(dirpath):
                     self.wfile.write(os.path.abspath(os.path.dirname(dirpath)))
             return
-        elif req.path == '/api/restart':
+        elif req.path.endswith('/api/netstat'):
+            content = ""
+            self.send_header('Content-type', 'text/json')
+            self.end_headers()
+            res = {
+                "allowed_networks": ALLOWED_NETWORKS,
+                "banned_ips": BANNED_IPS
+            }
+            self.wfile.write(bytes(json.dumps(res), "utf8"))
+            return
+        elif req.path.endswith('/api/restart'):
             LOG.info("/api/restart")
             self.send_header('Content-type', 'text/json')
             self.end_headers()
@@ -2900,11 +3489,11 @@ class RequestHandler(BaseHTTPRequestHandler):
                     res = json.loads(response.read().decode('utf-8'))
                     LOG.debug(res)
             except Exception as err:
-                LOG.warn(err)
+                LOG.warning(err)
                 res['restart'] = str(err)
             self.wfile.write(bytes(json.dumps(res), "utf8"))
             return
-        elif req.path == '/api/check_config':
+        elif req.path.endswith('/api/check_config'):
             LOG.info("/api/check_config")
             self.send_header('Content-type', 'text/json')
             self.end_headers()
@@ -2920,11 +3509,11 @@ class RequestHandler(BaseHTTPRequestHandler):
                 #     print(json.loads(response.read().decode('utf-8')))
                 #     res['service'] = "called successfully"
             except Exception as err:
-                LOG.warn(err)
+                LOG.warning(err)
                 res['restart'] = str(err)
             self.wfile.write(bytes(json.dumps(res), "utf8"))
             return
-        elif req.path == '/api/reload_automations':
+        elif req.path.endswith('/api/reload_automations'):
             LOG.info("/api/reload_automations")
             self.send_header('Content-type', 'text/json')
             self.end_headers()
@@ -2940,11 +3529,31 @@ class RequestHandler(BaseHTTPRequestHandler):
                     LOG.debug(json.loads(response.read().decode('utf-8')))
                     res['service'] = "called successfully"
             except Exception as err:
-                LOG.warn(err)
+                LOG.warning(err)
                 res['restart'] = str(err)
             self.wfile.write(bytes(json.dumps(res), "utf8"))
             return
-        elif req.path == '/api/reload_groups':
+        elif req.path.endswith('/api/reload_scripts'):
+            LOG.info("/api/reload_scripts")
+            self.send_header('Content-type', 'text/json')
+            self.end_headers()
+            res = {"reload_scripts": False}
+            try:
+                headers = {
+                    "Content-Type": "application/json"
+                }
+                if HASS_API_PASSWORD:
+                    headers["x-ha-access"] = HASS_API_PASSWORD
+                req = urllib.request.Request("%sservices/script/reload" % HASS_API, headers=headers, method='POST')
+                with urllib.request.urlopen(req) as response:
+                    LOG.debug(json.loads(response.read().decode('utf-8')))
+                    res['service'] = "called successfully"
+            except Exception as err:
+                LOG.warning(err)
+                res['restart'] = str(err)
+            self.wfile.write(bytes(json.dumps(res), "utf8"))
+            return
+        elif req.path.endswith('/api/reload_groups'):
             LOG.info("/api/reload_groups")
             self.send_header('Content-type', 'text/json')
             self.end_headers()
@@ -2960,11 +3569,11 @@ class RequestHandler(BaseHTTPRequestHandler):
                     LOG.debug(json.loads(response.read().decode('utf-8')))
                     res['service'] = "called successfully"
             except Exception as err:
-                LOG.warn(err)
+                LOG.warning(err)
                 res['restart'] = str(err)
             self.wfile.write(bytes(json.dumps(res), "utf8"))
             return
-        elif req.path == '/api/reload_core':
+        elif req.path.endswith('/api/reload_core'):
             LOG.info("/api/reload_core")
             self.send_header('Content-type', 'text/json')
             self.end_headers()
@@ -2980,28 +3589,39 @@ class RequestHandler(BaseHTTPRequestHandler):
                     LOG.debug(json.loads(response.read().decode('utf-8')))
                     res['service'] = "called successfully"
             except Exception as err:
-                LOG.warn(err)
+                LOG.warning(err)
                 res['restart'] = str(err)
             self.wfile.write(bytes(json.dumps(res), "utf8"))
             return
-        elif req.path == '/':
+        elif req.path.endswith('/'):
             self.send_header('Content-type', 'text/html')
             self.end_headers()
 
-            boot = "{}"
+            services = "[]"
+            events = "[]"
+            states = "[]"
             try:
                 headers = {
                     "Content-Type": "application/json"
                 }
                 if HASS_API_PASSWORD:
                     headers["x-ha-access"] = HASS_API_PASSWORD
-                req = urllib.request.Request("%sbootstrap" % HASS_API, headers=headers, method='GET')
+
+                req = urllib.request.Request("%sservices" % HASS_API, headers=headers, method='GET')
                 with urllib.request.urlopen(req) as response:
-                    boot = response.read().decode('utf-8')
+                    services = response.read().decode('utf-8')
+
+                req = urllib.request.Request("%sevents" % HASS_API, headers=headers, method='GET')
+                with urllib.request.urlopen(req) as response:
+                    events = response.read().decode('utf-8')
+
+                req = urllib.request.Request("%sstates" % HASS_API, headers=headers, method='GET')
+                with urllib.request.urlopen(req) as response:
+                    states = response.read().decode('utf-8')
 
             except Exception as err:
-                LOG.warn("Exception getting bootstrap")
-                LOG.warn(err)
+                LOG.warning("Exception getting bootstrap")
+                LOG.warning(err)
 
             color = "green"
             try:
@@ -3010,12 +3630,17 @@ class RequestHandler(BaseHTTPRequestHandler):
                 if VERSION != latest:
                     color = "red"
             except Exception as err:
-                LOG.warn("Exception getting release")
-                LOG.warn(err)
-            html = get_html().safe_substitute(bootstrap=boot,
+                LOG.warning("Exception getting release")
+                LOG.warning(err)
+            html = get_html().safe_substitute(services=services,
+                                              events=events,
+                                              states=states,
                                               current=VERSION,
                                               versionclass=color,
-                                              separator="\%s" % os.sep if os.sep == "\\" else os.sep)
+                                              separator="\%s" % os.sep if os.sep == "\\" else os.sep,
+                                              listening_address="%s://%s:%i" % (
+                                                  'https' if SSL_CERTIFICATE else 'http', LISTENIP, LISTENPORT),
+                                              hass_api_address="%s" % (HASS_API, ))
             self.wfile.write(bytes(html, "utf8"))
             return
         else:
@@ -3024,6 +3649,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.wfile.write(bytes("File not found", "utf8"))
 
     def do_POST(self):
+        global ALLOWED_NETWORKS, BANNED_IPS
         if not check_access(self.client_address[0]):
             self.do_BLOCK()
             return
@@ -3035,11 +3661,11 @@ class RequestHandler(BaseHTTPRequestHandler):
         }
 
         length = int(self.headers['content-length'])
-        if req.path == '/api/save':
+        if req.path.endswith('/api/save'):
             try:
                 postvars = parse_qs(self.rfile.read(length).decode('utf-8'), keep_blank_values=1)
             except Exception as err:
-                LOG.warn(err)
+                LOG.warning(err)
                 response['message'] = "%s" % (str(err))
                 postvars = {}
             if 'filename' in postvars.keys() and 'text' in postvars.keys():
@@ -3058,10 +3684,10 @@ class RequestHandler(BaseHTTPRequestHandler):
                         return
                     except Exception as err:
                         response['message'] = "%s" % (str(err))
-                        LOG.warn(err)
+                        LOG.warning(err)
             else:
                 response['message'] = "Missing filename or text"
-        elif req.path == '/api/upload':
+        elif req.path.endswith('/api/upload'):
             if length > 104857600: #100 MB for now
                 read = 0
                 while read < length:
@@ -3091,11 +3717,11 @@ class RequestHandler(BaseHTTPRequestHandler):
                 response['message'] = "Upload successful"
                 self.wfile.write(bytes(json.dumps(response), "utf8"))
                 return
-        elif req.path == '/api/delete':
+        elif req.path.endswith('/api/delete'):
             try:
                 postvars = parse_qs(self.rfile.read(length).decode('utf-8'), keep_blank_values=1)
             except Exception as err:
-                LOG.warn(err)
+                LOG.warning(err)
                 response['message'] = "%s" % (str(err))
                 postvars = {}
             if 'path' in postvars.keys():
@@ -3116,20 +3742,20 @@ class RequestHandler(BaseHTTPRequestHandler):
                             self.wfile.write(bytes(json.dumps(response), "utf8"))
                             return
                         except Exception as err:
-                            LOG.warn(err)
+                            LOG.warning(err)
                             response['error'] = True
                             response['message'] = str(err)
 
                     except Exception as err:
                         response['message'] = "%s" % (str(err))
-                        LOG.warn(err)
+                        LOG.warning(err)
             else:
                 response['message'] = "Missing filename or text"
-        elif req.path == '/api/exec_command':
+        elif req.path.endswith('/api/exec_command'):
             try:
                 postvars = parse_qs(self.rfile.read(length).decode('utf-8'), keep_blank_values=1)
             except Exception as err:
-                LOG.warn(err)
+                LOG.warning(err)
                 response['message'] = "%s" % (str(err))
                 postvars = {}
             if 'command' in postvars.keys():
@@ -3153,30 +3779,30 @@ class RequestHandler(BaseHTTPRequestHandler):
                             try:
                                 response['stdout'] = stdout.decode(sys.getdefaultencoding())
                             except Exception as err:
-                                LOG.warn(err)
+                                LOG.warning(err)
                                 response['stdout'] = stdout.decode("utf-8", errors="replace")
                             try:
                                 response['stderr'] = stderr.decode(sys.getdefaultencoding())
                             except Exception as err:
-                                LOG.warn(err)
+                                LOG.warning(err)
                                 response['stderr'] = stderr.decode("utf-8", errors="replace")
                             self.wfile.write(bytes(json.dumps(response), "utf8"))
                             return
                         except Exception as err:
-                            LOG.warn(err)
+                            LOG.warning(err)
                             response['error'] = True
                             response['message'] = str(err)
 
                     except Exception as err:
                         response['message'] = "%s" % (str(err))
-                        LOG.warn(err)
+                        LOG.warning(err)
             else:
                 response['message'] = "Missing command"
-        elif req.path == '/api/gitadd':
+        elif req.path.endswith('/api/gitadd'):
             try:
                 postvars = parse_qs(self.rfile.read(length).decode('utf-8'), keep_blank_values=1)
             except Exception as err:
-                LOG.warn(err)
+                LOG.warning(err)
                 response['message'] = "%s" % (str(err))
                 postvars = {}
             if 'path' in postvars.keys():
@@ -3196,20 +3822,20 @@ class RequestHandler(BaseHTTPRequestHandler):
                             self.wfile.write(bytes(json.dumps(response), "utf8"))
                             return
                         except Exception as err:
-                            LOG.warn(err)
+                            LOG.warning(err)
                             response['error'] = True
                             response['message'] = str(err)
 
                     except Exception as err:
                         response['message'] = "%s" % (str(err))
-                        LOG.warn(err)
+                        LOG.warning(err)
             else:
                 response['message'] = "Missing filename"
-        elif req.path == '/api/commit':
+        elif req.path.endswith('/api/commit'):
             try:
                 postvars = parse_qs(self.rfile.read(length).decode('utf-8'), keep_blank_values=1)
             except Exception as err:
-                LOG.warn(err)
+                LOG.warning(err)
                 response['message'] = "%s" % (str(err))
                 postvars = {}
             if 'path' in postvars.keys() and 'message' in postvars.keys():
@@ -3235,14 +3861,14 @@ class RequestHandler(BaseHTTPRequestHandler):
 
                     except Exception as err:
                         response['message'] = "Not a git repository: %s" % (str(err))
-                        LOG.warn("Exception (no repo): %s" % str(err))
+                        LOG.warning("Exception (no repo): %s" % str(err))
             else:
                 response['message'] = "Missing path"
-        elif req.path == '/api/checkout':
+        elif req.path.endswith('/api/checkout'):
             try:
                 postvars = parse_qs(self.rfile.read(length).decode('utf-8'), keep_blank_values=1)
             except Exception as err:
-                LOG.warn(err)
+                LOG.warning(err)
                 response['message'] = "%s" % (str(err))
                 postvars = {}
             if 'path' in postvars.keys() and 'branch' in postvars.keys():
@@ -3265,18 +3891,18 @@ class RequestHandler(BaseHTTPRequestHandler):
                         except Exception as err:
                             response['error'] = True
                             response['message'] = str(err)
-                            LOG.warn(response)
+                            LOG.warning(response)
 
                     except Exception as err:
                         response['message'] = "Not a git repository: %s" % (str(err))
-                        LOG.warn("Exception (no repo): %s" % str(err))
+                        LOG.warning("Exception (no repo): %s" % str(err))
             else:
                 response['message'] = "Missing path or branch"
-        elif req.path == '/api/newbranch':
+        elif req.path.endswith('/api/newbranch'):
             try:
                 postvars = parse_qs(self.rfile.read(length).decode('utf-8'), keep_blank_values=1)
             except Exception as err:
-                LOG.warn(err)
+                LOG.warning(err)
                 response['message'] = "%s" % (str(err))
                 postvars = {}
             if 'path' in postvars.keys() and 'branch' in postvars.keys():
@@ -3298,18 +3924,18 @@ class RequestHandler(BaseHTTPRequestHandler):
                         except Exception as err:
                             response['error'] = True
                             response['message'] = str(err)
-                            LOG.warn(response)
+                            LOG.warning(response)
 
                     except Exception as err:
                         response['message'] = "Not a git repository: %s" % (str(err))
-                        LOG.warn("Exception (no repo): %s" % str(err))
+                        LOG.warning("Exception (no repo): %s" % str(err))
             else:
                 response['message'] = "Missing path or branch"
-        elif req.path == '/api/init':
+        elif req.path.endswith('/api/init'):
             try:
                 postvars = parse_qs(self.rfile.read(length).decode('utf-8'), keep_blank_values=1)
             except Exception as err:
-                LOG.warn(err)
+                LOG.warning(err)
                 response['message'] = "%s" % (str(err))
                 postvars = {}
             if 'path' in postvars.keys():
@@ -3329,18 +3955,58 @@ class RequestHandler(BaseHTTPRequestHandler):
                         except Exception as err:
                             response['error'] = True
                             response['message'] = str(err)
-                            LOG.warn(response)
+                            LOG.warning(response)
 
                     except Exception as err:
                         response['message'] = "Not a git repository: %s" % (str(err))
-                        LOG.warn("Exception (no repo): %s" % str(err))
+                        LOG.warning("Exception (no repo): %s" % str(err))
             else:
                 response['message'] = "Missing path or branch"
-        elif req.path == '/api/newfolder':
+        elif req.path.endswith('/api/push'):
             try:
                 postvars = parse_qs(self.rfile.read(length).decode('utf-8'), keep_blank_values=1)
             except Exception as err:
-                LOG.warn(err)
+                LOG.warning(err)
+                response['message'] = "%s" % (str(err))
+                postvars = {}
+            if 'path' in postvars.keys():
+                if postvars['path']:
+                    try:
+                        repopath = unquote(postvars['path'][0])
+                        response['path'] = repopath
+                        try:
+                            repo = REPO(repopath)
+                            urls = []
+                            if repo.remotes:
+                                for url in repo.remotes.origin.urls:
+                                    urls.append(url)
+                            if not urls:
+                                response['error'] = True
+                                response['message'] = "No remotes configured for %s" % repopath
+                            else:
+                                repo.remotes.origin.push()
+                                response['error'] = False
+                                response['message'] = "Pushed to %s" % urls[0]
+                            self.send_response(200)
+                            self.send_header('Content-type', 'text/json')
+                            self.end_headers()
+                            self.wfile.write(bytes(json.dumps(response), "utf8"))
+                            return
+                        except Exception as err:
+                            response['error'] = True
+                            response['message'] = str(err)
+                            LOG.warning(response)
+
+                    except Exception as err:
+                        response['message'] = "Not a git repository: %s" % (str(err))
+                        LOG.warning("Exception (no repo): %s" % str(err))
+            else:
+                response['message'] = "Missing path or branch"
+        elif req.path.endswith('/api/newfolder'):
+            try:
+                postvars = parse_qs(self.rfile.read(length).decode('utf-8'), keep_blank_values=1)
+            except Exception as err:
+                LOG.warning(err)
                 response['message'] = "%s" % (str(err))
                 postvars = {}
             if 'path' in postvars.keys() and 'name' in postvars.keys():
@@ -3359,17 +4025,17 @@ class RequestHandler(BaseHTTPRequestHandler):
                             self.wfile.write(bytes(json.dumps(response), "utf8"))
                             return
                         except Exception as err:
-                            LOG.warn(err)
+                            LOG.warning(err)
                             response['error'] = True
                             response['message'] = str(err)
                     except Exception as err:
                         response['message'] = "%s" % (str(err))
-                        LOG.warn(err)
-        elif req.path == '/api/newfile':
+                        LOG.warning(err)
+        elif req.path.endswith('/api/newfile'):
             try:
                 postvars = parse_qs(self.rfile.read(length).decode('utf-8'), keep_blank_values=1)
             except Exception as err:
-                LOG.warn(err)
+                LOG.warning(err)
                 response['message'] = "%s" % (str(err))
                 postvars = {}
             if 'path' in postvars.keys() and 'name' in postvars.keys():
@@ -3389,14 +4055,84 @@ class RequestHandler(BaseHTTPRequestHandler):
                             self.wfile.write(bytes(json.dumps(response), "utf8"))
                             return
                         except Exception as err:
-                            LOG.warn(err)
+                            LOG.warning(err)
                             response['error'] = True
                             response['message'] = str(err)
                     except Exception as err:
                         response['message'] = "%s" % (str(err))
-                        LOG.warn(err)
+                        LOG.warning(err)
             else:
                 response['message'] = "Missing filename or text"
+        elif req.path.endswith('/api/allowed_networks'):
+            try:
+                postvars = parse_qs(self.rfile.read(length).decode('utf-8'), keep_blank_values=1)
+            except Exception as err:
+                LOG.warning(err)
+                response['message'] = "%s" % (str(err))
+                postvars = {}
+            if 'network' in postvars.keys() and 'method' in postvars.keys():
+                if postvars['network'] and postvars['method']:
+                    try:
+                        network = unquote(postvars['network'][0])
+                        method = unquote(postvars['method'][0])
+                        if method == 'remove':
+                            if network in ALLOWED_NETWORKS:
+                                ALLOWED_NETWORKS.remove(network)
+                                if not ALLOWED_NETWORKS:
+                                    ALLOWED_NETWORKS.append("0.0.0.0/0")
+                            response['error'] = False
+                        elif method == 'add':
+                            ipaddress.ip_network(network)
+                            ALLOWED_NETWORKS.append(network)
+                            response['error'] = False
+                        else:
+                            response['error'] = True
+                        self.send_response(200)
+                        self.send_header('Content-type', 'text/json')
+                        self.end_headers()
+                        response['error'] = False
+                        response['message'] = "ALLOWED_NETWORKS (%s): %s" % (method, network)
+                        self.wfile.write(bytes(json.dumps(response), "utf8"))
+                        return
+                    except Exception as err:
+                        response['error'] = True
+                        response['message'] = "%s" % (str(err))
+                        LOG.warning(err)
+            else:
+                response['message'] = "Missing network"
+        elif req.path.endswith('/api/banned_ips'):
+            try:
+                postvars = parse_qs(self.rfile.read(length).decode('utf-8'), keep_blank_values=1)
+            except Exception as err:
+                LOG.warning(err)
+                response['message'] = "%s" % (str(err))
+                postvars = {}
+            if 'ip' in postvars.keys() and 'method' in postvars.keys():
+                if postvars['ip'] and postvars['method']:
+                    try:
+                        ip = unquote(postvars['ip'][0])
+                        method = unquote(postvars['method'][0])
+                        if method == 'unban':
+                            if ip in BANNED_IPS:
+                                BANNED_IPS.remove(ip)
+                            response['error'] = False
+                        elif method == 'ban':
+                            ipaddress.ip_network(ip)
+                            BANNED_IPS.append(ip)
+                        else:
+                            response['error'] = True
+                        self.send_response(200)
+                        self.send_header('Content-type', 'text/json')
+                        self.end_headers()
+                        response['message'] = "BANNED_IPS (%s): %s" % (method, ip)
+                        self.wfile.write(bytes(json.dumps(response), "utf8"))
+                        return
+                    except Exception as err:
+                        response['error'] = True
+                        response['message'] = "%s" % (str(err))
+                        LOG.warning(err)
+            else:
+                response['message'] = "Missing IP"
         else:
             response['message'] = "Invalid method"
         self.send_response(200)
@@ -3416,7 +4152,7 @@ class AuthHandler(RequestHandler):
     def do_GET(self):
         global CREDENTIALS
         authorization = self.headers.get('Authorization', None)
-        if authorization == None:
+        if authorization is None:
             self.do_AUTHHEAD()
             self.wfile.write(bytes('no auth header received', 'utf-8'))
             pass
@@ -3429,7 +4165,7 @@ class AuthHandler(RequestHandler):
             if BANLIMIT:
                 bancounter = FAIL2BAN_IPS.get(self.client_address[0], 1)
                 if bancounter >= BANLIMIT:
-                    LOG.warn("Blocking access from %s" % self.client_address[0])
+                    LOG.warning("Blocking access from %s" % self.client_address[0])
                     self.do_BLOCK()
                     return
                 else:
@@ -3441,7 +4177,7 @@ class AuthHandler(RequestHandler):
     def do_POST(self):
         global CREDENTIALS
         authorization = self.headers.get('Authorization', None)
-        if authorization == None:
+        if authorization is None:
             self.do_AUTHHEAD()
             self.wfile.write(bytes('no auth header received', 'utf-8'))
             pass
@@ -3454,7 +4190,7 @@ class AuthHandler(RequestHandler):
             if BANLIMIT:
                 bancounter = FAIL2BAN_IPS.get(self.client_address[0], 1)
                 if bancounter >= BANLIMIT:
-                    LOG.warn("Blocking access from %s" % self.client_address[0])
+                    LOG.warning("Blocking access from %s" % self.client_address[0])
                     self.do_BLOCK()
                     return
                 else:
@@ -3468,23 +4204,24 @@ def main(args):
     if args:
         load_settings(args[0])
     LOG.info("Starting server")
+    CustomServer = socketserver.TCPServer
+    if ':' in LISTENIP:
+        CustomServer.address_family = socket.AF_INET6
     server_address = (LISTENIP, LISTENPORT)
     if CREDENTIALS:
         CREDENTIALS = base64.b64encode(bytes(CREDENTIALS, "utf-8"))
         Handler = AuthHandler
     else:
         Handler = RequestHandler
-    if not SSL_CERTIFICATE:
-        HTTPD = HTTPServer(server_address, Handler)
-    else:
-        HTTPD = socketserver.TCPServer(server_address, Handler)
+    HTTPD = CustomServer(server_address, Handler)
+    if SSL_CERTIFICATE:
         HTTPD.socket = ssl.wrap_socket(HTTPD.socket,
                                        certfile=SSL_CERTIFICATE,
                                        keyfile=SSL_KEY,
                                        server_side=True)
     LOG.info('Listening on: %s://%s:%i' % ('https' if SSL_CERTIFICATE else 'http',
-                                        LISTENIP,
-                                        LISTENPORT))
+                                           LISTENIP,
+                                           LISTENPORT))
     if BASEPATH:
         os.chdir(BASEPATH)
     HTTPD.serve_forever()

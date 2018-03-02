@@ -1,0 +1,30 @@
+###########
+# SCRIPTS #
+###########
+
+call_east_temp:
+  alias: Call East Wing Temp
+  sequence:
+    - service: tts.google_say
+      entity_id: media_player.living_room_home
+      data_template:
+        message: 'The East Wing is {{ states.climate.east_wing.attributes["current_temperature"] }} degrees.'
+        cache: false
+
+call_west_temp:
+  alias: Call West Wing Temp
+  sequence:
+    - service: tts.google_say
+      entity_id: media_player.living_room_home
+      data_template:
+        message: 'The West Wing is {{ states.climate.west_wing.attributes["current_temperature"] }} degrees.'
+        cache: false
+
+call_house_temp:
+  alias: Call House Temp
+  sequence:
+    - service: tts.google_say
+      entity_id: media_player.living_room_home
+      data_template:
+        message: 'The east wing is {{ states.climate.east_wing.attributes["current_temperature"] }} degrees and the west wing is {{ states.climate.west_wing.attributes["current_temperature"] }} degrees.'
+        cache: false

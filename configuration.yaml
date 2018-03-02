@@ -5,9 +5,23 @@ homeassistant:
   elevation: 192
   unit_system: imperial
   time_zone: America/Chicago
-  customize: !include extraconfig/customize.yaml
+  customize: !include customize/customize.yaml
+  customize_glob:
+    "*.*":
+      custom_ui_state_card: state-card-custom-ui
+    group.main_living_temps:
+      state_card_mode: badges
+    group.room_temps_1:
+      state_card_mode: badges
+    group.room_temps_2:
+      state_card_mode: badges
+    group.motion_badges:
+      state_card_mode: badges
+
 
 config:
+customizer:
+   custom_ui: local
 discovery:
   ignore:
     - philips_hue
@@ -16,6 +30,7 @@ discovery:
     - yamaha
     - harmony
 frontend:
+  themes: !include_dir_merge_named customize/themes/
 history:
 http:
   api_password: !secret api_password
@@ -40,23 +55,33 @@ updater:
 # Components #
 ##############
 automation: !include automations.yaml
-binary_sensor: !include extraconfig/binary_sensors.yaml
-camera: !include extraconfig/camera.yaml
-climate: !include extraconfig/climate.yaml
-#cover: !include extraconfig/cover.yaml
-device_tracker: !include extraconfig/device_tracker.yaml
-ecobee: !include extraconfig/ecobee.yaml
-group: !include extraconfig/group.yaml
-#influxdb: !include extraconfig/influxdb.yaml
-input_boolean: !include extraconfig/input_boolean.yaml
-input_select: !include extraconfig/input_select.yaml
-isy994: !include extraconfig/isy994.yaml
-light: !include extraconfig/lights.yaml
-lock: !include extraconfig/locks.yaml
-media_player: !include extraconfig/media_players.yaml
-mqtt: !include extraconfig/mqtt.yaml
-notify: !include extraconfig/notify.yaml
-#remote: !include extraconfig/remotes.yaml
-sensor: !include extraconfig/sensors.yaml
-shell_command: !include_dir_merge_named extraconfig/shell_commands/
-switch: !include extraconfig/switches.yaml
+binary_sensor: !include components/binary_sensors.yaml
+camera: !include components/camera.yaml
+climate: !include components/climate.yaml
+cover: !include components/cover.yaml
+device_tracker: !include components/device_tracker.yaml
+dialogflow:
+ecobee: !include components/ecobee.yaml
+google_assistant: !include components/google_assistant.yaml
+group: !include components/group.yaml
+hue: !include components/hue.yaml
+ifttt:
+  key: !secret ifttt_key
+#influxdb: !include components/influxdb.yaml
+input_boolean: !include components/input_boolean.yaml
+input_select: !include components/input_select.yaml
+intent_script: !include_dir_merge_named components/intents
+isy994: !include components/isy994.yaml
+light: !include components/lights.yaml
+lock: !include components/locks.yaml
+media_player: !include components/media_players.yaml
+mqtt: !include components/mqtt.yaml
+notify: !include components/notify.yaml
+#remote: !include components/remotes.yaml
+script: !include components/scripts.yaml
+sensor: !include components/sensors.yaml
+shell_command: !include_dir_merge_named components/shell_commands/
+switch: !include components/switches.yaml
+tts:
+  - platform: google
+    language: 'en'

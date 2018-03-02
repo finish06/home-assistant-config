@@ -8,19 +8,7 @@
     payload_on: "on"
     payload_off: "off"
     retain: true
-  # - platform: template
-  #   switches:
-  #      living_room_tv:
-  #        friendly_name: 'Living Room TV'
-  #        value_template: "{% if is_state('remote.living_room', 'on') %}on{% else %}off{% endif %}"
-  #        turn_on:
-  #           service: remote.turn_on
-  #           entity_id: remote.living_room
-  #           data:
-  #             activity: '28269845'
-  #        turn_off:
-  #            service: remote.turn_off
-  #            entity_id: remote.living_room
+
   - platform: template
     switches:
        office_tv:
@@ -34,6 +22,7 @@
          turn_off:
              service: remote.turn_off
              entity_id: remote.office
+
   - platform: template
     switches:
        master_bedroom_tv:
@@ -54,6 +43,31 @@
     command_topic: "harmony-api/hubs/living-room/activities/shield-tv/command"
     payload_on: "on"
     payload_off: "off"
+
+  - platform: mqtt
+    name: "Network Rack Switch"
+    state_topic: "smartthings/Network Rack Switch/switch"
+    command_topic: "smartthings/Network Rack Switch/switch"
+    payload_on: "on"
+    payload_off: "off"
+    retain: true
+
+  - platform: mqtt
+    name: "Server Rack Switch"
+    state_topic: "smartthings/Server Rack Switch/switch"
+    command_topic: "smartthings/Server Rack Switch/switch"
+    payload_on: "on"
+    payload_off: "off"
+    retain: true
+
+  - platform: mqtt
+    name: "Media Rack Switch"
+    state_topic: "smartthings/Media Rack Switch/switch"
+    command_topic: "smartthings/Media Rack Switch/switch"
+    payload_on: "on"
+    payload_off: "off"
+    retain: true
+
   # - platform: mqtt
   #   name: "Office TV"
   #   state_topic: "harmony-api/hubs/office/activities/kodi/state"
@@ -78,3 +92,16 @@
   #        command_on: '/home/hass/.homeassistant/bash_scripts/hgtv.sh'
   #        command_off: '/home/hass/.homeassistant/bash_scripts/kodi_off.sh'
   #        friendly_name: HGTV
+  # - platform: template
+  #   switches:
+  #      living_room_tv:
+  #        friendly_name: 'Living Room TV'
+  #        value_template: "{% if is_state('remote.living_room', 'on') %}on{% else %}off{% endif %}"
+  #        turn_on:
+  #           service: remote.turn_on
+  #           entity_id: remote.living_room
+  #           data:
+  #             activity: '28269845'
+  #        turn_off:
+  #            service: remote.turn_off
+  #            entity_id: remote.living_room

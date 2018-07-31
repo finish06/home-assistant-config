@@ -1,74 +1,92 @@
 ###########
 # SENSORS #
 ###########
+- platform: wunderground
+  api_key: !secret wu_api
+  pws_id: KOKCOLLI9
+  monitored_conditions:
+    - weather_1d
+    - temp_f
+    - temp_low_1d_f
+    - temp_high_1d_f
+    - relative_humidity
+    - precip_today_in
+    - wind_mph
+    - wind_dir
 
 - platform: mqtt
-  state_topic: "smartthings/Server Closet Temp/temperature"
-  name: "Server Closet Temp"
+  state_topic: "smartthings/Tech Closet Sensor/temperature"
+  name: "Tech Closet Temp"
   qos: 0
   unit_of_measurement: "°F"
 
 - platform: mqtt
-  state_topic: "smartthings/Server Closet Temp/humidity"
-  name: "Server Closet Humidity"
+  state_topic: "smartthings/Tech Closet Sensor/humidity"
+  name: "Tech Closet Humidity"
+  qos: 0
+  unit_of_measurement: "%"
+
+- platform: mqtt
+  state_topic: "smartthings/Tech Closet Sensor/battery"
+  name: "Tech Closet Battery"
   qos: 0
   unit_of_measurement: "%"
 
 - platform: mqtt
   state_topic: "smartthings/Server Rack Switch/power"
-  name: "Server Rack Power Draw"
+  name: "Compute Power Draw"
   qos: 0
   unit_of_measurement: "W"
 
 - platform: template
   sensors:
-    server_rack_power:
-      friendly_name: "Server Rack Power"
-      entity_id: "sensor.server_rack_power_draw"
+    compute_power:
+      friendly_name: "Compute Power"
+      entity_id: "sensor.compute_power_draw"
       unit_of_measurement: "W"
-      value_template: "{{ states('sensor.server_rack_power_draw') | round(0) }}"
+      value_template: "{{ states('sensor.compute_power_draw') | round(0) }}"
 
 - platform: statistics
-  entity_id: sensor.server_rack_power
-  name: Server Rack Stats
+  entity_id: sensor.compute_power
+  name: Compute Stats
   max_age:
     days: 30
 
 - platform: template
   sensors:
-    server_rack_power_cost:
-      friendly_name: "Server Rack Cost"
-      entity_id: "sensor.server_rack_stats_mean"
+    compute_power_cost:
+      friendly_name: "Compute Cost"
+      entity_id: "sensor.compute_stats_mean"
       unit_of_measurement: "USD"
-      value_template: "{{ (states.sensor.server_rack_stats_mean.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
+      value_template: "{{ (states.sensor.compute_stats_mean.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
 
 - platform: mqtt
   state_topic: "smartthings/Network Rack Switch/power"
-  name: "Network Rack Power Draw"
+  name: "Networking Power Draw"
   qos: 0
   unit_of_measurement: "W"
 
 - platform: template
   sensors:
-    network_rack_power:
-      friendly_name: "Network Rack Power"
-      entity_id: "sensor.network_rack_power_draw"
+    networking_power:
+      friendly_name: "Networking Power"
+      entity_id: "sensor.networking_power_draw"
       unit_of_measurement: "W"
-      value_template: "{{ states('sensor.network_rack_power_draw') | round(0) }}"
+      value_template: "{{ states('sensor.networking_power_draw') | round(0) }}"
 
 - platform: statistics
-  entity_id: sensor.network_rack_power
-  name: Network Rack Stats
+  entity_id: sensor.networking_power
+  name: Networking Stats
   max_age:
     days: 30
 
 - platform: template
   sensors:
-    network_rack_power_cost:
-      friendly_name: "Network Rack Cost"
-      entity_id: "sensor.network_rack_stats_mean"
+    networking_power_cost:
+      friendly_name: "Networking Cost"
+      entity_id: "sensor.networking_stats_mean"
       unit_of_measurement: "USD"
-      value_template: "{{ (states.sensor.network_rack_stats_mean.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
+      value_template: "{{ (states.sensor.networking_stats_mean.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
 
 - platform: mqtt
   state_topic: "smartthings/Media Rack Switch/power"

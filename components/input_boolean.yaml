@@ -1,7 +1,7 @@
-dynamic_living_room_sonos:
-  name: Living Room Sonos
-  initial: off
-  icon: mdi:music-note
+# dynamic_living_room_sonos:
+#   name: Living Room Sonos
+#   initial: off
+#   icon: mdi:music-note
 
 dynamic_living_room_tv:
   name: Living Room TV

@@ -1,11 +1,17 @@
 homeassistant:
-  name: Overview
+  # Name of the location where Home Assistant is running
+  name: Dunn's Home Assistant
+  # Location required to calculate the time the sun rises and sets
   latitude: !secret latitude_location
   longitude: !secret longitude_location
+  # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 192
+  # metric for Metric, imperial for Imperial
   unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Chicago
-  customize: !include customize/customize.yaml
+  # Customization file
+  customize: !include ui/customize.yaml
   customize_glob:
     "*.*":
       custom_ui_state_card: state-card-custom-ui
@@ -18,22 +24,24 @@ homeassistant:
     group.motion_badges:
       state_card_mode: badges
 
-
-config:
+# Custom-UI Customizations
 customizer:
-   custom_ui: debug
-discovery:
-  ignore:
-    - philips_hue
-    - samsung_tv
-    - sonos
-    - yamaha
-    - harmony
+   custom_ui: hosted
+
+# Enables the frontend
 frontend:
-  themes: !include_dir_merge_named customize/themes/
-history:
+  themes: !include_dir_merge_named ui/themes/
+
+# Enables configuration UI
+config:
+
 http:
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
   api_password: !secret api_password
+  base_url: !secret base_url
   trusted_networks:
     - 127.0.0.1
     - 192.168.1.11
@@ -41,20 +49,45 @@ http:
     - 10.8.0.0/16
   ip_ban_enabled: true
   login_attempts_threshold: 3
-ios:
-logbook:
-logger:
-  default: error
-  logs:
-    homeassistant.components.cover: critical
-recorder:
-sun:
-updater:
 
-##############
-# Components #
-##############
-automation: !include automations.yaml
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+  ignore:
+    - samsung_tv
+    - yamaha
+    - harmony
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Cloud
+cloud:
+
+# Components
+arlo: !include components/arlo.yaml
+automation: !include_dir_list automations/
 binary_sensor: !include components/binary_sensors.yaml
 camera: !include components/camera.yaml
 climate: !include components/climate.yaml
@@ -63,11 +96,10 @@ device_tracker: !include components/device_tracker.yaml
 dialogflow:
 ecobee: !include components/ecobee.yaml
 google_assistant: !include components/google_assistant.yaml
-group: !include components/group.yaml
-hue: !include components/hue.yaml
+group: !include_dir_merge_named ui/groups/
 ifttt:
   key: !secret ifttt_key
-#influxdb: !include components/influxdb.yaml
+influxdb: !include components/influxdb.yaml
 input_boolean: !include components/input_boolean.yaml
 input_select: !include components/input_select.yaml
 intent_script: !include_dir_merge_named components/intents
@@ -77,11 +109,17 @@ lock: !include components/locks.yaml
 media_player: !include components/media_players.yaml
 mqtt: !include components/mqtt.yaml
 notify: !include components/notify.yaml
-#remote: !include components/remotes.yaml
 script: !include components/scripts.yaml
 sensor: !include components/sensors.yaml
 shell_command: !include_dir_merge_named components/shell_commands/
 switch: !include components/switches.yaml
 tts:
   - platform: google
-    language: 'en'
+weather: !include components/weather.yaml
+
+
+panel_iframe:
+  configurator:
+    title: Configurator
+    icon: mdi:wrench
+    url: http://hassio.du.nn:3218

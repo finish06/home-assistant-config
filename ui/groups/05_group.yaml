@@ -1,56 +1,3 @@
- #########
-# VIEWS #
-#########
-default_view:
-  name: Overview
-  view: yes
-  entities:
-    - group.people
-    - group.motion
-    - group.card_office
-    - group.card_living_room
-    - group.card_master_bedroom
-    - group.card_hallways
-    - group.card_kitchen
-    - group.climate
-    - group.outside
-    - group.front_door
-    - group.entry_lights
-    - camera.dog_crate
-
-main_living_view:
-  name: Main Living
-  view: yes
-  entities:
-    - group.main_living_climate
-    - group.living_room_lights
-    - group.main_living_media
-    - group.living_room_tv_media_card
-    - group.living_room_soundbar_media_card
-    - group.kitchen_lights
-    - group.office_lights
-    - group.office_tv_media_card
-    - group.entry_lights
-
-master_bedroom_view:
-  name: Master Bedroom
-  view: yes
-  entities:
-    - light.calebs_lamp
-    - light.brittanys_lamp
-    - light.master_bedroom_light
-    - group.master_bedroom_fan
-    - group.master_bedroom_tv
-    - group.master_bedroom_climate
-    - group.master_bedroom_tv_media_card
-
-tech_closet_view:
-  name: Tech Closet
-  view: yes
-  entities:
-    - group.tech_closet_climate_card
-    - group.tech_closet_equipment
-
 ##############
 # ROOM CARDS #
 ##############
@@ -104,10 +51,10 @@ card_tech_closet:
   entities:
     - sensor.tech_closet_temp
     - sensor.tech_closet_humidity
-    - sensor.network_rack_power
-    - sensor.network_rack_power_cost
-    - sensor.server_rack_power
-    - sensor.server_rack_power_cost
+    - sensor.networking_power
+    - sensor.networking_power_cost
+    - sensor.compute_power
+    - sensor.compute_power_cost
     - sensor.media_rack_power
     - sensor.media_rack_power_cost
 
@@ -118,6 +65,11 @@ living_room_soundbar_media_card:
   name: LG Soundbar
   entities:
     - media_player.soundbar
+
+party_speakers_media_card:
+  name: Living Room & Patio Speakers
+  entities:
+    - media_player.party_speakers
 
 living_room_tv_media_card:
   name: Kodi
@@ -250,6 +202,7 @@ tech_closet_climate_card:
   entities:
     - sensor.tech_closet_temp
     - sensor.tech_closet_humidity
+    - sensor.tech_closet_battery
 
 tech_closet_equipment:
   name: Equipment

@@ -1,27 +1,29 @@
 #################
 # MEDIA PLAYERS #
 #################
-
-  - platform: kodi
-    host: 10.10.3.22
-    port: 8080
-    name: Master Bedroom Kodi
-  - platform: kodi
-    host: 192.168.1.41
-    port: 8080
-    name: Living Room Kodi
-  - platform: kodi
-    host: 10.10.3.25
-    port: 8080
-    name: Office Kodi
-  - platform: kodi
-    host: 192.168.1.42
-    port: 8080
-    name: Family Room Kodi
-  - platform: sonos
-    hosts: 192.168.1.220
   - platform: cast
-    host: 192.168.1.224
+  - platform: emby
+    host: emby.du.nn
+    api_key: "13dfa83bf700451ebbcd5ec27fc4069f"
+
+
+  # - platform: kodi
+  #   host: 10.10.3.22
+  #   port: 8080
+  #   name: Master Bedroom Kodi
+  # - platform: kodi
+  #   host: 192.168.1.41
+  #   port: 8080
+  #   name: Living Room Kodi
+  # - platform: kodi
+  #   host: 10.10.3.25
+  #   port: 8080
+  #   name: Office Kodi
+  # - platform: kodi
+  #   host: 192.168.1.42
+  #   port: 8080
+  #   name: Family Room Kodi
+
   # - platform: universal
   #   name: Living Room Media Center
   #   children:

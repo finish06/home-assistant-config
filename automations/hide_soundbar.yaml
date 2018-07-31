@@ -1,0 +1,18 @@
+  id: hide_living_room_soundbar
+  alias: Hide Living Room Soundbar
+  trigger:
+  - entity_id: media_player.soundbar
+    platform: state
+    to: 'paused'
+    for:
+      minutes: 1
+  - entity_id: media_player.soundbar
+    platform: state
+    to: 'off'
+    for:
+      minutes: 1
+  action:
+  - data:
+      visible: false
+    entity_id: group.living_room_soundbar_media_card
+    service: group.set_visibility

@@ -1,8 +1,14 @@
-dynamic_living_room_sonos:
-  name: Living Room Sonos
+spotify_playlist:
+  name: Playlist
   options:
     - Select a Playlist
     - Top Christian
-    - Sara Bareilles
-    - Top Country
-    - NPR (KWGS)
+
+spotify_source:
+  name: Source
+  options:
+    - Select Source Device
+    - Living Room Soundbar
+    - Living Room Google Home
+    - Master Bedroom Google Home
+    - Outdoor ChromeCast

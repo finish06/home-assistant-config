@@ -1,0 +1,16 @@
+default_view:
+  icon: mdi:home
+  view: yes
+  entities:
+    - group.people
+    - group.motion
+    - group.card_office
+    - group.card_living_room
+    - group.card_master_bedroom
+    - group.card_hallways
+    - group.card_kitchen
+    - group.climate
+    - group.outside
+    - group.front_door
+    - group.entry_lights
+    - camera.dog_crate

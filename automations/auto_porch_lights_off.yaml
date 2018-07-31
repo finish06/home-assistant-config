@@ -1,0 +1,12 @@
+  id: auto_porch_lights_off
+  alias: Turn off porch lights
+  trigger:
+    - platform: state
+      entity_id: lock.front_door
+      to: locked
+      for:
+        minutes: 10
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.porch_lights

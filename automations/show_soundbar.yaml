@@ -1,0 +1,11 @@
+  id: show_living_room_soundbar
+  alias: Show Living Room Soundbar
+  trigger:
+  - entity_id: media_player.soundbar
+    platform: state
+    to: 'playing'
+  action:
+  - data:
+      visible: true
+    entity_id: group.living_room_soundbar_media_card
+    service: group.set_visibility

@@ -1,0 +1,14 @@
+living_view:
+  icon: mdi:sofa
+  view: yes
+  entities:
+    - group.main_living_climate
+    - group.living_room_lights
+    - group.main_living_media
+    - group.living_room_tv_media_card
+    - group.living_room_soundbar_media_card
+    - group.party_speakers_media_card
+    - group.kitchen_lights
+    - group.office_lights
+    - group.office_tv_media_card
+    - group.entry_lights

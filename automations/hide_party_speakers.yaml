@@ -1,0 +1,18 @@
+  id: hide_party_speakers
+  alias: Hide Party Speakers
+  trigger:
+  - entity_id: media_player.party_speakers
+    platform: state
+    to: 'paused'
+    for:
+      minutes: 1
+  - entity_id: media_player.party_speakers
+    platform: state
+    to: 'off'
+    for:
+      minutes: 1
+  action:
+  - data:
+      visible: false
+    entity_id: group.party_speakers_media_card
+    service: group.set_visibility

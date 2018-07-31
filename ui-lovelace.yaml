@@ -1,0 +1,17 @@
+name: My Home
+views:
+  - name: Overview
+    cards:
+      - type: entities
+        title: Living room
+        entities:
+          - switch.living_room_light
+          - switch.living_room_dome_lights
+          - light.floor_lamp
+          - light.table_lamp
+          - switch.living_room_fan
+          - switch.living_room_tv
+      - type: camera-preview
+        entity: camera.dog_crate
+      - type: weather-forecast
+        entity: weather.local_weather

@@ -101,6 +101,8 @@
     icon: mdi:lock
   sensor.living_room_occupancy_template:
     device_class: motion
+  sensor.laundry_temperature:
+    friendly_name: Laundry
   sensor.network_rack_power:
     icon: mdi:flash
   sensor.server_rack_power:
@@ -131,6 +133,8 @@
   switch.dining_room_light:
     icon: mdi:lightbulb
   switch.east_hallway_light:
+    icon: mdi:lightbulb
+  switch.entry_light:
     icon: mdi:lightbulb
   switch.kitchen_light:
     icon: mdi:lightbulb
@@ -172,13 +176,13 @@
          unit: USD
          blacklist_states: 0
   switch.network_rack_switch:
-    friendly_name: Network Rack
+    friendly_name: Networking
     confirm_controls_show_lock: true
     extra_badge:
-       - entity_id: sensor.network_rack_power
+       - entity_id: sensor.networking_power
          unit: W
          blacklist_states: 0
-       - entity_id: sensor.network_rack_power_cost
+       - entity_id: sensor.networking_power_cost
          unit: USD
          blacklist_states: 0
   switch.office_fan:
@@ -187,16 +191,18 @@
     icon: mdi:lightbulb
   switch.office_floor_lamp:
     icon: mdi:lightbulb
+  switch.porch_lights:
+    icon: mdi:lightbulb
   switch.server_rack_switch:
-    friendly_name: Server Rack
+    friendly_name: Compute
     confirm_controls_show_lock: true
     extra_badge:
-       - entity_id: sensor.server_rack_power
+       - entity_id: sensor.compute_power
          unit: W
-         blacklist_states: 0
-       - entity_id: sensor.server_rack_power_cost
+         blacklist_states: -1
+       - entity_id: sensor.compute_power_cost
          unit: USD
-         blacklist_states: 0
+         blacklist_states: -1
   switch.west_hallway_light:
     icon: mdi:lightbulb
   switch.west_hallway_1:
@@ -245,7 +251,20 @@
     friendly_name: Office
   sensor.west_wing_temperature:
     friendly_name: Master Bedroom
-
+  sensor.pws_temp_f:
+    friendly_name: Temperature
+    hide_control: true
+    extra_badge:
+      - entity_id: sensor.pws_temp_low_1d_f
+        unit: Low
+      - entity_id: sensor.pws_temp_high_1d_f
+        unit: High
+      - entity_id: sensor.pws_temp_f
+        unit: Current
+  sensor.pws_wind_mph:
+    friendly_name: Wind
+    extra_badge:
+      - entity_id: sensor.pws_wind_dir
 
 ##################
 # GROUP ORDERING #
@@ -266,7 +285,9 @@
     order: 5
   group.kitchen_lights:
     order: 6
-  group.office_lights:
+  group.entry_lights:
     order: 7
-  group.office_tv_media_card:
+  group.office_lights:
     order: 8
+  group.office_tv_media_card:
+    order: 9

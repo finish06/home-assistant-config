@@ -1,5 +1,5 @@
   id: telegram_motion_alert
-  alias: Motion Alert
+  alias: Device On Alert
   trigger:
     platform: template
     value_template: >

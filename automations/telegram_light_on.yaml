@@ -2,7 +2,7 @@
   alias: Device On Alert
   trigger:
     platform: time
-    minutes: '/1'
+    minutes: '/15'
     seconds: 00
   condition:
     condition: and

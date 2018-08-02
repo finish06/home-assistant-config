@@ -3,7 +3,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.living_room_occupancy
-      to: on
+      to: 'on'
   action:
     - service_template: "notify.telegram"
       data:

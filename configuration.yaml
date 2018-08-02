@@ -113,6 +113,11 @@ script: !include components/scripts.yaml
 sensor: !include components/sensors.yaml
 shell_command: !include_dir_merge_named components/shell_commands/
 switch: !include components/switches.yaml
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_bot_api_key
+    allowed_chat_ids:
+      - !secret telegram_chat_id
 tts:
   - platform: google
 weather: !include components/weather.yaml

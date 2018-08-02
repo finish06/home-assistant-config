@@ -5,3 +5,7 @@
 - name: family
   platform: pushbullet
   api_key: o.B6fW5ijgMRUdpFzggWZcqqIoJqkaxRJn
+
+- name: telegram
+  platform: telegram
+  chat_id: !secret telegram_chat_id

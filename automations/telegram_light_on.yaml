@@ -23,8 +23,8 @@
         title: '**Alert - Device On**'
         message: >
           {% for state in states.switch %}
-            {%- if is_state(state.entity_id, 'on') %}
-              "No one is home and a {{ state.entity_id.attributes.friendly_name }} is still on."
+            {%- if (is_state(state.entity_id, 'on') and state.entity_id != 'switch.server_rack_switch' and state.entity_id != 'switch.network_rack_switch')  %}
+              "No one is home and the {{ state_attr(state.entity_id, 'friendly_name') }} is still on."
             {% endif -%}
           {% endfor %}
 

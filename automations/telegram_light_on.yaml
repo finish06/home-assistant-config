@@ -13,17 +13,7 @@
       - condition: state
         entity_id: 'device_tracker.calebs_pixel'
         state: 'not_home'
-      # - condition: template
-      #   value_template: >
-      #     {% for state in states.switch %}
-      #       {%- if is_state(state.entity_id, 'on') %}
-      #         true
-      #       {% endif -%}
-      #     {% endfor %}
   action:
-    - service: "notify.telegram"
-      data:
-        message: 'Test Test Test'
     - service_template: "notify.telegram"
       data_template:
         title: '**Alert - Device On**'
@@ -37,3 +27,11 @@
 
     # platform: template
     # value_template: "{% if is_state('device_tracker.calebs_pixel', 'home')%}false{% endif %}"
+    
+    # - condition: template
+    #   value_template: >
+    #     {% for state in states.switch %}
+    #       {%- if is_state(state.entity_id, 'on') %}
+    #         true
+    #       {% endif -%}
+    #     {% endfor %}

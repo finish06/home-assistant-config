@@ -1,13 +1,9 @@
   id: telegram_motion_alert
   alias: Device On Alert
   trigger:
-    platform: template
-    value_template: >
-      {% for state in states.switch %}
-        {%- if is_state(state.entity_id, 'on') %}
-          true
-        {% endif -%}
-      {% endfor %}
+    platform: time
+    minutes: '/10'
+    seconds: 00
   condition:
     condition: and
     conditions:
@@ -17,6 +13,13 @@
       - condition: state
         entity_id: 'device_tracker.calebs_pixel'
         state: 'away'
+      - condition: template
+        value_template: >
+          {% for state in states.switch %}
+            {%- if is_state(state.entity_id, 'on') %}
+              true
+            {% endif -%}
+          {% endfor %}
   action:
     - service_template: "notify.telegram"
       data_template:

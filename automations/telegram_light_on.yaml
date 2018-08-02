@@ -21,7 +21,12 @@
     - service_template: "notify.telegram"
       data_template:
         title: '**Alert - Device On**'
-        message: "No one is home and a {{ trigger.to_state.attributes.friendly_name }} is still on."
+        message: >
+          {% for state in states.switch %}
+            {%- if is_state(state.entity_id, 'on') %}
+              "No one is home and a {{ state.entity_id.attributes.friendly_name }} is still on."
+            {% endif -%}
+          {% endfor %}
 
 
     # platform: template

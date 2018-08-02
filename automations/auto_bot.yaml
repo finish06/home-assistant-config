@@ -29,4 +29,4 @@
     - service_template: "notify.telegram"
       data_template:
         title: 'Alert - Motion Detected'
-        message: "Motion has been detected in the {{ {{ trigger.entity_id }}.attributes.friendly_name }}."
+        message: "Motion has been detected in the {{ trigger.entity_id.attributes.friendly_name }}."

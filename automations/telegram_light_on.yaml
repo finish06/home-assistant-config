@@ -9,10 +9,10 @@
     conditions:
       - condition: state
         entity_id: 'device_tracker.brittanys_pixel'
-        state: 'away'
+        state: 'not_home'
       - condition: state
         entity_id: 'device_tracker.calebs_pixel'
-        state: 'away'
+        state: 'not_home'
       # - condition: template
       #   value_template: >
       #     {% for state in states.switch %}

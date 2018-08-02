@@ -21,6 +21,9 @@
       #       {% endif -%}
       #     {% endfor %}
   action:
+    - service: "notify.telegram"
+      data:
+        message: 'Test Test Test'
     - service_template: "notify.telegram"
       data_template:
         title: '**Alert - Device On**'

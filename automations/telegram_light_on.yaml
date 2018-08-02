@@ -1,0 +1,28 @@
+  id: telegram_motion_alert
+  alias: Motion Alert
+  trigger:
+    platform: template
+    value_template: >
+      {% for state in states.switch %}
+        {%- if is_state(state.entity_id, 'on') %}
+          true
+        {% endif -%}
+      {% endfor %}
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: 'device_tracker.brittanys_pixel'
+        state: 'away'
+      - condition: state
+        entity_id: 'device_tracker.calebs_pixel'
+        state: 'away'
+  action:
+    - service_template: "notify.telegram"
+      data_template:
+        title: '**Alert - Device On**'
+        message: "No one is home and a {{ trigger.to_state.attributes.friendly_name }} is still on."
+
+
+    # platform: template
+    # value_template: "{% if is_state('device_tracker.calebs_pixel', 'home')%}false{% endif %}"

@@ -1,16 +1,11 @@
-  id: telegram_test_message
-  alias: Send test message
+  id: telegram_motion_alert
+  alias: Motion Alert
   trigger:
-    - platform: homeassistant
-      event: start
     - platform: state
-      entity_id: sun.sun
-      to: above_horizon
-    - platform: state
-      entity_id: sun.sun
-      to: below_horizon
+      entity_id: binary_sensor.living_room_occupancy
+      to: on
   action:
     - service_template: "notify.telegram"
       data:
-        title: '*Send a message*'
-        message: "Test Test Test"
+        title: 'Alert - Motion Detected'
+        message: "Motion has been detected in the living room."

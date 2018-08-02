@@ -1,0 +1,16 @@
+  id: telegram_test_message
+  alias: Send test message
+  trigger:
+    - platform: homeassistant
+      event: start
+    - platform: state
+      entity_id: sun.sun
+      to: above_horizon
+    - platform: state
+      entity_id: sun.sun
+      to: below_horizon
+  action:
+    - service_template: "notify.telegram"
+      data:
+        title: '*Send a message*'
+        message: "Test Test Test"

@@ -13,7 +13,7 @@ homeassistant:
   # Customization file
   customize: !include ui/customize.yaml
   customize_glob:
-    "*.*":
+    "*sensor.*":
       custom_ui_state_card: state-card-custom-ui
     group.main_living_temps:
       state_card_mode: badges

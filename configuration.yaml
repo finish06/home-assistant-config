@@ -21,6 +21,8 @@ homeassistant:
       custom_ui_state_card: state-card-custom-ui
     switch.network_rack_switch:
       custom_ui_state_card: state-card-custom-ui
+    sensor.pws_temp_f:
+      custom_ui_state_card: state-card-custom-ui
     group.main_living_temps:
       state_card_mode: badges
     group.room_temps_1:
@@ -120,11 +122,7 @@ script: !include components/scripts.yaml
 sensor: !include components/sensors.yaml
 shell_command: !include_dir_merge_named components/shell_commands/
 switch: !include components/switches.yaml
-telegram_bot:
-  - platform: polling
-    api_key: !secret telegram_bot_api_key
-    allowed_chat_ids:
-      - !secret telegram_chat_id
+telegram_bot: !include components/telegram_bot.yaml
 tts:
   - platform: google
 weather: !include components/weather.yaml

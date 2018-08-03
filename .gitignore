@@ -24,4 +24,4 @@ update.sh
 .uuid
 .gitignore
 configurator.py
-/customizer
+/custom_components/customizer

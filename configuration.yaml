@@ -126,10 +126,3 @@ telegram_bot: !include components/telegram_bot.yaml
 tts:
   - platform: google
 weather: !include components/weather.yaml
-
-
-panel_iframe:
-  configurator:
-    title: Configurator
-    icon: mdi:wrench
-    url: http://hassio.du.nn:3218

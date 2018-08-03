@@ -80,7 +80,7 @@ conversation:
 history:
 
 # View all events in a logbook
-logbook:
+logger:
   logs:
     homeassistant.components.hub.arlo: critical
 # Enables a map showing the location of tracked devices

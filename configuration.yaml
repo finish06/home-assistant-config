@@ -82,6 +82,9 @@ conversation:
 history:
 
 # View all events in a logbook
+logbook:
+
+# Logging
 logger:
   logs:
     homeassistant.components.hub.arlo: critical

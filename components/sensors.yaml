@@ -208,7 +208,7 @@
 - platform: travisci
   api_key: !secret travisci_api_key
   # scan_interval: 60
-  repository: "home_assistant_config"
+  repository: "home-assistant-config"
   monitored_conditions:
     - last_build_id
     - last_build_state

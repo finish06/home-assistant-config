@@ -4,7 +4,7 @@
   - platform: cast
   - platform: emby
     host: emby.du.nn
-    api_key: "13dfa83bf700451ebbcd5ec27fc4069f"
+    api_key: "f13578255a51442b8a9242a347ca9645"
 
 
   # - platform: kodi

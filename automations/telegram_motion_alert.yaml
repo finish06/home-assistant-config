@@ -25,6 +25,15 @@
     - platform: state
       entity_id: binary_sensor.west_wing_occupancy
       to: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: 'device_tracker.brittanys_pixel'
+        state: 'not_home'
+      - condition: state
+        entity_id: 'device_tracker.calebs_pixel'
+        state: 'not_home'
   action:
     - service_template: "notify.telegram"
       data_template:

@@ -207,8 +207,3 @@
 
 - platform: travisci
   api_key: !secret travisci_api_key
-  repository:
-    - finish06/home-assistant-config
-  monitored_conditions:
-    - last_build_id
-    - last_build_state

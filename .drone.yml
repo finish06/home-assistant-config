@@ -9,7 +9,7 @@ pipeline:
     commands:
       - mv travis_secrets.yaml secrets.yaml
       - pip install homeassistant
-      - hass -c /hass --script check_config
+      - hass -c . --script check_config
   ssh:
     image: appleboy/drone-ssh
     host: 192.168.1.50

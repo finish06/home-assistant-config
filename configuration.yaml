@@ -98,7 +98,6 @@ sun:
 cloud:
 
 # Components
-arlo: !include components/arlo.yaml
 automation: !include_dir_list automations/
 binary_sensor: !include components/binary_sensors.yaml
 camera: !include components/camera.yaml

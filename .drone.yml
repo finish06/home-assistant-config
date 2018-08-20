@@ -19,3 +19,4 @@ pipeline:
     script:
       - cd /home/trek/hassio/homeassistant
       - git pull
+      - docker restart homeassistant

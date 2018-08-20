@@ -7,8 +7,8 @@ pipeline:
   build:
     image: python:3
     commands:
-      - mv /hass/travis_secrets.yaml /hass/secrets.yaml
-      - pip3 install homeassistant
+      - mv /hass/home-assistant-config/travis_secrets.yaml /hass/home-assistant-config/secrets.yaml
+      - pip install homeassistant
       - hass -c /hass --script check_config
   ssh:
     image: appleboy/drone-ssh

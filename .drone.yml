@@ -5,7 +5,7 @@ workspace:
 
 pipeline:
   build:
-    image: python3
+    image: python:3
     commands:
       - mv /hass/travis_secrets.yaml /hass/secrets.yaml
       - pip3 install homeassistant

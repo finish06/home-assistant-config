@@ -1,7 +1,6 @@
 #################
 # MEDIA PLAYERS #
 #################
-  - platform: cast
   - platform: emby
     host: emby.du.nn
     api_key: "f13578255a51442b8a9242a347ca9645"

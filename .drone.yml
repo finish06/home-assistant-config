@@ -11,7 +11,7 @@ pipeline:
       - pip install homeassistant
       - hass -c . --script check_config
   python_3.6:
-    image: python:3.6-stretch
+    image: python:3.6
     commands:
       - mv mock_secrets.yaml secrets.yaml
       - pip install homeassistant

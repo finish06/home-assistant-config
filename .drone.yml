@@ -4,18 +4,20 @@ workspace:
   base: /hass
 
 pipeline:
-  - python_3.5:
-      image: python:3.5-stretch
-      commands:
-        - mv mock_secrets.yaml secrets.yaml
-        - pip install homeassistant
-        - hass -c . --script check_config
-    python_3.6:
-      image: python:3.6-stretch
-      commands:
-        - mv mock_secrets.yaml secrets.yaml
-        - pip install homeassistant
-        - hass -c . --script check_config
+  python_3.5:
+    group: test
+    image: python:3.5-stretch
+    commands:
+      - mv mock_secrets.yaml secrets.yaml
+      - pip install homeassistant
+      - hass -c . --script check_config
+  python_3.6:
+    group: test
+    image: python:3.6-stretch
+    commands:
+      - mv mock_secrets.yaml secrets.yaml
+      - pip install homeassistant
+      - hass -c . --script check_config
   - ssh:
       image: appleboy/drone-ssh
       host: 192.168.1.50

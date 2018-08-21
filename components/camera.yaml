@@ -6,6 +6,3 @@
   nvr: 192.168.1.21
   key: !secret unifi_key
   password: !secret uvc_password
-
-- platform: arlo
-  ffmpeg_arguments: '-pred 1 -q:v 2'

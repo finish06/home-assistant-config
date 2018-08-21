@@ -5,13 +5,7 @@ workspace:
 
 pipeline:
   python_3.5:
-    image: python:3.5-stretch
-    commands:
-      - mv mock_secrets.yaml secrets.yaml
-      - pip install homeassistant
-      - hass -c . --script check_config
-  python_3.6:
-    image: python:3.6
+    image: python:3.5
     commands:
       - mv mock_secrets.yaml secrets.yaml
       - pip install homeassistant

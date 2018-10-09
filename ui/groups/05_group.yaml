@@ -81,28 +81,8 @@ main_living_media:
   control: hidden
   entities:
     - switch.living_room_tv
-    - switch.bonus_room_tv
+    - switch.movie_room_tv
     - switch.office_tv
-
-master_bedroom_tv:
-  name: Television
-  entities:
-    - input_boolean.dynamic_master_bedroom_tv
-
-master_bedroom_tv_media_card:
-  name: Kodi
-  entities:
-    - media_player.master_bedroom_kodi
-
-office_tv:
-    name: Television
-    entities:
-      - input_boolean.dynamic_office_tv
-
-office_tv_media_card:
-  name: Kodi
-  entities:
-    - media_player.office_kodi
 
 ##################
 # CLIMATE GROUPS #

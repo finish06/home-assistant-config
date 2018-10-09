@@ -103,7 +103,6 @@ camera: !include components/camera.yaml
 climate: !include components/climate.yaml
 cover: !include components/cover.yaml
 device_tracker: !include components/device_tracker.yaml
-dialogflow:
 ecobee: !include components/ecobee.yaml
 google_assistant: !include components/google_assistant.yaml
 group: !include_dir_merge_named ui/groups/

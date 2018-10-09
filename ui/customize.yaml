@@ -57,9 +57,6 @@
     haaska_hidden: true
   light.master_bedroom_light:
     friendly_name: Master Bedroom Light
-  media_player.gym_shield:
-    hidden: true
-    haaska_hidden: true
   media_player.living_room:
     friendly_name: Playbar
   media_player.living_room_kodi:

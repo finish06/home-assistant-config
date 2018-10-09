@@ -125,6 +125,8 @@
   switch.auto_dr:
     haaska_hidden: true
     hidden: true
+  switch.movie_room_tv:
+    icon: mdi:television
   switch.cabinet_lights:
     icon: mdi:lightbulb
   switch.dining_room_light:

@@ -5,6 +5,6 @@
       entity_id: lock.front_door
       to: unlocked
   action:
-    - service_template: "switch.turn_{{ 'on' if states.sun.sun.state == 'below_horizon' }}"
+    - service_template: "switch.turn_{{ 'on' if states.sun.sun.state == 'below_horizon' else 'off' }}"
       data:
         entity_id: switch.porch_lights

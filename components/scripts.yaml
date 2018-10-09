@@ -29,17 +29,16 @@ call_house_temp:
         message: 'The east wing is {{ states.climate.east_wing.attributes["current_temperature"] }} degrees and the west wing is {{ states.climate.west_wing.attributes["current_temperature"] }} degrees.'
         cache: false
 
-spotify_music:
-  alias: Play Selected Spotify Playlist
+play_radio:
+  alias: Play Radio on Chromecast Audio
   sequence:
     -  service: media_player.select_source
        data_template:
          entity_id: media_player.spotify
          source: >
-          {% if is_state("input_select.spotify_source", "Living Room Google Home") %} Living Room Home
-          {% elif is_state("input_select.spotify_source", "Living Room Soundbar") %} Soundbar
-          {% elif is_state("input_select.spotify_source", "Master Bedroom Google Home") %} Master Bedroom Home
-          {% endif %}
+          {% if is_state("input_select.chromecast_player", "All Speakers") %} media_player.all_speakers
+          {% elif is_state("input_select.chromecast_player", "Living Room") %} media_player.soundbar
+          {% elif is_state("input_select.chromecast_player", "Master Bedroom") %} media_player.master_bedroom_home
     -  service: media_player.play_media
        data_template:
          entity_id: media_player.spotify

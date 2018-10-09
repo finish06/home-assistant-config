@@ -1,14 +1,16 @@
-spotify_playlist:
-  name: Playlist
+media_playlist:
+  name: 'Select Radio Station:'
   options:
     - Select a Playlist
-    - Top Christian
+    - Air1
+    - KXOJ
 
-spotify_source:
-  name: Source
+chromecast_player:
+  name: 'Select Speakers:'
   options:
     - Select Source Device
-    - Living Room Soundbar
-    - Living Room Google Home
-    - Master Bedroom Google Home
-    - Outdoor ChromeCast
+    - Living Room
+    - Master Bedroom
+    - Backyard Speakers
+    - Living Room & Backyard Speakers
+    - All Speakers

@@ -110,7 +110,7 @@ group: !include_dir_merge_named ui/groups/
 ifttt:
   key: !secret ifttt_key
 influxdb: !include components/influxdb.yaml
-input_boolean: !include components/input_boolean.yaml
+# input_boolean: !include components/input_boolean.yaml
 input_select: !include components/input_select.yaml
 intent_script: !include_dir_merge_named components/intents
 isy994: !include components/isy994.yaml

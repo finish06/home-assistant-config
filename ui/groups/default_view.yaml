@@ -7,6 +7,7 @@ default_view:
     - group.card_office
     - group.card_living_room
     - group.card_master_bedroom
+    - group.card_movie_room
     - group.card_hallways
     - group.card_kitchen
     - group.climate

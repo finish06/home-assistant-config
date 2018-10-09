@@ -37,6 +37,13 @@ card_master_bedroom:
     - switch.master_bedroom_fan
     - input_boolean.dynamic_master_bedroom_tv
 
+card_movie_room:
+  name: Movie Room
+  control: hidden
+  entities:
+    - light.table_lamp
+    - switch.movie_room_tv
+
 card_office:
   name: Office
   control: hidden

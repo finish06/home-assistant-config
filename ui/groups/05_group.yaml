@@ -81,6 +81,7 @@ main_living_media:
   control: hidden
   entities:
     - switch.living_room_tv
+    - switch.bonus_room_tv
     - switch.office_tv
 
 master_bedroom_tv:

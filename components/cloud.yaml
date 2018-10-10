@@ -44,9 +44,9 @@ google_actions:
     light.master_bedroom_light:
       name: fan light
       room: Master Bedroom
-    light.table_lamp:
-      name: table lamp
-      room: Living Room
+    light.movie_floor lamp:
+      name: floor lamp
+      room: Movie Room
     script.call_east_temp:
       name: Call East wing temperature
     switch.cabinet_lights:
@@ -82,6 +82,9 @@ google_actions:
     switch.master_bedroom_tv:
       name: TV
       room: Master Bedroom
+    switch.movie_room_tv:
+      name: TV
+      room: Movie Room
     switch.office_fan:
       name: fan
       room: Office

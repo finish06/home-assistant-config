@@ -6,19 +6,19 @@ google_actions:
      - script
      - climate
    exclude_entities:
-    - light.hue_living_room
-    - light.hue_master_bedroom
-    - light.hgrp0000000030
-    - switch.auto_dr
-    - switch.kitchen_light_1
-    - switch.kitchen_light_2
-    - switch.living_room_dome_lights_1
-    - switch.living_room_dome_lights_2
-    - switch.media_rack_switch
-    - switch.network_rack_switch
-    - switch.west_hallway_1
-    - switch.west_hallway_2
-    - switch.server_rack_switch
+     - light.hue_living_room
+     - light.hue_master_bedroom
+     - light.hgrp0000000030
+     - switch.auto_dr
+     - switch.kitchen_light_1
+     - switch.kitchen_light_2
+     - switch.living_room_dome_lights_1
+     - switch.living_room_dome_lights_2
+     - switch.media_rack_switch
+     - switch.network_rack_switch
+     - switch.west_hallway_1
+     - switch.west_hallway_2
+     - switch.server_rack_switch
   entity_config:
     climate.east_wing:
       name: East Thermostat

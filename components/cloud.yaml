@@ -1,6 +1,6 @@
 google_actions:
   filter:
-   exposed_domains:
+   include_domains:
      - switch
      - light
      - script

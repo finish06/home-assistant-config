@@ -44,7 +44,7 @@ google_actions:
     light.master_bedroom_light:
       name: fan light
       room: Master Bedroom
-    light.movie_floor lamp:
+    light.movie_floor_lamp:
       name: floor lamp
       room: Movie Room
     script.call_east_temp:

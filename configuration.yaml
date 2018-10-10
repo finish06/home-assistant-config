@@ -101,6 +101,7 @@ automation: !include_dir_list automations/
 binary_sensor: !include components/binary_sensors.yaml
 camera: !include components/camera.yaml
 climate: !include components/climate.yaml
+cloud: !include components/cloud.yaml
 cover: !include components/cover.yaml
 device_tracker: !include components/device_tracker.yaml
 ecobee: !include components/ecobee.yaml

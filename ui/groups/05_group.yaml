@@ -41,7 +41,7 @@ card_movie_room:
   name: Movie Room
   control: hidden
   entities:
-    - light.table_lamp
+    - light.movie_floor_lamp
     - switch.movie_room_tv
 
 card_office:

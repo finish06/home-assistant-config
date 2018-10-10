@@ -5,111 +5,111 @@ google_actions:
      - light
      - script
      - climate
-   entity_config:
-     climate.east_wing:
-       name: East Thermostat
-       room: East Hallway
-     climate.west_wing:
-       name: West Thermostat
-       room: Master Bedroom
-     light.brittanys_lamp:
-       name: her lamp
-       room: Master Bedroom
-     light.calebs_lamp:
-       name: his lamp
-       room: Master Bedroom
-     light.entry_table_lamp:
-       name: lamp
-       room: Entry
-     light.floor_lamp:
-       name: floor lamp
-       room: Living Room
-     light.hue_living_room:
-       expose: false
-     light.hue_master_bedroom:
-       expose: false
-     light.hgrp0000000030:
-       expose: false
-     light.entry_lamp:
-       name: table lamp
-       room: Living Room
-     light.master_bedroom_light:
-       name: fan light
-       room: Master Bedroom
-     light.table_lamp:
-       name: table lamp
-       room: Living Room
-     script.call_east_temp:
-       name: Call East wing temperature
-       expose: true
-     switch.auto_dr:
-       expose: false
-     switch.cabinet_lights:
-       name: cabinet lights
-       room: Kitchen
-     switch.dining_room_light:
-       name: light
-       room: Dining Room
-     switch.east_hallway_light:
-       name: light
-       room: East Hallway
-     switch.entry_light:
-       name: ceiling light
-       room: Entry
-     switch.kitchen_light:
-       name: can lights
-       room: Kitchen
-     switch.kitchen_light_1:
-       expose: false
-     switch.kitchen_light_2:
-       expose: false
-     switch.living_room_dome_lights_1:
-       expose: false
-     switch.living_room_dome_lights_2:
-       expose: false
-     switch.living_room_dome_lights:
-       name: can lights
-       room: Living Room
-     switch.living_room_fan:
-       name: fan
-       room: Living Room
-     switch.living_room_light:
-       name: fan light
-       room: Living Room
-     switch.living_room_tv:
-       name: TV
-       room: Living Room
-     switch.master_bedroom_fan:
-       name: fan
-       room: Master Bedroom
-     switch.master_bedroom_tv:
-       name: TV
-       room: Master Bedroom
-     switch.media_rack_switch:
-       expose: false
-     switch.network_rack_switch:
-       expose: false
-     switch.office_fan:
-       name: fan
-       room: Office
-     switch.office_floor_lamp:
-       name: floor lamp
-       room: Office
-     switch.office_light:
-       name: fan light
-       room: Office
-     switch.office_tv:
-       name: TV
-       room: Office
-     switch.porch_lights:
-       name: lights
-       room: Porch
-     switch.server_rack_switch:
-       expose: false
-     switch.west_hallway_light:
-       name: light
-       room: West Hallway
-     switch.west_hallway_1:
-       expose: false
-     switch.west_hallway_2:
-       expose: false
+  entity_config:
+    climate.east_wing:
+      name: East Thermostat
+      room: East Hallway
+    climate.west_wing:
+      name: West Thermostat
+      room: Master Bedroom
+    light.brittanys_lamp:
+      name: her lamp
+      room: Master Bedroom
+    light.calebs_lamp:
+      name: his lamp
+      room: Master Bedroom
+    light.entry_table_lamp:
+      name: lamp
+      room: Entry
+    light.floor_lamp:
+      name: floor lamp
+      room: Living Room
+    light.hue_living_room:
+      expose: false
+    light.hue_master_bedroom:
+      expose: false
+    light.hgrp0000000030:
+      expose: false
+    light.entry_lamp:
+      name: table lamp
+      room: Living Room
+    light.master_bedroom_light:
+      name: fan light
+      room: Master Bedroom
+    light.table_lamp:
+      name: table lamp
+      room: Living Room
+    script.call_east_temp:
+      name: Call East wing temperature
+      expose: true
+    switch.auto_dr:
+      expose: false
+    switch.cabinet_lights:
+      name: cabinet lights
+      room: Kitchen
+    switch.dining_room_light:
+      name: light
+      room: Dining Room
+    switch.east_hallway_light:
+      name: light
+      room: East Hallway
+    switch.entry_light:
+      name: ceiling light
+      room: Entry
+    switch.kitchen_light:
+      name: can lights
+      room: Kitchen
+    switch.kitchen_light_1:
+      expose: false
+    switch.kitchen_light_2:
+      expose: false
+    switch.living_room_dome_lights_1:
+      expose: false
+    switch.living_room_dome_lights_2:
+      expose: false
+    switch.living_room_dome_lights:
+      name: can lights
+      room: Living Room
+    switch.living_room_fan:
+      name: fan
+      room: Living Room
+    switch.living_room_light:
+      name: fan light
+      room: Living Room
+    switch.living_room_tv:
+      name: TV
+      room: Living Room
+    switch.master_bedroom_fan:
+      name: fan
+      room: Master Bedroom
+    switch.master_bedroom_tv:
+      name: TV
+      room: Master Bedroom
+    switch.media_rack_switch:
+      expose: false
+    switch.network_rack_switch:
+      expose: false
+    switch.office_fan:
+      name: fan
+      room: Office
+    switch.office_floor_lamp:
+      name: floor lamp
+      room: Office
+    switch.office_light:
+      name: fan light
+      room: Office
+    switch.office_tv:
+      name: TV
+      room: Office
+    switch.porch_lights:
+      name: lights
+      room: Porch
+    switch.server_rack_switch:
+      expose: false
+    switch.west_hallway_light:
+      name: light
+      room: West Hallway
+    switch.west_hallway_1:
+      expose: false
+    switch.west_hallway_2:
+      expose: false

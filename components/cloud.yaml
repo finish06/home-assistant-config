@@ -49,7 +49,6 @@ google_actions:
       room: Living Room
     script.call_east_temp:
       name: Call East wing temperature
-      expose: true
     switch.cabinet_lights:
       name: cabinet lights
       room: Kitchen

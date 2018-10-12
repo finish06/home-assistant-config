@@ -93,6 +93,7 @@ map:
 recorder:
   purge_keep_days: 3
   purge_interval: 1
+  
 
 # Track the sun
 sun:

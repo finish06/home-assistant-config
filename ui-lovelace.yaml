@@ -19,7 +19,8 @@ views:
         entities:
           - entity: binary_sensor.bonus_room_occupancy
             name: Movie Room
-          - binary_sensor.bedroom_occupancy
+          - entity: binary_sensor.bedroom_occupancy
+            name: Guest Bed
           - binary_sensor.kitchen_occupancy
           - entity: binary_sensor.living_room_occupancy
             name: Living
@@ -88,7 +89,8 @@ views:
           - entity: sensor.bonus_room_temperature
             name: Movie Room
           - sensor.laundry_temperature
-          - sensor.bedroom_temperature
+          - entity: sensor.bedroom_temperature
+            name: Guest Bed
           - entity: sensor.living_room_temperature
             name: Living
       - type: entities

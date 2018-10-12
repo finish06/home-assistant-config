@@ -17,10 +17,10 @@ homeassistant:
       custom_ui_state_card: state-card-custom-ui
     "sensor.*temperature":
       custom_ui_state_card: state-card-custom-ui
-    switch.server_rack_switch:
-      custom_ui_state_card: state-card-custom-ui
-    switch.network_rack_switch:
-      custom_ui_state_card: state-card-custom-ui
+    # switch.server_rack_switch:
+    #   custom_ui_state_card: state-card-custom-ui
+    # switch.network_rack_switch:
+    #   custom_ui_state_card: state-card-custom-ui
     sensor.pws_temp_f:
       custom_ui_state_card: state-card-custom-ui
     group.main_living_temps:

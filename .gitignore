@@ -24,6 +24,5 @@ update.sh
 .uuid
 .gitignore
 configurator.py
-custom_components/
 .storage/
 .cloud/

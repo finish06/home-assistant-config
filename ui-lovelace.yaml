@@ -197,9 +197,17 @@ views:
           - sensor.tech_closet_temp
           - sensor.tech_closet_humidity
           - sensor.tech_closet_battery
-      - type: entities
-        title: Equipment
+      - type: glance
+        title: Network Gear
         show_header_toggle: false
         entities:
+          - sensor.network_rack_power
+          - sensor.network_rack_power_cost
           - switch.network_rack_switch
+      - type: glance
+        title: Compute Gear
+        show_header_toggle: false
+        entities:
+          - sensor.server_rack_power
+          - sensor.server_rack_power_cost
           - switch.server_rack_switch

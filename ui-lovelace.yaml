@@ -201,13 +201,13 @@ views:
         title: Network Gear
         show_header_toggle: false
         entities:
-          - sensor.network_rack_power
-          - sensor.network_rack_power_cost
+          - sensor.networking_power
+          - sensor.networking_power_cost
           - switch.network_rack_switch
       - type: glance
         title: Compute Gear
         show_header_toggle: false
         entities:
-          - sensor.server_rack_power
-          - sensor.server_rack_power_cost
+          - sensor.compute_power
+          - sensor.compute_power_cost
           - switch.server_rack_switch

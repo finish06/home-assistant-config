@@ -25,3 +25,5 @@ update.sh
 .gitignore
 configurator.py
 /custom_components/customizer
+.storage/
+.cloud/

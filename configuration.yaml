@@ -34,7 +34,7 @@ homeassistant:
 
 # Custom-UI Customizations
 customizer:
-   custom_ui: hosted
+  custom_ui: hosted
 
 # Enables the frontend
 frontend:

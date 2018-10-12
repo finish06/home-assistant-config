@@ -13,15 +13,18 @@ views:
         entities:
           - sensor.caleb_location_template
           - sensor.brittany_location_template
-      - type: entities
+      - type: glances
         title: Motion
         show_header_toggle: true
         entities:
-          - binary_sensor.bonus_room_occupancy
+          - entity: binary_sensor.bonus_room_occupancy
+            name: Movie Room
           - binary_sensor.bedroom_occupancy
           - binary_sensor.kitchen_occupancy
-          - binary_sensor.living_room_occupancy
-          - binary_sensor.west_wing_occupancy
+          - entity: binary_sensor.living_room_occupancy
+            name: Living
+          - entity: binary_sensor.west_wing_occupancy
+            name: Master
           - binary_sensor.office_occupancy
       - type: entities
         title: Office
@@ -74,21 +77,20 @@ views:
           - climate.west_wing
           - sensor.east_wing_humidity
           - sensor.west_wing_humidity
-      - type: entities
+      - type: glances
         title: Temps
-        show_header_toggle: true
-        entities:
-          - sensor.bonus_room_temperature
-          - sensor.laundry_temperature
-          - sensor.bedroom_temperature
-          - sensor.living_room_temperature
-      - type: entities
-        title: Temps
-        show_header_toggle: true
+        show_header_toggle: false
         entities:
           - sensor.kitchen_temperature
           - sensor.office_temperature
-          - sensor.west_wing_temperature
+          - entity: sensor.west_wing_temperature
+            name: Master
+          - entity: sensor.bonus_room_temperature
+            name: Movie Room
+          - sensor.laundry_temperature
+          - sensor.bedroom_temperature
+          - entity: sensor.living_room_temperature
+            name: Living
       - type: entities
         title: Weather
         show_header_toggle: true

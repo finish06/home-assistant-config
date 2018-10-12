@@ -93,7 +93,6 @@ map:
 recorder:
   purge_keep_days: 3
   purge_interval: 1
-  
 
 # Track the sun
 sun:
@@ -107,7 +106,6 @@ cloud: !include components/cloud.yaml
 cover: !include components/cover.yaml
 device_tracker: !include components/device_tracker.yaml
 ecobee: !include components/ecobee.yaml
-google_assistant: !include components/google_assistant.yaml
 group: !include_dir_merge_named ui/groups/
 ifttt:
   key: !secret ifttt_key

@@ -97,6 +97,7 @@ recorder:
 # Track the sun
 sun:
 
+
 # Components
 automation: !include_dir_list automations/
 binary_sensor: !include components/binary_sensors.yaml

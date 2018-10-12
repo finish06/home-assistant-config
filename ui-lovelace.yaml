@@ -13,7 +13,7 @@ views:
         entities:
           - sensor.caleb_location_template
           - sensor.brittany_location_template
-      - type: glances
+      - type: glance
         title: Motion
         show_header_toggle: true
         entities:
@@ -77,7 +77,7 @@ views:
           - climate.west_wing
           - sensor.east_wing_humidity
           - sensor.west_wing_humidity
-      - type: glances
+      - type: glance
         title: Temps
         show_header_toggle: false
         entities:

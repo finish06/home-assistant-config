@@ -201,13 +201,25 @@ views:
         title: Network Gear
         show_header_toggle: false
         entities:
-          - sensor.networking_power
-          - sensor.networking_power_cost
-          - switch.network_rack_switch
+          - entity: sensor.networking_power
+            name: Power
+            icon: mdi:flash
+          - entity: sensor.networking_power_cost
+            name: Cost
+            icon: mdi:cash-usd
+          - entity: switch.network_rack_switch
+            name: Status
+            icon: mdi:power-plug
       - type: glance
         title: Compute Gear
         show_header_toggle: false
         entities:
-          - sensor.compute_power
-          - sensor.compute_power_cost
-          - switch.server_rack_switch
+          - entity: sensor.compute_power
+            name: Power
+            icon: mdi:flash
+          - entity: sensor.compute_power_cost
+            name: Cost
+            icon: mdi:cash-usd
+          - entity: switch.server_rack_switch
+            name: Status
+            icon: mdi:power-plug

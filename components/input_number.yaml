@@ -1,0 +1,13 @@
+living_room_soundbar_volume_slider:
+  name: Soundbar Volume
+  initial: 15
+  min: 0
+  max: 100
+  step: 5
+
+backyard_speaker_volume_slider:
+  name: Backyard Volume
+  initial: 15
+  min: 0
+  max: 100
+  step: 5

@@ -214,7 +214,7 @@
 # BINARY SENSORS #
 ##################
   binary_sensor.bonus_room_occupancy:
-    friendly_name: Bonus Room
+    friendly_name: Movie Room
     device_class: motion
   binary_sensor.bedroom_occupancy:
     friendly_name: Guest Bedroom
@@ -237,7 +237,7 @@
 # SENSORS #
 ###########
   sensor.bonus_room_temperature:
-    friendly_name: Bonus Room
+    friendly_name: Movie Room
   sensor.bedroom_temperature:
     friendly_name: Guest Bedroom
   sensor.home_gym_temperature:

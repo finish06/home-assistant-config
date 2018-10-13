@@ -7,7 +7,7 @@ action:
    data_template:
      entity_id: input_number.living_room_soundbar_volume_slider
      value: >
-        {{ (trigger.to_state.attributes.volume_level) }}
+        {{ ( ( trigger.to_state.attributes.volume_level | float ) * 100.0 ) | round(0.0) }}
 
 alias: Living Room Soundbar Volume Control (Slider to Media)
 trigger:
@@ -18,4 +18,4 @@ action:
     data_template:
       entity_id: media_player.soundbar
       volume_level: >
-        {{ (trigger.to_state.state) }}
+        {{ (trigger.to_state.state | float / 100.0) | round(2) }}

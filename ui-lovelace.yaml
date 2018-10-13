@@ -174,24 +174,28 @@ views:
             group: true
             power_color: true
             show_source: true
+            volume_stateless: true
           - entity: media_player.master_bedroom_home
             type: custom:mini-media-player
             icon: mdi:cast
             group: true
             power_color: true
             show_source: true
+            volume_stateless: true
           - entity: media_player.living_room_home
             type: custom:mini-media-player
             icon: mdi:cast
             group: true
             power_color: true
             show_source: true
+            volume_stateless: true
           - entity: media_player.party_speakers
             type: custom:mini-media-player
             icon: mdi:cast
             group: true
             power_color: true
             show_source: true
+            volume_stateless: true
       - type: entities
         title: Kitchen
         show_header_toggle: false

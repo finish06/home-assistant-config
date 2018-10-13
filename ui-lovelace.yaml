@@ -171,6 +171,7 @@ views:
           - entity: media_player.soundbar
             type: custom:mini-media-player
             icon: mdi:cast
+            name: Living
             group: true
             power_color: true
             show_source: true
@@ -178,13 +179,15 @@ views:
           - entity: media_player.master_bedroom_home
             type: custom:mini-media-player
             icon: mdi:cast
+            name: Master
             group: true
             power_color: true
             show_source: true
             volume_stateless: true
-          - entity: media_player.living_room_home
+          - entity: media_player.backyard_speaker
             type: custom:mini-media-player
             icon: mdi:cast
+            name: Backyard
             group: true
             power_color: true
             show_source: true
@@ -192,6 +195,15 @@ views:
           - entity: media_player.party_speakers
             type: custom:mini-media-player
             icon: mdi:cast
+            name: Living & Backyard
+            group: true
+            power_color: true
+            show_source: true
+            volume_stateless: true
+          - entity: media_player.all_speakers
+            type: custom:mini-media-player
+            icon: mdi:cast
+            name: All Speakers
             group: true
             power_color: true
             show_source: true

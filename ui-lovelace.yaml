@@ -3,6 +3,11 @@
 # https://github.com/dale3h/python-lovelace
 
 title: Home
+
+resources:
+  - url: /local/mini-media-player.js?v=0.8.5
+    type: module
+
 views:
   - title: default_view
     icon: mdi:home
@@ -161,8 +166,12 @@ views:
           - switch.movie_room_tv
       - type: media-control
         entity: media_player.soundbar
-      - type: media-control
+      - type: custom:mini-media-player
         entity: media_player.party_speakers
+        icon: mdi:cast
+        artwork_border: true
+        power_color: true
+        show_source: true
       - type: entities
         title: Kitchen
         show_header_toggle: false

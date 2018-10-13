@@ -159,19 +159,39 @@ views:
           - light.floor_lamp
           - switch.living_room_fan
       - type: entities
-        title: Media
+        title: Televisions
         show_header_toggle: false
         entities:
           - switch.living_room_tv
           - switch.movie_room_tv
-      - type: media-control
-        entity: media_player.soundbar
-      - type: custom:mini-media-player
-        entity: media_player.party_speakers
-        icon: mdi:cast
-        artwork_border: true
-        power_color: true
-        show_source: true
+      - type: entities
+        title: Music
+        show_header_toggle: false
+        entities:
+          - entity: media_player.soundbar
+            type: custom:mini-media-player
+            icon: mdi:cast
+            group: true
+            power_color: true
+            show_source: true
+          - entity: media_player.master_bedroom_home
+            type: custom:mini-media-player
+            icon: mdi:cast
+            group: true
+            power_color: true
+            show_source: true
+          - entity: media_player.living_room_home
+            type: custom:mini-media-player
+            icon: mdi:cast
+            group: true
+            power_color: true
+            show_source: true
+          - entity: media_player.party_speakers
+            type: custom:mini-media-player
+            icon: mdi:cast
+            group: true
+            power_color: true
+            show_source: true
       - type: entities
         title: Kitchen
         show_header_toggle: false

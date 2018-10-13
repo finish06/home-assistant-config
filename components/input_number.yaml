@@ -1,13 +1,11 @@
 living_room_soundbar_volume_slider:
   name: Soundbar Volume
-  initial: 15
   min: 0
-  max: 100
-  step: 5
+  max: 25
+  step: 1
 
 backyard_speaker_volume_slider:
   name: Backyard Volume
-  initial: 15
   min: 0
   max: 100
-  step: 5
+  step: 1

@@ -125,14 +125,26 @@ views:
   - title: living_view
     icon: mdi:sofa
     cards:
-      - type: entities
-        title: Climate
+      - type: glance
+        title: Motion
         show_header_toggle: true
         entities:
-          - sensor.bonus_room_temperature
-          - sensor.living_room_temperature
+          - entity: binary_sensor.bonus_room_occupancy
+            name: Movie Room
+          - binary_sensor.kitchen_occupancy
+          - entity: binary_sensor.living_room_occupancy
+            name: Living
+          - binary_sensor.office_occupancy
+      - type: glance
+        title: Temps
+        show_header_toggle: false
+        entities:
           - sensor.kitchen_temperature
           - sensor.office_temperature
+          - entity: sensor.bonus_room_temperature
+            name: Movie Room
+          - entity: sensor.living_room_temperature
+            name: Living
       - type: entities
         title: Living Room
         show_header_toggle: false

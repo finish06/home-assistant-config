@@ -1,4 +1,5 @@
 alias: Living Room Soundbar Volume Control (Slider to Media)
+id: living_room_soundbar_volume_control_slider_to_media
 trigger:
   - platform: state
     entity_id: input_number.living_room_soundbar_volume_slider

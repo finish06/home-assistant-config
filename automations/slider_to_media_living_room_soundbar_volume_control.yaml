@@ -1,0 +1,10 @@
+alias: Living Room Soundbar Volume Control (Slider to Media)
+trigger:
+  - platform: state
+    entity_id: input_number.living_room_soundbar_volume_slider
+action:
+  - service: media_player.volume_set
+    data_template:
+      entity_id: media_player.soundbar
+      volume_level: >
+        {{ (trigger.to_state.state | float / 100.0 ) }}

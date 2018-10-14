@@ -272,13 +272,13 @@ views:
               green: 50
               yellow: 20
               red: 0
-      - type: entities
-        title: Climate
-        show_header_toggle: true
-        entities:
-          - sensor.tech_closet_temp
-          - sensor.tech_closet_humidity
-          - sensor.tech_closet_battery
+      # - type: entities
+      #   title: Climate
+      #   show_header_toggle: true
+      #   entities:
+      #     - sensor.tech_closet_temp
+      #     - sensor.tech_closet_humidity
+      #     - sensor.tech_closet_battery
       - type: glance
         title: Network Gear
         show_header_toggle: false

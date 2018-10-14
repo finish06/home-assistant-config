@@ -12,12 +12,14 @@ views:
   - title: default_view
     icon: mdi:home
     cards:
-      - type: entities
+      - type: glance
         title: Family
-        show_header_toggle: true
+        show_header_toggle: false
         entities:
-          - sensor.caleb_location_template
-          - sensor.brittany_location_template
+          - entity: device_tracker.calebs_pixel
+            name: Caleb
+          - entity: device_tracker.brittanys_pixel
+            name: Brittany
       - type: glance
         title: Motion
         show_header_toggle: true

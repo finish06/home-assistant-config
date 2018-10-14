@@ -98,7 +98,7 @@ views:
             name: Guest Bed
           - entity: sensor.living_room_temperature
             name: Living
-      - type: weather-forcast
+      - type: weather-forecast
         entity: weather.local_weather
       - type: glance
         title: Entrances

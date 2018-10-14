@@ -7,4 +7,4 @@ action:
     data_template:
       entity_id: media_player.soundbar
       volume_level: >
-        {{ (trigger.to_state.state | float / 100.0 ) }}
+        {{ (trigger.to_state.state | float / 40.0 ) }}

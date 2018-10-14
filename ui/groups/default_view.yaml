@@ -11,7 +11,6 @@ default_view:
     - group.card_hallways
     - group.card_kitchen
     - group.climate
-    - group.outside
     - group.front_door
     - group.entry_lights
     - camera.dog_crate

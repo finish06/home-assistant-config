@@ -252,18 +252,26 @@ views:
   - title: tech_closet_view
     icon: mdi:laptop
     cards:
+      - type: sensor
+        entity: sensor.tech_closet_temp
+        name: Temp
+        accuracy: 40
+        hours_to_show: 12
       - type: horizontal-stack
         cards:
-          - type: sensor
-            entity: sensor.tech_closet_temp
-            name: Temp
-            accuracy: 20
-            hours_to_show: 12
           - type: sensor
             entity: sensor.tech_closet_humidity
             name: Humidity
             accuracy: 20
             hours_to_show: 12
+          - type: guage
+            entity: sensor.tech_closet_battery
+            name: Battery Life
+            unit_of_measure: '%'
+            severity:
+              green: 50
+              yellow: 20
+              red: 0
       - type: entities
         title: Climate
         show_header_toggle: true

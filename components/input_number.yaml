@@ -5,7 +5,7 @@ living_room_soundbar_volume_slider:
   step: 2
 
 backyard_speaker_volume_slider:
-  name: Backyard Volume
+  name: Volume
   min: 0
   max: 100
   step: 2

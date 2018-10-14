@@ -6,6 +6,6 @@ trigger:
 action:
   - service: media_player.volume_set
     data_template:
-      entity_id: media_player.backyard_speakerbackyard_speaker
+      entity_id: media_player.backyard_speaker
       volume_level: >
         {{ (trigger.to_state.state | float / 100.0 ) }}

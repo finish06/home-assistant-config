@@ -1,0 +1,11 @@
+alias: Backyard Speaker Volume Control (Slider to Media)
+id: backyard_speaker_volume_control_slider_to_media
+trigger:
+  - platform: state
+    entity_id: input_number.backyard_speaker_volume_slider
+action:
+  - service: media_player.volume_set
+    data_template:
+      entity_id: media_player.backyard_speakerbackyard_speaker
+      volume_level: >
+        {{ (trigger.to_state.state | float / 100.0 ) }}

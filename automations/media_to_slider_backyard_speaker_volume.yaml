@@ -1,0 +1,10 @@
+alias: Backyard Speaker Volume Control (Media to Slider)
+trigger:
+  - platform: state
+    entity_id: media_player.backyard_speaker
+action:
+   service: input_number.set_value
+   data_template:
+     entity_id: input_number.backyard_speaker_volume_slider
+     value: >
+        {{ ( ( trigger.to_state.attributes.volume_level | float ) * 100.0 ) | round(0) }}

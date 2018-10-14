@@ -252,6 +252,11 @@ views:
   - title: tech_closet_view
     icon: mdi:laptop
     cards:
+      - type: sensor
+        entity: sensor.tech_closet_temp
+        name: Temp
+        accuracy: 20
+        hours_to_show: 12
       - type: entities
         title: Climate
         show_header_toggle: true

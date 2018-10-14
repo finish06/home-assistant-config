@@ -7,4 +7,4 @@ action:
    data_template:
      entity_id: input_number.living_room_soundbar_volume_slider
      value: >
-        {{ ( ( trigger.to_state.attributes.volume_level | float ) * 40.0 ) | round(0) }}
+        {{ ( ( trigger.to_state.attributes.volume_level | float ) * 100.0 ) | round(0) }}

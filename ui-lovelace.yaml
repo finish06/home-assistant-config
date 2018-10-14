@@ -194,6 +194,7 @@ views:
             power_color: true
             show_source: true
             volume_stateless: true
+          - entity: input_number.backyard_speaker_volume_slider
           - entity: media_player.party_speakers
             type: custom:mini-media-player
             icon: mdi:cast

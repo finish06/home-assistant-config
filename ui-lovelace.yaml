@@ -266,7 +266,7 @@ views:
             hours_to_show: 12
           - type: gauge
             entity: sensor.tech_closet_battery
-            name: Battery Life
+            title: Battery Life
             unit_of_measure: '%'
             severity:
               green: 50

@@ -300,3 +300,11 @@ views:
           - entity: switch.server_rack_switch
             name: Status
             icon: mdi:power-plug
+  - title: sec_camera_view
+    icon: mdi:cctv
+    cards:
+      - type: picture-entity
+        name: Dog Crate
+        entity: camera.dog_crate
+        show_info: true
+        show_state: false

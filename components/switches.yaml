@@ -1,6 +1,7 @@
 ############
 # SWITCHES #
 ############
+
   - platform: mqtt
     name: Office Floor Lamp
     state_topic: "smartthings/Office Lamp/switch"

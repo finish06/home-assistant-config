@@ -30,7 +30,7 @@ http:
   trusted_networks:
     - 127.0.0.1
     - 192.168.1.11
-    - 192.168.1.181
+    - 192.168.1.126
     - 10.8.0.0/16
   ip_ban_enabled: true
   login_attempts_threshold: 3

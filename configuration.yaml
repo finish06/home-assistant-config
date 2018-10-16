@@ -12,29 +12,6 @@ homeassistant:
   time_zone: America/Chicago
   # Customization file
   customize: !include ui/customize.yaml
-  customize_glob:
-    "sensor.*occupancy*":
-      custom_ui_state_card: state-card-custom-ui
-    "sensor.*temperature":
-      custom_ui_state_card: state-card-custom-ui
-    # switch.server_rack_switch:
-    #   custom_ui_state_card: state-card-custom-ui
-    # switch.network_rack_switch:
-    #   custom_ui_state_card: state-card-custom-ui
-    sensor.pws_temp_f:
-      custom_ui_state_card: state-card-custom-ui
-    group.main_living_temps:
-      state_card_mode: badges
-    group.room_temps_1:
-      state_card_mode: badges
-    group.room_temps_2:
-      state_card_mode: badges
-    group.motion_badges:
-      state_card_mode: badges
-
-# Custom-UI Customizations
-customizer:
-  custom_ui: hosted
 
 # Enables the frontend
 frontend:

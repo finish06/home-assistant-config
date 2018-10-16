@@ -186,6 +186,7 @@ views:
             power_color: true
             show_source: true
             volume_stateless: true
+          - entity: input_number.master_bedroom_home_volume_slider
           - entity: media_player.backyard_speaker
             type: custom:mini-media-player
             icon: mdi:cast

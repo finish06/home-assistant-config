@@ -11,8 +11,8 @@
 
   - platform: mqtt
     name: "Movie Room TV"
-    state_topic: "harmony/hubs/bonus-room/activities/shield-tv/state"
-    command_topic: "harmony/hubs/bonus-room/activities/shield-tv/command"
+    state_topic: "harmony/hubs/movie-room/activities/shield-tv/state"
+    command_topic: "harmony/hubs/movie-room/activities/shield-tv/command"
     payload_on: "on"
     payload_off: "off"
 

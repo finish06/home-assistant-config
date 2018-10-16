@@ -1,3 +1,7 @@
+################
+# INPUT NUMBER #
+################
+
 living_room_soundbar_volume_slider:
   name: Volume
   min: 0

@@ -81,6 +81,7 @@ cover: !include components/cover.yaml
 device_tracker: !include components/device_tracker.yaml
 ecobee: !include components/ecobee.yaml
 group: !include_dir_merge_named ui/groups/
+ifttt: !include components/ifttt.yaml
 influxdb: !include components/influxdb.yaml
 input_number: !include components/input_number.yaml
 input_select: !include components/input_select.yaml

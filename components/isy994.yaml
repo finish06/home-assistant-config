@@ -1,3 +1,7 @@
-  host: http://192.168.1.54:80
-  username: !secret isy_username
-  password: !secret isy_password
+#######
+# ISY #
+#######
+
+host: http://192.168.1.54:80
+username: !secret isy_username
+password: !secret isy_password

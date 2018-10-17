@@ -7,7 +7,7 @@ title: Home
 resources:
   - url: /local/mini-media-player.js?v=0.8.5
     type: module
-  - url: /local/folding-group-entity-row.js
+  - url: /local/fold-entity-row.js
     type: js
 
 

@@ -315,6 +315,3 @@ views:
         entity: camera.dog_crate
         show_info: true
         show_state: false
-
-
-        

@@ -169,7 +169,8 @@ views:
         title: Music
         show_header_toggle: false
         entities:
-          - entity: media_player.soundbar
+          - entity: group.my_group
+            head: media_player.soundbar
             type: custom:mini-media-player
             icon: mdi:cast
             name: Living
@@ -177,7 +178,8 @@ views:
             power_color: true
             show_source: true
             volume_stateless: true
-          - entity: input_number.living_room_soundbar_volume_slider
+            items:
+              - input_number.living_room_soundbar_volume_slider
           - entity: media_player.master_bedroom_home
             type: custom:mini-media-player
             icon: mdi:cast

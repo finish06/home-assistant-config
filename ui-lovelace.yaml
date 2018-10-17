@@ -184,40 +184,40 @@ views:
               volume_stateless: true
             items:
               - input_number.living_room_soundbar_volume_slider
-          - entity: media_player.master_bedroom_home
-            type: custom:mini-media-player
-            icon: mdi:cast
-            name: Master
-            group: true
-            power_color: true
-            show_source: true
-            volume_stateless: true
-          - entity: input_number.master_bedroom_home_volume_slider
-          - entity: media_player.backyard_speaker
-            type: custom:mini-media-player
-            icon: mdi:cast
-            name: Backyard
-            group: true
-            power_color: true
-            show_source: true
-            volume_stateless: true
-          - entity: input_number.backyard_speaker_volume_slider
-          - entity: media_player.party_speakers
-            type: custom:mini-media-player
-            icon: mdi:cast
-            name: Living & Backyard
-            group: true
-            power_color: true
-            show_source: true
-            volume_stateless: true
-          - entity: media_player.all_speakers
-            type: custom:mini-media-player
-            icon: mdi:cast
-            name: All Speakers
-            group: true
-            power_color: true
-            show_source: true
-            volume_stateless: true
+          # - entity: media_player.master_bedroom_home
+          #   type: custom:mini-media-player
+          #   icon: mdi:cast
+          #   name: Master
+          #   group: true
+          #   power_color: true
+          #   show_source: true
+          #   volume_stateless: true
+          # - entity: input_number.master_bedroom_home_volume_slider
+          # - entity: media_player.backyard_speaker
+          #   type: custom:mini-media-player
+          #   icon: mdi:cast
+          #   name: Backyard
+          #   group: true
+          #   power_color: true
+          #   show_source: true
+          #   volume_stateless: true
+          # - entity: input_number.backyard_speaker_volume_slider
+          # - entity: media_player.party_speakers
+          #   type: custom:mini-media-player
+          #   icon: mdi:cast
+          #   name: Living & Backyard
+          #   group: true
+          #   power_color: true
+          #   show_source: true
+          #   volume_stateless: true
+          # - entity: media_player.all_speakers
+          #   type: custom:mini-media-player
+          #   icon: mdi:cast
+          #   name: All Speakers
+          #   group: true
+          #   power_color: true
+          #   show_source: true
+          #   volume_stateless: true
       - type: entities
         title: Kitchen
         show_header_toggle: false

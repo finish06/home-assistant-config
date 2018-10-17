@@ -189,7 +189,7 @@ views:
               entity: media_player.master_bedroom_home
               type: custom:mini-media-player
               icon: mdi:cast
-              name: Living
+              name: Master
               group: true
               power_color: true
               show_source: true
@@ -201,7 +201,7 @@ views:
               entity: media_player.backyard_speaker
               type: custom:mini-media-player
               icon: mdi:cast
-              name: Living
+              name: Backyard
               group: true
               power_color: true
               show_source: true

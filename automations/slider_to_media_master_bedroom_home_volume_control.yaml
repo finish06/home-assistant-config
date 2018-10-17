@@ -1,0 +1,11 @@
+alias: Master Bedroom Home Volume Control (Slider to Media)
+id: master_bedroom_home_volume_control_slider_to_media
+trigger:
+  - platform: state
+    entity_id: input_number.master_bedroom_home_volume_slider
+action:
+  - service: media_player.volume_set
+    data_template:
+      entity_id: media_player.master_bedroom_home
+      volume_level: >
+        {{ (trigger.to_state.state | float / 100.0 ) }}

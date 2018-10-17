@@ -1,0 +1,5 @@
+#########
+# IFTTT #
+#########
+
+key: !secret ifttt_key

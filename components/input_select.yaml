@@ -1,3 +1,7 @@
+################
+# INPUT SELECT #
+################
+
 media_playlist:
   name: 'Select Radio Station:'
   options:

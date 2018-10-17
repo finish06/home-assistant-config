@@ -7,11 +7,26 @@ title: Home
 resources:
   - url: /local/mini-media-player.js?v=0.8.5
     type: module
+  - url: /local/fold-entity-row.js
+    type: js
+
 
 views:
   - title: default_view
     icon: mdi:home
     cards:
+      - type: conditional
+        conditions:
+          - entity: device_tracker.brittanys_pixel
+            state_not: "home"
+          - entity: device_tracker.calebs_pixel
+            state_not: "home"
+        card:
+          type: picture-entity
+          name: Dog Crate
+          entity: camera.dog_crate
+          show_info: true
+          show_state: false
       - type: glance
         title: Family
         show_header_toggle: false
@@ -116,18 +131,6 @@ views:
           - light.entry_table_lamp
           - switch.entry_light
           - switch.porch_lights
-      - type: conditional
-        conditions:
-          - entity: device_tracker.brittanys_pixel
-            state_not: "home"
-          - entity: device_tracker.calebs_pixel
-            state_not: "home"
-        card:
-          type: picture-entity
-          name: Dog Crate
-          entity: camera.dog_crate
-          show_info: true
-          show_state: false
   - title: living_view
     icon: mdi:sofa
     cards:
@@ -169,42 +172,52 @@ views:
         title: Music
         show_header_toggle: false
         entities:
-          - entity: media_player.soundbar
-            type: custom:mini-media-player
-            icon: mdi:cast
-            name: Living
-            group: true
-            power_color: true
-            show_source: true
-            volume_stateless: true
-          - entity: input_number.living_room_soundbar_volume_slider
-          - entity: media_player.master_bedroom_home
-            type: custom:mini-media-player
-            icon: mdi:cast
-            name: Master
-            group: true
-            power_color: true
-            show_source: true
-            volume_stateless: true
-          - entity: media_player.backyard_speaker
-            type: custom:mini-media-player
-            icon: mdi:cast
-            name: Backyard
-            group: true
-            power_color: true
-            show_source: true
-            volume_stateless: true
-          - entity: input_number.backyard_speaker_volume_slider
-          - entity: media_player.party_speakers
-            type: custom:mini-media-player
+          - type: custom:fold-entity-row
+            head:
+              entity: media_player.soundbar
+              type: custom:mini-media-player
+              icon: mdi:cast
+              name: Living
+              group: true
+              power_color: true
+              show_source: true
+              volume_stateless: true
+            items:
+              - input_number.living_room_soundbar_volume_slider
+          - type: custom:fold-entity-row
+            head:
+              entity: media_player.master_bedroom_home
+              type: custom:mini-media-player
+              icon: mdi:cast
+              name: Master
+              group: true
+              power_color: true
+              show_source: true
+              volume_stateless: true
+            items:
+              - input_number.master_bedroom_home_volume_slider
+          - type: custom:fold-entity-row
+            head:
+              entity: media_player.backyard_speaker
+              type: custom:mini-media-player
+              icon: mdi:cast
+              name: Backyard
+              group: true
+              power_color: true
+              show_source: true
+              volume_stateless: true
+            items:
+              - input_number.backyard_speaker_volume_slider
+          - type: custom:mini-media-player
+            entity: media_player.party_speakers
             icon: mdi:cast
             name: Living & Backyard
             group: true
             power_color: true
             show_source: true
             volume_stateless: true
-          - entity: media_player.all_speakers
-            type: custom:mini-media-player
+          - type: custom:mini-media-player
+            entity: media_player.all_speakers
             icon: mdi:cast
             name: All Speakers
             group: true
@@ -274,13 +287,6 @@ views:
               green: 50
               yellow: 20
               red: 0
-      # - type: entities
-      #   title: Climate
-      #   show_header_toggle: true
-      #   entities:
-      #     - sensor.tech_closet_temp
-      #     - sensor.tech_closet_humidity
-      #     - sensor.tech_closet_battery
       - type: glance
         title: Network Gear
         show_header_toggle: false
@@ -307,3 +313,11 @@ views:
           - entity: switch.server_rack_switch
             name: Status
             icon: mdi:power-plug
+  - title: sec_camera_view
+    icon: mdi:cctv
+    cards:
+      - type: picture-entity
+        name: Dog Crate
+        entity: camera.dog_crate
+        show_info: true
+        show_state: false

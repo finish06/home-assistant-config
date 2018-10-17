@@ -12,29 +12,6 @@ homeassistant:
   time_zone: America/Chicago
   # Customization file
   customize: !include ui/customize.yaml
-  customize_glob:
-    "sensor.*occupancy*":
-      custom_ui_state_card: state-card-custom-ui
-    "sensor.*temperature":
-      custom_ui_state_card: state-card-custom-ui
-    # switch.server_rack_switch:
-    #   custom_ui_state_card: state-card-custom-ui
-    # switch.network_rack_switch:
-    #   custom_ui_state_card: state-card-custom-ui
-    sensor.pws_temp_f:
-      custom_ui_state_card: state-card-custom-ui
-    group.main_living_temps:
-      state_card_mode: badges
-    group.room_temps_1:
-      state_card_mode: badges
-    group.room_temps_2:
-      state_card_mode: badges
-    group.motion_badges:
-      state_card_mode: badges
-
-# Custom-UI Customizations
-customizer:
-  custom_ui: hosted
 
 # Enables the frontend
 frontend:
@@ -44,20 +21,14 @@ frontend:
 config:
 
 http:
-  # Secrets are defined in the file secrets.yaml
-  # api_password: !secret http_password
-  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-  # base_url: example.duckdns.org:8123
-  api_password: !secret api_password
   base_url: !secret base_url
   trusted_networks:
     - 127.0.0.1
     - 192.168.1.11
-    - 192.168.1.181
+    - 192.168.1.126
     - 10.8.0.0/16
   ip_ban_enabled: true
   login_attempts_threshold: 99
-
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -97,7 +68,6 @@ recorder:
 # Track the sun
 sun:
 
-
 # Components
 automation: !include_dir_list automations/
 binary_sensor: !include components/binary_sensors.yaml
@@ -108,8 +78,7 @@ cover: !include components/cover.yaml
 device_tracker: !include components/device_tracker.yaml
 ecobee: !include components/ecobee.yaml
 group: !include_dir_merge_named ui/groups/
-ifttt:
-  key: !secret ifttt_key
+ifttt: !include components/ifttt.yaml
 influxdb: !include components/influxdb.yaml
 input_number: !include components/input_number.yaml
 input_select: !include components/input_select.yaml
@@ -125,6 +94,5 @@ sensor: !include components/sensors.yaml
 shell_command: !include_dir_merge_named components/shell_commands/
 switch: !include components/switches.yaml
 telegram_bot: !include components/telegram_bot.yaml
-tts:
-  - platform: google
+tts: !include components/tts.yaml
 weather: !include components/weather.yaml

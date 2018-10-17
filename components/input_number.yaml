@@ -1,3 +1,7 @@
+################
+# INPUT NUMBER #
+################
+
 living_room_soundbar_volume_slider:
   name: Volume
   min: 0
@@ -5,6 +9,12 @@ living_room_soundbar_volume_slider:
   step: 2
 
 backyard_speaker_volume_slider:
+  name: Volume
+  min: 0
+  max: 100
+  step: 2
+
+master_bedroom_home_volume_slider:
   name: Volume
   min: 0
   max: 100

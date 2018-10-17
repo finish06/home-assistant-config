@@ -56,7 +56,7 @@ http:
     - 192.168.1.181
     - 10.8.0.0/16
   ip_ban_enabled: true
-  login_attempts_threshold: 3
+  login_attempts_threshold: 99
 
 
 # Checks for available updates

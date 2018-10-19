@@ -1,8 +1,8 @@
-  id: telegram_switch_alert
+  id: notify_switch_alert
   alias: Switch On Alert
   trigger:
     platform: time
-    minutes: '/15'
+    minutes: '/5'
     seconds: 00
   condition:
     condition: and
@@ -13,8 +13,13 @@
       - condition: state
         entity_id: 'device_tracker.calebs_pixel'
         state: 'not_home'
+      - condition: template
+        value_template: >
+          {% for state in states.switch %}
+            {{ state.state == 'on' and state.entity_id != 'switch.server_rack_switch' and state.entity_id != 'switch.network_rack_switch' }}
+          {% endfor %}
   action:
-    - service_template: "notify.telegram"
+    - service_template: "notify.home"
       data_template:
         title: '**Alert - Switch On**'
         message: >

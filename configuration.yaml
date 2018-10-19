@@ -27,8 +27,11 @@ http:
     - 192.168.1.11
     - 192.168.1.126
     - 10.8.0.0/16
+  use_x_forwarded_for: true
+  trusted_proxies: 192.168.1.26
   ip_ban_enabled: true
-  login_attempts_threshold: 99
+  login_attempts_threshold: 2
+
 
 # Checks for available updates
 # Note: This component will send some information about your system to

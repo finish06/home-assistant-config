@@ -15,9 +15,8 @@
         state: 'not_home'
       - condition: template
         value_template: >
-          {% for state in states.light %}
-            {{ state.state == 'on' and state.entity_id != 'light.hgrp0000000030' and state.entity_id != 'light.hue_living_room' and state.entity_id != 'light.hue_master_bedroom' and state.entity_id != 'light.movie_room' and state.entity_id != 'light.entry_table_lamp' }}
-          {% endfor %}
+          {% set ignore_lights = ['light.movie_room', 'light.entry_table_lamp', 'light.hue_master_bedroom','light.hgrp0000000030','light.hue_living_room' ] %}
+          {{ states.light | rejectattr('entity_id','in',ignore_lights) | selectattr('state','eq','on') | map(attribute='name') | list }}
   action:
     - service_template: "notify.home"
       data_template:

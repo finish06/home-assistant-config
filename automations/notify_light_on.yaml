@@ -1,4 +1,4 @@
-  id: home_light_alert
+  id: notify_light_alert
   alias: Light On Alert
   trigger:
     platform: time

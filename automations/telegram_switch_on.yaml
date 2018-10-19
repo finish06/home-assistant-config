@@ -1,4 +1,4 @@
-  id: telegram_switch_alert
+  id: notify_switch_alert
   alias: Switch On Alert
   trigger:
     platform: time
@@ -14,7 +14,7 @@
         entity_id: 'device_tracker.calebs_pixel'
         state: 'not_home'
   action:
-    - service_template: "notify.telegram"
+    - service_template: "notify.home"
       data_template:
         title: '**Alert - Switch On**'
         message: >

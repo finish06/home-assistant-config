@@ -13,6 +13,11 @@
       - condition: state
         entity_id: 'device_tracker.calebs_pixel'
         state: 'not_home'
+      - condition: template
+        value_template: >
+          {% for state in states.switch %}
+            {{ is_state(state.entity_id, 'on') and state.entity_id != 'switch.server_rack_switch' and state.entity_id != 'switch.network_rack_switch' }}
+          {% endfor %}
   action:
     - service_template: "notify.home"
       data_template:

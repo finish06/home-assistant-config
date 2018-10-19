@@ -2,7 +2,7 @@
   alias: Light On Alert
   trigger:
     platform: time
-    minutes: '/1'
+    minutes: '/5'
     seconds: 00
   condition:
     condition: and
@@ -16,9 +16,7 @@
       - condition: template
         value_template: >
           {% for state in states.light %}
-            {%- if (state.entity_id != 'light.hgrp0000000030' and state.entity_id != 'light.hue_living_room' and state.entity_id != 'light.hue_master_bedroom' and state.entity_id != 'light.movie_room' and state.entity_id != 'light.entry_table_lamp') -%}
-              {{ state.state == 'on' }}
-            {%- endif -%}
+            {{ state.state == 'on' and state.entity_id != 'light.hgrp0000000030' and state.entity_id != 'light.hue_living_room' and state.entity_id != 'light.hue_master_bedroom' and state.entity_id != 'light.movie_room' and state.entity_id != 'light.entry_table_lamp') }}
           {% endfor %}
   action:
     - service_template: "notify.home"

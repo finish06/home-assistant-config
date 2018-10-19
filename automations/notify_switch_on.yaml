@@ -2,7 +2,7 @@
   alias: Switch On Alert
   trigger:
     platform: time
-    minutes: '/1'
+    minutes: '/5'
     seconds: 00
   condition:
     condition: and

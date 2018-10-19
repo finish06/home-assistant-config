@@ -9,3 +9,8 @@
 - name: telegram
   platform: telegram
   chat_id: !secret telegram_chat_id
+
+- name: html5
+  name: Home
+  gcm_api_key: !secret html5_api_key
+  gcm_sender_id: !secret html5_sender_id

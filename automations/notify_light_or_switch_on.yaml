@@ -19,7 +19,7 @@
   action:
     - service_template: "notify.home"
       data_template:
-        title: 'House not turned off'
+        title: 'Dunn Home'
         message: >
           {% for state in states.light %}
             {%- if (is_state(state.entity_id, 'on') and state.entity_id != 'light.hgrp0000000030' and state.entity_id != 'light.hue_living_room' and state.entity_id != 'light.hue_master_bedroom' and state.entity_id != 'light.movie_room' and state.entity_id != 'light.entry_table_lamp')  %}

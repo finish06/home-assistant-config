@@ -258,3 +258,29 @@ office_fan:
   name: Fan
   entities:
     - switch.office_fan
+
+#####################
+# AUTOMATION GROUPS #
+#####################
+lights_automation_group:
+  name: Home Lights
+  entities:
+    - light.brittanys_lamp
+    - light.calebs_lamp
+    - light.entry_table_lamp
+    - light.floor_lamp
+    - light.master_bedroom_light
+    - light.movie_floor_lamp
+    - switch.cabinet_lights
+    - switch.dining_room_light
+    - switch.entry_light
+    - switch.kitchen_light
+    - switch.living_room_dome_lights
+    - switch.living_room_fan
+    - switch.living_room_light
+    - switch.master_bedroom_fan
+    - switch.office_fan
+    - switch.office_floor_lamp
+    - switch.office_light
+    - switch.porch_lights
+    - switch.west_hallway_light

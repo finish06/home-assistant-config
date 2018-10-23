@@ -234,21 +234,6 @@ people:
     - sensor.caleb_location_template
     - sensor.brittany_location_template
 
-motion:
-  name: Motion
-  entities:
-    group.motion_badges
-
-motion_badges:
-  name: Motion
-  entities:
-    - binary_sensor.bonus_room_occupancy
-    - binary_sensor.bedroom_occupancy
-    - binary_sensor.kitchen_occupancy
-    - binary_sensor.living_room_occupancy
-    - binary_sensor.west_wing_occupancy
-    - binary_sensor.office_occupancy
-
 master_bedroom_fan:
   name: Fan
   entities:

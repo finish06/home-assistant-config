@@ -1,9 +1,12 @@
   id: notify_light_alert
   alias: Light On Alert
   trigger:
-    platform: time
-    minutes: '/5'
-    seconds: 00
+    - platform: state
+      entity_id: 'device_tracker.brittanys_pixel'
+      to: 'not_home'
+    - platform: state
+      entity_id: 'device_tracker.calebs_pixel'
+      to: 'not_home'
   condition:
     condition: and
     conditions:
@@ -16,7 +19,9 @@
       - condition: template
         value_template: >
           {% for state in states.light %}
-            {{ state.state == 'on' and state.entity_id != 'light.hgrp0000000030' and state.entity_id != 'light.hue_living_room' and state.entity_id != 'light.hue_master_bedroom' and state.entity_id != 'light.movie_room' and state.entity_id != 'light.entry_table_lamp' }}
+            {%- if (is_state(state.entity_id, 'on') and state.entity_id != 'light.hgrp0000000030' and state.entity_id != 'light.hue_living_room' and state.entity_id != 'light.hue_master_bedroom' and state.entity_id != 'light.movie_room' and state.entity_id != 'light.entry_table_lamp')  %}
+              "No one is home and the {{ state_attr(state.entity_id, 'friendly_name') }} is still on."
+            {% endif -%}
           {% endfor %}
   action:
     - service_template: "notify.home"
@@ -40,3 +45,10 @@
     #         true
     #       {% endif -%}
     #     {% endfor %}
+
+      #
+      # - condition: template
+      #   value_template: >
+      #     {% for state in states.light %}
+      #       {{ state.state == 'on' and state.entity_id != 'light.hgrp0000000030' and state.entity_id != 'light.hue_living_room' and state.entity_id != 'light.hue_master_bedroom' and state.entity_id != 'light.movie_room' and state.entity_id != 'light.entry_table_lamp' }}
+      #     {% endfor %}

@@ -252,7 +252,6 @@ lights_automation_group:
   entities:
     - light.brittanys_lamp
     - light.calebs_lamp
-    - light.entry_table_lamp
     - light.floor_lamp
     - light.master_bedroom_light
     - light.movie_floor_lamp

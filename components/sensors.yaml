@@ -193,12 +193,14 @@
     - temperature
     - humidity
 
-- platform: glances
-  host: 192.168.1.31
-  resources:
-    - processor_load
-    - process_running
-    - process_thread
-    - process_total
-    - memory_use
-    - memory_free
+- platform: nzbget
+  host: nzb.du.nn
+  monitored_variables:
+    - download_rate
+
+- platform: rtorrent
+  url: 'http://rtorrent.du.nn:8008/RPC2'
+  monitored_variables:
+    - current_status
+    - download_speed
+    - upload_speed

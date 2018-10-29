@@ -272,21 +272,21 @@ views:
         name: Temp
         accuracy: 15
         hours_to_show: 6
-      - type: horizontal-stack
-        cards:
-          - type: sensor
-            entity: sensor.tech_closet_humidity
-            name: Humidity
-            accuracy: 10
-            hours_to_show: 6
-          - type: gauge
-            entity: sensor.tech_closet_battery
-            title: Battery Life
-            unit_of_measure: '%'
-            severity:
-              green: 50
-              yellow: 20
-              red: 0
+      # - type: horizontal-stack
+      #   cards:
+      #     - type: sensor
+      #       entity: sensor.tech_closet_humidity
+      #       name: Humidity
+      #       accuracy: 10
+      #       hours_to_show: 6
+      #     - type: gauge
+      #       entity: sensor.tech_closet_battery
+      #       title: Battery Life
+      #       unit_of_measure: '%'
+      #       severity:
+      #         green: 50
+      #         yellow: 20
+      #         red: 0
       - type: glance
         title: Network Gear
         show_header_toggle: false
@@ -313,6 +313,16 @@ views:
           - entity: switch.server_rack_switch
             name: Status
             icon: mdi:power-plug
+      - type: glance
+        title: DL
+        show_header_toggle: false
+        entities:
+          - entity: sensor.nzbget_speed
+            name: NZBget Down
+          - entity: sensor.rtorrent_down_speed
+            name: Flood Down
+          - entity: sensor.rtorrent_up_speed
+            name: Flood Up
   - title: sec_camera_view
     icon: mdi:cctv
     cards:

@@ -313,16 +313,6 @@ views:
           - entity: switch.server_rack_switch
             name: Status
             icon: mdi:power-plug
-      - type: glance
-        title: DL
-        show_header_toggle: false
-        entities:
-          - entity: sensor.nzbget_speed
-            name: NZBget Down
-          - entity: sensor.rtorrent_down_speed
-            name: Flood Down
-          - entity: sensor.rtorrent_up_speed
-            name: Flood Up
   - title: sec_camera_view
     icon: mdi:cctv
     cards:

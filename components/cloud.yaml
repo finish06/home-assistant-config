@@ -79,16 +79,16 @@ google_actions:
       name: fan light
       room: Living Room
     switch.living_room_tv:
-      name: TV
+      name: Samsung TV
       room: Living Room
     switch.master_bedroom_fan:
       name: fan
       room: Master Bedroom
     switch.master_bedroom_tv:
-      name: TV
+      name: Samsung TV
       room: Master Bedroom
     switch.movie_room_tv:
-      name: TV
+      name: Sony TV
       room: Movie Room
     switch.office_fan:
       name: fan

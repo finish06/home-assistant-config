@@ -100,7 +100,7 @@ google_actions:
       name: fan light
       room: Office
     switch.office_tv:
-      name: TV
+      name: Samsung TV
       room: Office
     switch.porch_lights:
       name: lights

@@ -201,7 +201,7 @@
     - download_rate
 
 - platform: rtorrent
-  url: http://192.168.1.103:8008/RPC2
+  url: http://192.168.1.101:8008/RPC2
   monitored_variables:
     - current_status
     - download_speed

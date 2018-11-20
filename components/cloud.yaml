@@ -57,6 +57,9 @@ google_actions:
     switch.cabinet_lights:
       name: cabinet lights
       room: Kitchen
+    switch.christmas_tree:
+      name: tree
+      room: Living Room
     switch.dining_room_light:
       name: light
       room: Dining Room

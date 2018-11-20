@@ -41,7 +41,7 @@
     retain: true
 
   - platform: mqtt
-    name: "Christmas Tree Switch"
+    name: "Christmas Tree"
     state_topic: "smartthings/Christmas Tree/switch"
     command_topic: "smartthings/Christmas Tree/switch"
     payload_on: "on"

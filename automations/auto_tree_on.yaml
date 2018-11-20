@@ -8,12 +8,14 @@
       entity_id: device_tracker.calebs_pixel
       to: home
   condition:
-    - condition: time
-      after: '16:00:00'
-      before: '22:45:00'
-    - condition: state
-      entity_id: switch.christmas_tree
-      state: off
+    condition: and
+    conditions:
+      - condition: time
+        after: '16:00:00'
+        before: '22:45:00'
+      - condition: state
+        entity_id: switch.christmas_tree
+        state: off
   action:
     - service_template: switch.turn_on
       data:

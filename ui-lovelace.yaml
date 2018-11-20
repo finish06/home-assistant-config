@@ -65,6 +65,7 @@ views:
           - light.floor_lamp
           - switch.living_room_fan
           - switch.living_room_tv
+          - switch.christmas_tree
       - type: entities
         title: Master Bedroom
         show_header_toggle: false

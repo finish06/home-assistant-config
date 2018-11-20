@@ -1,8 +1,8 @@
   id: auto_tree_off
   alias: Turn off Christmas tree
   trigger:
-    - platform: time
-      at: 23:00:00
+    platform: time
+    at: 23:00:00
   condition:
     condition: state
     entity_id: switch.christmas_tree

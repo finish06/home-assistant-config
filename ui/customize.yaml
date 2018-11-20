@@ -129,6 +129,8 @@
     icon: mdi:television
   switch.cabinet_lights:
     icon: mdi:lightbulb
+  switch.christmas_tree:
+    icon: mdi:pine-tree
   switch.dining_room_light:
     icon: mdi:lightbulb
   switch.east_hallway_light:

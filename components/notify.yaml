@@ -2,7 +2,7 @@
 # NOTIFY #
 ##########
 
-- name: family
+- name: pushbullet
   platform: pushbullet
   api_key: o.B6fW5ijgMRUdpFzggWZcqqIoJqkaxRJn
 

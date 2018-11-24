@@ -332,3 +332,13 @@ views:
         entity: camera.dog_crate
         show_info: true
         show_state: false
+  - title: settings_view
+    icon: mdi:settings
+    cards:
+      - type: entities
+        title: Automations
+        entities:
+          - automation.entry_table_lamp_onoff
+          - automation.light_or_switch_on_alert
+          - automation.motion_alert
+          - automation.switch_on_alert

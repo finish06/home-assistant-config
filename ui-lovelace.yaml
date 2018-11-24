@@ -342,3 +342,7 @@ views:
           - automation.light_or_switch_on_alert
           - automation.motion_alert
           - automation.switch_on_alert
+          - automation.turn_off_christmas_tree
+          - automation.turn_off_porch_lights
+          - automation.turn_on_christmas_tree
+          - automation.turn_on_porch_lights

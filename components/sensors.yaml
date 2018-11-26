@@ -110,6 +110,29 @@
   qos: 0
   unit_of_measurement: "%"
 
+- platform: darksky
+  api_key: !secret darksky_api
+  monitored_conditions:
+    - summary
+    - icon
+    - temperature
+    - humidity
+
+- platform: nzbget
+  host: 192.168.1.101
+  username: !secret nzbget_user
+  password: !secret nzbget_password
+  monitored_variables:
+    - download_rate
+
+- platform: rtorrent
+  url: http://192.168.1.101:8008/RPC2
+  monitored_variables:
+    - current_status
+    - download_speed
+    - upload_speed
+
+
 # - platform: template
 #   sensors:
 #     office_occupancy_template:
@@ -184,25 +207,3 @@
     #     Unlocked
     #     {%- endif -%}
     #   friendly_name: 'Front Door'
-
-- platform: darksky
-  api_key: !secret darksky_api
-  monitored_conditions:
-    - summary
-    - icon
-    - temperature
-    - humidity
-
-- platform: nzbget
-  host: 192.168.1.101
-  username: !secret nzbget_user
-  password: !secret nzbget_password
-  monitored_variables:
-    - download_rate
-
-- platform: rtorrent
-  url: http://192.168.1.101:8008/RPC2
-  monitored_variables:
-    - current_status
-    - download_speed
-    - upload_speed

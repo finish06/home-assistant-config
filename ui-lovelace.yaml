@@ -266,13 +266,13 @@ views:
           - entity: sensor.west_wing_temperature
             name: Master
       - type: entities
-        name: Lights
+        title: Lights
         entities:
           - light.calebs_lamp
           - light.brittanys_lamp
           - light.master_bedroom_light
       - type: entities
-        title: Fan
+        title: Fans
         entities:
           - switch.master_bedroom_fan
   - title: tech_closet_view

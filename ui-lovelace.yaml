@@ -267,12 +267,14 @@ views:
             name: Master
       - type: entities
         title: Lights
+        show_header_toggle: false
         entities:
           - light.calebs_lamp
           - light.brittanys_lamp
           - light.master_bedroom_light
       - type: entities
         title: Fans
+        show_header_toggle: false
         entities:
           - switch.master_bedroom_fan
   - title: tech_closet_view

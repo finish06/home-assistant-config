@@ -252,21 +252,20 @@ views:
     icon: mdi:bed-empty
     cards:
       - type: entities
+        name: Lights
         entities:
           - light.calebs_lamp
           - light.brittanys_lamp
           - light.master_bedroom_light
       - type: entities
         title: Fan
-        show_header_toggle: true
         entities:
           - switch.master_bedroom_fan
       - type: glance
-        title: Climate
-        show_header_toggle: true
+        title: Temps
         entities:
           - entity: binary_sensor.bedroom_temperature
-          - name: Guest Bedroom
+          - name: Guest Bed
           - entity: sensor.west_wing_temperature
             name: Master
   - title: tech_closet_view

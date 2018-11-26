@@ -43,12 +43,14 @@ views:
             name: Movie Room
           - entity: binary_sensor.bedroom_occupancy
             name: Guest Bed
-          - binary_sensor.kitchen_occupancy
+          - entity: binary_sensor.kitchen_occupancy
+            name: Kitchen
           - entity: binary_sensor.living_room_occupancy
             name: Living
           - entity: binary_sensor.west_wing_occupancy
             name: Master
-          - binary_sensor.office_occupancy
+          - entity: binary_sensor.office_occupancy
+            name: Office
       - type: entities
         title: Office
         show_header_toggle: false

@@ -251,6 +251,20 @@ views:
   - title: bedrooms_view
     icon: mdi:bed-empty
     cards:
+      - type: glance
+        title: Motion
+        entities:
+          - entity: binary_sensor.bedroom_occupancy
+            name: Guest Bedroom
+          - entity: binary_sensor.west_wing_occupancy
+            name: Master
+      - type: glance
+        title: Temps
+        entities:
+          - entity: binary_sensor.bedroom_temperature
+            name: Guest Bed
+          - entity: sensor.west_wing_temperature
+            name: Master
       - type: entities
         name: Lights
         entities:
@@ -261,13 +275,6 @@ views:
         title: Fan
         entities:
           - switch.master_bedroom_fan
-      - type: glance
-        title: Temps
-        entities:
-          - entity: binary_sensor.bedroom_temperature
-            name: Guest Bed
-          - entity: sensor.west_wing_temperature
-            name: Master
   - title: tech_closet_view
     icon: mdi:laptop
     cards:

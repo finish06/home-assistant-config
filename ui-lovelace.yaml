@@ -265,7 +265,7 @@ views:
         title: Temps
         entities:
           - entity: binary_sensor.bedroom_temperature
-          - name: Guest Bed
+            name: Guest Bed
           - entity: sensor.west_wing_temperature
             name: Master
   - title: tech_closet_view

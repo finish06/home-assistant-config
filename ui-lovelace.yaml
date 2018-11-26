@@ -261,12 +261,14 @@ views:
         show_header_toggle: true
         entities:
           - switch.master_bedroom_fan
-      - type: entities
+      - type: glance
         title: Climate
         show_header_toggle: true
         entities:
-          - sensor.west_wing_occupancy_template
-          - sensor.west_wing_temperature
+          - entity: binary_sensor.bedroom_temperature
+          - name: Guest Bedroom
+          - entity: sensor.west_wing_temperature
+            name: Master
   - title: tech_closet_view
     icon: mdi:laptop
     cards:

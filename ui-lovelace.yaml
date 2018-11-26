@@ -255,7 +255,7 @@ views:
         title: Motion
         entities:
           - entity: binary_sensor.bedroom_occupancy
-            name: Guest Bedroom
+            name: Guest Bed
           - entity: binary_sensor.west_wing_occupancy
             name: Master
       - type: glance

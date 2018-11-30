@@ -133,7 +133,10 @@ views:
         entities:
           - light.entry_table_lamp
           - switch.entry_light
+      - type: entities
+        title: Outdoor
           - switch.porch_lights
+          - switch.patio_light
   - title: living_view
     icon: mdi:sofa
     cards:

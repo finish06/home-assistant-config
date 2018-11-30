@@ -52,6 +52,9 @@ google_actions:
     light.movie_floor_lamp:
       name: floor lamp
       room: Movie Room
+    light.table_lamp:
+      name: Table Lamp
+      room: Living Room
     script.call_east_temp:
       name: Call East wing temperature
     switch.cabinet_lights:
@@ -105,6 +108,9 @@ google_actions:
     switch.office_tv:
       name: Samsung TV
       room: Office
+    switch.patio_light
+      name: lights
+      room: Patio
     switch.porch_lights:
       name: lights
       room: Porch

@@ -108,7 +108,7 @@ google_actions:
     switch.office_tv:
       name: Samsung TV
       room: Office
-    switch.patio_light
+    switch.patio_light:
       name: lights
       room: Patio
     switch.porch_lights:

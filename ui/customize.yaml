@@ -1,24 +1,7 @@
 ########
 # View #
 ########
-  automation.hide_living_room_sonos:
-    haaska_hidden: true
-  automation.hide_living_room_sonos_at_start:
-    haaska_hidden: true
-  automation.hide_living_room_tv_at_start:
-    haaska_hidden: true
-  automation.hide_master_bedroom_tv_at_start:
-    haaska_hidden: true
-  automation.hide_office_tv_at_start:
-    haaska_hidden: true
-  automation.select_and_show_living_room_sonos:
-    haaska_hidden: true
-  automation.start_and_show_living_room_tv:
-    haaska_hidden: true
-  automation.start_and_show_master_bedroom_tv:
-    haaska_hidden: true
-  automation.start_and_show_office_tv:
-    haaska_hidden: true
+
   cover.double_door:
     haaska_hidden: true
   cover.single_door:
@@ -47,20 +30,15 @@
     icon: mdi:music
   light.brittanys_lamp:
     friendly_name: Her Lamp
-    haaska_name: Her Lamp
   light.calebs_lamp:
     friendly_name: His Lamp
-    haaska_name: His Lamp
-    theme: center_badges
   light.hgrp0000000030:
     hidden: true
-    haaska_hidden: true
   light.master_bedroom_light:
     friendly_name: Master Bedroom Light
   media_player.living_room:
     friendly_name: Playbar
   media_player.living_room_kodi:
-    haaska_hidden: true
     friendly_name: Kodi
   media_player.master_bedroom_kodi:
     haaska_hidden: true
@@ -188,6 +166,29 @@
   switch.west_hallway_2:
     haaska_hidden: true
     hidden: true
+
+###############
+# AUTOMATIONS #
+###############
+  automation.hide_living_room_sonos:
+    haaska_hidden: true
+  automation.hide_living_room_sonos_at_start:
+    haaska_hidden: true
+  automation.hide_living_room_tv_at_start:
+    haaska_hidden: true
+  automation.hide_master_bedroom_tv_at_start:
+    haaska_hidden: true
+  automation.hide_office_tv_at_start:
+    haaska_hidden: true
+  automation.select_and_show_living_room_sonos:
+    haaska_hidden: true
+  automation.start_and_show_living_room_tv:
+    haaska_hidden: true
+  automation.start_and_show_master_bedroom_tv:
+    haaska_hidden: true
+  automation.start_and_show_office_tv:
+    haaska_hidden: true
+
 ##################
 # BINARY SENSORS #
 ##################
@@ -209,7 +210,6 @@
   binary_sensor.west_wing_occupancy:
     friendly_name: Master Bedroom
     device_class: motion
-
 
 ###########
 # SENSORS #

@@ -228,10 +228,6 @@
     friendly_name: Office
   sensor.west_wing_temperature:
     friendly_name: Master Bedroom
-  sensor.pws_wind_mph:
-    friendly_name: Wind
-    extra_badge:
-      - entity_id: sensor.pws_wind_dir
 
 ##################
 # GROUP ORDERING #

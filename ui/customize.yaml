@@ -166,44 +166,20 @@
     icon: mdi:television
   switch.master_bedroom_tv:
     icon: mdi:television
-  switch.media_rack_switch:
-    friendly_name: Media Rack
-    confirm_controls_show_lock: true
-    extra_badge:
-       - entity_id: sensor.media_rack_power
-         unit: W
-         blacklist_states: 0
-       - entity_id: sensor.media_rack_power_cost
-         unit: USD
-         blacklist_states: 0
   switch.network_rack_switch:
     friendly_name: Networking
-    confirm_controls_show_lock: true
-    extra_badge:
-       - entity_id: sensor.networking_power
-         unit: W
-         blacklist_states: 0
-       - entity_id: sensor.networking_power_cost
-         unit: USD
-         blacklist_states: 0
   switch.office_fan:
     icon: mdi:fan
   switch.office_light:
     icon: mdi:lightbulb
   switch.office_floor_lamp:
     icon: mdi:lightbulb
+  switch.patio_light:
+    icon: mdi:ligthbulb
   switch.porch_lights:
     icon: mdi:lightbulb
   switch.server_rack_switch:
     friendly_name: Compute
-    confirm_controls_show_lock: true
-    extra_badge:
-       - entity_id: sensor.compute_power
-         unit: W
-         blacklist_states: -1
-       - entity_id: sensor.compute_power_cost
-         unit: USD
-         blacklist_states: -1
   switch.west_hallway_light:
     icon: mdi:lightbulb
   switch.west_hallway_1:
@@ -252,16 +228,6 @@
     friendly_name: Office
   sensor.west_wing_temperature:
     friendly_name: Master Bedroom
-  sensor.pws_temp_f:
-    friendly_name: Temperature
-    hide_control: true
-    extra_badge:
-      - entity_id: sensor.pws_temp_low_1d_f
-        unit: Low
-      - entity_id: sensor.pws_temp_high_1d_f
-        unit: High
-      - entity_id: sensor.pws_temp_f
-        unit: Current
   sensor.pws_wind_mph:
     friendly_name: Wind
     extra_badge:

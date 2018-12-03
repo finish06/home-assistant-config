@@ -135,6 +135,7 @@ views:
           - switch.entry_light
       - type: entities
         title: Outdoor
+        show_header_toggle: false
         entities:
           - switch.porch_lights
           - switch.patio_light

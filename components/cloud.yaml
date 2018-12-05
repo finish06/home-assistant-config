@@ -34,63 +34,63 @@ google_actions:
       name: West Thermostat
       room: Master Bedroom
     light.brittanys_lamp:
-      name: her lamp
+      name: Her Lamp
       room: Master Bedroom
     light.living_room_ceiling_lights:
-      name: ceiling lights
+      name: Ceiling Lights
       room: Living Room
     light.calebs_lamp:
-      name: his lamp
+      name: His Lamp
       room: Master Bedroom
     light.entry_table_lamp:
-      name: lamp
+      name: Lamp
       room: Entry
     light.floor_lamp:
-      name: floor lamp
+      name: Floor Lamp
       room: Living Room
     light.entry_lamp:
-      name: table lamp
+      name: Table Lamp
       room: Living Room
     light.living_room_fan_light:
-      name: fan light
+      name: Fan Light
       room: Living Room
     light.master_bedroom_light:
-      name: fan light
+      name: Fan Light
       room: Master Bedroom
     light.movie_floor_lamp:
-      name: floor lamp
+      name: Floor Lamp
       room: Movie Room
     light.table_lamp:
       name: Table Lamp
       room: Living Room
     script.call_east_temp:
-      name: Call East wing temperature
+      name: Call East Wing Temperature
     switch.cabinet_lights:
-      name: cabinet lights
+      name: Cabinet Lights
       room: Kitchen
     switch.christmas_tree:
-      name: tree
+      name: Tree
       room: Living Room
     switch.dining_room_light:
-      name: light
+      name: Light
       room: Dining Room
     switch.east_hallway_light:
-      name: light
+      name: Light
       room: East Hallway
     switch.entry_light:
-      name: ceiling light
+      name: Ceiling Light
       room: Entry
     switch.kitchen_light:
-      name: can lights
+      name: Can Lights
       room: Kitchen
     switch.living_room_fan:
-      name: fan
+      name: Fan
       room: Living Room
     switch.living_room_tv:
       name: Samsung TV
       room: Living Room
     switch.master_bedroom_fan:
-      name: fan
+      name: Fan
       room: Master Bedroom
     switch.master_bedroom_tv:
       name: Samsung TV
@@ -99,23 +99,23 @@ google_actions:
       name: Sony TV
       room: Movie Room
     switch.office_fan:
-      name: fan
+      name: Fan
       room: Office
     switch.office_floor_lamp:
-      name: floor lamp
+      name: Floor Lamp
       room: Office
     switch.office_light:
-      name: fan light
+      name: Fan Light
       room: Office
     switch.office_tv:
       name: Samsung TV
       room: Office
     switch.patio_light:
-      name: lights
+      name: Lights
       room: Patio
     switch.porch_lights:
-      name: lights
+      name: Lights
       room: Porch
     switch.west_hallway_light:
-      name: light
+      name: Light
       room: West Hallway

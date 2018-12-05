@@ -27,6 +27,7 @@ google_actions:
      - switch.living_room_dome_lights_2
      - switch.living_room_light
      - switch.office_floor_lamp
+     - switch.office_light
      - switch.patio_light
      - switch.porch_lights
      - switch.network_rack_switch
@@ -117,12 +118,6 @@ google_actions:
       room: Movie Room
     switch.office_fan:
       name: Fan
-      room: Office
-    switch.office_floor_lamp:
-      name: Floor Lamp
-      room: Office
-    switch.office_light:
-      name: Fan Light
       room: Office
     switch.office_tv:
       name: Samsung TV

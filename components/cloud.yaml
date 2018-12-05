@@ -50,7 +50,6 @@ google_actions:
     light.dining_room_light:
       name: Light
       room: Dining Room
-
     light.east_hallway_light:
       name: Light
       room: East Hallway
@@ -128,12 +127,3 @@ google_actions:
     switch.office_tv:
       name: Samsung TV
       room: Office
-    switch.patio_light:
-      name: Lights
-      room: Patio
-    switch.porch_lights:
-      name: Lights
-      room: Porch
-    switch.west_hallway_light:
-      name: Light
-      room: West Hallway

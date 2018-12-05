@@ -12,7 +12,7 @@
 
 - platform: switch
   name: entry light
-  entity_id: light.entry_light
+  entity_id: switch.entry_light
 
 - platform: switch
   name: kitchen cabinet lights

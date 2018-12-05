@@ -276,7 +276,8 @@ views:
         entities:
           - light.calebs_lamp
           - light.brittanys_lamp
-          - light.master_bedroom_light
+          - entity: light.master_bedroom_light
+            name: Master Bedroom Fan Light
       - type: entities
         title: Fans
         show_header_toggle: false

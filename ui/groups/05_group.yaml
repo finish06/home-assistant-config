@@ -64,32 +64,6 @@ card_tech_closet:
     - sensor.media_rack_power
     - sensor.media_rack_power_cost
 
-################
-# MEDIA GROUPS #
-################
-living_room_soundbar_media_card:
-  name: LG Soundbar
-  entities:
-    - media_player.soundbar
-
-party_speakers_media_card:
-  name: Living Room & Patio Speakers
-  entities:
-    - media_player.party_speakers
-
-living_room_tv_media_card:
-  name: Kodi
-  entities:
-    - media_player.living_room_kodi
-
-main_living_media:
-  name: Media
-  control: hidden
-  entities:
-    - switch.living_room_tv
-    - switch.movie_room_tv
-    - switch.office_tv
-
 ##################
 # CLIMATE GROUPS #
 ##################

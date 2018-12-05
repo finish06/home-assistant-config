@@ -55,10 +55,10 @@ google_actions:
       name: Light
       room: East Hallway
     light.entry_light:
-      name: Light
+      name: Ceiling Light
       room: Entry
     light.entry_table_lamp:
-      name: Lamp
+      name: Table Lamp
       room: Entry
     light.floor_lamp:
       name: Floor Lamp
@@ -81,6 +81,9 @@ google_actions:
     light.movie_floor_lamp:
       name: Floor Lamp
       room: Movie Room
+    light.office_fan_light:
+       name: Fan Light
+       room: Office
     light.office_floor_lamp:
       name: Floor Lamp
       room: Office
@@ -105,7 +108,7 @@ google_actions:
       name: Fan
       room: Living Room
     switch.living_room_tv:
-      name: Samsung TV
+      name: Samsung Television
       room: Living Room
     switch.master_bedroom_fan:
       name: Fan

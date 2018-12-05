@@ -259,9 +259,12 @@ views:
         title: Kitchen
         show_header_toggle: false
         entities:
-          - light.dining_room_light
-          - light.kitchen_cabinet_lights
-          - light.kitchen_ceiling_lights
+          - entity: light.dining_room_light
+            name: Dining Light
+          - entity: light.kitchen_ceiling_lights
+            name: Ceiling Lights
+          - entity: light.kitchen_cabinet_lights
+            name: Cabinet Lights
       - type: entities
         title: Office
         show_header_toggle: false

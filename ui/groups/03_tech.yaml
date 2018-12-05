@@ -1,6 +1,0 @@
-tech_closet_view:
-  icon: mdi:laptop
-  view: yes
-  entities:
-    - group.tech_closet_climate_card
-    - group.tech_closet_equipment

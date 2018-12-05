@@ -3,18 +3,6 @@
 ##########
 
 - platform: switch
-  name: living room ceiling lights
-  entity_id: switch.living_room_dome_lights
-
-- platform: switch
-  name: living room fan light
-  entity_id: switch.living_room_light
-
-- platform: switch
-  name: cabinet lights
-  entity_id: switch.cabinet_lights
-
-- platform: switch
   name: dining room light
   entity_id: switch.dining_room_light
 
@@ -24,4 +12,20 @@
 
 - platform: switch
   name: entry light
-  entity_id: switch.entry_light
+  entity_id: light.entry_light
+
+- platform: switch
+  name: kitchen cabinet lights
+  entity_id: switch.cabinet_lights
+
+- platform: switch
+  name: kitchen ceiling lights
+  entity_id: switch.kitchen_light
+
+- platform: switch
+  name: living room ceiling lights
+  entity_id: switch.living_room_dome_lights
+
+- platform: switch
+  name: living room fan light
+  entity_id: switch.living_room_light

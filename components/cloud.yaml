@@ -15,6 +15,10 @@ google_actions:
      - light.hgrp0000000030
      - light.movie_room
      - switch.auto_dr
+     - switch.cabinet_lights
+     - switch.dining_room_light
+     - switch.east_hallway_light
+     - switch.entry_light
      - switch.kitchen_light_1
      - switch.kitchen_light_2
      - switch.living_room_dome_lights
@@ -36,6 +40,18 @@ google_actions:
     light.brittanys_lamp:
       name: Her Lamp
       room: Master Bedroom
+    light.cabinet_lights:
+      name: Cabinet Lights
+      room: Kitchen
+    light.dining_room_light:
+      name: Light
+      room: Dining Room
+    light.east_hallway_light:
+      name: Light
+      room: East Hallway
+    light.entry_light:
+      name: Light
+      room: Entry
     light.living_room_ceiling_lights:
       name: Ceiling Lights
       room: Living Room
@@ -65,21 +81,9 @@ google_actions:
       room: Living Room
     script.call_east_temp:
       name: Call East Wing Temperature
-    switch.cabinet_lights:
-      name: Cabinet Lights
-      room: Kitchen
     switch.christmas_tree:
       name: Tree
       room: Living Room
-    switch.dining_room_light:
-      name: Light
-      room: Dining Room
-    switch.east_hallway_light:
-      name: Light
-      room: East Hallway
-    switch.entry_light:
-      name: Ceiling Light
-      room: Entry
     switch.kitchen_light:
       name: Can Lights
       room: Kitchen

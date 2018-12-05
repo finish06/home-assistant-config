@@ -9,3 +9,19 @@
 - platform: switch
   name: living room fan light
   entity_id: switch.living_room_light
+
+- platform: switch
+  name: cabinet lights
+  entity_id: switch.cabinet_lights
+
+- platform: switch
+  name: dining room light
+  entity_id: switch.dining_room_light
+
+- platform: switch
+  name: east hallway light
+  entity_id: switch.east_hallway_light
+
+- platform: switch
+  name: entry light
+  entity_id: switch.entry_light

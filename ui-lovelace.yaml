@@ -70,6 +70,8 @@ views:
             name: Ceiling Lights
           - entity: light.floor_lamp
             name: Floor Lamp
+          - entity: light.table_lamp
+            name: Table Lamp
           - entity: switch.living_room_fan
             name: Fan
           - entity: switch.living_room_tv

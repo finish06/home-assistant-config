@@ -54,46 +54,66 @@ views:
         title: Office
         show_header_toggle: false
         entities:
-          - switch.office_light
-          - switch.office_floor_lamp
-          - switch.office_fan
+          - entity: switch.office_light
+            name: Fan Light
+          - entity: switch.office_floor_lamp
+            name: Floor Lamp
+          - entity: switch.office_fan
+            name: Fan
       - type: entities
         title: Living Room
         show_header_toggle: false
         entities:
-          - light.living_room_fan_light
-          - light.living_room_ceiling_lights
-          - light.floor_lamp
-          - switch.living_room_fan
-          - switch.living_room_tv
-          - switch.christmas_tree
+          - entity: light.living_room_fan_light
+            name: Fan Light
+          - entity: light.living_room_ceiling_lights
+            name: Ceiling Lights
+          - entity: light.floor_lamp
+            name: Floor Lamp
+          - entity: switch.living_room_fan
+            name: Fan
+          - entity: switch.living_room_tv
+            name: TV
+          - entity: switch.christmas_tree
+            name: Tree
       - type: entities
         title: Master Bedroom
         show_header_toggle: false
         entities:
-          - light.calebs_lamp
-          - light.brittanys_lamp
-          - light.master_bedroom_light
-          - switch.master_bedroom_fan
+          - entity: light.calebs_lamp
+            name: His Lamp
+          - entity: light.brittanys_lamp
+            name: Her Lamp
+          - entity: light.master_bedroom_light
+            name: Fan Light
+          - entity: switch.master_bedroom_fan
+            name: Fan
       - type: entities
         title: Movie Room
         show_header_toggle: false
         entities:
-          - light.movie_floor_lamp
-          - switch.movie_room_tv
+          - entity: light.movie_floor_lamp
+            name: Floor Lamp
+          - entity: switch.movie_room_tv
+            name: TV
       - type: entities
         title: Hallways
         show_header_toggle: false
         entities:
-          - switch.west_hallway_light
-          - light.east_hallway_light
+          - entity: switch.west_hallway_light
+            name: West Hallway Light
+          - entity: light.east_hallway_light
+            name: East Hallway Light
       - type: entities
         title: Kitchen
         show_header_toggle: false
         entities:
-          - light.dining_room_light
-          - light.kitchen_ceiling_lights
-          - light.kitchen_cabinet_lights
+          - entity: light.dining_room_light
+            name: Dining Light
+          - entity: light.kitchen_ceiling_lights
+            name: Ceiling Lights
+          - entity: light.kitchen_cabinet_lights
+            name: Cabinet Lights
       - type: entities
         title: Climate
         show_header_toggle: true
@@ -130,14 +150,18 @@ views:
         title: Entry
         show_header_toggle: false
         entities:
-          - light.entry_table_lamp
-          - switch.entry_light
+          - entity: light.entry_table_lamp
+            name: Table Lamp
+          - entity: switch.entry_light
+            name: Ceiling Light
       - type: entities
         title: Outdoor
         show_header_toggle: false
         entities:
-          - switch.porch_lights
-          - switch.patio_light
+          - entity: switch.porch_lights
+            name: Front Lights
+          - entity: switch.patio_light
+            name: Back Light
   - title: living_view
     icon: mdi:sofa
     cards:

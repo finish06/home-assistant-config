@@ -26,7 +26,6 @@ google_actions:
      - switch.living_room_dome_lights_1
      - switch.living_room_dome_lights_2
      - switch.living_room_light
-     - switch.media_rack_switch
      - switch.network_rack_switch
      - switch.server_rack_switch
      - switch.west_hallway_1

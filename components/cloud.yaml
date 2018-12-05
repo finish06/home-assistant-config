@@ -17,8 +17,10 @@ google_actions:
      - switch.auto_dr
      - switch.kitchen_light_1
      - switch.kitchen_light_2
+     - switch.living_room_dome_lights
      - switch.living_room_dome_lights_1
      - switch.living_room_dome_lights_2
+     - switch.living_room_light
      - switch.media_rack_switch
      - switch.network_rack_switch
      - switch.server_rack_switch
@@ -34,6 +36,9 @@ google_actions:
     light.brittanys_lamp:
       name: her lamp
       room: Master Bedroom
+    light.living_room_ceiling_lights:
+      name: ceiling lights
+      room: Living Room
     light.calebs_lamp:
       name: his lamp
       room: Master Bedroom
@@ -45,6 +50,9 @@ google_actions:
       room: Living Room
     light.entry_lamp:
       name: table lamp
+      room: Living Room
+    light.living_room_fan_light:
+      name: fan light
       room: Living Room
     light.master_bedroom_light:
       name: fan light
@@ -75,14 +83,8 @@ google_actions:
     switch.kitchen_light:
       name: can lights
       room: Kitchen
-    switch.living_room_dome_lights:
-      name: can lights
-      room: Living Room
     switch.living_room_fan:
       name: fan
-      room: Living Room
-    switch.living_room_light:
-      name: fan light
       room: Living Room
     switch.living_room_tv:
       name: Samsung TV

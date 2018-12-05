@@ -3,9 +3,9 @@
 ##########
 
 - platform: switch
-  name: ceiling lights
+  name: living room ceiling lights
   entity_id: switch.living_room_dome_lights
 
 - platform: switch
-  name: fan light
+  name: living room fan light
   entity_id: switch.living_room_light

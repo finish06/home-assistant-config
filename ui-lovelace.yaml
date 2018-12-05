@@ -282,6 +282,10 @@ views:
         show_header_toggle: false
         entities:
           - switch.master_bedroom_fan
+      - type: entities
+        title: Televisions
+        entities:
+          - switch.master_bedroom_tv
   - title: tech_closet_view
     icon: mdi:laptop
     cards:

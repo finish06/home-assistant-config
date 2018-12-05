@@ -82,23 +82,6 @@ garage_doors:
     - sensor.single_door_template
 
 #################
-# SENSOR GROUPS #
-#################
-tech_closet_climate_card:
-  name: Climate
-  entities:
-    - sensor.tech_closet_temp
-    - sensor.tech_closet_humidity
-    - sensor.tech_closet_battery
-
-tech_closet_equipment:
-  name: Equipment
-  control: hidden
-  entities:
-    - switch.network_rack_switch
-    - switch.server_rack_switch
-
-#################
 # LIGHTS & FANS #
 #################
 entry_lights:

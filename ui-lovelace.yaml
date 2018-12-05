@@ -191,10 +191,18 @@ views:
         title: Living Room
         show_header_toggle: false
         entities:
-          - light.living_room_fan_light
-          - light.living_room_ceiling_lights
-          - light.floor_lamp
-          - switch.living_room_fan
+          - entity: light.living_room_fan_light
+            name: Fan Light
+          - entity: light.living_room_ceiling_lights
+            name: Ceiling Lights
+          - entity: light.floor_lamp
+            name: Floor Lamp
+          - entity: light.table_lamp
+            name: Table Lamp
+          - entity: switch.living_room_fan
+            name: Fan
+          - entity: switch.christmas_tree
+            name: Tree
       - type: entities
         title: Televisions
         show_header_toggle: false

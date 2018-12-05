@@ -34,6 +34,10 @@
     friendly_name: His Lamp
   light.hgrp0000000030:
     hidden: true
+  light.living_room_fan_light:
+    friendly_name: Fan Light
+  light.living_room_ceiling_lights:
+    friendly_name: Ceiling Lights
   light.master_bedroom_light:
     friendly_name: Master Bedroom Light
   media_player.living_room:

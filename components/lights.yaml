@@ -29,3 +29,19 @@
 - platform: switch
   name: living room fan light
   entity_id: switch.living_room_light
+
+- platform: switch
+  name: office floor lamp
+  entity_id: switch.office_floor_lamp
+
+- platform: switch
+  name: patio light
+  entity_id: switch.patio_light
+
+- platform: switch
+  name: porch lights
+  entity_id: switch.porch_lights
+
+- platform: switch
+  name: west hallway light
+  entity_id: switch.west_hallway_light

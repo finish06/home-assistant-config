@@ -26,8 +26,12 @@ google_actions:
      - switch.living_room_dome_lights_1
      - switch.living_room_dome_lights_2
      - switch.living_room_light
+     - switch.office_floor_lamp
+     - switch.patio_light
+     - switch.porch_lights
      - switch.network_rack_switch
      - switch.server_rack_switch
+     - switch.west_hallway_light
      - switch.west_hallway_1
      - switch.west_hallway_2
   entity_config:
@@ -40,15 +44,25 @@ google_actions:
     light.brittanys_lamp:
       name: Her Lamp
       room: Master Bedroom
+    light.calebs_lamp:
+      name: His Lamp
+      room: Master Bedroom
     light.dining_room_light:
       name: Light
       room: Dining Room
+
     light.east_hallway_light:
       name: Light
       room: East Hallway
     light.entry_light:
       name: Light
       room: Entry
+    light.entry_table_lamp:
+      name: Lamp
+      room: Entry
+    light.floor_lamp:
+      name: Floor Lamp
+      room: Living Room
     light.kitchen_cabinet_lights:
       name: Cabinet Lights
       room: Kitchen
@@ -57,18 +71,6 @@ google_actions:
       room: Kitchen
     light.living_room_ceiling_lights:
       name: Ceiling Lights
-      room: Living Room
-    light.calebs_lamp:
-      name: His Lamp
-      room: Master Bedroom
-    light.entry_table_lamp:
-      name: Lamp
-      room: Entry
-    light.floor_lamp:
-      name: Floor Lamp
-      room: Living Room
-    light.entry_lamp:
-      name: Table Lamp
       room: Living Room
     light.living_room_fan_light:
       name: Fan Light
@@ -79,9 +81,21 @@ google_actions:
     light.movie_floor_lamp:
       name: Floor Lamp
       room: Movie Room
+    light.office_floor_lamp:
+      name: Floor Lamp
+      room: Office
+    light.patio_light:
+      name: Light
+      room: Patio
+    light.porch_lights:
+      name: Lights
+      room: Porch
     light.table_lamp:
       name: Table Lamp
       room: Living Room
+    light.west_hallway_light:
+      name: Light
+      room: West Hallway
     script.call_east_temp:
       name: Call East Wing Temperature
     switch.christmas_tree:

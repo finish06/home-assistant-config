@@ -25,6 +25,13 @@
     payload_off: "off"
 
   - platform: mqtt
+    name: "Master Bedroom TV"
+    state_topic: "harmony/hubs/master-bedroom/activities/shield-tv/state"
+    command_topic: "harmony/hubs/master-bedroom/activities/shield-tv/command"
+    payload_on: "on"
+    payload_off: "off"
+
+  - platform: mqtt
     name: "Network Rack Switch"
     state_topic: "smartthings/Network Rack Switch/switch"
     command_topic: "smartthings/Network Rack Switch/switch"

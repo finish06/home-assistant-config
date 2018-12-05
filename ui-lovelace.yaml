@@ -92,7 +92,7 @@ views:
         show_header_toggle: false
         entities:
           - light.dining_room_light
-          - light.kitchen_ceiling_light
+          - light.kitchen_ceiling_lights
           - light.kitchen_cabinet_lights
       - type: entities
         title: Climate
@@ -237,7 +237,7 @@ views:
         entities:
           - light.dining_room_light
           - light.kitchen_cabinet_lights
-          - light.kitchen_ceiling_light
+          - light.kitchen_ceiling_lights
       - type: entities
         title: Office
         show_header_toggle: false

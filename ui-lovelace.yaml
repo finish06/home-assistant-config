@@ -161,7 +161,7 @@ views:
           - entity: switch.porch_lights
             name: Front Lights
           - entity: switch.patio_light
-            name: Back Light
+            name: Back Lights
   - title: living_view
     icon: mdi:sofa
     cards:

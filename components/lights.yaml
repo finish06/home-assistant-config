@@ -31,6 +31,10 @@
   entity_id: switch.living_room_light
 
 - platform: switch
+  name: office fan light
+  entity_id: switch.office_light
+
+- platform: switch
   name: office floor lamp
   entity_id: switch.office_floor_lamp
 

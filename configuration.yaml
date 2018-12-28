@@ -47,7 +47,6 @@ discovery:
   ignore:
     - samsung_tv
     - yamaha
-    - harmony
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:

@@ -18,13 +18,6 @@
     payload_off: "off"
 
   - platform: mqtt
-    name: "Living Room TV"
-    state_topic: "harmony/hubs/living-room/activities/shield-tv/state"
-    command_topic: "harmony/hubs/living-room/activities/shield-tv/command"
-    payload_on: "on"
-    payload_off: "off"
-
-  - platform: mqtt
     name: "Master Bedroom TV"
     state_topic: "harmony/hubs/master-bedroom/activities/shield-tv/state"
     command_topic: "harmony/hubs/master-bedroom/activities/shield-tv/command"
@@ -68,3 +61,10 @@
          turn_off:
              service: remote.turn_off
              entity_id: remote.living_room
+
+  # - platform: mqtt
+  #   name: "Living Room TV"
+  #   state_topic: "harmony/hubs/living-room/activities/shield-tv/state"
+  #   command_topic: "harmony/hubs/living-room/activities/shield-tv/command"
+  #   payload_on: "on"
+  #   payload_off: "off"

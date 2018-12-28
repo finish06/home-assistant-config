@@ -52,7 +52,7 @@
     switches:
        living_room_tv:
          friendly_name: 'Living Room TV'
-         value_template: "{{ is_state_attr('remote.living_room, 'current_activity', ‘PowerOn’) }}"
+         value_template: "{{ is_state_attr('remote.living_room, 'current_activity', 'SHIELD_TV') }}"
          turn_on:
             service: remote.turn_on
             data:

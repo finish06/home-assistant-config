@@ -116,6 +116,9 @@ google_actions:
     switch.master_bedroom_tv:
       name: Samsung TV
       room: Master Bedroom
+    switch.movie_room_light:
+      name: Ceiling Light
+      room: Movie Room
     switch.movie_room_tv:
       name: Sony TV
       room: Movie Room

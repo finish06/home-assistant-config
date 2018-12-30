@@ -26,6 +26,8 @@ google_actions:
      - switch.living_room_dome_lights_1
      - switch.living_room_dome_lights_2
      - switch.living_room_light
+     - switch.movie_room_1
+     - switch.movie_room_2
      - switch.office_floor_lamp
      - switch.office_light
      - switch.patio_light

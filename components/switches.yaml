@@ -57,7 +57,7 @@
             service: remote.turn_on
             data:
               entity_id: remote.living_room
-              activity: '33272944'
+              activity: 'SHIELD TV'
          turn_off:
              service: remote.turn_off
              data:

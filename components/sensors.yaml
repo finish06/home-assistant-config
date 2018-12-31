@@ -138,7 +138,7 @@
       friendly_name: "Download"
       entity_id: "sensor.total_download"
       unit_of_measurement: "kB/s"
-      value_template: "{{ (states('sensor.rtorrent_up_speed')|float + (states('sensor.nzbget_speed')|float) * 1000) }}"
+      value_template: "{{ states('sensor.rtorrent_down_speed')|float + (states('sensor.nzbget_speed')|float * 1000) | round(2) }}"
 
 # - platform: template
 #   sensors:

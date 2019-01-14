@@ -1,5 +1,5 @@
   id: auto_entry_lamp
-  alias: Entry Table Lamp On/Off
+  alias: Entry Table Lamp On or Off
   trigger:
     - platform: homeassistant
       event: start

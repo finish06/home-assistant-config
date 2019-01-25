@@ -22,7 +22,7 @@
         title: 'Dunn Home'
         message: >
           {% for state in states.light %}
-            {%- if (is_state(state.entity_id, 'on') and state.entity_id != 'light.hgrp0000000030' and state.entity_id != 'light.hue_living_room' and state.entity_id != 'light.hue_master_bedroom' and state.entity_id != 'light.movie_room' and state.entity_id != 'light.entry_table_lamp')  %}
+            {%- if (is_state(state.entity_id, 'on') and state.entity_id != 'light.hgrp_0000000030' and state.entity_id != 'light.hue_living_room' and state.entity_id != 'light.hue_master_bedroom' and state.entity_id != 'light.movie_room' and state.entity_id != 'light.entry_table_lamp')  %}
               "No one is home and the {{ state_attr(state.entity_id, 'friendly_name') }} is still on."
             {% endif -%}
           {% endfor %}

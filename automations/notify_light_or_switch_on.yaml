@@ -1,7 +1,7 @@
   id: notify_light_or_swtich_alert
   alias: Light or Switch On Alert
   trigger:
-    platform: time
+    platform: time_pattern
     minutes: '/5'
     seconds: 00
   condition:

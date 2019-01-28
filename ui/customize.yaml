@@ -232,29 +232,3 @@
     friendly_name: Office
   sensor.west_wing_temperature:
     friendly_name: Master Bedroom
-
-##################
-# GROUP ORDERING #
-##################
-# Overview
-  group.motion:
-    order: 2
-# Main Living
-  group.main_living_climate:
-    order: 1
-  group.living_room_lights:
-    order: 2
-  group.living_room_media:
-    order: 3
-  group.living_room_tv_media_card:
-    order: 4
-  group.living_room_sonos_media_card:
-    order: 5
-  group.kitchen_lights:
-    order: 6
-  group.entry_lights:
-    order: 7
-  group.office_lights:
-    order: 8
-  group.office_tv_media_card:
-    order: 9

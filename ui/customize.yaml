@@ -175,22 +175,22 @@
 # BINARY SENSORS #
 ##################
   binary_sensor.bonus_room_occupancy:
-    friendly_name: Movie Room
+    friendly_name: Movie
     device_class: motion
   binary_sensor.bedroom_occupancy:
-    friendly_name: Guest Bedroom
+    friendly_name: Guest Bed
     device_class: motion
   binary_sensor.kitchen_occupancy:
     friendly_name: Kitchen
     device_class: motion
   binary_sensor.living_room_occupancy:
-    friendly_name: Living Room
+    friendly_name: Living
     device_class: motion
   binary_sensor.office_occupancy:
     friendly_name: Office
     device_class: motion
   binary_sensor.west_wing_occupancy:
-    friendly_name: Master Bedroom
+    friendly_name: Master
     device_class: motion
 
 ###########

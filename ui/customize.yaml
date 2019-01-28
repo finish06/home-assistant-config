@@ -171,28 +171,6 @@
     haaska_hidden: true
     hidden: true
 
-###############
-# AUTOMATIONS #
-###############
-  automation.hide_living_room_sonos:
-    haaska_hidden: true
-  automation.hide_living_room_sonos_at_start:
-    haaska_hidden: true
-  automation.hide_living_room_tv_at_start:
-    haaska_hidden: true
-  automation.hide_master_bedroom_tv_at_start:
-    haaska_hidden: true
-  automation.hide_office_tv_at_start:
-    haaska_hidden: true
-  automation.select_and_show_living_room_sonos:
-    haaska_hidden: true
-  automation.start_and_show_living_room_tv:
-    haaska_hidden: true
-  automation.start_and_show_master_bedroom_tv:
-    haaska_hidden: true
-  automation.start_and_show_office_tv:
-    haaska_hidden: true
-
 ##################
 # BINARY SENSORS #
 ##################

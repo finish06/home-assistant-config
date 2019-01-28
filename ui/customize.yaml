@@ -2,10 +2,6 @@
 # View #
 ########
 
-  cover.double_door:
-    haaska_hidden: true
-  cover.single_door:
-    haaska_hidden: true
   group.main_living_temps:
     custom_ui_state_card: state-card-custom-ui
     theme: center_badges
@@ -18,14 +14,6 @@
   group.room_temps_2:
     custom_ui_state_card: state-card-custom-ui
     theme: center_badges
-  input_boolean.dynamic_living_room_tv:
-    haaska_hidden: true
-  input_boolean.dynamic_living_room_sonos:
-    haaska_hidden: true
-  input_boolean.dynamic_master_bedroom_tv:
-    haaska_hidden: true
-  input_boolean.dynamic_office_tv:
-    haaska_hidden: true
   input_select.dynamic_living_room_sonos:
     icon: mdi:music
   light.brittanys_lamp:
@@ -45,20 +33,15 @@
   media_player.living_room_kodi:
     friendly_name: Kodi
   media_player.master_bedroom_kodi:
-    haaska_hidden: true
     friendly_name: Kodi
   media_player.office_kodi:
-    haaska_hidden: true
     friendly_name: Kodi
   media_player.living_room_shield:
     hidden: true
-    haaska_hidden: true
   media_player.master_bedroom_shield:
     hidden: true
-    haaska_hidden: true
   media_player.office_shield:
     hidden: true
-    haaska_hidden: true
   sensor.caleb_location_template:
     friendly_name: Caleb
     icon: mdi:account
@@ -105,7 +88,6 @@
   sensor.west_wing_humidity:
     icon: mdi:water-percent
   switch.auto_dr:
-    haaska_hidden: true
     hidden: true
   switch.movie_room_tv:
     icon: mdi:television
@@ -122,10 +104,8 @@
   switch.kitchen_light:
     icon: mdi:lightbulb
   switch.kitchen_light_1:
-    haaska_hidden: true
     hidden: true
   switch.kitchen_light_2:
-    haaska_hidden: true
     hidden: true
   switch.living_room_fan:
     icon: mdi:fan
@@ -134,10 +114,8 @@
   switch.living_room_dome_lights:
     icon: mdi:lightbulb
   switch.living_room_dome_lights_1:
-    haaska_hidden: true
     hidden: true
   switch.living_room_dome_lights_2:
-    haaska_hidden: true
     hidden: true
   switch.living_room_tv:
     icon: mdi:television
@@ -165,10 +143,8 @@
   switch.west_hallway_light:
     icon: mdi:lightbulb
   switch.west_hallway_1:
-    haaska_hidden: true
     hidden: true
   switch.west_hallway_2:
-    haaska_hidden: true
     hidden: true
 
 ##################

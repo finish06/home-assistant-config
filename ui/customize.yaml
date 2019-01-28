@@ -173,16 +173,14 @@
 # SENSORS #
 ###########
   sensor.bonus_room_temperature:
-    friendly_name: Movie Room
+    friendly_name: Movie
   sensor.bedroom_temperature:
-    friendly_name: Guest Bedroom
-  sensor.home_gym_temperature:
-    friendly_name: Home Gym
+    friendly_name: Guest Bed
   sensor.kitchen_temperature:
     friendly_name: Kitchen
   sensor.living_room_temperature:
-    friendly_name: Living Room
+    friendly_name: Living
   sensor.office_temperature:
     friendly_name: Office
   sensor.west_wing_temperature:
-    friendly_name: Master Bedroom
+    friendly_name: Master

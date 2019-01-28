@@ -75,65 +75,6 @@
     icon: mdi:garage
   sensor.west_wing_humidity:
     icon: mdi:water-percent
-  switch.auto_dr:
-    hidden: true
-  switch.movie_room_tv:
-    icon: mdi:television
-  switch.cabinet_lights:
-    icon: mdi:lightbulb
-  switch.christmas_tree:
-    icon: mdi:pine-tree
-  switch.dining_room_light:
-    icon: mdi:lightbulb
-  switch.east_hallway_light:
-    icon: mdi:lightbulb
-  switch.entry_light:
-    icon: mdi:lightbulb
-  switch.kitchen_light:
-    icon: mdi:lightbulb
-  switch.kitchen_light_1:
-    hidden: true
-  switch.kitchen_light_2:
-    hidden: true
-  switch.living_room_fan:
-    icon: mdi:fan
-  switch.living_room_light:
-    icon: mdi:lightbulb
-  switch.living_room_dome_lights:
-    icon: mdi:lightbulb
-  switch.living_room_dome_lights_1:
-    hidden: true
-  switch.living_room_dome_lights_2:
-    hidden: true
-  switch.living_room_tv:
-    icon: mdi:television
-  switch.master_bedroom_fan:
-    friendly_name: Master Bedroom Fan
-    icon: mdi:fan
-  switch.office_tv:
-    icon: mdi:television
-  switch.master_bedroom_tv:
-    icon: mdi:television
-  switch.network_rack_switch:
-    friendly_name: Networking
-  switch.office_fan:
-    icon: mdi:fan
-  switch.office_light:
-    icon: mdi:lightbulb
-  switch.office_floor_lamp:
-    icon: mdi:lightbulb
-  switch.patio_light:
-    icon: mdi:lightbulb
-  switch.porch_lights:
-    icon: mdi:lightbulb
-  switch.server_rack_switch:
-    friendly_name: Compute
-  switch.west_hallway_light:
-    icon: mdi:lightbulb
-  switch.west_hallway_1:
-    hidden: true
-  switch.west_hallway_2:
-    hidden: true
 
 ##################
 # BINARY SENSORS #
@@ -172,3 +113,80 @@
     friendly_name: Office
   sensor.west_wing_temperature:
     friendly_name: Master
+
+############
+# SWITCHES #
+############
+  switch.auto_dr:
+    hidden: true
+  switch.cabinet_lights:
+    friendly_name: Kitchen Cabinet Lights
+    icon: mdi:lightbulb
+  switch.dining_room_light:
+    friendly_name: Dining Light
+    icon: mdi:lightbulb
+  switch.east_hallway_light:
+    friendly_name: East Hallway Light
+    icon: mdi:lightbulb
+  switch.entry_light:
+    friendly_name: Entry Ceiling Light
+    icon: mdi:lightbulb
+  switch.kitchen_light:
+    friendly_name: Kitchen Ceiling Lights
+    icon: mdi:lightbulb
+  switch.kitchen_light_1:
+    hidden: true
+  switch.kitchen_light_2:
+    hidden: true
+  switch.living_room_fan:
+    friendly_name: Living Fan
+    icon: mdi:fan
+  switch.living_room_light:
+    friendly_name: Living Fan Light
+    icon: mdi:lightbulb
+  switch.living_room_dome_lights:
+    friendly_name: Living Ceiling Lights
+    icon: mdi:lightbulb
+  switch.living_room_dome_lights_1:
+    hidden: true
+  switch.living_room_dome_lights_2:
+    hidden: true
+  switch.living_room_tv:
+    friendly_name: Living TV
+    icon: mdi:television
+  switch.master_bedroom_fan:
+    friendly_name: Master Fan
+    icon: mdi:fan
+  switch.office_tv:
+    friendly_name: Office TV
+    icon: mdi:television
+  switch.master_bedroom_tv:
+    friendly_name: Master TV
+    icon: mdi:television
+  switch.movie_room_tv:
+    icon: mdi:television
+  switch.network_rack_switch:
+    friendly_name: Networking
+  switch.office_fan:
+    friendly_name: Office Fan
+    icon: mdi:fan
+  switch.office_light:
+    friendly_name: Office Light
+    icon: mdi:lightbulb
+  switch.office_floor_lamp:
+    friendly_name: Office Floor Lamp
+    icon: mdi:lightbulb
+  switch.patio_light:
+    friendly_name: Patio Light
+    icon: mdi:lightbulb
+  switch.porch_lights:
+    icon: mdi:lightbulb
+  switch.server_rack_switch:
+    friendly_name: Compute
+  switch.west_hallway_light:
+    friendly_name: West Hallway Light
+    icon: mdi:lightbulb
+  switch.west_hallway_1:
+    hidden: true
+  switch.west_hallway_2:
+    hidden: true

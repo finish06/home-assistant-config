@@ -2,18 +2,6 @@
 # View #
 ########
 
-  group.main_living_temps:
-    custom_ui_state_card: state-card-custom-ui
-    theme: center_badges
-  group.motion_badges:
-    custom_ui_state_card: state-card-custom-ui
-    theme: center_badges
-  group.room_temps_1:
-    custom_ui_state_card: state-card-custom-ui
-    theme: center_badges
-  group.room_temps_2:
-    custom_ui_state_card: state-card-custom-ui
-    theme: center_badges
   input_select.dynamic_living_room_sonos:
     icon: mdi:music
   light.brittanys_lamp:

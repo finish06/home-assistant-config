@@ -110,7 +110,7 @@ google_actions:
       name: Fan
       room: Living Room
     switch.living_room_tv:
-      name: Samsung Television
+      name: Samsung TV
       room: Living Room
     switch.master_bedroom_fan:
       name: Fan

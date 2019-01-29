@@ -164,6 +164,7 @@
     friendly_name: Master TV
     icon: mdi:television
   switch.movie_room_tv:
+    friendly_name: Movie TV
     icon: mdi:television
   switch.network_rack_switch:
     friendly_name: Networking

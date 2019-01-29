@@ -66,7 +66,7 @@
 
   - platform: template
     switches:
-       living_room_tv:
+       master_bedroom_tv:
          friendly_name: 'Master Bedroom TV'
          value_template: "{{ is_state_attr('remote.master_bedroom', 'current_activity', 'Shield TV') }}"
          turn_on:
@@ -82,9 +82,9 @@
 
   - platform: template
     switches:
-       living_room_tv:
+       movie_room_tv:
          friendly_name: 'Movie Room TV'
-         value_template: "{{ is_state_attr('remote.master_bedroom', 'current_activity', 'Shield TV') }}"
+         value_template: "{{ is_state_attr('remote.movie_room', 'current_activity', 'Shield TV') }}"
          turn_on:
             service: remote.turn_on
             data:

@@ -52,16 +52,48 @@
     switches:
        living_room_tv:
          friendly_name: 'Living Room TV'
-         value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'SHIELD TV') }}"
+         value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Shield TV') }}"
          turn_on:
             service: remote.turn_on
             data:
               entity_id: remote.living_room
-              activity: 'SHIELD TV'
+              activity: 'Shield TV'
          turn_off:
              service: remote.turn_off
              data:
                entity_id: remote.living_room
+               activity: "-1"
+
+  - platform: template
+    switches:
+       living_room_tv:
+         friendly_name: 'Master Bedroom TV'
+         value_template: "{{ is_state_attr('remote.master_bedroom', 'current_activity', 'Shield TV') }}"
+         turn_on:
+            service: remote.turn_on
+            data:
+              entity_id: remote.master_bedroom
+              activity: 'Shield TV'
+         turn_off:
+             service: remote.turn_off
+             data:
+               entity_id: remote.master_bedroom
+               activity: "-1"
+
+  - platform: template
+    switches:
+       living_room_tv:
+         friendly_name: 'Movie Room TV'
+         value_template: "{{ is_state_attr('remote.master_bedroom', 'current_activity', 'Shield TV') }}"
+         turn_on:
+            service: remote.turn_on
+            data:
+              entity_id: remote.movie_room
+              activity: 'Shield TV'
+         turn_off:
+             service: remote.turn_off
+             data:
+               entity_id: remote.movie_room
                activity: "-1"
 
   # - platform: mqtt

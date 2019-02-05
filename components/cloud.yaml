@@ -103,9 +103,6 @@ google_actions:
       room: West Hallway
     script.call_east_temp:
       name: Call East Wing Temperature
-    switch.christmas_tree:
-      name: Tree
-      room: Living Room
     switch.living_room_fan:
       name: Fan
       room: Living Room

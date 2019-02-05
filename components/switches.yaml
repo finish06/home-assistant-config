@@ -82,6 +82,22 @@
                entity_id: remote.movie_room
                activity: "-1"
 
+  - platform: template
+    switches:
+       office_tv:
+         friendly_name: 'Office TV'
+         value_template: "{{ is_state_attr('remote.office', 'current_activity', 'Shield TV') }}"
+         turn_on:
+            service: remote.turn_on
+            data:
+              entity_id: remote.office
+              activity: 'Shield TV'
+         turn_off:
+             service: remote.turn_off
+             data:
+               entity_id: remote.office
+               activity: "-1"
+
   # - platform: mqtt
   #   name: "Living Room TV"
   #   state_topic: "harmony/hubs/living-room/activities/shield-tv/state"

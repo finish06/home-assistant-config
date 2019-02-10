@@ -88,6 +88,9 @@
   binary_sensor.kitchen_occupancy:
     friendly_name: Kitchen
     device_class: motion
+  binary_sensor.laundry_occupancy:
+    friendly_name: Laundry
+    device_class: motion
   binary_sensor.living_room_occupancy:
     friendly_name: Living
     device_class: motion

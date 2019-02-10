@@ -66,6 +66,9 @@ map:
 recorder:
   db_url: !secret db_url
 
+# System health for APIs
+system_health:
+
 # Track the sun
 sun:
 

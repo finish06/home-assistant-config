@@ -5,6 +5,10 @@
     host: emby.du.nn
     api_key: "f13578255a51442b8a9242a347ca9645"
 
+  - platform: spotify
+    client_id: !secret spotify_client_id
+    client_secret: !secret spotify_client_secret
+
 
   # - platform: kodi
   #   host: 10.10.3.22

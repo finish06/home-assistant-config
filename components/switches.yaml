@@ -2,38 +2,6 @@
 # SWITCHES #
 ############
 
-  - platform: mqtt
-    name: Office Floor Lamp
-    state_topic: "smartthings/Office Lamp/switch"
-    command_topic: "smartthings/Office Lamp/switch"
-    payload_on: "on"
-    payload_off: "off"
-    retain: true
-
-  - platform: mqtt
-    name: "Network Rack Switch"
-    state_topic: "smartthings/Network Rack Switch/switch"
-    command_topic: "smartthings/Network Rack Switch/switch"
-    payload_on: "on"
-    payload_off: "off"
-    retain: true
-
-  - platform: mqtt
-    name: "Server Rack Switch"
-    state_topic: "smartthings/Server Rack Switch/switch"
-    command_topic: "smartthings/Server Rack Switch/switch"
-    payload_on: "on"
-    payload_off: "off"
-    retain: true
-
-  - platform: mqtt
-    name: "Christmas Tree"
-    state_topic: "smartthings/Christmas Tree/switch"
-    command_topic: "smartthings/Christmas Tree/switch"
-    payload_on: "on"
-    payload_off: "off"
-    retain: true
-
   - platform: template
     switches:
        living_room_tv:

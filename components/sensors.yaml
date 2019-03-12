@@ -8,7 +8,7 @@
       friendly_name: "Compute Power"
       entity_id: "switch.server_rack_switch"
       unit_of_measurement: "W"
-      value_template: "{{ state_attr("switch.server_rack_switch", "current_power_w") | round(0) }}"
+      value_template: "{{ state_attr('switch.server_rack_switch', 'current_power_w') | round(0) }}"
 
 - platform: statistics
   entity_id: sensor.compute_power

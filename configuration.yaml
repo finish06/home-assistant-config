@@ -17,6 +17,9 @@ homeassistant:
 frontend:
   themes: !include_dir_merge_named ui/themes/
 
+# Monitor and update custom components
+custom_updater:
+
 # Enables configuration UI
 config:
 
@@ -89,7 +92,7 @@ input_select: !include components/input_select.yaml
 intent_script: !include_dir_merge_named components/intents
 isy994: !include components/isy994.yaml
 light: !include components/lights.yaml
-lock: !include components/locks.yaml
+# lock: !include components/locks.yaml
 media_player: !include components/media_players.yaml
 mqtt: !include components/mqtt.yaml
 notify: !include components/notify.yaml

@@ -17,9 +17,6 @@ homeassistant:
 frontend:
   themes: !include_dir_merge_named ui/themes/
 
-# Monitor and update custom components
-custom_updater:
-
 # Enables configuration UI
 config:
 

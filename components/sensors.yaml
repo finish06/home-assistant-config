@@ -2,31 +2,13 @@
 # SENSORS #
 ###########
 
-- platform: mqtt
-  state_topic: "smartthings/Tech Closet Sensor/temperature"
-  name: "Tech Closet Temp"
-  qos: 0
-  unit_of_measurement: "°F"
-
-- platform: mqtt
-  state_topic: "smartthings/Tech Closet Sensor/humidity"
-  name: "Tech Closet Humidity"
-  qos: 0
-  unit_of_measurement: "%"
-
-- platform: mqtt
-  state_topic: "smartthings/Tech Closet Sensor/battery"
-  name: "Tech Closet Battery"
-  qos: 0
-  unit_of_measurement: "%"
-
 - platform: template
   sensors:
     compute_power:
       friendly_name: "Compute Power"
       entity_id: "switch.server_rack_switch"
       unit_of_measurement: "W"
-      value_template: ""{{ state_attr("switch.server_rack_switch", "current_power_w") | round(0) }}""
+      value_template: "{{ state_attr("switch.server_rack_switch", "current_power_w") | round(0) }}"
 
 - platform: statistics
   entity_id: sensor.compute_power

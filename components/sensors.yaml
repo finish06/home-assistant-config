@@ -20,11 +20,6 @@
   qos: 0
   unit_of_measurement: "%"
 
-- platform: templat
-  name: "Compute Power Draw"
-  qos: 0
-  unit_of_measurement: "W"
-
 - platform: template
   sensors:
     compute_power:

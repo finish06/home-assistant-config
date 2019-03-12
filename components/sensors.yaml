@@ -20,8 +20,7 @@
   qos: 0
   unit_of_measurement: "%"
 
-- platform: mqtt
-  state_topic: "smartthings/Server Rack Switch/power"
+- platform: templat
   name: "Compute Power Draw"
   qos: 0
   unit_of_measurement: "W"
@@ -30,9 +29,9 @@
   sensors:
     compute_power:
       friendly_name: "Compute Power"
-      entity_id: "sensor.compute_power_draw"
+      entity_id: "switch.server_rack_switch"
       unit_of_measurement: "W"
-      value_template: "{{ states('sensor.compute_power_draw') | round(0) }}"
+      value_template: {{ state_attr("switch.server_rack_switch", "current_power_w") | round(0) }}
 
 - platform: statistics
   entity_id: sensor.compute_power
@@ -48,19 +47,13 @@
       unit_of_measurement: "USD"
       value_template: "{{ (states.sensor.compute_stats_mean.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
 
-- platform: mqtt
-  state_topic: "smartthings/Network Rack Switch/power"
-  name: "Networking Power Draw"
-  qos: 0
-  unit_of_measurement: "W"
-
 - platform: template
   sensors:
     networking_power:
       friendly_name: "Networking Power"
-      entity_id: "sensor.networking_power_draw"
+      entity_id: "sensor.network_rack_switch"
       unit_of_measurement: "W"
-      value_template: "{{ states('sensor.networking_power_draw') | round(0) }}"
+      value_template: "{{ state_attr("switch.network_rack_switch", "current_power_w") | round(0) }}"
 
 - platform: statistics
   entity_id: sensor.networking_power
@@ -75,12 +68,6 @@
       entity_id: "sensor.networking_stats_mean"
       unit_of_measurement: "USD"
       value_template: "{{ (states.sensor.networking_stats_mean.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
-
-- platform: mqtt
-  state_topic: "smartthings/Media Rack Switch/power"
-  name: "Media Rack Power Draw"
-  qos: 0
-  unit_of_measurement: "W"
 
 - platform: template
   sensors:

@@ -12,6 +12,7 @@ steps:
       - mv mock_secrets.yaml secrets.yaml
       - pip install homeassistant
       - hass -c . --script check_config
+
   - name: Update Hassio
     image: appleboy/drone-ssh
     settings:
@@ -19,7 +20,7 @@ steps:
       username:
         from_secret: username
       ssh_key:
-        from_secret: ssh_key
+        from_secret: ssh_key_pub
       port: 22
       script:
         - cd /home/trek/hassio/homeassistant

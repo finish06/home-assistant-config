@@ -20,7 +20,7 @@ steps:
       username:
         from_secret: username
       key:
-        from_secret: ssh_key_2
+        from_secret: ssh_key
       port: 22
       script:
         - cd /home/trek/hassio/homeassistant

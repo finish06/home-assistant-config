@@ -1,6 +1,4 @@
 ---
-workspace:
-  bass: /hass
 
 kind: pipeline
 name: default

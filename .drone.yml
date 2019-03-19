@@ -13,19 +13,13 @@ steps:
 
   - name: Update Hassio
     image: appleboy/drone-ssh
-    environment:
-      USERNAME:
-        from_secret: username
-      SSH_KEY:
-        from_secret: ssh_key
     settings:
       host: 192.168.1.50
       username:
         from_secret: username
       key:
-        from_secret: ssh_key
+        fromt_secret: ssh_key
       port: 22
-      envs: [ SSH_KEY ]
       script:
         - cd /home/trek/hassio/homeassistant
         - git pull

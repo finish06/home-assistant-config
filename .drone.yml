@@ -25,6 +25,7 @@ steps:
       key:
         from_secret: ssh_key
       port: 22
+      envs: [ USERNAME ]
       script:
         - cd /home/trek/hassio/homeassistant
         - git pull

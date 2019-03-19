@@ -10,6 +10,7 @@ steps:
       - mv mock_secrets.yaml secrets.yaml
       - pip install homeassistant
       - hass -c . --script check_config
+      
   - name: Update Hassio
     image: appleboy/drone-ssh
     pull: true

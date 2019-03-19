@@ -13,6 +13,11 @@ steps:
 
   - name: Update Hassio
     image: appleboy/drone-ssh
+    environment:
+      USERNAME:
+        from_secret: username
+      SSH_KEY:
+        from_secret: ssh_key
     settings:
       host: 192.168.1.50
       username:

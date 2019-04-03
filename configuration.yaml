@@ -104,7 +104,7 @@ weather: !include components/weather.yaml
 
 # Panels
 panel_iframe:
-  Node-Red:
+  nodered:
     title: Node-RED
     url: !secret node-red-url
     icon: mdi:sitemap

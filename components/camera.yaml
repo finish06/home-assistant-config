@@ -7,5 +7,5 @@
   key: !secret unifi_key
   password: !secret uvc_password
 
-- platofrm: mjpeg
+- platform: mjpeg
   mjpeg_url: !secret drive_way_mjpeg

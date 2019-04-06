@@ -29,24 +29,10 @@ call_house_temp:
         message: 'The east wing is {{ states.climate.east_wing.attributes["current_temperature"] }} degrees and the west wing is {{ states.climate.west_wing.attributes["current_temperature"] }} degrees.'
         cache: false
 
-# play_radio:
-#   alias: Play Radio on Chromecast Audio
-#   sequence:
-#     -  service: media_player.select_source
-#        data_template:
-#          entity_id: media_player.spotify
-#          source: >
-#           {% if is_state("input_select.chromecast_player", "All Speakers") %} media_player.all_speakers
-#           {% elif is_state("input_select.chromecast_player", "Living Room") %} media_player.soundbar
-#           {% elif is_state("input_select.chromecast_player", "Master Bedroom") %} media_player.master_bedroom_home
-#     -  service: media_player.play_media
-#        data_template:
-#          entity_id: media_player.spotify
-#          media_content_type: playlist
-#          media_content_id: >
-#           {% if is_state("input_select.spotify_playlist", "Top Christian") %} spotify:user:spotify:playlist:37i9dQZF1DXcb6CQIjdqKy
-#           {% elif is_state("input_select.spotify_playlist", "Cinematic Chill-Out") %} spotify:user:spotify:playlist:37i9dQZF1DWVFJtzvDHN4L
-#           {% elif is_state("input_select.spotify_playlist", "FUTURESYNTH") %} spotify:user:12131571557:playlist:2JgjNysZhksrtRjuGbbWns
-#           {% elif is_state("input_select.spotify_playlist", "From a Smokey Bar") %} spotify:user:spotify:playlist:37i9dQZF1DWTlzJXLRpd4a
-#           {% elif is_state("input_select.spotify_playlist", "Piano in the Background") %} spotify:user:spotify:playlist:37i9dQZF1DX7K31D69s4M1
-#           {% endif %}
+stream_driveway_to_living_room:
+  alias: Stream Driveway to Living Room
+  sequence:
+    - service: camera.play_stream
+      data:
+        entity_id: camera.driveway_rtsp
+        media_player: media_player.living_room_shield

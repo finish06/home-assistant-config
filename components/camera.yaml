@@ -8,4 +8,9 @@
   password: !secret uvc_password
 
 - platform: mjpeg
+  name: Driveway Camera
   mjpeg_url: !secret drive_way_mjpeg
+
+- platform: mjpeg
+  name: Kennel Camera
+  mjpeg_url: !secret kennel_mjpeg

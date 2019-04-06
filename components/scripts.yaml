@@ -7,5 +7,5 @@ stream_driveway_to_living_room:
   sequence:
     - service: camera.play_stream
       data:
-        entity_id: camera.driveway_rtsp
+        entity_id: camera.driveway_stream
         media_player: media_player.living_room_shield

@@ -14,3 +14,7 @@
 - platform: mjpeg
   name: Kennel Camera
   mjpeg_url: !secret kennel_mjpeg
+
+- platform: generic
+  still_image_url: !secret driveway_jpeg
+  stream_source: !secret driveway_rtsp

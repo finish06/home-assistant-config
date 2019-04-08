@@ -81,6 +81,13 @@
     - icon
     - temperature
     - humidity
+    - wind_speed
+    - wind_gust
+  hourly_forecast:
+    - 0
+    - 2
+    - 4
+    - 6
 
 - platform: nzbget
   host: 192.168.1.101

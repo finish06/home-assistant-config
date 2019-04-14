@@ -26,10 +26,12 @@ google_actions:
      - switch.living_room_dome_lights_1
      - switch.living_room_dome_lights_2
      - switch.living_room_light
+     - switch.living_room_tv
      - switch.movie_room_1
      - switch.movie_room_2
      - switch.office_floor_lamp
      - switch.office_light
+     - switch.office_tv
      - switch.patio_light
      - switch.porch_lights
      - switch.network_rack_switch
@@ -101,13 +103,14 @@ google_actions:
     light.west_hallway_light:
       name: Light
       room: West Hallway
-    script.call_east_temp:
-      name: Call East Wing Temperature
+    script.turn_on_living_room_tv:
+      name: Samsung TV
+      room: Living Room
+    script.turn_on_office_tv:
+      name: Samsung TV
+      room: Office
     switch.living_room_fan:
       name: Fan
-      room: Living Room
-    switch.living_room_tv:
-      name: Samsung TV
       room: Living Room
     switch.master_bedroom_fan:
       name: Fan
@@ -123,7 +126,4 @@ google_actions:
       room: Movie Room
     switch.office_fan:
       name: Fan
-      room: Office
-    switch.office_tv:
-      name: Samsung TV
       room: Office

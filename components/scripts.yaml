@@ -9,3 +9,17 @@ stream_driveway_to_living_room:
       data:
         entity_id: camera.driveway_stream
         media_player: media_player.living_room_shield
+
+turn_on_living_room_tv:
+  alias: Turn on Living Room Samsung TV
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.living_room_tv
+
+turn_on_office_tv:
+  alias: Turn on Office TV
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.office_tv

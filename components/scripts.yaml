@@ -14,7 +14,7 @@ turn_on_living_room_tv:
   alias: Living Room TV Toggle
   sequence:
     - service_template: >
-        {% if states.switch.living_room_tv == 'on'}
+        {% if states.switch.living_room_tv == 'on' %}
           switch.turn_off
         {% else %}
           switch.turn_on

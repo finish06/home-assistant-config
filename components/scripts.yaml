@@ -11,11 +11,15 @@ stream_driveway_to_living_room:
         media_player: media_player.living_room_shield
 
 turn_on_living_room_tv:
-  alias: Turn on Living Room Samsung TV
+  alias: Living Room TV Toggle
   sequence:
-    - service: switch.turn_on
-      data:
-        entity_id: switch.living_room_tv
+    - service_template: >
+        {% if states.switch.living_room_tv == 'on'}
+          switch.turn_off
+        {% else %}
+          switch.turn_on
+        {% endif %}
+      entity_id: switch.living_room_tv
 
 turn_on_office_tv:
   alias: Turn on Office TV

@@ -11,6 +11,7 @@
   name: Driveway Stream
   username: !secret driveway_username
   password: !secret driveway_password
+  authentication: digest
   still_image_url: !secret driveway_jpeg
   stream_source: !secret driveway_rtsp
 

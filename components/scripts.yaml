@@ -10,7 +10,7 @@ stream_driveway_to_living_room:
         entity_id: camera.driveway_stream
         media_player: media_player.living_room_shield
 
-turn_on_living_room_tv:
+toggle_living_room_tv:
   alias: Living Room TV Toggle
   sequence:
     - service_template: >
@@ -21,8 +21,8 @@ turn_on_living_room_tv:
         {% endif %}
       entity_id: switch.living_room_tv
 
-turn_on_office_tv:
-  alias: Turn on Office TV
+toggle_office_tv:
+  alias: Office TV Toggle
   sequence:
     - service: switch.turn_on
       data:

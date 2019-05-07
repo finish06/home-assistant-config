@@ -104,8 +104,8 @@ tts: !include components/tts.yaml
 weather: !include components/weather.yaml
 
 # Panels
-panel_iframe:
-  nodered:
-    title: Node-RED
-    url: !secret node-red-url
-    icon: mdi:sitemap
+# panel_iframe:
+#   nodered:
+#     title: Node-RED
+#     url: !secret node-red-url
+#     icon: mdi:sitemap

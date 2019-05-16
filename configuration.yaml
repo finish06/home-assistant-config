@@ -28,7 +28,6 @@ http:
     - 192.168.1.183
     - 10.8.0.0/16
   use_x_forwarded_for: true
-  trusted_proxies: 192.168.1.26
   trusted_networks: !secret my_ip
   ip_ban_enabled: true
   login_attempts_threshold: 2

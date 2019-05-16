@@ -5,9 +5,11 @@ name: default
 
 steps:
   - name: Test
-    image: python:3.5
+    image: ubuntu:latest
     commands:
       - mv mock_secrets.yaml secrets.yaml
+      - apt-get update
+      - apt-get install -y python-dev pkg-config
       - apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libswresample-dev libavfilter-dev
       - pip install homeassistant
       - hass -c . --script check_config

@@ -22,12 +22,6 @@ config:
 
 http:
   base_url: !secret base_url
-  trusted_networks:
-    - 127.0.0.1
-    - 192.168.1.11
-    - 192.168.1.183
-    - 10.8.0.0/16
-    - !secret my_ip
   use_x_forwarded_for: true
   trusted_proxies: 192.168.1.26
   ip_ban_enabled: true

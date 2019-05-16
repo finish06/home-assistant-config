@@ -8,6 +8,7 @@ steps:
     image: python:3.5
     commands:
       - mv mock_secrets.yaml secrets.yaml
+      - apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libswresample-dev libavfilter-dev
       - pip install homeassistant
       - hass -c . --script check_config
 

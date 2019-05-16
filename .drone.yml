@@ -11,7 +11,7 @@ steps:
       - apt-get update
       - apt-get install -y python3-dev pkg-config python3-pip
       - apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libswresample-dev libavfilter-dev
-      - pip install homeassistant
+      - pip3 install homeassistant
       - hass -c . --script check_config
 
   - name: Update Hassio

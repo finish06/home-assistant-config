@@ -1,1 +1,0 @@
-/usr/bin/curl --user kodi:kodi --data-binary '{ "jsonrpc": "2.0", "method": "Player.Open", "params": { "item": { "channelid": 597} }, "id": 1 }' -H 'content-type: application/json;' 'http://192.168.1.103:8080/jsonrpc'

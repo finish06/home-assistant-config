@@ -15,10 +15,10 @@
   still_image_url: !secret driveway_jpeg
   stream_source: !secret driveway_rtsp
 
-# - platform: mjpeg
-#   name: Driveway Camera
-#   mjpeg_url: !secret drive_way_mjpeg
-#
+- platform: mjpeg
+  name: Driveway Camera
+  mjpeg_url: !secret driveway_perf
+
 # - platform: mjpeg
 #   name: Kennel Camera
 #   mjpeg_url: !secret kennel_mjpeg

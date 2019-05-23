@@ -4,4 +4,7 @@
   model:
     graph: /config/tensorflow/model/frozen_inference_graph.pb
     categories:
-      - category: person
+      - person
+      - car
+      - truck
+      - dog

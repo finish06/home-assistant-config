@@ -21,6 +21,9 @@ homeassistant:
         - 192.168.1.183
         - 10.8.0.0/16
         - !secret my_ip
+  whitelist_external_dirs:
+    - /tmp
+
 
 # Enables the frontend
 frontend:

@@ -8,13 +8,13 @@ steps:
     image: ubuntu:latest
     commands:
       - mv mock_secrets.yaml secrets.yaml
-      - cp -r tensorflow /config/tensorflow/
+      - cp -r . /config/
       - ls /config
       - apt-get update
       - apt-get install -y python3-dev pkg-config python3-pip
       - apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libswresample-dev libavfilter-dev
       - pip3 install homeassistant
-      - hass -c . --script check_config
+      - hass -c /config --script check_config
 
   - name: Update Hassio
     image: appleboy/drone-ssh

@@ -8,8 +8,8 @@ steps:
     image: ubuntu:latest
     commands:
       - mv mock_secrets.yaml secrets.yaml
-      - cp /tensorflow /config/
-      - apt-get update
+      - cp -r tensorflow /config/
+      - apt-get update-r 
       - apt-get install -y python3-dev pkg-config python3-pip
       - apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libswresample-dev libavfilter-dev
       - pip3 install homeassistant

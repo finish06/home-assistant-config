@@ -8,7 +8,7 @@ steps:
     image: ubuntu:latest
     commands:
       - mv mock_secrets.yaml secrets.yaml
-      - cp -r ./tensorflow/ /config/
+      - cp -r tensorflow /config/tensorflow/
       - ls /config
       - apt-get update
       - apt-get install -y python3-dev pkg-config python3-pip

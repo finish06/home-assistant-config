@@ -3,5 +3,5 @@
     - entity_id: camera.driveway_stream
   model:
     graph: /config/tensorflow/model/frozen_inference_graph.pb
-      categories:
-        - category: person
+    categories:
+      - category: person

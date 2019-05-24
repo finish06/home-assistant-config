@@ -22,5 +22,9 @@
   model:
     graph: "/config/tensorflow/model/frozen_inference_graph.pb"
     categories:
-      - car
-      - truck
+      - category: car
+        area:
+          top: 0.2
+      - category: truck
+        area:
+          top: 0.2

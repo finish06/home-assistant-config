@@ -4,6 +4,7 @@
   file_out:
     - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
     - "/config/tensorflow/images/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+  scan_interval: 604800
   model:
     graph: "/config/tensorflow/model/frozen_inference_graph.pb"
     categories:

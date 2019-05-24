@@ -1,6 +1,6 @@
 - platform: tensorflow
   source:
-    - entity_id: camera.driveway_stream
+    - entity_id: camera.driveway_proxy
   file_out:
     - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
     - "/config/tensorflow/images/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"

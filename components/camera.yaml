@@ -14,3 +14,8 @@
   authentication: digest
   still_image_url: !secret driveway_jpeg
   stream_source: !secret driveway_rtsp
+
+- platform: proxy
+  name: Driveway Proxy
+  entity_id: camera.driveway_stream
+  max_stream_width: 1920

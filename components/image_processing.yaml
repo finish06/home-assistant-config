@@ -8,6 +8,3 @@
     graph: "/config/tensorflow/model/frozen_inference_graph.pb"
     categories:
       - person
-      - car
-      - truck
-      - dog

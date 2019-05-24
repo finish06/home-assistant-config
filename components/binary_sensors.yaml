@@ -2,3 +2,8 @@
 # BINARY SENSORS #
 ##################
 
+- platform: hikvision
+  name: driveway camera sensor
+  host: 10.10.2.6
+  username: !secret driveway_username
+  password: !secret driveway_password

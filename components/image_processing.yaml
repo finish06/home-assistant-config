@@ -6,7 +6,7 @@
       name: driveway_camera_person
   file_out:
     - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
-    - "/config/tensorflow/images/{{ camera_entity.split('.')[1] }}_persons_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+    - "/config/tensorflow/images/driveway/{{ camera_entity.split('.')[1] }}_persons_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
   scan_interval: 604800
   model:
     graph: "/config/tensorflow/model/frozen_inference_graph.pb"
@@ -19,7 +19,7 @@
       name: driveway_camera_vehicles
   file_out:
     - "/config/www/{{ camera_entity.split('.')[1] }}_vehicles_latest.jpg"
-    - "/config/tensorflow/images/{{ camera_entity.split('.')[1] }}_vehicle_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+    - "/config/tensorflow/images/driveway/{{ camera_entity.split('.')[1] }}_vehicle_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
   scan_interval: 604800
   model:
     graph: "/config/tensorflow/model/frozen_inference_graph.pb"
@@ -44,3 +44,4 @@
     categories:
       - dog
       - cat
+      - animal

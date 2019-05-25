@@ -1,3 +1,5 @@
+
+# Driveway Smarts
 - platform: tensorflow
   source:
     - entity_id: camera.driveway_proxy
@@ -28,3 +30,17 @@
       - category: truck
         area:
           top: 0.2
+
+# Backyard Smarts
+- platform: tensorflow
+  source:
+    - entity_id: camera.backyard_proxy
+      name: backyard_camera_animals
+  file_out:
+    - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_animal_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+  scan_interval: 604800
+  model:
+    graph: "/config/tensorflow/model/frozen_inference_graph.pb"
+    categories:
+      - dog
+      - cat

@@ -2,11 +2,13 @@
 # CAMERA #
 ##########
 
+# Dog Crate
 - platform: uvc
   nvr: 192.168.1.21
   key: !secret unifi_key
   password: !secret uvc_password
 
+# Driveway
 - platform: generic
   name: Driveway Stream
   username: !secret driveway_username
@@ -18,4 +20,18 @@
 - platform: proxy
   name: Driveway Proxy
   entity_id: camera.driveway_stream
+  max_stream_width: 1920
+
+# Backyard
+- platform: generic
+  name: Backyard Stream
+  username: !secret backyard_username
+  password: !secret backyard_password
+  authentication: digest
+  still_image_url: !secret backyard_jpeg
+  stream_source: !secret backyard_rtsp
+
+- platform: proxy
+  name: Backyard Proxy
+  entity_id: camera.backyard_stream
   max_stream_width: 1920

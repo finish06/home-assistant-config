@@ -2,7 +2,7 @@
 # Driveway Smarts
 - platform: tensorflow
   source:
-    - entity_id: camera.driveway_proxy
+    - entity_id: camera.driveway_stream
       name: driveway_camera_person
   file_out:
     - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
@@ -15,7 +15,7 @@
 
 - platform: tensorflow
   source:
-    - entity_id: camera.driveway_proxy
+    - entity_id: camera.driveway_stream
       name: driveway_camera_vehicles
   file_out:
     - "/config/www/{{ camera_entity.split('.')[1] }}_vehicles_latest.jpg"
@@ -34,7 +34,7 @@
 # Backyard Smarts
 - platform: tensorflow
   source:
-    - entity_id: camera.backyard_proxy
+    - entity_id: camera.backyard_stream
       name: backyard_camera_animals
   file_out:
     - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"

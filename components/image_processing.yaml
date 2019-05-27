@@ -13,8 +13,8 @@
     categories:
       - category: person
         area:
-          right: 0.75
-          top: 0.1
+          right: 0.80
+          top: 0.15
 
 - platform: tensorflow
   source:

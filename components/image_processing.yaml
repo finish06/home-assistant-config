@@ -11,7 +11,10 @@
   model:
     graph: "/config/tensorflow/model/frozen_inference_graph.pb"
     categories:
-      - person
+      - category: person
+        area:
+          right: 0.75
+          top: 0.1
 
 - platform: tensorflow
   source:

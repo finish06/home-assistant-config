@@ -15,6 +15,7 @@
         area:
           right: 0.81
           top: 0.15
+          left: 0.02
 
 - platform: tensorflow
   source:

@@ -22,6 +22,14 @@
   entity_id: camera.driveway_stream
   max_stream_width: 1920
 
+- platform: local_file
+  name: Latest Persons Detection
+  file_path: /www/driveway_stream_latest.jpg
+
+- platform: local_file
+  name: Latest Vehicles Detection
+  file_path: /www/driveway_stream_vehicles_latest.jpg
+
 # Backyard
 - platform: generic
   name: Backyard Stream
@@ -35,3 +43,7 @@
   name: Backyard Proxy
   entity_id: camera.backyard_stream
   max_stream_width: 1920
+
+- platform: local_file
+  name: Latest Animals Detection
+  file_path: /www/backyard_stream_animals_latest.jpg

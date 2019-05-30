@@ -64,6 +64,9 @@ logbook:
 
 # Logging
 logger:
+  default: error
+  logs:
+    homeassistant.components.myq: critical
 
 # Enables a map showing the location of tracked devices
 map:

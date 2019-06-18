@@ -9,6 +9,7 @@ google_actions:
      - light
      - script
      - climate
+     - camera
    exclude_entities:
      - light.hue_living_room
      - light.hue_master_bedroom
@@ -40,6 +41,12 @@ google_actions:
      - switch.west_hallway_1
      - switch.west_hallway_2
   entity_config:
+    camera.backyard_stream:
+      name: Backyard Camera
+      room: Patio
+    camera.driveway_stream:
+      name: Driveway Camera
+      room: Entry
     climate.east_wing:
       name: East Thermostat
       room: East Hallway

@@ -106,11 +106,10 @@ script: !include components/scripts.yaml
 sensor: !include components/sensors.yaml
 # shell_command: !include_dir_merge_named components/shell_commands/
 speedtestdotnet:
-  scan_interval:
-    minutes: 61
+  server_id: 5112
   monitored_conditions:
-    - ping
     - download
+    - ping
     - upload
 stream:
 switch: !include components/switches.yaml

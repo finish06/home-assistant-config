@@ -105,6 +105,13 @@ notify: !include components/notify.yaml
 script: !include components/scripts.yaml
 sensor: !include components/sensors.yaml
 # shell_command: !include_dir_merge_named components/shell_commands/
+speedtestdotnet:
+  scan_interval:
+    minutes: 61
+  monitored_conditions:
+    - ping
+    - download
+    - upload
 stream:
 switch: !include components/switches.yaml
 # telegram_bot: !include components/telegram_bot.yaml

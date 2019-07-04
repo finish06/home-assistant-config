@@ -3,6 +3,8 @@
 ########
 
   broker: 127.0.0.1
+  username: MQTTusername
+  password: MQTTpassword
   discovery: true
   discovery_prefix: homeassistant
   birth_message:

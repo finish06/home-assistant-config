@@ -4,5 +4,6 @@
 
   broker: 127.0.0.1
   port: 1883
+  discovery: True
   client_id: home-assistant
   keepalive: 60

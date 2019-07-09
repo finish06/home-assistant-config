@@ -3,6 +3,12 @@
 ########
 
   broker: 127.0.0.1
-  port: 1883
-  client_id: home-assistant
-  keepalive: 60
+  username: MQTTusername
+  password: MQTTpassword
+  discovery: true
+  discovery_prefix: homeassistant
+  birth_message:
+    topic: 'hass/status'
+    payload: 'online'
+    qos: 0
+    retain: false

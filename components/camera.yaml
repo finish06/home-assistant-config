@@ -20,7 +20,7 @@
 - platform: proxy
   name: Driveway Proxy
   entity_id: camera.driveway_stream
-  max_stream_width: 1920
+  max_stream_width: 1280
 
 - platform: local_file
   name: Latest Persons Detection
@@ -42,7 +42,7 @@
 - platform: proxy
   name: Backyard Proxy
   entity_id: camera.backyard_stream
-  max_stream_width: 1920
+  max_stream_width: 1280
 
 - platform: local_file
   name: Latest Animals Detection

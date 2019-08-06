@@ -30,9 +30,11 @@
     categories:
       - category: car
         area:
+          right: 0.81
           top: 0.2
       - category: truck
         area:
+          right: 0.81
           top: 0.2
 
 # Backyard Smarts

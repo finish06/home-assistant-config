@@ -1,11 +1,3 @@
 #####################
 # Device Tracker(s) #
 #####################
-
-  - platform: unifi
-    host: unifi.du.nn
-    username: !secret unifi_username
-    password: !secret unifi_password
-    verify_ssl: False
-    consider_home: 180
-    track_new_devices: False

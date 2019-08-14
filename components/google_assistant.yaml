@@ -6,7 +6,6 @@
   exposed_domains:
     - switch
     - light
-    - script
   entity_config:
     light.brittanys_lamp:
       name: her lamp

@@ -7,7 +7,6 @@ google_actions:
    include_domains:
      - switch
      - light
-     - script
      - climate
      - camera
    exclude_entities:

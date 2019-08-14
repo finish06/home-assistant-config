@@ -34,8 +34,6 @@
     light.table_lamp:
       name: table lamp
       room: Living Room
-    script.call_east_temp:
-      name: Call East wing temperature
       expose: true
     switch.auto_dr:
       expose: false

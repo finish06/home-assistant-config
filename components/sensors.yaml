@@ -20,9 +20,9 @@
   sensors:
     compute_power_cost:
       friendly_name: "Compute Cost"
-      entity_id: "sensor.compute_stats_mean"
+      entity_id: "sensor.compute_stats"
       unit_of_measurement: "USD"
-      value_template: "{{ (states.sensor.compute_stats_mean.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
+      value_template: "{{ (states.sensor.compute_stats.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
 
 - platform: template
   sensors:
@@ -42,9 +42,9 @@
   sensors:
     networking_power_cost:
       friendly_name: "Networking Cost"
-      entity_id: "sensor.networking_stats_mean"
+      entity_id: "sensor.networking_stats"
       unit_of_measurement: "USD"
-      value_template: "{{ (states.sensor.networking_stats_mean.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
+      value_template: "{{ (states.sensor.networking_stats.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
 
 - platform: template
   sensors:
@@ -64,9 +64,9 @@
   sensors:
     media_rack_power_cost:
       friendly_name: "Media Rack Cost"
-      entity_id: "sensor.media_rack_stats_mean"
+      entity_id: "sensor.media_rack_stats"
       unit_of_measurement: "USD"
-      value_template: "{{ (states.sensor.media_rack_stats_mean.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
+      value_template: "{{ (states.sensor.media_rack_stats.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
 
 - platform: mqtt
   state_topic: "smartthings/Front Door/battery"

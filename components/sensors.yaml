@@ -92,13 +92,6 @@
     - 10
     - 12
 
-- platform: nzbget
-  host: 192.168.1.101
-  username: !secret nzbget_user
-  password: !secret nzbget_password
-  monitored_variables:
-    - download_rate
-
 - platform: rtorrent
   url: http://192.168.1.101:8008/RPC2
   monitored_variables:

@@ -4,7 +4,7 @@ kind: pipeline
 name: default
 
 steps:
-  - name: Test
+  - name: Test config
     image: ubuntu:latest
     commands:
       - mv mock_secrets.yaml secrets.yaml
@@ -17,7 +17,7 @@ steps:
       - pip3 install homeassistant
       - hass -c /config --script check_config
 
-  - name: Update Hassio
+  - name: Update hassio
     image: appleboy/drone-ssh
     settings:
       host: 192.168.1.50

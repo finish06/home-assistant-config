@@ -18,27 +18,15 @@
     friendly_name: Master Bedroom Light
   media_player.living_room:
     friendly_name: Playbar
-  media_player.living_room_kodi:
-    friendly_name: Kodi
-  media_player.master_bedroom_kodi:
-    friendly_name: Kodi
-  media_player.office_kodi:
-    friendly_name: Kodi
   media_player.living_room_shield:
     hidden: true
   media_player.master_bedroom_shield:
     hidden: true
   media_player.office_shield:
     hidden: true
-  sensor.caleb_location_template:
-    friendly_name: Caleb
-    icon: mdi:account
   sensor.battery:
     icon: mdi:battery-90
     friendly_name: Battery
-  sensor.brittany_location_template:
-    friendly_name: Brittany
-    icon: mdi:account
   sensor.dark_sky_temperature:
     friendly_name: Temperature
   sensor.dark_sky_humidity:
@@ -88,10 +76,16 @@
   binary_sensor.kitchen_occupancy:
     friendly_name: Kitchen
     device_class: motion
+  binary_sensor.kitchen_dual_occupancy:
+    friendly_name: Kitchen
+    device_class: motion
   binary_sensor.laundry_occupancy:
     friendly_name: Laundry
     device_class: motion
   binary_sensor.living_room_occupancy:
+    friendly_name: Living
+    device_class: motion
+  binary_sensor.living_room_dual_occupancy:
     friendly_name: Living
     device_class: motion
   binary_sensor.office_occupancy:

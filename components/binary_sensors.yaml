@@ -18,10 +18,14 @@
 - platform: template
   sensors:
     kitchen_dual_occupancy:
+      friendly_name: Kitchen
+      device_class: motion
       value_template: "{{ is_state('binary_sensor.kitchen_occupancy', 'on') or is_state('binary_sensor.kitchen_motion', 'on') }}"
 
 # Living room combined Ring sensor & Ecobee sensor
 - platform: template
   sensors:
     living_room_dual_occupancy:
+      friendly_name: Living
+      device_class: motion
       value_template: "{{ is_state('binary_sensor.living_room_occupancy', 'on') or is_state('binary_sensor.living_motion', 'on') }}"

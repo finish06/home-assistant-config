@@ -3,10 +3,10 @@
 ##########
 
 # Dog Crate
-- platform: uvc
-  nvr: 192.168.1.21
-  key: !secret unifi_key
-  password: !secret uvc_password
+- platform: generic
+  name: Dog Crate
+  still_image_url: !secret dog_jpeg
+  stream_source: !secret dog_rtsp
 
 # Driveway
 - platform: generic

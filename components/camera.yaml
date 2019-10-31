@@ -4,7 +4,7 @@
 
 # Dog Crate
 - platform: generic
-  name: Dog Crate
+  name: Dog Crate Stream
   still_image_url: !secret dog_jpeg
   stream_source: !secret dog_rtsp
 

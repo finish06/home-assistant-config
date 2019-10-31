@@ -5,4 +5,3 @@
 - platform: myq
   username: !secret myq_user
   password: !secret myq_pass
-  type: chamberlain

@@ -107,7 +107,6 @@ nzbget: !include components/nzbget.yaml
 sensor: !include components/sensors.yaml
 # shell_command: !include_dir_merge_named components/shell_commands/
 speedtestdotnet:
-  server_id: 5112
   monitored_conditions:
     - download
     - ping

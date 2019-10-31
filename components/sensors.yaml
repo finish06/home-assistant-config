@@ -22,7 +22,7 @@
       friendly_name: "Compute Cost"
       entity_id: "sensor.compute_stats_mean"
       unit_of_measurement: "USD"
-      value_template: "{{ (states.sensor.compute_stats_mean.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
+      value_template: "{{ (states.sensor.compute_stats.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
 
 - platform: template
   sensors:
@@ -44,7 +44,7 @@
       friendly_name: "Networking Cost"
       entity_id: "sensor.networking_stats_mean"
       unit_of_measurement: "USD"
-      value_template: "{{ (states.sensor.networking_stats_mean.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
+      value_template: "{{ (states.sensor.networking_stats.attributes['mean'] | float * 0.72 * 0.07772) | round(2) }}"
 
 - platform: template
   sensors:

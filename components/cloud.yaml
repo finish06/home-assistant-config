@@ -9,6 +9,7 @@ google_actions:
      - light
      - climate
      - camera
+     - script
    exclude_entities:
      - light.hue_living_room
      - light.hue_master_bedroom
@@ -107,6 +108,8 @@ google_actions:
     light.west_hallway_light:
       name: Light
       room: West Hallway
+    script.home_alarm:
+      name: Home Alarm
     switch.living_room_fan:
       name: Fan
       room: Living Room

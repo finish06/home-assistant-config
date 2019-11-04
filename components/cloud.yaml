@@ -11,13 +11,18 @@ google_actions:
      - camera
      - script
    exclude_entities:
+     - light.christmas_tree
      - light.hue_living_room
      - light.hue_master_bedroom
-     - light.hgrp0000000030
+     - light.hgrp_0000000030
      - light.movie_room
      - switch.auto_dr
+     - switch.backyard_camera
      - switch.cabinet_lights
+     - switch.cloudkey_gen1
      - switch.dining_room_light
+     - switch.dog_camera
+     - switch.driveway_camera
      - switch.east_hallway_light
      - switch.entry_light
      - switch.kitchen_light
@@ -27,14 +32,18 @@ google_actions:
      - switch.living_room_dome_lights_1
      - switch.living_room_dome_lights_2
      - switch.living_room_light
+     - switch.miner3
      - switch.movie_room_1
      - switch.movie_room_2
+     - switch.netgear_lte
+     - switch.node3_ipmi
      - switch.office_floor_lamp
      - switch.office_light
      - switch.patio_light
      - switch.porch_lights
      - switch.network_rack_switch
      - switch.server_rack_switch
+     - switch.unifi_poe_28_16_a8_07_b7_b4
      - switch.west_hallway_light
      - switch.west_hallway_1
      - switch.west_hallway_2

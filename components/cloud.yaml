@@ -118,7 +118,7 @@ google_actions:
       name: Light
       room: West Hallway
     script.home_alarm:
-      name: Home Alarm
+      name: Alarm System
     switch.living_room_fan:
       name: Fan
       room: Living Room

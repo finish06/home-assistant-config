@@ -36,6 +36,8 @@ google_actions:
      - switch.movie_room_1
      - switch.movie_room_2
      - switch.netgear_lte
+     - switch.node1_ipmi
+     - switch.node2_ipmi
      - switch.node3_ipmi
      - switch.office_floor_lamp
      - switch.office_light
@@ -119,6 +121,9 @@ google_actions:
       room: West Hallway
     script.home_alarm:
       name: Alarm System
+      aliases:
+        - home alarm
+        - home alarm system
     switch.living_room_fan:
       name: Fan
       room: Living Room

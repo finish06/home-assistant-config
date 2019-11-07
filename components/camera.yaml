@@ -17,6 +17,14 @@
   still_image_url: !secret driveway_jpeg
   stream_source: !secret driveway_rtsp
 
+- platform: generic
+  name: Driveway Low Stream
+  username: !secret driveway_username
+  password: !secret driveway_password
+  authentication: digest
+  still_image_url: !secret driveway_jpeg
+  stream_source: !secret driveway_low_rtsp
+
 - platform: proxy
   name: Driveway Proxy
   entity_id: camera.driveway_stream

@@ -48,7 +48,7 @@
   model:
     graph: "/config/tensorflow/model/frozen_inference_graph.pb"
     categories:
-      - category: animal
+      - category: deer
         area:
           top: 0.25
       - category: dog

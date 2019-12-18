@@ -40,7 +40,26 @@
 - platform: tensorflow
   source:
     - entity_id: camera.backyard_stream
-      name: backyard_camera_animals
+      name: backyard_camera_wildlife
+  file_out:
+    - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
+    - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_animal_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+  scan_interval: 604800
+  model:
+    graph: "/config/tensorflow/model/frozen_inference_graph.pb"
+    labels: "/config/tensorflow/object_detection/data/oid_object_detection_challenge_500_label_map.pbtxt"
+    categories:
+      - category: deer
+        area:
+          top: 0.25
+      - category: animal
+        area:
+          top: 0.25
+
+- platform: tensorflow
+  source:
+    - entity_id: camera.backyard_stream
+      name: backyard_camera_domestic
   file_out:
     - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
     - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_animal_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
@@ -48,7 +67,7 @@
   model:
     graph: "/config/tensorflow/model/frozen_inference_graph.pb"
     categories:
-      - category: deer
+      - category: person
         area:
           top: 0.25
       - category: dog

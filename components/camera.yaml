@@ -54,4 +54,8 @@
 
 - platform: local_file
   name: Latest Animals Detection
-  file_path: /config/www/backyard_stream_latest.jpg
+  file_path: /config/www/backyard_stream_wildlife_latest.jpg
+
+- platform: local_file
+  name: Latest Human and Friend Detection
+  file_path: /config/www/backyard_stream_domestic_latest.jpg

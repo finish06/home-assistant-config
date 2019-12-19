@@ -42,8 +42,8 @@
     - entity_id: camera.backyard_stream
       name: backyard_camera_wildlife
   file_out:
-    - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
-    - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_animal_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+    - "/config/www/{{ camera_entity.split('.')[1] }}_wildlife_latest.jpg"
+    - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_wildlife_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
   scan_interval: 604800
   model:
     graph: "/config/tensorflow/model/frozen_inference_graph.pb"
@@ -61,8 +61,8 @@
     - entity_id: camera.backyard_stream
       name: backyard_camera_domestic
   file_out:
-    - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
-    - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_animal_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+    - "/config/www/{{ camera_entity.split('.')[1] }}_domestics_latest.jpg"
+    - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_domestic_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
   scan_interval: 604800
   model:
     graph: "/config/tensorflow/model/frozen_inference_graph.pb"

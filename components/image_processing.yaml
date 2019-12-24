@@ -47,7 +47,7 @@
   scan_interval: 604800
   model:
     graph: "/config/tensorflow/model/frozen_inference_graph.pb"
-    labels: "/config/tensorflow/object_detection/data/oid_object_detection_challenge_500_label_map.pbtxt"
+    labels: "/config/tensorflow/object_detection/data/oid_bbox_trainable_label_map.pbtxt"
     categories:
       - category: deer
         area:

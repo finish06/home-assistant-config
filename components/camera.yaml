@@ -70,6 +70,6 @@
   stream_source: !secret backyard_west_rtsp
 
 - platform: proxy
-  name: Backyard Proxy
+  name: Backyard West Proxy
   entity_id: camera.backyard_west_stream
   max_stream_width: 1280

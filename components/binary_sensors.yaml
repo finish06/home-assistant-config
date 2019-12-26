@@ -3,24 +3,44 @@
 ##################
 
 - platform: hikvision
-  name: driveway camera sensor
   host: 10.10.2.6
   username: !secret driveway_username
   password: !secret driveway_password
 
 - platform: hikvision
-  name: backyard east camera sensor
   host: 10.10.2.7
   username: !secret backyard_username
   password: !secret backyard_password
 
 - platform: hikvision
-  name: backyard west camera sensor
   host: 10.10.2.8
   username: !secret backyard_west_username
   password: !secret backyard_west_password
+  customize:
+    attended_baggage:
+      ignored: true
+    disk_full:
+      ignored: true
+    disk_error:
+      ignored: true
+    net_interface_broken:
+      ignored: true
+    face_detection:
+      ignored: true
+    field_detection:
+      ignored: true
+    illegal_access:
+      ignored: true
+    line_crossing:
+      ignored: true
+    change_detection:
+      ignored: true
+    tamper_detection:
+      ignored: true
+    unattended_baggage:
+      ignored: true
 
-  # Kitchen combined Ring sensor & Ecobee sensor
+# Kitchen combined Ring sensor & Ecobee sensor
 - platform: template
   sensors:
     kitchen_dual_occupancy:

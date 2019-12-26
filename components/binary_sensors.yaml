@@ -14,6 +14,12 @@
   username: !secret backyard_username
   password: !secret backyard_password
 
+- platform: hikvision
+  name: backyard west camera sensor
+  host: 10.10.2.8
+  username: !secret backyard_west_username
+  password: !secret backyard_west_password
+
   # Kitchen combined Ring sensor & Ecobee sensor
 - platform: template
   sensors:

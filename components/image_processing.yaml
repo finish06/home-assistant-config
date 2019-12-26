@@ -36,7 +36,7 @@
           left: 0.2
           right: 0.9
 
-# Backyard Smarts
+# Backyard East Smarts
 - platform: tensorflow
   source:
     - entity_id: camera.backyard_stream
@@ -52,6 +52,12 @@
       - category: deer
         area:
           top: 0.25
+      - category: dog
+        area:
+          top: 0.25
+      - category: cat
+        area:
+          top: 0.25
       - category: animal
         area:
           top: 0.25
@@ -59,10 +65,10 @@
 - platform: tensorflow
   source:
     - entity_id: camera.backyard_stream
-      name: backyard_camera_domestic
+      name: backyard_camera_person
   file_out:
-    - "/config/www/{{ camera_entity.split('.')[1] }}_domestic_latest.jpg"
-    - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_domestic_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+    - "/config/www/{{ camera_entity.split('.')[1] }}_person_latest.jpg"
+    - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_person_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
   scan_interval: 604800
   model:
     graph: "/config/tensorflow/model/frozen_inference_graph.pb"
@@ -70,9 +76,19 @@
       - category: person
         area:
           top: 0.25
-      - category: dog
-        area:
-          top: 0.25
-      - category: cat
+
+# Backyard West Smarts
+- platform: tensorflow
+  source:
+    - entity_id: camera.backyard_west_stream
+      name: backyard_west_camera_person
+  file_out:
+    - "/config/www/{{ camera_entity.split('.')[1] }}_person_latest.jpg"
+    - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_person_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+  scan_interval: 604800
+  model:
+    graph: "/config/tensorflow/model/frozen_inference_graph.pb"
+    categories:
+      - category: person
         area:
           top: 0.25

@@ -40,14 +40,14 @@
 - platform: tensorflow
   source:
     - entity_id: camera.backyard_stream
-      name: backyard_camera_wildlife
+      name: backyard_camera_animals
   file_out:
-    - "/config/www/{{ camera_entity.split('.')[1] }}_wildlife_latest.jpg"
-    - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_wildlife_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+    - "/config/www/{{ camera_entity.split('.')[1] }}_animal_latest.jpg"
+    - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_animal_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
   scan_interval: 604800
   model:
     graph: "/config/tensorflow/model/frozen_inference_graph.pb"
-    labels: "tensorflow/object_detection/data/oid_bbox_trainable_label_map.pbtxt"
+    labels: "/config/tensorflow/object_detection/data/oid_bbox_trainable_label_map.pbtxt"
     categories:
       - category: deer
         area:

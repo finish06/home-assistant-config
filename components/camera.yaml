@@ -53,12 +53,12 @@
   max_stream_width: 1280
 
 - platform: local_file
-  name: Latest Animals Detection
-  file_path: /config/www/backyard_stream_wildlife_latest.jpg
+  name: Latest Animal(s) Detection
+  file_path: /config/www/backyard_stream_animal_latest.jpg
 
 - platform: local_file
-  name: Latest Human and Friend Detection
-  file_path: /config/www/backyard_stream_domestic_latest.jpg
+  name: Latest Person(s) Backyard
+  file_path: /config/www/backyard_stream_person_latest.jpg
 
 # Backyard West
 - platform: generic
@@ -73,3 +73,7 @@
   name: Backyard West Proxy
   entity_id: camera.backyard_west_stream
   max_stream_width: 1280
+  
+- platform: local_file
+  name: Last Person(s) Backyard Entrances
+  file_path: /config/www/backyard_west_stream_person_latest.jpg

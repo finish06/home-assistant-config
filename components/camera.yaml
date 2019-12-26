@@ -38,7 +38,7 @@
   name: Latest Vehicles Detection
   file_path: /config/www/driveway_stream_vehicles_latest.jpg
 
-# Backyard
+# Backyard East
 - platform: generic
   name: Backyard Stream
   username: !secret backyard_username
@@ -59,3 +59,17 @@
 - platform: local_file
   name: Latest Human and Friend Detection
   file_path: /config/www/backyard_stream_domestic_latest.jpg
+
+# Backyard West
+- platform: generic
+  name: Backyard West Stream
+  username: !secret backyard_west_username
+  password: !secret backyard_west_password
+  authentication: digest
+  still_image_url: !secret backyard_west_jpeg
+  stream_source: !secret backyard_west_rtsp
+
+- platform: proxy
+  name: Backyard Proxy
+  entity_id: camera.backyard_west_stream
+  max_stream_width: 1280

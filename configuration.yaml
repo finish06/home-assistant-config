@@ -111,5 +111,5 @@ stream:
 switch: !include components/switches.yaml
 # telegram_bot: !include components/telegram_bot.yaml
 tts: !include components/tts.yaml
+unifi: !include components/unifi.yaml
 weather: !include components/weather.yaml
-

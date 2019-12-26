@@ -51,16 +51,16 @@
     categories:
       - category: deer
         area:
-          top: 0.25
+          top: 0.01
       - category: dog
         area:
-          top: 0.25
+          top: 0.01
       - category: cat
         area:
-          top: 0.25
+          top: 0.01
       - category: animal
         area:
-          top: 0.25
+          top: 0.01
 
 - platform: tensorflow
   source:
@@ -75,7 +75,7 @@
     categories:
       - category: person
         area:
-          top: 0.25
+          top: 0.01
 
 # Backyard West Smarts
 - platform: tensorflow
@@ -90,5 +90,3 @@
     graph: "/config/tensorflow/model/frozen_inference_graph.pb"
     categories:
       - category: person
-        area:
-          top: 0.25

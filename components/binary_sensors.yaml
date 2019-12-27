@@ -19,6 +19,8 @@
   customize:
     attended_baggage:
       ignored: true
+    change_detection:
+      ignored: true
     disk_full:
       ignored: true
     disk_error:

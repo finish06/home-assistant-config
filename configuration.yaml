@@ -61,6 +61,9 @@ history:
 # View all events in a logbook
 logbook:
 
+# Support Android/ iOS mobile apps
+mobile_app:
+
 # Logging
 logger:
   default: error

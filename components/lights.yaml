@@ -15,6 +15,10 @@
   entity_id: switch.entry_light
 
 - platform: switch
+  name: garage lights
+  entity_id: switch.garage_lights
+
+- platform: switch
   name: kitchen cabinet lights
   entity_id: switch.cabinet_lights
 

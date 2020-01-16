@@ -150,6 +150,7 @@ lights_automation_group:
     - switch.cabinet_lights
     - switch.dining_room_light
     - switch.entry_light
+    - switch.garage_lights
     - switch.kitchen_light
     - switch.living_room_dome_lights
     - switch.living_room_fan
@@ -158,5 +159,4 @@ lights_automation_group:
     - switch.office_fan
     - switch.office_floor_lamp
     - switch.office_light
-    - switch.porch_lights
     - switch.west_hallway_light

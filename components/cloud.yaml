@@ -83,6 +83,9 @@ google_actions:
     light.floor_lamp:
       name: Floor Lamp
       room: Living Room
+    light.garage_lights:
+      name: Ceiling Lights
+      room: Garage
     light.kitchen_cabinet_lights:
       name: Cabinet Lights
       room: Kitchen

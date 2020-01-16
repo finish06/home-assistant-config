@@ -2,14 +2,6 @@
 # NOTIFY #
 ##########
 
-- name: my_pushbullet
-  platform: pushbullet
-  api_key: o.B6fW5ijgMRUdpFzggWZcqqIoJqkaxRJn
-
-- name: her_pushbullet
-  platform: pushbullet
-  api_key: !secret her_pushbullet_api
-
 - name: Home
   platform: html5
   vapid_pub_key: !secret vapid_pub_key

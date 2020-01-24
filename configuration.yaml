@@ -32,7 +32,11 @@ config:
 http:
   base_url: !secret base_url
   use_x_forwarded_for: true
-  trusted_proxies: 192.168.1.26
+  trusted_proxies:
+    - 192.168.1.26
+    - 192.168.1.41
+    - 192.168.1.204
+    - 192.168.1.228
   ip_ban_enabled: true
   login_attempts_threshold: 3
 

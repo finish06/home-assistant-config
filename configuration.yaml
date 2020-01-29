@@ -20,6 +20,19 @@ homeassistant:
         - !secret my_ip
     - type: homeassistant
 
+# Zones
+zone:
+  - name: Home
+    latitude: !secret latitude_location
+    longitude: !secret longitude_location
+    radius: 250
+    icon: mdi:home
+  - name: Work
+    latitude: !secret her_work_latitude_location
+    longitude: !secret her_work_longitude_location
+    radius: 500
+    icon: mdi:hospital-marker
+
 
 # Enables the frontend
 frontend:

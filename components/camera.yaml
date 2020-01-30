@@ -34,10 +34,6 @@
   name: Latest Persons Detection
   file_path: /config/www/driveway_stream_latest.jpg
 
-- platform: local_file
-  name: Latest Vehicles Detection
-  file_path: /config/www/driveway_stream_vehicles_latest.jpg
-
 # Backyard East
 - platform: generic
   name: Backyard Stream
@@ -58,7 +54,7 @@
 
 - platform: local_file
   name: Latest Person(s) Backyard
-  file_path: /config/www/backyard_stream_person_latest.jpg
+  file_path: /config/www/backyard_stream_latest.jpg
 
 # Backyard West
 - platform: generic
@@ -76,4 +72,4 @@
   
 - platform: local_file
   name: Last Person(s) Backyard Entrances
-  file_path: /config/www/backyard_west_stream_person_latest.jpg
+  file_path: /config/www/backyard_west_stream_latest.jpg

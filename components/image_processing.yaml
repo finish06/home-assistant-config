@@ -83,10 +83,10 @@
 - platform: tensorflow
   source:
     - entity_id: camera.backyard_stream
-      name: backyard_camera_person
+      name: backyard_east_camera_smarts
   file_out:
-    - "/config/www/{{ camera_entity.split('.')[1] }}_person_latest.jpg"
-    - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_person_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+    - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
+    - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
   scan_interval: 604800
   model:
     graph: "/config/tensorflow/model/frozen_inference_graph.pb"
@@ -94,10 +94,10 @@
       - category: person
         area:
           top: 0.01
-      - category: Dog
+      - category: dog
         area:
           top: 0.01
-      - category: Cat
+      - category: cat
         area:
           top: 0.01
 

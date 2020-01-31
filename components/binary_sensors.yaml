@@ -38,8 +38,6 @@
       ignored: true
     line_crossing:
       ignored: true
-    change_detection:
-      ignored: true
     tamper_detection:
       ignored: true
     unattended_baggage:

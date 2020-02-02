@@ -119,7 +119,7 @@ media_player: !include components/media_players.yaml
 mqtt: !include components/mqtt.yaml
 notify: !include components/notify.yaml
 nzbget: !include components/nzbget.yaml
-script: !include components/scripts.yaml
+script: !include scripts.yaml
 sensor: !include components/sensors.yaml
 speedtestdotnet:
   monitored_conditions:

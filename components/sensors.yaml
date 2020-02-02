@@ -6,9 +6,9 @@
   sensors:
     compute_power:
       friendly_name: "Compute Power"
-      entity_id: "switch.server_rack_switch"
+      entity_id: "sensor.server_conditions_power"
       unit_of_measurement: "W"
-      value_template: "{{ state_attr('switch.server_rack_switch', 'current_power_w') | round(0) }}"
+      value_template: "{{ states('sensor.server_conditions_power') | round(0) }}"
 
 - platform: template
   sensors:
@@ -16,7 +16,7 @@
       friendly_name: "Networking Power"
       entity_id: "switch.network_rack_switch"
       unit_of_measurement: "W"
-      value_template: "{{ state_attr('switch.network_rack_switch', 'current_power_w') | round(0) }}"
+      value_template: "{{ states('sensor.network_conditions_power') | round(0) }}"
 
 - platform: darksky
   api_key: !secret darksky_api

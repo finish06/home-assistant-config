@@ -27,9 +27,14 @@ zone:
     longitude: !secret longitude_location
     radius: 500
     icon: mdi:home
-  - name: Work
+  - name: SJ Work
     latitude: !secret her_work_latitude_location
     longitude: !secret her_work_longitude_location
+    radius: 200
+    icon: mdi:hospital-marker
+  - name: SF Work
+    latitude: !secret his_work_latitude_location
+    longitude: !secret his_work_longitude_location
     radius: 200
     icon: mdi:hospital-marker
 

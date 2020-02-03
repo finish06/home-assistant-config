@@ -4,17 +4,17 @@
 
 - platform: template
   sensors:
-    compute_power:
-      friendly_name: "Compute Power"
+    sensor.server_conditions_power_template:
+      friendly_name: "Server Conditions Power Template"
       entity_id: "sensor.server_conditions_power"
       unit_of_measurement: "W"
       value_template: "{{ states('sensor.server_conditions_power') | round(0) }}"
 
 - platform: template
   sensors:
-    networking_power:
-      friendly_name: "Networking Power"
-      entity_id: "switch.network_rack_switch"
+    network_conditions_power_template:
+      friendly_name: "Network Conditions Power Template"
+      entity_id: "sensor.network_conditions_power"
       unit_of_measurement: "W"
       value_template: "{{ states('sensor.network_conditions_power') | round(0) }}"
 

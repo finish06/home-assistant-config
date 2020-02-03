@@ -4,7 +4,7 @@
 
 - platform: template
   sensors:
-    sensor.server_conditions_power_template:
+    server_conditions_power_template:
       friendly_name: "Server Conditions Power Template"
       entity_id: "sensor.server_conditions_power"
       unit_of_measurement: "W"

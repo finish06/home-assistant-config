@@ -70,7 +70,6 @@ updater:
 # Discover some devices automatically
 discovery:
   ignore:
-    - samsung_tv
     - yamaha
 
 # Allows you to issue voice commands from the frontend in enabled browsers

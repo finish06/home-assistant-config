@@ -73,6 +73,9 @@
   binary_sensor.bedroom_occupancy:
     friendly_name: Guest Bed
     device_class: motion
+  binary_sensor.elis_room_occupancy:
+    friendly_name: Eli's Bed
+    device_class: motion
   binary_sensor.kitchen_occupancy:
     friendly_name: Kitchen
     device_class: motion
@@ -102,6 +105,8 @@
     friendly_name: Movie
   sensor.bedroom_temperature:
     friendly_name: Guest Bed
+  sensor.elis_room_temperature:
+    friendly_name: Eli's Bed
   sensor.kitchen_temperature:
     friendly_name: Kitchen
   sensor.living_room_temperature:

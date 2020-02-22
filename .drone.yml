@@ -5,16 +5,10 @@ name: default
 
 steps:
   - name: Test config
-    image: ubuntu:latest
+    image: homeassistant/home-assistant:stable
     commands:
       - mv mock_secrets.yaml secrets.yaml
       - cp -r . /config/
-      - echo "" > /config/components/device_tracker.yaml
-      - ls /config
-      - apt-get update
-      - apt-get install -y python3-dev pkg-config python3-pip
-      - apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libswresample-dev libavfilter-dev
-      - pip3 install homeassistant
       - hass -c /config --script check_config
 
   - name: Update hassio

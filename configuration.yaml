@@ -103,7 +103,7 @@ system_health:
 sun:
 
 # Components
-automation: automations.yaml
+automation: !include automations.yaml
 binary_sensor: !include components/binary_sensors.yaml
 camera: !include components/camera.yaml
 climate: !include components/climate.yaml

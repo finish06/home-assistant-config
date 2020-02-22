@@ -103,7 +103,7 @@ system_health:
 sun:
 
 # Components
-automation: !include_dir_list automations/
+automation: automations.yaml
 binary_sensor: !include components/binary_sensors.yaml
 camera: !include components/camera.yaml
 climate: !include components/climate.yaml
@@ -125,11 +125,7 @@ notify: !include components/notify.yaml
 nzbget: !include components/nzbget.yaml
 script: !include scripts.yaml
 sensor: !include components/sensors.yaml
-speedtestdotnet:
-  monitored_conditions:
-    - download
-    - ping
-    - upload
+speedtestdotnet: !include components/speedtest.yaml
 stream:
 switch: !include components/switches.yaml
 # telegram_bot: !include components/telegram_bot.yaml

@@ -23,4 +23,3 @@ steps:
       script:
         - cd /usr/share/hassio/homeassistant
         - git pull
-        - docker restart homeassistant

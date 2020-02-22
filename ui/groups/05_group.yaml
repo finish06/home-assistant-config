@@ -3,14 +3,12 @@
 ##############
 card_hallways:
   name: Hallways
-  control: hidden
   entities:
     - switch.west_hallway_light
     - switch.east_hallway_light
 
 card_kitchen:
   name: Kitchen
-  control: hidden
   entities:
     - switch.dining_room_light
     - switch.kitchen_light
@@ -18,7 +16,6 @@ card_kitchen:
 
 card_living_room:
   name: Living Room
-  control: hidden
   entities:
     - switch.living_room_light
     - switch.living_room_dome_lights
@@ -28,7 +25,6 @@ card_living_room:
 
 card_master_bedroom:
   name: Master Bedroom
-  control: hidden
   entities:
     - light.calebs_lamp
     - light.brittanys_lamp
@@ -38,14 +34,12 @@ card_master_bedroom:
 
 card_movie_room:
   name: Movie Room
-  control: hidden
   entities:
     - light.movie_floor_lamp
     - switch.movie_room_tv
 
 card_office:
   name: Office
-  control: hidden
   entities:
     - switch.office_light
     - switch.office_floor_lamp
@@ -86,7 +80,6 @@ garage_doors:
 #################
 entry_lights:
   name: Entry
-  control: hidden
   entities:
     - light.entry_table_lamp
     - switch.entry_light
@@ -94,7 +87,6 @@ entry_lights:
 
 living_room_lights:
   name: Living Room
-  control: hidden
   entities:
     - switch.living_room_dome_lights
     - switch.living_room_light
@@ -103,7 +95,6 @@ living_room_lights:
 
 kitchen_lights:
   name: Kitchen
-  control: hidden
   entities:
     - switch.cabinet_lights
     - switch.dining_room_light
@@ -111,7 +102,6 @@ kitchen_lights:
 
 office_lights:
   name: Office
-  control: hidden
   entities:
     - switch.office_light
     - switch.office_floor_lamp

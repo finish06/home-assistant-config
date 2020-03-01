@@ -31,10 +31,12 @@
         area:
           left: 0.2
           right: 0.9
+          top: 0.1
       - category: truck
         area:
           left: 0.2
           right: 0.9
+          top: 0.1
 
 - platform: tensorflow
   source:

@@ -2,5 +2,6 @@
 # influxdb #
 ############
 
-  host: 192.168.1.82
+  host: influxdb.du.nn
   max_retries: 4
+  port: 80

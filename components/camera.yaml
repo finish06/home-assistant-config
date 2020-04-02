@@ -57,6 +57,13 @@
   name: Latest Person(s) Backyard
   file_path: /config/www/backyard_stream_latest.jpg
 
+- platform: mjpeg
+  mjpeg_url: !secret backyard_east_mjpeg
+  name: Backyard East Camera
+  username: !secret bi_username
+  password: !secret bi_password
+  authentication: basic
+
 # Backyard West
 - platform: generic
   name: Backyard West Stream
@@ -74,3 +81,10 @@
 - platform: local_file
   name: Last Person(s) Backyard Entrances
   file_path: /config/www/backyard_west_stream_latest.jpg
+
+- platform: mjpeg
+  mjpeg_url: !secret backyard_west_mjpeg
+  name: Backyard West Camera
+  username: !secret bi_username
+  password: !secret bi_password
+  authentication: basic

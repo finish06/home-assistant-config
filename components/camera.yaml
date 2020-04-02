@@ -28,6 +28,13 @@
   name: Latest Persons Detection
   file_path: /config/www/driveway_stream_latest.jpg
 
+- platofrm: mjpeg
+  mjpeg_url: !secret driveway_mjpeg
+  name: Driveway Camera
+  username: !secret bi_username
+  password: !secret bi_password
+  authentication: basic
+
 # Backyard East
 - platform: generic
   name: Backyard Stream

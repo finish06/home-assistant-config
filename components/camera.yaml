@@ -27,8 +27,7 @@
 - platform: local_file
   name: Latest Persons Detection
   file_path: /config/www/driveway_stream_latest.jpg
-
-camera   
+   
 - platform: mjpeg
   mjpeg_url: !secret driveway_mjpeg
   name: Driveway Camera

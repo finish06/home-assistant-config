@@ -19,15 +19,16 @@
   still_image_url: !secret driveway_jpeg
   stream_source: !secret driveway_low_rtsp
 
-- platform: proxy
-  name: Driveway Proxy
-  entity_id: camera.driveway_stream
-  max_stream_width: 1280
+# - platform: proxy
+#   name: Driveway Proxy
+#   entity_id: camera.driveway_stream
+#   max_stream_width: 1280
 
 - platform: local_file
   name: Latest Persons Detection
   file_path: /config/www/driveway_stream_latest.jpg
 
+camera   
 - platform: mjpeg
   mjpeg_url: !secret driveway_mjpeg
   name: Driveway Camera
@@ -44,10 +45,10 @@
   still_image_url: !secret backyard_jpeg
   stream_source: !secret backyard_rtsp
 
-- platform: proxy
-  name: Backyard Proxy
-  entity_id: camera.backyard_stream
-  max_stream_width: 1280
+# - platform: proxy
+#   name: Backyard Proxy
+#   entity_id: camera.backyard_stream
+#   max_stream_width: 1280
 
 - platform: local_file
   name: Latest Animal(s) Detection
@@ -73,10 +74,10 @@
   still_image_url: !secret backyard_west_jpeg
   stream_source: !secret backyard_west_rtsp
 
-- platform: proxy
-  name: Backyard West Proxy
-  entity_id: camera.backyard_west_stream
-  max_stream_width: 1280
+# - platform: proxy
+#   name: Backyard West Proxy
+#   entity_id: camera.backyard_west_stream
+#   max_stream_width: 1280
   
 - platform: local_file
   name: Last Person(s) Backyard Entrances

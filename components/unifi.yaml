@@ -1,5 +1,0 @@
-controllers:
-  - host: 192.168.1.1
-    site: Default
-    dont_track_wired_clients: true
-    dont_track_devices: true

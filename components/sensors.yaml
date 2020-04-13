@@ -77,3 +77,19 @@
       entity_id: "sensor.tech_closet_conditions_relative_humidity"
       unit_of_measurement: "%"
       value_template: "{{ states('sensor.tech_closet_conditions_relative_humidity') | round(1) }}"
+
+# Garage Temperature Avg
+- platform: template
+  sensors:
+    garage_temperature:
+      friendly_name: Garage Temp
+      device_class: temperature
+      value_template: "{{ ((states('sensor.garage_east_wall_conditions_temperature') | float) + (states('sensor.garage_north_wall_conditions_temperature') | float)) / 2.0 }}"
+
+# Garage Humidity Avg
+- platform: template
+  sensors:
+    garage_humidity:
+      friendly_name: Garage Humidity
+      device_class: humidity
+      value_template: "{{ ((states('sensor.garage_east_wall_conditions_relative_humidity') | float) + (states('sensor.garage_north_wall_conditions_relative_humidity') | float)) / 2.0 }}"

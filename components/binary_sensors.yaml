@@ -64,4 +64,4 @@
     garage_occupancy:
       friendly_name: Garage
       device_class: motion
-      value_template: "{{ is_state('sensor.garage_east_wall_conditions_burglar', '8') }}"
+      value_template: "{{ is_state('sensor.garage_east_wall_conditions_burglar', '8') or is_state('binary_sensor.garage_north_wall_conditions_burglar', '8') }}"

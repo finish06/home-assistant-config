@@ -58,3 +58,10 @@
       friendly_name: Living
       device_class: motion
       value_template: "{{ is_state('binary_sensor.living_room_occupancy', 'on') or is_state('binary_sensor.living_motion', 'on') }}"
+
+- platform: template
+  sensors:
+    sensor.garage_occupancy:
+      friendly_name: Garage
+      device_class: motion
+      value_template: "{{ is_state('sensor.garage_east_wall_conditions_burglar', '8') }}"

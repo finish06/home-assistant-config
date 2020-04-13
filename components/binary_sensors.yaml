@@ -61,7 +61,7 @@
 
 - platform: template
   sensors:
-    sensor.garage_occupancy:
+    garage_occupancy:
       friendly_name: Garage
       device_class: motion
       value_template: "{{ is_state('sensor.garage_east_wall_conditions_burglar', '8') }}"

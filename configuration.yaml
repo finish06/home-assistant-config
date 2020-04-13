@@ -120,7 +120,7 @@ input_select: !include components/input_select.yaml
 isy994: !include components/isy994.yaml
 light: !include components/lights.yaml
 media_player: !include components/media_players.yaml
-mqtt: !include components/mqtt.yaml
+# mqtt: !include components/mqtt.yaml
 notify: !include components/notify.yaml
 nzbget: !include components/nzbget.yaml
 script: !include scripts.yaml
@@ -130,5 +130,5 @@ stream:
 switch: !include components/switches.yaml
 # telegram_bot: !include components/telegram_bot.yaml
 tts: !include components/tts.yaml
-unifi: !include components/unifi.yaml
+# unifi: !include components/unifi.yaml
 weather: !include components/weather.yaml

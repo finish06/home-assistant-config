@@ -109,7 +109,7 @@ camera: !include components/camera.yaml
 climate: !include components/climate.yaml
 cloud: !include components/cloud.yaml
 cover: !include components/cover.yaml
-ecobee: !include components/ecobee.yaml
+# ecobee: !include components/ecobee.yaml
 group: !include_dir_merge_named ui/groups/
 ifttt: !include components/ifttt.yaml
 image_processing: !include components/image_processing.yaml

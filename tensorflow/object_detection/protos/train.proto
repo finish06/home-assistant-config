@@ -5,8 +5,16 @@ package object_detection.protos;
 import "object_detection/protos/optimizer.proto";
 import "object_detection/protos/preprocessor.proto";
 
+
+enum CheckpointVersion {
+  UNKNOWN  = 0;
+  V1 = 1;
+  V2 = 2;
+}
+
+
 // Message for configuring DetectionModel training jobs (train.py).
-// Next id: 27
+// Next id: 30
 message TrainConfig {
   // Effective batch size to use for training.
   // For TPU (or sync SGD jobs), the batch size per core (or GPU) is going to be
@@ -20,7 +28,7 @@ message TrainConfig {
   optional bool sync_replicas = 3 [default=false];
 
   // How frequently to keep checkpoints.
-  optional uint32 keep_checkpoint_every_n_hours = 4 [default=1000];
+  optional float keep_checkpoint_every_n_hours = 4 [default=10000.0];
 
   // Optimizer used to train the DetectionModel.
   optional Optimizer optimizer = 5;
@@ -36,6 +44,11 @@ message TrainConfig {
   // 'detection'. Provides extensibility to from_detection_checkpoint.
   // Typically used to load feature extractor variables from trained models.
   optional string fine_tune_checkpoint_type = 22 [default=""];
+
+  // Either "v1" or "v2". If v1, restores the checkpoint using the tensorflow
+  // v1 style of restoring checkpoints. If v2, uses the eager mode checkpoint
+  // restoration API.
+  optional CheckpointVersion fine_tune_checkpoint_version = 28 [default=V1];
 
   // [Deprecated]: use fine_tune_checkpoint_type instead.
   // Specifies if the finetune checkpoint is from an object detection model.
@@ -74,13 +87,13 @@ message TrainConfig {
   optional int32 replicas_to_aggregate = 13 [default=1];
 
   // Maximum number of elements to store within a queue.
-  optional int32 batch_queue_capacity = 14 [default=150];
+  optional int32 batch_queue_capacity = 14 [default=150, deprecated=true];
 
   // Number of threads to use for batching.
-  optional int32 num_batch_queue_threads = 15 [default=8];
+  optional int32 num_batch_queue_threads = 15 [default=8, deprecated=true];
 
   // Maximum capacity of the queue used to prefetch assembled batches.
-  optional int32 prefetch_queue_capacity = 16 [default=5];
+  optional int32 prefetch_queue_capacity = 16 [default=5, deprecated=true];
 
   // If true, boxes with the same coordinates will be merged together.
   // This is useful when each box can have multiple labels.
@@ -113,6 +126,12 @@ message TrainConfig {
   // will lead to a larger memory footprint.
   optional bool retain_original_images = 23 [default=false];
 
-  // Whether to use bfloat16 for training.
+  // Whether to use bfloat16 for training. This is currently only supported for
+  // TPUs.
   optional bool use_bfloat16 = 26 [default=false];
+
+  // Whether to summarize gradients.
+  optional bool summarize_gradients = 27 [default=false];
+
 }
+

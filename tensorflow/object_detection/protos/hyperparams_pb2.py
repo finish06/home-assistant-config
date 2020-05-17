@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='object_detection/protos/hyperparams.proto',
   package='object_detection.protos',
   syntax='proto2',
-  serialized_pb=_b('\n)object_detection/protos/hyperparams.proto\x12\x17object_detection.protos\"\xac\x03\n\x0bHyperparams\x12\x39\n\x02op\x18\x01 \x01(\x0e\x32\'.object_detection.protos.Hyperparams.Op:\x04\x43ONV\x12\x39\n\x0bregularizer\x18\x02 \x01(\x0b\x32$.object_detection.protos.Regularizer\x12\x39\n\x0binitializer\x18\x03 \x01(\x0b\x32$.object_detection.protos.Initializer\x12I\n\nactivation\x18\x04 \x01(\x0e\x32/.object_detection.protos.Hyperparams.Activation:\x04RELU\x12\x36\n\nbatch_norm\x18\x05 \x01(\x0b\x32\".object_detection.protos.BatchNorm\x12#\n\x14regularize_depthwise\x18\x06 \x01(\x08:\x05\x66\x61lse\"\x16\n\x02Op\x12\x08\n\x04\x43ONV\x10\x01\x12\x06\n\x02\x46\x43\x10\x02\",\n\nActivation\x12\x08\n\x04NONE\x10\x00\x12\x08\n\x04RELU\x10\x01\x12\n\n\x06RELU_6\x10\x02\"\xa6\x01\n\x0bRegularizer\x12@\n\x0el1_regularizer\x18\x01 \x01(\x0b\x32&.object_detection.protos.L1RegularizerH\x00\x12@\n\x0el2_regularizer\x18\x02 \x01(\x0b\x32&.object_detection.protos.L2RegularizerH\x00\x42\x13\n\x11regularizer_oneof\"\"\n\rL1Regularizer\x12\x11\n\x06weight\x18\x01 \x01(\x02:\x01\x31\"\"\n\rL2Regularizer\x12\x11\n\x06weight\x18\x01 \x01(\x02:\x01\x31\"\xb3\x02\n\x0bInitializer\x12[\n\x1ctruncated_normal_initializer\x18\x01 \x01(\x0b\x32\x33.object_detection.protos.TruncatedNormalInitializerH\x00\x12[\n\x1cvariance_scaling_initializer\x18\x02 \x01(\x0b\x32\x33.object_detection.protos.VarianceScalingInitializerH\x00\x12U\n\x19random_normal_initializer\x18\x03 \x01(\x0b\x32\x30.object_detection.protos.RandomNormalInitializerH\x00\x42\x13\n\x11initializer_oneof\"@\n\x1aTruncatedNormalInitializer\x12\x0f\n\x04mean\x18\x01 \x01(\x02:\x01\x30\x12\x11\n\x06stddev\x18\x02 \x01(\x02:\x01\x31\"\xc5\x01\n\x1aVarianceScalingInitializer\x12\x11\n\x06\x66\x61\x63tor\x18\x01 \x01(\x02:\x01\x32\x12\x16\n\x07uniform\x18\x02 \x01(\x08:\x05\x66\x61lse\x12N\n\x04mode\x18\x03 \x01(\x0e\x32\x38.object_detection.protos.VarianceScalingInitializer.Mode:\x06\x46\x41N_IN\",\n\x04Mode\x12\n\n\x06\x46\x41N_IN\x10\x00\x12\x0b\n\x07\x46\x41N_OUT\x10\x01\x12\x0b\n\x07\x46\x41N_AVG\x10\x02\"=\n\x17RandomNormalInitializer\x12\x0f\n\x04mean\x18\x01 \x01(\x02:\x01\x30\x12\x11\n\x06stddev\x18\x02 \x01(\x02:\x01\x31\"z\n\tBatchNorm\x12\x14\n\x05\x64\x65\x63\x61y\x18\x01 \x01(\x02:\x05\x30.999\x12\x14\n\x06\x63\x65nter\x18\x02 \x01(\x08:\x04true\x12\x14\n\x05scale\x18\x03 \x01(\x08:\x05\x66\x61lse\x12\x16\n\x07\x65psilon\x18\x04 \x01(\x02:\x05\x30.001\x12\x13\n\x05train\x18\x05 \x01(\x08:\x04true')
+  serialized_pb=_b('\n)object_detection/protos/hyperparams.proto\x12\x17object_detection.protos\"\x87\x04\n\x0bHyperparams\x12\x39\n\x02op\x18\x01 \x01(\x0e\x32\'.object_detection.protos.Hyperparams.Op:\x04\x43ONV\x12\x39\n\x0bregularizer\x18\x02 \x01(\x0b\x32$.object_detection.protos.Regularizer\x12\x39\n\x0binitializer\x18\x03 \x01(\x0b\x32$.object_detection.protos.Initializer\x12I\n\nactivation\x18\x04 \x01(\x0e\x32/.object_detection.protos.Hyperparams.Activation:\x04RELU\x12\x38\n\nbatch_norm\x18\x05 \x01(\x0b\x32\".object_detection.protos.BatchNormH\x00\x12\x38\n\ngroup_norm\x18\x07 \x01(\x0b\x32\".object_detection.protos.GroupNormH\x00\x12#\n\x14regularize_depthwise\x18\x06 \x01(\x08:\x05\x66\x61lse\"\x16\n\x02Op\x12\x08\n\x04\x43ONV\x10\x01\x12\x06\n\x02\x46\x43\x10\x02\"7\n\nActivation\x12\x08\n\x04NONE\x10\x00\x12\x08\n\x04RELU\x10\x01\x12\n\n\x06RELU_6\x10\x02\x12\t\n\x05SWISH\x10\x03\x42\x12\n\x10normalizer_oneof\"\xa6\x01\n\x0bRegularizer\x12@\n\x0el1_regularizer\x18\x01 \x01(\x0b\x32&.object_detection.protos.L1RegularizerH\x00\x12@\n\x0el2_regularizer\x18\x02 \x01(\x0b\x32&.object_detection.protos.L2RegularizerH\x00\x42\x13\n\x11regularizer_oneof\"\"\n\rL1Regularizer\x12\x11\n\x06weight\x18\x01 \x01(\x02:\x01\x31\"\"\n\rL2Regularizer\x12\x11\n\x06weight\x18\x01 \x01(\x02:\x01\x31\"\xb3\x02\n\x0bInitializer\x12[\n\x1ctruncated_normal_initializer\x18\x01 \x01(\x0b\x32\x33.object_detection.protos.TruncatedNormalInitializerH\x00\x12[\n\x1cvariance_scaling_initializer\x18\x02 \x01(\x0b\x32\x33.object_detection.protos.VarianceScalingInitializerH\x00\x12U\n\x19random_normal_initializer\x18\x03 \x01(\x0b\x32\x30.object_detection.protos.RandomNormalInitializerH\x00\x42\x13\n\x11initializer_oneof\"@\n\x1aTruncatedNormalInitializer\x12\x0f\n\x04mean\x18\x01 \x01(\x02:\x01\x30\x12\x11\n\x06stddev\x18\x02 \x01(\x02:\x01\x31\"\xc5\x01\n\x1aVarianceScalingInitializer\x12\x11\n\x06\x66\x61\x63tor\x18\x01 \x01(\x02:\x01\x32\x12\x16\n\x07uniform\x18\x02 \x01(\x08:\x05\x66\x61lse\x12N\n\x04mode\x18\x03 \x01(\x0e\x32\x38.object_detection.protos.VarianceScalingInitializer.Mode:\x06\x46\x41N_IN\",\n\x04Mode\x12\n\n\x06\x46\x41N_IN\x10\x00\x12\x0b\n\x07\x46\x41N_OUT\x10\x01\x12\x0b\n\x07\x46\x41N_AVG\x10\x02\"=\n\x17RandomNormalInitializer\x12\x0f\n\x04mean\x18\x01 \x01(\x02:\x01\x30\x12\x11\n\x06stddev\x18\x02 \x01(\x02:\x01\x31\"z\n\tBatchNorm\x12\x14\n\x05\x64\x65\x63\x61y\x18\x01 \x01(\x02:\x05\x30.999\x12\x14\n\x06\x63\x65nter\x18\x02 \x01(\x08:\x04true\x12\x14\n\x05scale\x18\x03 \x01(\x08:\x05\x66\x61lse\x12\x16\n\x07\x65psilon\x18\x04 \x01(\x02:\x05\x30.001\x12\x13\n\x05train\x18\x05 \x01(\x08:\x04true\"\x0b\n\tGroupNorm')
 )
 
 
@@ -41,8 +41,8 @@ _HYPERPARAMS_OP = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=431,
-  serialized_end=453,
+  serialized_start=491,
+  serialized_end=513,
 )
 _sym_db.RegisterEnumDescriptor(_HYPERPARAMS_OP)
 
@@ -64,11 +64,15 @@ _HYPERPARAMS_ACTIVATION = _descriptor.EnumDescriptor(
       name='RELU_6', index=2, number=2,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SWISH', index=3, number=3,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=455,
-  serialized_end=499,
+  serialized_start=515,
+  serialized_end=570,
 )
 _sym_db.RegisterEnumDescriptor(_HYPERPARAMS_ACTIVATION)
 
@@ -93,8 +97,8 @@ _VARIANCESCALINGINITIALIZER_MODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1272,
-  serialized_end=1316,
+  serialized_start=1363,
+  serialized_end=1407,
 )
 _sym_db.RegisterEnumDescriptor(_VARIANCESCALINGINITIALIZER_MODE)
 
@@ -142,7 +146,14 @@ _HYPERPARAMS = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='regularize_depthwise', full_name='object_detection.protos.Hyperparams.regularize_depthwise', index=5,
+      name='group_norm', full_name='object_detection.protos.Hyperparams.group_norm', index=5,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='regularize_depthwise', full_name='object_detection.protos.Hyperparams.regularize_depthwise', index=6,
       number=6, type=8, cpp_type=7, label=1,
       has_default_value=True, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -161,9 +172,12 @@ _HYPERPARAMS = _descriptor.Descriptor(
   syntax='proto2',
   extension_ranges=[],
   oneofs=[
+    _descriptor.OneofDescriptor(
+      name='normalizer_oneof', full_name='object_detection.protos.Hyperparams.normalizer_oneof',
+      index=0, containing_type=None, fields=[]),
   ],
   serialized_start=71,
-  serialized_end=499,
+  serialized_end=590,
 )
 
 
@@ -203,8 +217,8 @@ _REGULARIZER = _descriptor.Descriptor(
       name='regularizer_oneof', full_name='object_detection.protos.Regularizer.regularizer_oneof',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=502,
-  serialized_end=668,
+  serialized_start=593,
+  serialized_end=759,
 )
 
 
@@ -234,8 +248,8 @@ _L1REGULARIZER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=670,
-  serialized_end=704,
+  serialized_start=761,
+  serialized_end=795,
 )
 
 
@@ -265,8 +279,8 @@ _L2REGULARIZER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=706,
-  serialized_end=740,
+  serialized_start=797,
+  serialized_end=831,
 )
 
 
@@ -313,8 +327,8 @@ _INITIALIZER = _descriptor.Descriptor(
       name='initializer_oneof', full_name='object_detection.protos.Initializer.initializer_oneof',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=743,
-  serialized_end=1050,
+  serialized_start=834,
+  serialized_end=1141,
 )
 
 
@@ -351,8 +365,8 @@ _TRUNCATEDNORMALINITIALIZER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1052,
-  serialized_end=1116,
+  serialized_start=1143,
+  serialized_end=1207,
 )
 
 
@@ -397,8 +411,8 @@ _VARIANCESCALINGINITIALIZER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1119,
-  serialized_end=1316,
+  serialized_start=1210,
+  serialized_end=1407,
 )
 
 
@@ -435,8 +449,8 @@ _RANDOMNORMALINITIALIZER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1318,
-  serialized_end=1379,
+  serialized_start=1409,
+  serialized_end=1470,
 )
 
 
@@ -494,8 +508,32 @@ _BATCHNORM = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1381,
-  serialized_end=1503,
+  serialized_start=1472,
+  serialized_end=1594,
+)
+
+
+_GROUPNORM = _descriptor.Descriptor(
+  name='GroupNorm',
+  full_name='object_detection.protos.GroupNorm',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1596,
+  serialized_end=1607,
 )
 
 _HYPERPARAMS.fields_by_name['op'].enum_type = _HYPERPARAMS_OP
@@ -503,8 +541,15 @@ _HYPERPARAMS.fields_by_name['regularizer'].message_type = _REGULARIZER
 _HYPERPARAMS.fields_by_name['initializer'].message_type = _INITIALIZER
 _HYPERPARAMS.fields_by_name['activation'].enum_type = _HYPERPARAMS_ACTIVATION
 _HYPERPARAMS.fields_by_name['batch_norm'].message_type = _BATCHNORM
+_HYPERPARAMS.fields_by_name['group_norm'].message_type = _GROUPNORM
 _HYPERPARAMS_OP.containing_type = _HYPERPARAMS
 _HYPERPARAMS_ACTIVATION.containing_type = _HYPERPARAMS
+_HYPERPARAMS.oneofs_by_name['normalizer_oneof'].fields.append(
+  _HYPERPARAMS.fields_by_name['batch_norm'])
+_HYPERPARAMS.fields_by_name['batch_norm'].containing_oneof = _HYPERPARAMS.oneofs_by_name['normalizer_oneof']
+_HYPERPARAMS.oneofs_by_name['normalizer_oneof'].fields.append(
+  _HYPERPARAMS.fields_by_name['group_norm'])
+_HYPERPARAMS.fields_by_name['group_norm'].containing_oneof = _HYPERPARAMS.oneofs_by_name['normalizer_oneof']
 _REGULARIZER.fields_by_name['l1_regularizer'].message_type = _L1REGULARIZER
 _REGULARIZER.fields_by_name['l2_regularizer'].message_type = _L2REGULARIZER
 _REGULARIZER.oneofs_by_name['regularizer_oneof'].fields.append(
@@ -536,6 +581,7 @@ DESCRIPTOR.message_types_by_name['TruncatedNormalInitializer'] = _TRUNCATEDNORMA
 DESCRIPTOR.message_types_by_name['VarianceScalingInitializer'] = _VARIANCESCALINGINITIALIZER
 DESCRIPTOR.message_types_by_name['RandomNormalInitializer'] = _RANDOMNORMALINITIALIZER
 DESCRIPTOR.message_types_by_name['BatchNorm'] = _BATCHNORM
+DESCRIPTOR.message_types_by_name['GroupNorm'] = _GROUPNORM
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Hyperparams = _reflection.GeneratedProtocolMessageType('Hyperparams', (_message.Message,), dict(
@@ -600,6 +646,13 @@ BatchNorm = _reflection.GeneratedProtocolMessageType('BatchNorm', (_message.Mess
   # @@protoc_insertion_point(class_scope:object_detection.protos.BatchNorm)
   ))
 _sym_db.RegisterMessage(BatchNorm)
+
+GroupNorm = _reflection.GeneratedProtocolMessageType('GroupNorm', (_message.Message,), dict(
+  DESCRIPTOR = _GROUPNORM,
+  __module__ = 'object_detection.protos.hyperparams_pb2'
+  # @@protoc_insertion_point(class_scope:object_detection.protos.GroupNorm)
+  ))
+_sym_db.RegisterMessage(GroupNorm)
 
 
 # @@protoc_insertion_point(module_scope)

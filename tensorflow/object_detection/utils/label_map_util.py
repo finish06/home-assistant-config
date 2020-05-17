@@ -14,8 +14,14 @@
 # ==============================================================================
 """Label map utility functions."""
 
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
 import logging
 
+from six import string_types
+from six.moves import range
 import tensorflow as tf
 from google.protobuf import text_format
 from object_detection.protos import string_int_label_map_pb2
@@ -79,6 +85,8 @@ def convert_label_map_to_categories(label_map,
     'id': (required) an integer id uniquely identifying this category.
     'name': (required) string representing category name
       e.g., 'cat', 'dog', 'pizza'.
+    'keypoints': (optional) a dictionary of keypoint string 'label' to integer
+      'id'.
   We only allow class into the list if its id-label_id_offset is
   between 0 (inclusive) and max_num_classes (exclusive).
   If there are several items mapping to the same id in the label map,
@@ -117,7 +125,18 @@ def convert_label_map_to_categories(label_map,
       name = item.name
     if item.id not in list_of_ids_already_added:
       list_of_ids_already_added.append(item.id)
-      categories.append({'id': item.id, 'name': name})
+      category = {'id': item.id, 'name': name}
+      if item.keypoints:
+        keypoints = {}
+        list_of_keypoint_ids = []
+        for kv in item.keypoints:
+          if kv.id in list_of_keypoint_ids:
+            raise ValueError('Duplicate keypoint ids are not allowed. '
+                             'Found {} more than once'.format(kv.id))
+          keypoints[kv.label] = kv.id
+          list_of_keypoint_ids.append(kv.id)
+        category['keypoints'] = keypoints
+      categories.append(category)
   return categories
 
 
@@ -129,7 +148,7 @@ def load_labelmap(path):
   Returns:
     a StringIntLabelMapProto
   """
-  with tf.gfile.GFile(path, 'r') as fid:
+  with tf.io.gfile.GFile(path, 'r') as fid:
     label_map_string = fid.read()
     label_map = string_int_label_map_pb2.StringIntLabelMap()
     try:
@@ -140,13 +159,14 @@ def load_labelmap(path):
   return label_map
 
 
-def get_label_map_dict(label_map_path,
+def get_label_map_dict(label_map_path_or_proto,
                        use_display_name=False,
                        fill_in_gaps_and_background=False):
   """Reads a label map and returns a dictionary of label names to id.
 
   Args:
-    label_map_path: path to StringIntLabelMap proto text file.
+    label_map_path_or_proto: path to StringIntLabelMap proto text file or the
+      proto itself.
     use_display_name: whether to use the label map items' display names as keys.
     fill_in_gaps_and_background: whether to fill in gaps and background with
     respect to the id field in the proto. The id: 0 is reserved for the
@@ -161,7 +181,12 @@ def get_label_map_dict(label_map_path,
     ValueError: if fill_in_gaps_and_background and label_map has non-integer or
     negative values.
   """
-  label_map = load_labelmap(label_map_path)
+  if isinstance(label_map_path_or_proto, string_types):
+    label_map = load_labelmap(label_map_path_or_proto)
+  else:
+    _validate_label_map(label_map_path_or_proto)
+    label_map = label_map_path_or_proto
+
   label_map_dict = {}
   for item in label_map.item:
     if use_display_name:
@@ -184,7 +209,9 @@ def get_label_map_dict(label_map_path,
       # there are gaps in the labels, fill in gaps.
       for value in range(1, max(values)):
         if value not in values:
-          label_map_dict['class_' + str(value)] = value
+          # TODO(rathodv): Add a prefix 'class_' here once the tool to generate
+          # teacher annotation adds this prefix in the data.
+          label_map_dict[str(value)] = value
 
   return label_map_dict
 
@@ -196,6 +223,8 @@ def create_categories_from_labelmap(label_map_path, use_display_name=True):
   which  has the following keys:
     'id': an integer id uniquely identifying this category.
     'name': string representing category name e.g., 'cat', 'dog'.
+    'keypoints': a dictionary of keypoint string label to integer id. It is only
+      returned when available in label map proto.
 
   Args:
     label_map_path: Path to `StringIntLabelMap` proto text file.

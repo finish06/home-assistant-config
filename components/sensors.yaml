@@ -81,6 +81,7 @@
 # Garage Temperature Avg
 - platform: min_max
   name: Garage Temperature
+  type: mean
   entity_ids:
     - sensor.garage_east_wall_conditions_temperature
     - sensor.garage_north_wall_conditions_temperature
@@ -88,6 +89,7 @@
 # Garage Humidity Avg
 - platform: min_max
   name: Garage Humidity
+  type: mean
   entity_ids:
     - sensor.garage_east_wall_conditions_relative_humidity
     - sensor.garage_north_wall_conditions_relative_humidity

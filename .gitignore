@@ -27,3 +27,4 @@ configurator.py
 .cloud/
 custom_components/customizer/__pycache__/
 html5_push_registrations.conf
+automations.yaml

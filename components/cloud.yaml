@@ -10,6 +10,7 @@ google_actions:
      - climate
      - camera
      - script
+     - sensor
    exclude_entities:
      - light.christmas_tree
      - light.hue_living_room
@@ -127,6 +128,12 @@ google_actions:
       aliases:
         - home alarm
         - home alarm system
+    sensor.kitchen_temperature:
+      name: Temp
+      room: Kitchen
+    sensor.office_temperature:
+      name: Temp
+      room: Office
     switch.living_room_fan:
       name: Fan
       room: Living Room

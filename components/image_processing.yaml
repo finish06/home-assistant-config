@@ -98,12 +98,15 @@
       - category: person
         area:
           top: 0.01
+          right: 0.8
       - category: dog
         area:
           top: 0.01
+          right: 0.8
       - category: cat
         area:
           top: 0.01
+          right: 0.8
 
 # Backyard West Smarts
 - platform: tensorflow

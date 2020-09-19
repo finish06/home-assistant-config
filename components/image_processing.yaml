@@ -133,7 +133,7 @@
   area:
     top: 0.1
     right: 0.9
-    coveres: false
+    covers: false
   labels:
     - name: person
       confidence: 90

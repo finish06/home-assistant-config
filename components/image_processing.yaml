@@ -122,6 +122,7 @@
 #       - category: cat
 
 - platform: doods
+  scan_interval: 3600
   url: http://doods.du.nn
   detector: tensorflow
   source:

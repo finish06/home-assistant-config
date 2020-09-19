@@ -121,7 +121,7 @@
       - category: dog
       - category: cat
 
-- platfrm: doods
+- platform: doods
   url: http://doods.du.nn
   detector: default
   source:

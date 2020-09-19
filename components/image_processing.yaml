@@ -65,78 +65,78 @@
 #           left: 0.02
 
 # Backyard East Smarts
-- platform: tensorflow
-  source:
-    - entity_id: camera.backyard_stream
-      name: backyard_camera_animals
-  file_out:
-    - "/config/www/{{ camera_entity.split('.')[1] }}_animal_latest.jpg"
-    - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_animal_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
-  scan_interval: 604800
-  model:
-    graph: /config/tensorflow/models/efficientdet_d0_coco17_tpu-32/
-    labels: "tensorflow/object_detection/data/oid_bbox_trainable_label_map.pbtxt"
-    categories:
-      - category: Deer
-        area:
-          top: 0.01
-      - category: Animal
-        area:
-          top: 0.01
+# - platform: tensorflow
+#   source:
+#     - entity_id: camera.backyard_stream
+#       name: backyard_camera_animals
+#   file_out:
+#     - "/config/www/{{ camera_entity.split('.')[1] }}_animal_latest.jpg"
+#     - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_animal_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+#   scan_interval: 604800
+#   model:
+#     graph: /config/tensorflow/models/efficientdet_d0_coco17_tpu-32/
+#     labels: "tensorflow/object_detection/data/oid_bbox_trainable_label_map.pbtxt"
+#     categories:
+#       - category: Deer
+#         area:
+#           top: 0.01
+#       - category: Animal
+#         area:
+#           top: 0.01
 
-- platform: tensorflow
-  source:
-    - entity_id: camera.backyard_stream
-      name: backyard_east_camera_smarts
-  file_out:
-    - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
-    - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
-  scan_interval: 604800
-  model:
-    graph: /config/tensorflow/models/efficientdet_d0_coco17_tpu-32/
-    categories:
-      - category: person
-        area:
-          top: 0.01
-      - category: dog
-        area:
-          top: 0.01
-      - category: cat
-        area:
-          top: 0.01
+# - platform: tensorflow
+#   source:
+#     - entity_id: camera.backyard_stream
+#       name: backyard_east_camera_smarts
+#   file_out:
+#     - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
+#     - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+#   scan_interval: 604800
+#   model:
+#     graph: /config/tensorflow/models/efficientdet_d0_coco17_tpu-32/
+#     categories:
+#       - category: person
+#         area:
+#           top: 0.01
+#       - category: dog
+#         area:
+#           top: 0.01
+#       - category: cat
+#         area:
+#           top: 0.01
 
-# Backyard West Smarts
-- platform: tensorflow
-  source:
-    - entity_id: camera.backyard_west_stream
-      name: backyard_west_camera_smarts
-  file_out:
-    - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
-    - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
-  scan_interval: 604800
-  model:
-    graph: /config/tensorflow/models/efficientdet_d0_coco17_tpu-32/
-    categories:
-      - category: person
-      - category: dog
-      - category: cat
+# # Backyard West Smarts
+# - platform: tensorflow
+#   source:
+#     - entity_id: camera.backyard_west_stream
+#       name: backyard_west_camera_smarts
+#   file_out:
+#     - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
+#     - "/config/tensorflow/images/backyard/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+#   scan_interval: 604800
+#   model:
+#     graph: /config/tensorflow/models/efficientdet_d0_coco17_tpu-32/
+#     categories:
+#       - category: person
+#       - category: dog
+#       - category: cat
 
 - platform: doods
   url: http://doods.du.nn
-  detector: default
+  detector: tensorflow
   source:
     - entity_id: camera.driveway_stream
+    - entity_id: camera.backyard_west_stream
+    - entity_id: camera.backyard_stream
   file_out:
     - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
-    - "/config/tensorflow/images/driveway/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
-  confidence: 50
+    - "/config/tensorflow/images/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+  confidence: 65
   area:
-    top: 0.1
-    right: 0.9
     covers: false
   labels:
-    - name: person
-      confidence: 50
+    - person
     - car
     - truck
-    - bicycle
+    - dog
+    - cat

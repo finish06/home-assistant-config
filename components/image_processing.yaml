@@ -129,14 +129,14 @@
   file_out:
     - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
     - "/config/tensorflow/images/driveway/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
-  confidence: 90
+  confidence: 50
   area:
     top: 0.1
     right: 0.9
     covers: false
   labels:
     - name: person
-      confidence: 90
+      confidence: 50
     - car
     - truck
     - bicycle

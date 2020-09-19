@@ -5,7 +5,7 @@ name: default
 
 steps:
   - name: Test config
-    image: homeassistant/home-assistant:stable
+    image: homeassistant/home-assistant:latest
     commands:
       - mv mock_secrets.yaml secrets.yaml
       - cp -r . /config/

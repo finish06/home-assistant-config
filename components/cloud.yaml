@@ -30,7 +30,7 @@ google_actions:
      - sensor.dark_sky_temperature_4h
      - sensor.dark_sky_temperature_6h
      - sensor.dark_sky_temperature_8h
-     - switch.aeon_labs_zw096_smart_switch_6_switch	
+     - switch.aeon_labs_zw096_smart_switch_6_switch
      - switch.auto_dr
      - switch.backyard_camera
      - switch.cabinet_lights

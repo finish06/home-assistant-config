@@ -12,19 +12,35 @@ google_actions:
      - script
      - sensor
    exclude_entities:
+     - camera.backyard_west_stream
+     - camera.driveway_stream
+     - camera.driveway_low_stream
+     - light.base_station_audio_settings
      - light.christmas_tree
      - light.hue_living_room
      - light.hue_master_bedroom
      - light.hgrp_0000000030
+     - light.keypad_audio_settings
+     - light.keypad_audio_settings_2
      - light.movie_room
+     - sensor.dark_sky_temperature_0h
+     - sensor.dark_sky_temperature_10h
+     - sensor.dark_sky_temperature_12h
+     - sensor.dark_sky_temperature_2h
+     - sensor.dark_sky_temperature_4h
+     - sensor.dark_sky_temperature_6h
+     - sensor.dark_sky_temperature_8h
+     - switch.aeon_labs_zw096_smart_switch_6_switch	
      - switch.auto_dr
      - switch.backyard_camera
      - switch.cabinet_lights
      - switch.cloudkey_gen1
+     - switch.collinsville_siren
      - switch.dining_room_light
      - switch.dog_camera
      - switch.driveway_camera
      - switch.east_hallway_light
+     - switch.eli_room_east_outlet_both_sides
      - switch.entry_light
      - switch.kitchen_light
      - switch.kitchen_light_1
@@ -37,6 +53,7 @@ google_actions:
      - switch.movie_room_1
      - switch.movie_room_2
      - switch.netgear_lte
+     - switch.nzbget_download
      - switch.node1_ipmi
      - switch.node2_ipmi
      - switch.node3_ipmi
@@ -51,12 +68,12 @@ google_actions:
      - switch.west_hallway_1
      - switch.west_hallway_2
   entity_config:
-    camera.backyard_stream:
+    camera.backyard_west_stream:
       name: Backyard Camera
-      room: Patio
+      room: Outside
     camera.driveway_stream:
       name: Driveway Camera
-      room: Entry
+      room: Outside
     climate.east_wing:
       name: East Thermostat
       room: East Hallway
@@ -143,9 +160,6 @@ google_actions:
     switch.master_bedroom_fan:
       name: Fan
       room: Master Bedroom
-    switch.master_bedroom_tv:
-      name: Samsung TV
-      room: Master Bedroom
     switch.movie_room_light:
       name: Ceiling Light
       room: Movie Room
@@ -155,6 +169,9 @@ google_actions:
     switch.office_fan:
       name: Fan
       room: Office
-    switch.office_tv:
-      name: Samsung TV
-      room: Office
+    switch.outside_garage_lights:
+      name: Outside Garage Lights
+      room: Outside
+    switch.porch_lights:
+      name: Porch Lights
+      room: Outside

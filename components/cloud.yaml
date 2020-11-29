@@ -23,6 +23,7 @@ google_actions:
      - light.keypad_audio_settings
      - light.keypad_audio_settings_2
      - light.movie_room
+     - sensor.dark_sky_temperature
      - sensor.dark_sky_temperature_0h
      - sensor.dark_sky_temperature_10h
      - sensor.dark_sky_temperature_12h
@@ -61,8 +62,8 @@ google_actions:
      - switch.office_light
      - switch.patio_light
      - switch.porch_lights
-     - switch.network_rack_switch
-     - switch.server_rack_switch
+     - switch.network_conditions_switch
+     - switch.server_conditions_switch
      - switch.unifi_poe_28_16_a8_07_b7_b4
      - switch.west_hallway_light
      - switch.west_hallway_1
@@ -145,12 +146,33 @@ google_actions:
       aliases:
         - home alarm
         - home alarm system
+    sensor.bedroom_temperature:
+      name: Temp
+      room: Guest Bedroom
+    sensor.bonus_room_temperature:
+      name: Temp
+      room: Movie Room
+    sensor.east_wing_temperature:
+      name: Temp
+      room: East Hallway
+    sensor.elis_room_temperature:
+      name: Temp
+      room: Eli's Room
     sensor.kitchen_temperature:
       name: Temp
       room: Kitchen
+    sensor.living_room_temperature:
+      name: Temp
+      room: Living Room
+    sensor.laundry_temperature:
+      name: Temp
+      room: Laundry Room
     sensor.office_temperature:
       name: Temp
       room: Office
+    sensor.west_wing_temperature:
+      name: Temp
+      room: Master Bedroom
     switch.living_room_fan:
       name: Fan
       room: Living Room

@@ -39,6 +39,7 @@ google_actions:
      - switch.dog_camera
      - switch.driveway_camera
      - switch.east_hallway_light
+     - switch.eli_room_east_outlet_both
      - switch.eli_room_east_outlet_both_sides
      - switch.entry_light
      - switch.garage_lights
@@ -67,6 +68,8 @@ google_actions:
      - switch.west_hallway_light
      - switch.west_hallway_1
      - switch.west_hallway_2
+     - switch.zooz_zen25_s2_double_plug_switch_2
+
   entity_config:
     camera.backyard_stream:
       name: Backyard East Camera

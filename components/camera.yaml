@@ -37,7 +37,7 @@
 
 # Backyard East
 - platform: generic
-  name: Backyard Stream
+  name: Backyard East Stream
   username: !secret backyard_username
   password: !secret backyard_password
   authentication: digest

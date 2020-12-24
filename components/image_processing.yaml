@@ -124,7 +124,7 @@
 - platform: doods
   scan_interval: 3600
   url: http://doods.du.nn
-  detector: tensorflow
+  detector: edgetpu
   source:
     - entity_id: camera.driveway_stream
     - entity_id: camera.backyard_west_stream

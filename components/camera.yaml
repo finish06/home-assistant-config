@@ -50,10 +50,6 @@
 #   max_stream_width: 1280
 
 - platform: local_file
-  name: Latest Animal(s) Detection
-  file_path: /config/www/backyard_stream_animal_latest.jpg
-
-- platform: local_file
   name: Latest Person(s) Backyard
   file_path: /config/www/backyard_stream_latest.jpg
 

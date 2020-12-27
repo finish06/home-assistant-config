@@ -132,7 +132,7 @@
   file_out:
     - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
     - "/config/tensorflow/images/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
-  confidence: 87
+  confidence: 50
   area:
     covers: false
   labels:

@@ -84,3 +84,12 @@
   username: !secret bi_username
   password: !secret bi_password
   authentication: basic
+
+# Tech Closet Camera
+
+- platform: mjpeg
+  mjpeg_url: !secret tech_closet_mjpeg
+  name: Tech Closet Camera
+  username: !secret bi_username
+  password: !secret bi_password
+  authentication: basic

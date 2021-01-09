@@ -141,3 +141,23 @@
     - truck
     - dog
     - cat
+
+- platform: doods
+  scan_interval: 3600
+  url: http://doods.du.nn:8080
+  detector: edgetpu
+  source:
+    - entity_id: camera.driveway_stream
+  file_out:
+    - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
+    - "/config/tensorflow/images/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+  confidence: 65
+  area:
+    right: 0.85
+    covers: false
+  labels:
+    - person
+    - car
+    - truck
+    - dog
+    - cat

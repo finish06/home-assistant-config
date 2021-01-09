@@ -9,6 +9,7 @@ google_actions:
      - light
      - climate
      - camera
+     - input_boolean
      - script
      - sensor
    exclude_entities:
@@ -86,6 +87,9 @@ google_actions:
     climate.west_wing:
       name: West Thermostat
       room: Master Bedroom
+    input_boolean.living_room_candles:
+      name: Candles
+      room: Living Room
     light.brittanys_lamp:
       name: Her Lamp
       room: Master Bedroom

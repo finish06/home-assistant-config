@@ -126,7 +126,6 @@
   url: http://doods.du.nn:8080
   detector: edgetpu
   source:
-    - entity_id: camera.driveway_stream
     - entity_id: camera.backyard_west_stream
     - entity_id: camera.backyard_east_stream
   file_out:

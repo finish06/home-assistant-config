@@ -4,73 +4,73 @@
 
 google_actions:
   filter:
-   include_domains:
-     - switch
-     - light
-     - climate
-     - camera
-     - input_boolean
-     - script
-     - sensor
-   exclude_entities:
-     - camera.driveway_low_stream
-     - light.base_station_audio_settings
-     - light.christmas_tree
-     - light.hue_living_room
-     - light.hue_master_bedroom
-     - light.hgrp_0000000030
-     - light.keypad_audio_settings
-     - light.keypad_audio_settings_2
-     - light.movie_room
-     - sensor.dark_sky_temperature
-     - sensor.dark_sky_temperature_0h
-     - sensor.dark_sky_temperature_10h
-     - sensor.dark_sky_temperature_12h
-     - sensor.dark_sky_temperature_2h
-     - sensor.dark_sky_temperature_4h
-     - sensor.dark_sky_temperature_6h
-     - sensor.dark_sky_temperature_8h
-     - switch.aeon_labs_zw096_smart_switch_6_switch
-     - switch.auto_dr
-     - switch.backyard_camera
-     - switch.cabinet_lights
-     - switch.cloudkey_gen1
-     - switch.collinsville_siren
-     - switch.dining_room_light
-     - switch.dog_camera
-     - switch.driveway_camera
-     - switch.east_hallway_light
-     - switch.eli_room_east_outlet_both
-     - switch.eli_room_east_outlet_both_sides
-     - switch.entry_light
-     - switch.garage_lights
-     - switch.kitchen_light
-     - switch.kitchen_light_1
-     - switch.kitchen_light_2
-     - switch.living_room_dome_lights
-     - switch.living_room_dome_lights_1
-     - switch.living_room_dome_lights_2
-     - switch.living_room_light
-     - switch.miner3
-     - switch.movie_room_1
-     - switch.movie_room_2
-     - switch.netgear_lte
-     - switch.nzbget_download
-     - switch.node1_ipmi
-     - switch.node2_ipmi
-     - switch.node3_ipmi
-     - switch.office_floor_lamp
-     - switch.office_light
-     - switch.patio_light
-     - switch.porch_lights
-     - switch.network_conditions_switch
-     - switch.server_conditions_switch
-     - switch.unifi_poe_28_16_a8_07_b7_b4
-     - switch.west_hallway_light
-     - switch.west_hallway_1
-     - switch.west_hallway_2
-     - switch.zooz_zen25_s2_double_plug_switch_2
-
+    include_domains:
+      - switch
+      - light
+      - climate
+      - camera
+      - input_boolean
+      - script
+      - sensor
+    exclude_entities:
+      - camera.driveway_low_stream
+      - light.base_station_audio_settings
+      - light.christmas_tree
+      - light.entry
+      - light.hue_master_bedroom
+      - light.living_room
+      - light.hgrp_0000000030
+      - light.keypad_audio_settings
+      - light.keypad_audio_settings_2
+      - light.movie_room
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_temperature_0h
+      - sensor.dark_sky_temperature_10h
+      - sensor.dark_sky_temperature_12h
+      - sensor.dark_sky_temperature_2h
+      - sensor.dark_sky_temperature_4h
+      - sensor.dark_sky_temperature_6h
+      - sensor.dark_sky_temperature_8h
+      - switch.aeon_labs_zw096_smart_switch_6_switch
+      - switch.auto_dr
+      - switch.backyard_camera
+      - switch.cabinet_lights
+      - switch.cloudkey_gen1
+      - switch.collinsville_siren
+      - switch.dining_room_light
+      - switch.dog_camera
+      - switch.driveway_camera
+      - switch.east_hallway_light
+      - switch.eli_room_east_outlet_both
+      - switch.eli_room_east_outlet_both_sides
+      - switch.entry_light
+      - switch.garage_lights
+      - switch.kitchen_light
+      - switch.kitchen_light_1
+      - switch.kitchen_light_2
+      - switch.living_room_dome_lights
+      - switch.living_room_dome_lights_1
+      - switch.living_room_dome_lights_2
+      - switch.living_room_light
+      - switch.miner3
+      - switch.movie_room_1
+      - switch.movie_room_2
+      - switch.netgear_lte
+      - switch.nzbget_download
+      - switch.node1_ipmi
+      - switch.node2_ipmi
+      - switch.node3_ipmi
+      - switch.office_floor_lamp
+      - switch.office_light
+      - switch.patio_light
+      - switch.porch_lights
+      - switch.network_conditions_switch
+      - switch.server_conditions_switch
+      - switch.unifi_poe_28_16_a8_07_b7_b4
+      - switch.west_hallway_light
+      - switch.west_hallway_1
+      - switch.west_hallway_2
+      - switch.zooz_zen25_s2_double_plug_switch_2
   entity_config:
     camera.backyard_stream:
       name: Backyard East Camera
@@ -89,6 +89,9 @@ google_actions:
       room: Master Bedroom
     input_boolean.living_room_candles:
       name: Candles
+      room: Living Room
+    input_boolean.living_room_tv:
+      name: Samsung TV
       room: Living Room
     light.brittanys_lamp:
       name: Her Lamp
@@ -133,8 +136,8 @@ google_actions:
       name: Floor Lamp
       room: Movie Room
     light.office_fan_light:
-       name: Fan Light
-       room: Office
+      name: Fan Light
+      room: Office
     light.office_floor_lamp:
       name: Floor Lamp
       room: Office
@@ -184,9 +187,6 @@ google_actions:
       room: Master Bedroom
     switch.living_room_fan:
       name: Fan
-      room: Living Room
-    switch.living_room_tv:
-      name: Samsung TV
       room: Living Room
     switch.master_bedroom_fan:
       name: Fan

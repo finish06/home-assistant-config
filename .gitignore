@@ -56,3 +56,6 @@ tensorflow/
 /node-red/
 /www/
 
+# Harmony remote configs
+harmony*.conf
+

@@ -11,15 +11,15 @@ steps:
       - cp -r . /config/
       - hass -c /config --script check_config
 
-  - name: Update hassio
-    image: appleboy/drone-ssh
-    settings:
-      host: 192.168.1.50
-      username:
-        from_secret: username
-      key:
-        from_secret: ssh_key
-      port: 22
-      script:
-        - cd /usr/share/hassio/homeassistant
-        - git pull
+  # - name: Update hassio
+  #   image: appleboy/drone-ssh
+  #   settings:
+  #     host: 192.168.1.50
+  #     username:
+  #       from_secret: username
+  #     key:
+  #       from_secret: ssh_key
+  #     port: 22
+  #     script:
+  #       - cd /usr/share/hassio/homeassistant
+  #       - git pull

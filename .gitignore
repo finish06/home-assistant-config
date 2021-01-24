@@ -1,3 +1,8 @@
+# You can whitelist files/folders with !, these will not be ignored.
+!*.yaml
+!.git
+!*.md
+
 *.pid
 *.xml
 *.csr
@@ -9,7 +14,6 @@ home-assistant_v2.db
 *.db-journal
 lib
 deps
-secrets.yaml
 emulated_hue_ids.json
 known_devices.yaml
 entity_registry.yaml
@@ -28,3 +32,27 @@ configurator.py
 custom_components/customizer/__pycache__/
 html5_push_registrations.conf
 automations.yaml
+.spotify-token-cache
+.finish_06_gmail_com.tile.conf
+
+# Personal
+ip_bans.yaml
+secrets.yaml
+
+# zwave
+zwscene.xml
+zwave_device_config.yaml
+
+# Software modules
+node_modules/
+
+# Tensorflow
+tensorflow/
+
+# Custom components
+/themes
+
+# Plugins
+/node-red/
+/www/
+

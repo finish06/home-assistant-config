@@ -1,1 +1,118 @@
-[]
+- id: '1590338634758'
+  alias: Auto change theme
+  description: ''
+  trigger:
+  - event: start
+    platform: homeassistant
+  - entity_id: sun.sun
+    platform: state
+    to: above_horizon
+  - entity_id: sun.sun
+    platform: state
+    to: below_horizon
+  condition: []
+  action:
+  - data_template:
+      name: "{% if states.sun.sun.state == \"above_horizon\" %}\n  Google Light Theme\n\
+        {% else %}\n  Google Dark Theme\n{% endif %}\n"
+    service_template: frontend.set_theme
+- id: '1590341011623'
+  alias: Turn off lights
+  description: ''
+  trigger:
+  - event_data:
+      event_data:
+        action: turn_lights_off
+    event_type: mobile_app_notification_action
+    platform: event
+  condition: []
+  action:
+  - data:
+      data:
+        tag: lights_on
+      message: clear_notification
+    service: notify.mobile_app_pixel_3
+  - data:
+      data:
+        tag: lights_on
+      message: clear_notification
+    service: notify.mobile_app_surface_duo
+  - entity_id: group.all_switches
+    service: switch.turn_off
+  - entity_id: group.all_lights
+    service: light.turn_off
+  mode: single
+- id: '1610211812023'
+  alias: Turn off living room candles
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.living_room_candles
+    to: 'off'
+  condition: []
+  action:
+  - service: script.turn_off_candles
+    data: {}
+  mode: single
+- id: '1610212236844'
+  alias: Turn on living room candles
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.living_room_candles
+    to: 'on'
+  condition: []
+  action:
+  - service: script.turn_on_candles
+    data: {}
+  mode: single
+- id: '1611516563252'
+  alias: Turn on living room TV
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.living_room_tv
+    to: 'on'
+  - platform: state
+    entity_id: media_player.living_room_tv
+    from: 'off'
+  - platform: state
+    entity_id: media_player.living_room_tv
+    from: idle
+  condition: []
+  action:
+  - service: media_player.turn_on
+    data: {}
+    entity_id: media_player.living_room_tv
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: input_boolean.living_room_tv
+      state: 'on'
+  - service: input_boolean.turn_on
+    data: {}
+    entity_id: input_boolean.living_room_tv
+  mode: single
+- id: '1611516613984'
+  alias: Turn off living room TV
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: input_boolean.living_room_tv
+    to: 'off'
+  - platform: state
+    entity_id: media_player.living_room_tv
+    to: 'off'
+  condition: []
+  action:
+  - service: script.turn_off_living_room_tv
+    data: {}
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: input_boolean.living_room_tv
+      state: 'off'
+  - service: input_boolean.turn_off
+    data: {}
+    entity_id: input_boolean.living_room_tv
+  mode: single

@@ -1,12 +1,40 @@
-###########
-# SCRIPTS #
-###########
-
 home_alarm:
   alias: Arm Alarm Home
   description: Arm the Ring Alarm to Home mode
   sequence:
-    - alias: Arm Alarm Home
-      service: alarm_control_panel.alarm_arm_home
-      data:
-        entity_id: alarm_control_panel.ring_alarm
+  - alias: Arm Alarm Home
+    service: alarm_control_panel.alarm_arm_home
+    data:
+      entity_id: alarm_control_panel.ring_alarm
+turn_on_candles:
+  alias: Turn on candles
+  sequence:
+  - service: remote.send_command
+    data:
+      command: PowerOn
+      device: 73340190
+    entity_id: remote.living_room_2
+  mode: restart
+turn_off_candles:
+  alias: Turn off candles
+  sequence:
+  - service: remote.send_command
+    data:
+      command: PowerOff
+      device: 73340190
+    entity_id: remote.living_room_2
+  mode: restart
+turn_on_living_room_tv:
+  alias: Turn on Living Room TV
+  sequence:
+  - service: media_player.turn_on
+    data: {}
+    entity_id: media_player.living_room_tv
+  mode: single
+turn_off_living_room_tv:
+  alias: Turn off Living Room TV
+  sequence:
+  - service: media_player.turn_off
+    data: {}
+    entity_id: media_player.living_room_tv
+  mode: single

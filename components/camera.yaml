@@ -27,7 +27,7 @@
 - platform: local_file
   name: Latest Persons Detection
   file_path: /config/www/driveway_stream_latest.jpg
-   
+
 - platform: mjpeg
   mjpeg_url: !secret driveway_mjpeg
   name: Driveway Camera
@@ -51,7 +51,7 @@
 
 - platform: local_file
   name: Latest Person(s) Backyard
-  file_path: /config/www/backyard_stream_latest.jpg
+  file_path: /config/www/backyard_east_stream_latest.jpg
 
 - platform: mjpeg
   mjpeg_url: !secret backyard_east_mjpeg
@@ -73,7 +73,7 @@
 #   name: Backyard West Proxy
 #   entity_id: camera.backyard_west_stream
 #   max_stream_width: 1280
-  
+
 - platform: local_file
   name: Last Person(s) Backyard Entrances
   file_path: /config/www/backyard_west_stream_latest.jpg

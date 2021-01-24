@@ -2,87 +2,87 @@
 # SWITCHES #
 ############
 
-  - platform: template
-    switches:
-       living_room_tv:
-         friendly_name: 'Living Room TV'
-         value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Shield TV') }}"
-         turn_on:
-            service: remote.turn_on
-            data:
-              entity_id: remote.living_room
-              activity: 'Shield TV'
-         turn_off:
-             service: remote.turn_off
-             data:
-               entity_id: remote.living_room
-               activity: "-1"
+# Transitioned from Harmony to AndroidABD and use Shield remote
+# - platform: template
+#   switches:
+#     living_room_tv:
+#       friendly_name: "Living Room TV"
+#       value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Shield TV') }}"
+#       turn_on:
+#         service: remote.turn_on
+#         data:
+#           entity_id: remote.living_room
+#           activity: "Shield TV"
+#       turn_off:
+#         service: remote.turn_off
+#         data:
+#           entity_id: remote.living_room
+#           activity: "-1"
 
-  - platform: template
-    switches:
-       master_bedroom_tv:
-         friendly_name: 'Master Bedroom TV'
-         value_template: "{{ is_state_attr('remote.master_bedroom', 'current_activity', 'Shield TV') }}"
-         turn_on:
-            service: remote.turn_on
-            data:
-              entity_id: remote.master_bedroom
-              activity: 'Shield TV'
-         turn_off:
-             service: remote.turn_off
-             data:
-               entity_id: remote.master_bedroom
-               activity: "-1"
+- platform: template
+  switches:
+    master_bedroom_tv:
+      friendly_name: "Master Bedroom TV"
+      value_template: "{{ is_state_attr('remote.master_bedroom', 'current_activity', 'Shield TV') }}"
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.master_bedroom
+          activity: "Shield TV"
+      turn_off:
+        service: remote.turn_off
+        data:
+          entity_id: remote.master_bedroom
+          activity: "-1"
 
-  - platform: template
-    switches:
-       movie_room_tv:
-         friendly_name: 'Movie Room TV'
-         value_template: "{{ is_state_attr('remote.movie_room', 'current_activity', 'Shield TV') }}"
-         turn_on:
-            service: remote.turn_on
-            data:
-              entity_id: remote.movie_room
-              activity: 'Shield TV'
-         turn_off:
-             service: remote.turn_off
-             data:
-               entity_id: remote.movie_room
-               activity: "-1"
+- platform: template
+  switches:
+    movie_room_tv:
+      friendly_name: "Movie Room TV"
+      value_template: "{{ is_state_attr('remote.movie_room', 'current_activity', 'Shield TV') }}"
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.movie_room
+          activity: "Shield TV"
+      turn_off:
+        service: remote.turn_off
+        data:
+          entity_id: remote.movie_room
+          activity: "-1"
 
-  - platform: template
-    switches:
-       office_tv:
-         friendly_name: 'Office TV'
-         value_template: "{{ is_state_attr('remote.office', 'current_activity', 'Shield TV') }}"
-         turn_on:
-            service: remote.turn_on
-            data:
-              entity_id: remote.office
-              activity: 'Shield TV'
-         turn_off:
-             service: remote.turn_off
-             data:
-               entity_id: remote.office
-               activity: "-1"
-
-  # - platform: mqtt
-  #   name: "Living Room TV"
-  #   state_topic: "harmony/hubs/living-room/activities/shield-tv/state"
-  #   command_topic: "harmony/hubs/living-room/activities/shield-tv/command"
-  #   payload_on: "on"
-  #   payload_off: "off"
-  #
-  # - platform: mqtt
-  #   name: "Movie Room TV"
-  #   state_topic: "harmony/hubs/movie-room/activities/shield-tv/state"
-  #   command_topic: "harmony/hubs/movie-room/activities/shield-tv/command"
-  #   payload_on: "on"
-  #   payload_off: "off"
-  #
-  # - platform: mqtt
-  #   name: "Master Bedroom TV"
-  #   state_topic: "harmony/hubs/master-bedroom/activities/shield-tv/state"
-  #   command_topic: "harmony/hubs/master-bedroom/activities/shield-tv/command"
-  #   payload_on: "on"
-  #   payload_off: "off"
+- platform: template
+  switches:
+    office_tv:
+      friendly_name: "Office TV"
+      value_template: "{{ is_state_attr('remote.office', 'current_activity', 'Shield TV') }}"
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.office
+          activity: "Shield TV"
+      turn_off:
+        service: remote.turn_off
+        data:
+          entity_id: remote.office
+          activity: "-1"
+# - platform: mqtt
+#   name: "Living Room TV"
+#   state_topic: "harmony/hubs/living-room/activities/shield-tv/state"
+#   command_topic: "harmony/hubs/living-room/activities/shield-tv/command"
+#   payload_on: "on"
+#   payload_off: "off"
+#
+# - platform: mqtt
+#   name: "Movie Room TV"
+#   state_topic: "harmony/hubs/movie-room/activities/shield-tv/state"
+#   command_topic: "harmony/hubs/movie-room/activities/shield-tv/command"
+#   payload_on: "on"
+#   payload_off: "off"
+#
+# - platform: mqtt
+#   name: "Master Bedroom TV"
+#   state_topic: "harmony/hubs/master-bedroom/activities/shield-tv/state"
+#   command_topic: "harmony/hubs/master-bedroom/activities/shield-tv/command"
+#   payload_on: "on"
+#   payload_off: "off"

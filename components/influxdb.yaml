@@ -2,6 +2,7 @@
 # influxdb #
 ############
 
-  host: influxdb.du.nn
-  max_retries: 4
-  port: 80
+host: influxdb.du.nn
+api_version: 1
+max_retries: 4
+port: 80

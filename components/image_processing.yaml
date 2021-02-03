@@ -130,13 +130,11 @@
   file_out:
     - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
     - "/config/tensorflow/images/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
-  confidence: 65
+  confidence: 70
   area:
     covers: false
   labels:
     - person
-    - car
-    - truck
     - dog
     - cat
 
@@ -149,7 +147,7 @@
   file_out:
     - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
     - "/config/tensorflow/images/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
-  confidence: 60
+  confidence: 70
   area:
     right: 0.90
     covers: false

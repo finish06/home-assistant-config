@@ -105,9 +105,9 @@ binary_sensor: !include components/binary_sensors.yaml
 camera: !include components/camera.yaml
 climate: !include components/climate.yaml
 cloud: !include components/cloud.yaml
-cover: !include components/cover.yaml
 device_tracker: !include components/device_tracker.yaml
 group: !include_dir_merge_named ui/groups/
+homekit: !include components/homekit.yaml
 ifttt: !include components/ifttt.yaml
 image_processing: !include components/image_processing.yaml
 influxdb: !include components/influxdb.yaml
@@ -126,9 +126,10 @@ speedtestdotnet: !include components/speedtest.yaml
 stream:
 switch: !include components/switches.yaml
 tts: !include components/tts.yaml
-# unifi: !include components/unifi.yaml
 weather: !include components/weather.yaml
 # Retired configs
+# cover: !include components/cover.yaml
 # ecobee: !include components/ecobee.yaml
 # telegram_bot: !include components/telegram_bot.yaml
 # intent_script: !include_dir_merge_named components/intents
+# unifi: !include components/unifi.yaml

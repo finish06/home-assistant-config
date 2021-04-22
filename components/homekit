@@ -1,0 +1,10 @@
+###########
+# HOMEKIT #
+###########
+
+- filter:
+    include_domains:
+      - alarm_control_panel
+      - light
+- name: HASS Bridge
+  

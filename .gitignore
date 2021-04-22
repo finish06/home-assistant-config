@@ -55,6 +55,7 @@ tensorflow/
 # Plugins
 /node-red/
 /www/
+/custom_components/
 
 # Harmony remote configs
 harmony*.conf

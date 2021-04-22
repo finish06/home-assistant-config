@@ -20,24 +20,6 @@ homeassistant:
         - !secret my_ip
     - type: homeassistant
 
-# Zones
-zone:
-  - name: Home
-    latitude: !secret latitude_location
-    longitude: !secret longitude_location
-    radius: 500
-    icon: mdi:home
-  - name: SJ Work
-    latitude: !secret her_work_latitude_location
-    longitude: !secret her_work_longitude_location
-    radius: 200
-    icon: mdi:hospital-marker
-  - name: SF Work
-    latitude: !secret his_work_latitude_location
-    longitude: !secret his_work_longitude_location
-    radius: 200
-    icon: mdi:hospital-marker
-
 # Enables the frontend
 frontend:
   themes: !include_dir_merge_named themes/
@@ -53,6 +35,7 @@ http:
     - 192.168.1.41
     - 192.168.1.42
     - 192.168.1.43
+    - !secret my_ip
     - 173.245.48.0/20
     - 103.21.244.0/22
     - 103.22.200.0/22
@@ -64,7 +47,8 @@ http:
     - 197.234.240.0/22
     - 198.41.128.0/17
     - 162.158.0.0/15
-    - 104.16.0.0/12
+    - 104.16.0.0/13
+    - 104.24.0.0/14
     - 172.64.0.0/13
     - 131.0.72.0/22
   ip_ban_enabled: true
@@ -123,7 +107,6 @@ climate: !include components/climate.yaml
 cloud: !include components/cloud.yaml
 cover: !include components/cover.yaml
 device_tracker: !include components/device_tracker.yaml
-# ecobee: !include components/ecobee.yaml
 group: !include_dir_merge_named ui/groups/
 ifttt: !include components/ifttt.yaml
 image_processing: !include components/image_processing.yaml
@@ -131,7 +114,6 @@ influxdb: !include components/influxdb.yaml
 input_number: !include components/input_number.yaml
 input_select: !include components/input_select.yaml
 input_boolean:
-# intent_script: !include_dir_merge_named components/intents
 isy994: !include components/isy994.yaml
 light: !include components/lights.yaml
 media_player: !include components/media_players.yaml
@@ -143,7 +125,10 @@ sensor: !include components/sensors.yaml
 speedtestdotnet: !include components/speedtest.yaml
 stream:
 switch: !include components/switches.yaml
-# telegram_bot: !include components/telegram_bot.yaml
 tts: !include components/tts.yaml
 # unifi: !include components/unifi.yaml
 weather: !include components/weather.yaml
+# Retired configs
+# ecobee: !include components/ecobee.yaml
+# telegram_bot: !include components/telegram_bot.yaml
+# intent_script: !include_dir_merge_named components/intents

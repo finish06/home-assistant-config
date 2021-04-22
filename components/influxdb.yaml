@@ -3,6 +3,10 @@
 ############
 
 host: influxdb.du.nn
-api_version: 1
+ssl: false
+api_version: 2
 max_retries: 4
 port: 80
+organization: Homelab
+bucket: home_assistant/autogen
+token: !secret influxdb_token

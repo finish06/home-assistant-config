@@ -1,7 +1,7 @@
 # You can whitelist files/folders with !, these will not be ignored.
-!*.yaml
-!.git
-!*.md
+# !*.yaml
+# !.git
+# !*.md
 
 *.pid
 *.xml
@@ -29,7 +29,6 @@ update.sh
 configurator.py
 .storage/
 .cloud/
-custom_components/customizer/__pycache__/
 html5_push_registrations.conf
 automations.yaml
 .spotify-token-cache
@@ -52,11 +51,10 @@ tensorflow/
 # Custom components
 /themes
 
-# Plugins
-/node-red/
-/www/
-/custom_components/
-
 # Harmony remote configs
 harmony*.conf
 
+# Plugins
+/node-red/
+/www/
+custom_components/

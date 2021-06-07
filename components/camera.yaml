@@ -3,21 +3,21 @@
 ##########
 
 # Driveway
-- platform: generic
-  name: Driveway Stream
-  username: !secret driveway_username
-  password: !secret driveway_password
-  authentication: digest
-  still_image_url: !secret driveway_jpeg
-  stream_source: !secret driveway_rtsp
+# - platform: generic
+#   name: Driveway Stream
+#   username: !secret driveway_username
+#   password: !secret driveway_password
+#   authentication: digest
+#   still_image_url: !secret driveway_jpeg
+#   stream_source: !secret driveway_rtsp
 
-- platform: generic
-  name: Driveway Low Stream
-  username: !secret driveway_username
-  password: !secret driveway_password
-  authentication: digest
-  still_image_url: !secret driveway_jpeg
-  stream_source: !secret driveway_low_rtsp
+# - platform: generic
+#   name: Driveway Low Stream
+#   username: !secret driveway_username
+#   password: !secret driveway_password
+#   authentication: digest
+#   still_image_url: !secret driveway_jpeg
+#   stream_source: !secret driveway_low_rtsp
 
 # - platform: proxy
 #   name: Driveway Proxy
@@ -36,18 +36,13 @@
   authentication: basic
 
 # Backyard East
-- platform: generic
-  name: Backyard East Stream
-  username: !secret backyard_username
-  password: !secret backyard_password
-  authentication: digest
-  still_image_url: !secret backyard_jpeg
-  stream_source: !secret backyard_rtsp
-
-# - platform: proxy
-#   name: Backyard Proxy
-#   entity_id: camera.backyard_stream
-#   max_stream_width: 1280
+# - platform: generic
+#   name: Backyard East Stream
+#   username: !secret backyard_username
+#   password: !secret backyard_password
+#   authentication: digest
+#   still_image_url: !secret backyard_jpeg
+#   stream_source: !secret backyard_rtsp
 
 - platform: local_file
   name: Latest Person(s) Backyard
@@ -61,18 +56,13 @@
   authentication: basic
 
 # Backyard West
-- platform: generic
-  name: Backyard West Stream
-  username: !secret backyard_west_username
-  password: !secret backyard_west_password
-  authentication: digest
-  still_image_url: !secret backyard_west_jpeg
-  stream_source: !secret backyard_west_rtsp
-
-# - platform: proxy
-#   name: Backyard West Proxy
-#   entity_id: camera.backyard_west_stream
-#   max_stream_width: 1280
+# - platform: generic
+#   name: Backyard West Stream
+#   username: !secret backyard_west_username
+#   password: !secret backyard_west_password
+#   authentication: digest
+#   still_image_url: !secret backyard_west_jpeg
+#   stream_source: !secret backyard_west_rtsp
 
 - platform: local_file
   name: Last Person(s) Backyard Entrances
@@ -86,7 +76,6 @@
   authentication: basic
 
 # Tech Closet Camera
-
 - platform: mjpeg
   mjpeg_url: !secret tech_closet_mjpeg
   name: Tech Closet Camera

@@ -7,3 +7,15 @@ filter:
     - alarm_control_panel
     - light
     - lock
+  exclude_entities:
+    - light.keypad_audio_settings
+    - light.keypad_audio_settings_2
+    - light.base_station_audio_settings
+  include_entities:
+    - camera.driveway_stream
+    - camera.tech_closet_camera
+    - camera.backyard_east_stream
+    - camera.backyard_west_stream
+entity_config:
+  alarm_control_panel.ring_alarm:
+    code: 2112

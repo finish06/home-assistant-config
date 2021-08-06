@@ -1,0 +1,25 @@
+- sensor:
+    - name: Server Conditions Power Template
+      unit_of_measurement: "W"
+      state: "{{ states('sensor.server_conditions_power') | round(0) }}"
+- sensor:
+    - name: Network Conditions Power Template
+      unit_of_measurement: "W"
+      state: "{{ states('sensor.network_conditions_power') | round(0) }}"
+- sensor:
+    - name: Total Download
+      unit_of_measurement: "kB/s"
+      state: "{{ states('sensor.rtorrent_down_speed')|float + (states('sensor.nzbget_speed')|float * 1000) | round(2) }}"
+# z-Wave Tech Closet Conditions
+- sensor:
+    - name: Tech Closet Conditions Battery
+      unit_of_measurement: "%"
+      state: "{{ state_attr('zwave.tech_closet_conditions', 'battery_level') | round(0) }}"
+- sensor:
+    - name: Tech Closet Conditions Temperature Template
+      unit_of_measurement: "°F"
+      state: "{{ states('sensor.tech_closet_conditions_temperature') | round(1) }}"
+- sensor:
+    - name: Tech Closet Conditions Relative Humidity Template
+      unit_of_measurement: "%"
+      state: "{{ states('sensor.tech_closet_conditions_relative_humidity') | round(1) }}"

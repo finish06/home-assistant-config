@@ -24,16 +24,16 @@
 #   entity_id: camera.driveway_stream
 #   max_stream_width: 1280
 
-- platform: local_file
-  name: Latest Persons Detection
-  file_path: /config/www/driveway_stream_latest.jpg
+# - platform: local_file
+#   name: Latest Persons Detection
+#   file_path: /config/www/driveway_stream_latest.jpg
 
-- platform: mjpeg
-  mjpeg_url: !secret driveway_mjpeg
-  name: Driveway Camera
-  username: !secret bi_username
-  password: !secret bi_password
-  authentication: basic
+# - platform: mjpeg
+#   mjpeg_url: !secret driveway_mjpeg
+#   name: Driveway Camera
+#   username: !secret bi_username
+#   password: !secret bi_password
+#   authentication: basic
 
 # Backyard East
 # - platform: generic
@@ -44,9 +44,9 @@
 #   still_image_url: !secret backyard_jpeg
 #   stream_source: !secret backyard_rtsp
 
-- platform: local_file
-  name: Latest Person(s) Backyard
-  file_path: /config/www/backyard_east_stream_latest.jpg
+# - platform: local_file
+#   name: Latest Person(s) Backyard
+#   file_path: /config/www/backyard_east_stream_latest.jpg
 
 - platform: mjpeg
   mjpeg_url: !secret backyard_east_mjpeg
@@ -64,9 +64,9 @@
 #   still_image_url: !secret backyard_west_jpeg
 #   stream_source: !secret backyard_west_rtsp
 
-- platform: local_file
-  name: Last Person(s) Backyard Entrances
-  file_path: /config/www/backyard_west_stream_latest.jpg
+# - platform: local_file
+#   name: Last Person(s) Backyard Entrances
+#   file_path: /config/www/backyard_west_stream_latest.jpg
 
 - platform: mjpeg
   mjpeg_url: !secret backyard_west_mjpeg
@@ -82,3 +82,4 @@
   username: !secret bi_username
   password: !secret bi_password
   authentication: basic
+# Doorbell Camera

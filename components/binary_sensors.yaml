@@ -2,11 +2,11 @@
 # BINARY SENSORS #
 ##################
 
-# Driveway Camera
-- platform: hikvision
-  host: 10.10.2.6
-  username: !secret driveway_username
-  password: !secret driveway_password
+# # Driveway Camera
+# - platform: hikvision
+#   host: 10.10.2.6
+#   username: !secret driveway_username
+#   password: !secret driveway_password
 
 # Backyard East Camera
 - platform: hikvision
@@ -66,5 +66,3 @@
       friendly_name: Garage
       device_class: motion
       value_template: "{{ is_state('sensor.garage_east_wall_conditions_burglar', '8') or is_state('binary_sensor.garage_north_wall_conditions_burglar', '8') }}"
-
-

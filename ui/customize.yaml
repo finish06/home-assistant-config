@@ -2,194 +2,208 @@
 # View #
 ########
 
-  input_select.dynamic_living_room_sonos:
-    icon: mdi:music
-  light.brittanys_lamp:
-    friendly_name: Her Lamp
-  light.calebs_lamp:
-    friendly_name: His Lamp
-  light.hgrp0000000030:
-    hidden: true
-  light.living_room_fan_light:
-    friendly_name: Fan Light
-  light.living_room_ceiling_lights:
-    friendly_name: Ceiling Lights
-  light.master_bedroom_light:
-    friendly_name: Master Bedroom Light
-  media_player.living_room:
-    friendly_name: Playbar
-  media_player.living_room_shield:
-    hidden: true
-  media_player.master_bedroom_shield:
-    hidden: true
-  media_player.office_shield:
-    hidden: true
-  sensor.battery:
-    icon: mdi:battery-90
-    friendly_name: Battery
-  sensor.dark_sky_temperature:
-    friendly_name: Temperature
-  sensor.dark_sky_humidity:
-    friendly_name: Humidity
-  sensor.double_door_template:
-    icon: mdi:garage
-  sensor.east_wing_humidity:
-    icon: mdi:water-percent
-  sensor.front_door_template:
-    icon: mdi:lock
-  sensor.living_room_occupancy_template:
-    device_class: motion
-  sensor.laundry_temperature:
-    friendly_name: Laundry
-  sensor.network_rack_power:
-    icon: mdi:flash
-  sensor.server_rack_power:
-    icon: mdi:flash
-  sensor.media_rack_power:
-    icon: mdi:flash
-  sensor.media_rack_power_cost:
-    icon: mdi:square-inc-cash
-  sensor.network_rack_power_cost:
-    icon: mdi:square-inc-cash
-  sensor.office_occupancy_template:
-    device_class: motion
-  sensor.server_closet_temp:
-    icon: mdi:thermometer
-  sensor.server_closet_humidity:
-    icon: mdi:water-percent
-  sensor.server_rack_power_cost:
-    icon: mdi:square-inc-cash
-  sensor.single_door_template:
-    icon: mdi:garage
-  sensor.west_wing_humidity:
-    icon: mdi:water-percent
+input_select.dynamic_living_room_sonos:
+  icon: mdi:music
+light.brittanys_lamp:
+  friendly_name: Her Lamp
+light.calebs_lamp:
+  friendly_name: His Lamp
+light.hgrp0000000030:
+  hidden: true
+light.living_room_fan_light:
+  friendly_name: Fan Light
+light.living_room_ceiling_lights:
+  friendly_name: Ceiling Lights
+light.master_bedroom_light:
+  friendly_name: Master Bedroom Light
+media_player.living_room:
+  friendly_name: Playbar
+media_player.living_room_shield:
+  hidden: true
+media_player.master_bedroom_shield:
+  hidden: true
+media_player.office_shield:
+  hidden: true
+sensor.battery:
+  icon: mdi:battery-90
+  friendly_name: Battery
+sensor.dark_sky_temperature:
+  friendly_name: Temperature
+sensor.dark_sky_humidity:
+  friendly_name: Humidity
+sensor.double_door_template:
+  icon: mdi:garage
+sensor.east_wing_humidity:
+  icon: mdi:water-percent
+sensor.front_door_template:
+  icon: mdi:lock
+sensor.living_room_occupancy_template:
+  device_class: motion
+sensor.laundry_temperature:
+  friendly_name: Laundry
+sensor.network_rack_power:
+  icon: mdi:flash
+sensor.server_rack_power:
+  icon: mdi:flash
+sensor.media_rack_power:
+  icon: mdi:flash
+sensor.media_rack_power_cost:
+  icon: mdi:square-inc-cash
+sensor.network_rack_power_cost:
+  icon: mdi:square-inc-cash
+sensor.office_occupancy_template:
+  device_class: motion
+sensor.server_closet_temp:
+  icon: mdi:thermometer
+sensor.server_closet_humidity:
+  icon: mdi:water-percent
+sensor.server_rack_power_cost:
+  icon: mdi:square-inc-cash
+sensor.single_door_template:
+  icon: mdi:garage
+sensor.west_wing_humidity:
+  icon: mdi:water-percent
 
 ##################
 # BINARY SENSORS #
 ##################
-  binary_sensor.bonus_room_occupancy:
-    friendly_name: Movie
-    device_class: motion
-  binary_sensor.bedroom_occupancy:
-    friendly_name: Guest Bed
-    device_class: motion
-  binary_sensor.elis_room_occupancy:
-    friendly_name: Eli's Bed
-    device_class: motion
-  binary_sensor.kitchen_occupancy:
-    friendly_name: Kitchen
-    device_class: motion
-  binary_sensor.kitchen_dual_occupancy:
-    friendly_name: Kitchen
-    device_class: motion
-  binary_sensor.laundry_occupancy:
-    friendly_name: Laundry
-    device_class: motion
-  binary_sensor.living_room_occupancy:
-    friendly_name: Living
-    device_class: motion
-  binary_sensor.living_room_dual_occupancy:
-    friendly_name: Living
-    device_class: motion
-  binary_sensor.office_occupancy:
-    friendly_name: Office
-    device_class: motion
-  binary_sensor.west_wing_occupancy:
-    friendly_name: Master
-    device_class: motion
+binary_sensor.bonus_room_occupancy:
+  friendly_name: Movie
+  device_class: motion
+binary_sensor.bedroom_occupancy:
+  friendly_name: Guest Bed
+  device_class: motion
+binary_sensor.elis_room_occupancy:
+  friendly_name: Eli's Bed
+  device_class: motion
+binary_sensor.kitchen_occupancy:
+  friendly_name: Kitchen
+  device_class: motion
+binary_sensor.kitchen_dual_occupancy:
+  friendly_name: Kitchen
+  device_class: motion
+binary_sensor.laundry_occupancy:
+  friendly_name: Laundry
+  device_class: motion
+binary_sensor.living_room_occupancy:
+  friendly_name: Living
+  device_class: motion
+binary_sensor.living_room_dual_occupancy:
+  friendly_name: Living
+  device_class: motion
+binary_sensor.office_occupancy:
+  friendly_name: Office
+  device_class: motion
+binary_sensor.west_wing_occupancy:
+  friendly_name: Master
+  device_class: motion
 
 ###########
 # SENSORS #
 ###########
-  sensor.bonus_room_temperature:
-    friendly_name: Movie
-  sensor.bedroom_temperature:
-    friendly_name: Guest Bed
-  sensor.elis_room_temperature:
-    friendly_name: Eli's Bed
-  sensor.kitchen_temperature:
-    friendly_name: Kitchen
-  sensor.living_room_temperature:
-    friendly_name: Living
-  sensor.office_temperature:
-    friendly_name: Office
-  sensor.west_wing_temperature:
-    friendly_name: Master
+sensor.bonus_room_temperature:
+  friendly_name: Movie
+sensor.bedroom_temperature:
+  friendly_name: Guest Bed
+sensor.elis_room_temperature:
+  friendly_name: Eli's Bed
+sensor.kitchen_temperature:
+  friendly_name: Kitchen
+sensor.living_room_temperature:
+  friendly_name: Living
+sensor.office_temperature:
+  friendly_name: Office
+sensor.west_wing_temperature:
+  friendly_name: Master
 
 ############
 # SWITCHES #
 ############
-  switch.auto_dr:
-    hidden: true
-  switch.cabinet_lights:
-    friendly_name: Kitchen Cabinet Lights
-    icon: mdi:lightbulb
-  switch.dining_room_light:
-    friendly_name: Dining Light
-    icon: mdi:lightbulb
-  switch.east_hallway_light:
-    friendly_name: East Hallway Light
-    icon: mdi:lightbulb
-  switch.entry_light:
-    friendly_name: Entry Ceiling Light
-    icon: mdi:lightbulb
-  switch.kitchen_light:
-    friendly_name: Kitchen Ceiling Lights
-    icon: mdi:lightbulb
-  switch.kitchen_light_1:
-    hidden: true
-  switch.kitchen_light_2:
-    hidden: true
-  switch.living_room_fan:
-    friendly_name: Living Fan
-    icon: mdi:fan
-  switch.living_room_light:
-    friendly_name: Living Fan Light
-    icon: mdi:lightbulb
-  switch.living_room_dome_lights:
-    friendly_name: Living Ceiling Lights
-    icon: mdi:lightbulb
-  switch.living_room_dome_lights_1:
-    hidden: true
-  switch.living_room_dome_lights_2:
-    hidden: true
-  switch.living_room_tv:
-    friendly_name: Living TV
-    icon: mdi:television
-  switch.master_bedroom_fan:
-    friendly_name: Master Fan
-    icon: mdi:fan
-  switch.office_tv:
-    friendly_name: Office TV
-    icon: mdi:television
-  switch.master_bedroom_tv:
-    friendly_name: Master TV
-    icon: mdi:television
-  switch.movie_room_tv:
-    friendly_name: Movie TV
-    icon: mdi:television
-  switch.network_rack_switch:
-    friendly_name: Networking
-  switch.office_fan:
-    friendly_name: Office Fan
-    icon: mdi:fan
-  switch.office_light:
-    friendly_name: Office Light
-    icon: mdi:lightbulb
-  switch.office_floor_lamp:
-    friendly_name: Office Floor Lamp
-    icon: mdi:lightbulb
-  switch.patio_light:
-    friendly_name: Patio Light
-    icon: mdi:lightbulb
-  switch.porch_lights:
-    icon: mdi:lightbulb
-  switch.server_rack_switch:
-    friendly_name: Compute
-  switch.west_hallway_light:
-    friendly_name: West Hallway Light
-    icon: mdi:lightbulb
-  switch.west_hallway_1:
-    hidden: true
-  switch.west_hallway_2:
-    hidden: true
+switch.auto_dr:
+  hidden: true
+switch.cabinet_lights:
+  friendly_name: Kitchen Cabinet Lights
+  icon: mdi:lightbulb
+switch.dining_room_light:
+  friendly_name: Dining Light
+  icon: mdi:lightbulb
+switch.east_hallway_light:
+  friendly_name: East Hallway Light
+  icon: mdi:lightbulb
+switch.entry_light:
+  friendly_name: Entry Ceiling Light
+  icon: mdi:lightbulb
+switch.kitchen_light:
+  friendly_name: Kitchen Ceiling Lights
+  icon: mdi:lightbulb
+switch.kitchen_light_1:
+  hidden: true
+switch.kitchen_light_2:
+  hidden: true
+switch.living_room_fan:
+  friendly_name: Living Fan
+  icon: mdi:fan
+switch.living_room_light:
+  friendly_name: Living Fan Light
+  icon: mdi:lightbulb
+switch.living_room_dome_lights:
+  friendly_name: Living Ceiling Lights
+  icon: mdi:lightbulb
+switch.living_room_dome_lights_1:
+  hidden: true
+switch.living_room_dome_lights_2:
+  hidden: true
+switch.living_room_tv:
+  friendly_name: Living TV
+  icon: mdi:television
+switch.master_bedroom_fan:
+  friendly_name: Master Fan
+  icon: mdi:fan
+switch.office_tv:
+  friendly_name: Office TV
+  icon: mdi:television
+switch.master_bedroom_tv:
+  friendly_name: Master TV
+  icon: mdi:television
+switch.movie_room_tv:
+  friendly_name: Movie TV
+  icon: mdi:television
+switch.network_rack_switch:
+  friendly_name: Networking
+switch.office_fan:
+  friendly_name: Office Fan
+  icon: mdi:fan
+switch.office_light:
+  friendly_name: Office Light
+  icon: mdi:lightbulb
+switch.office_floor_lamp:
+  friendly_name: Office Floor Lamp
+  icon: mdi:lightbulb
+switch.patio_light:
+  friendly_name: Patio Light
+  icon: mdi:lightbulb
+switch.porch_lights:
+  icon: mdi:lightbulb
+switch.server_rack_switch:
+  friendly_name: Compute
+switch.west_hallway_light:
+  friendly_name: West Hallway Light
+  icon: mdi:lightbulb
+switch.west_hallway_1:
+  hidden: true
+switch.west_hallway_2:
+  hidden: true
+
+##########
+# ENERGY #
+##########
+sensor.server_conditions_energy:
+  last_reset: "1970-01-01T00:00:00+00:00"
+  unit_of_measurement: "kWh"
+  device_class: energy
+  state_class: measurement
+sensor.aeon_labs_zw096_smart_switch_6_energy:
+  last_reset: "1970-01-01T00:00:00+00:00"
+  unit_of_measurement: "kWh"
+  device_class: energy
+  state_class: measurement

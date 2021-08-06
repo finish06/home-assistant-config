@@ -2,22 +2,6 @@
 # SENSORS #
 ###########
 
-- platform: template
-  sensors:
-    server_conditions_power_template:
-      friendly_name: "Server Conditions Power Template"
-      entity_id: "sensor.server_conditions_power"
-      unit_of_measurement: "W"
-      value_template: "{{ states('sensor.server_conditions_power') | round(0) }}"
-
-- platform: template
-  sensors:
-    network_conditions_power_template:
-      friendly_name: "Network Conditions Power Template"
-      entity_id: "sensor.network_conditions_power"
-      unit_of_measurement: "W"
-      value_template: "{{ states('sensor.network_conditions_power') | round(0) }}"
-
 - platform: darksky
   api_key: !secret darksky_api
   monitored_conditions:
@@ -42,41 +26,6 @@
     - current_status
     - download_speed
     - upload_speed
-
-- platform: template
-  sensors:
-    total_download:
-      friendly_name: "Total Download"
-      entity_id:
-        - sensor.rtorrent_down_speed
-        - sensor.nzbget_speed
-      unit_of_measurement: "kB/s"
-      value_template: "{{ states('sensor.rtorrent_down_speed')|float + (states('sensor.nzbget_speed')|float * 1000) | round(2) }}"
-
-# z-Wave Tech Closet Conditions
-- platform: template
-  sensors:
-    tech_closet_conditions_battery:
-      friendly_name: "Tech Closet Conditions Battery"
-      entity_id: "zwave.tech_closet_conditions"
-      unit_of_measurement: "%"
-      value_template: "{{ state_attr('zwave.tech_closet_conditions', 'battery_level') | round(0) }}"
-
-- platform: template
-  sensors:
-    tech_closet_conditions_temperature_template:
-      friendly_name: "Tech Closet Conditions Temperature Template"
-      entity_id: "sensor.tech_closet_conditions_temperature"
-      unit_of_measurement: "°F"
-      value_template: "{{ states('sensor.tech_closet_conditions_temperature') | round(1) }}"
-
-- platform: template
-  sensors:
-    tech_closet_conditions_relative_humidity_template:
-      friendly_name: "Tech Closet Conditions Relative Humidity Template"
-      entity_id: "sensor.tech_closet_conditions_relative_humidity"
-      unit_of_measurement: "%"
-      value_template: "{{ states('sensor.tech_closet_conditions_relative_humidity') | round(1) }}"
 
 # Garage Temperature Avg
 - platform: min_max

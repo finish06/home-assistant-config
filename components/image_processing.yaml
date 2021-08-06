@@ -119,41 +119,41 @@
 #       - category: person
 #       - category: dog
 #       - category: cat
+#
+# - platform: doods
+#   scan_interval: 3600
+#   url: http://doods.du.nn:8080
+#   detector: edgetpu
+#   source:
+#     - entity_id: camera.backyard_west_stream
+#     - entity_id: camera.backyard_east_stream
+#   file_out:
+#     - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
+#     - "/config/tensorflow/images/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+#   confidence: 70
+#   area:
+#     covers: false
+#   labels:
+#     - person
+#     - dog
+#     - cat
 
-- platform: doods
-  scan_interval: 3600
-  url: http://doods.du.nn:8080
-  detector: edgetpu
-  source:
-    - entity_id: camera.backyard_west_stream
-    - entity_id: camera.backyard_east_stream
-  file_out:
-    - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
-    - "/config/tensorflow/images/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
-  confidence: 70
-  area:
-    covers: false
-  labels:
-    - person
-    - dog
-    - cat
-
-- platform: doods
-  scan_interval: 3600
-  url: http://doods.du.nn:8080
-  detector: edgetpu
-  source:
-    - entity_id: camera.driveway_stream
-  file_out:
-    - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
-    - "/config/tensorflow/images/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
-  confidence: 70
-  area:
-    right: 0.90
-    covers: false
-  labels:
-    - person
-    - car
-    - truck
-    - dog
-    - cat
+# - platform: doods
+#   scan_interval: 3600
+#   url: http://doods.du.nn:8080
+#   detector: edgetpu
+#   source:
+#     - entity_id: camera.driveway_stream
+#   file_out:
+#     - "/config/www/{{ camera_entity.split('.')[1] }}_latest.jpg"
+#     - "/config/tensorflow/images/{{ camera_entity.split('.')[1] }}_{{ now().strftime('%Y%m%d_%H%M%S') }}.jpg"
+#   confidence: 70
+#   area:
+#     right: 0.90
+#     covers: false
+#   labels:
+#     - person
+#     - car
+#     - truck
+#     - dog
+#     - cat

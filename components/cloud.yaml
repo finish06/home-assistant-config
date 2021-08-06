@@ -23,6 +23,22 @@ google_actions:
       - light.keypad_audio_settings
       - light.keypad_audio_settings_2
       - light.movie_room
+      - media_player.living_room_tv
+      - media_player.living_room_tv_cast
+      - media_player.movie_room_shield
+      - media_player.xbr_65x850e
+      - script.turn_on_living_room_tv
+      - script.turn_off_living_room_tv
+      - sensor.backyard_east_camera_fps
+      - sensor.backyard_east_detection_fps
+      - sensor.backyard_east_person
+      - sensor.backyard_east_process_fps
+      - sensor.backyard_east_skipped_fps
+      - sensor.backyard_west_camera_fps
+      - sensor.backyard_west_detection_fps
+      - sensor.backyard_west_person
+      - sensor.backyard_west_process_fps
+      - sensor.backyard_west_skipped_fps
       - sensor.dark_sky_temperature
       - sensor.dark_sky_temperature_0h
       - sensor.dark_sky_temperature_10h
@@ -31,6 +47,18 @@ google_actions:
       - sensor.dark_sky_temperature_4h
       - sensor.dark_sky_temperature_6h
       - sensor.dark_sky_temperature_8h
+      - sensor.driveway_camera_fps
+      - sensor.driveway_detection_fps
+      - sensor.driveway_person
+      - sensor.driveway_process_fps
+      - sensor.driveway_skipped_fps
+      - sensor.doorbell_camera_fps
+      - sensor.doorbell_detection_fps
+      - sensor.doorbell_person
+      - sensor.doorbell_process_fps
+      - sensor.doorbell_skipped_fps
+      - sensor.motion_recording_doorbell
+      - sensor.motion_recording_driveway
       - switch.aeon_labs_zw096_smart_switch_6_switch
       - switch.auto_dr
       - switch.backyard_camera
@@ -39,6 +67,27 @@ google_actions:
       - switch.collinsville_siren
       - switch.dining_room_light
       - switch.dog_camera
+      - switch.doorbell_clips
+      - switch.doorbell_detect
+      - switch.doorbell_snapshots
+      - switch.hdr_mode_doorbell
+      - switch.high_fps_doorbell
+      - switch.ir_active_doorbell
+      - switch.record_smart_doorbell
+      - switch.record_always_doorbell
+      - switch.record_motion_doorbell
+      - switch.status_light_on_doorbell
+      - switch.driveway_clips
+      - switch.driveway_detect
+      - switch.driveway_snapshots
+      - switch.hdr_mode_driveway
+      - switch.high_fps_driveway
+      - switch.ir_active_driveway
+      - switch.record_smart_driveway
+      - switch.record_smart_driveway
+      - switch.record_always_driveway
+      - switch.record_motion_driveway
+      - switch.status_light_on_driveway
       - switch.driveway_camera
       - switch.east_hallway_light
       - switch.eli_room_east_outlet_both
@@ -93,7 +142,7 @@ google_actions:
     input_boolean.living_room_tv:
       name: Samsung TV
       room: Living Room
-    light.brittanys_lamp:
+    light.her_lamp:
       name: Her Lamp
       room: Master Bedroom
     light.calebs_lamp:
@@ -164,6 +213,9 @@ google_actions:
     sensor.bonus_room_temperature:
       name: Temp
       room: Movie Room
+    sensor.east_wing_humidity:
+      name: East Thermostat Humidity
+      room: East Hallway
     sensor.east_wing_temperature:
       name: Temp
       room: East Hallway
@@ -182,6 +234,9 @@ google_actions:
     sensor.office_temperature:
       name: Temp
       room: Office
+    sensor.west_wing_humidity:
+      name: West Thermostat Humidty
+      room: Master Bedroom
     sensor.west_wing_temperature:
       name: Temp
       room: Master Bedroom
@@ -202,7 +257,9 @@ google_actions:
       room: Office
     switch.outside_garage_lights:
       name: Outside Garage Lights
-      room: Outside
+      aliases:
+        - Outdoor Garage Lights
+      room: Outside Front
     switch.porch_lights:
       name: Porch Lights
-      room: Outside
+      room: Outside Front

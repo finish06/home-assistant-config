@@ -27,8 +27,7 @@ update.sh
 .uuid
 .gitignore
 configurator.py
-.storage/
-.cloud/
+.cloud
 html5_push_registrations.conf
 automations.yaml
 .spotify-token-cache

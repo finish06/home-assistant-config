@@ -54,22 +54,10 @@ http:
   ip_ban_enabled: true
   login_attempts_threshold: 15
 
-# Checks for available updates
-# Note: This component will send some information about your system to
-# the developers to assist with development of Home Assistant.
-# For more information, please see:
-# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
-updater:
-  # Optional, allows Home Assistant developers to focus on popular components.
-  include_used_components: true
-
 # Discover some devices automatically
 discovery:
   ignore:
     - yamaha
-
-# Allows you to issue voice commands from the frontend in enabled browsers
-conversation:
 
 # Enables support for tracking state changes over time
 history:
@@ -85,13 +73,11 @@ logger:
   default: error
   logs:
     homeassistant.components.myq: critical
-
-# Enables a map showing the location of tracked devices
-map:
-  hours_to_show: 24
+    homeassistant.components.energy: debug
 
 recorder:
   db_url: !secret db_url
+  purge_keep_days: 30
 
 # System health for APIs
 system_health:
@@ -110,34 +96,47 @@ downloader:
   download_dir: /config/www/snaps/
 energy:
 group: !include_dir_merge_named ui/groups/
-homekit: !include components/homekit.yaml
 ifttt: !include components/ifttt.yaml
 image_processing: !include components/image_processing.yaml
 influxdb: !include components/influxdb.yaml
-input_number: !include components/input_number.yaml
-input_select: !include components/input_select.yaml
+input_number:
+input_select:
 input_boolean:
 isy994: !include components/isy994.yaml
 light: !include components/lights.yaml
 media_player: !include components/media_players.yaml
 media_source:
-mqtt: !include components/mqtt.yaml
 my:
 notify: !include components/notify.yaml
-nzbget: !include components/nzbget.yaml
 script: !include scripts.yaml
 sensor: !include components/sensors.yaml
 speedtestdotnet: !include components/speedtest.yaml
-spotify: !include components/spotify.yaml
+spotcast:
+  sp_dc: !secret sp_dc
+  sp_key: !secret sp_key
 stream:
 switch: !include components/switches.yaml
 template: !include components/template.yaml
 tts: !include components/tts.yaml
+utility_meter:
+  daily_gas:
+    source: sensor.meter_gas_ft3
+    name: Daily Gas
+    cycle: daily
+  monthly_gas:
+    source: sensor.meter_gas_ft3
+    name: Monthly Gas
+    cycle: monthly
 weather: !include components/weather.yaml
 
-# Retired configs
+###################
+# Retired Configs #
+###################
 # cover: !include components/cover.yaml
 # ecobee: !include components/ecobee.yaml
+# homekit: !include components/homekit.yaml
 # telegram_bot: !include components/telegram_bot.yaml
 # intent_script: !include_dir_merge_named components/intents
+# nzbget: !include components/nzbget.yaml
 # unifi: !include components/unifi.yaml
+# mqtt: !include components/mqtt.yaml

@@ -1,2 +1,4 @@
 zwave.aeon_labs_dsc06106_smart_energy_switch:
   node_name: AEON Labs Server Smart Energy Switch
+sensor.iotawatt_input_mini_split_wh:
+  friendly_name: Mini Split
